@@ -1,0 +1,803 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rain Chan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="本节给出一些相当trivial的微积分的数值计算方法. 数值微分 差分法 从定义出发即可, 与数学不同的是, 我们无法做到计算&quot;无穷小&quot;, 它压根不是个数, 只能尽量给出较小的差分长度: \[ f&#39;(x)\approx\frac{f(x+h)-f(x)}{h} \] 对\(f(x)\)作展开, 即\(f(x+h)&#x3D;f(x)+c_1h+c_2h^2+\cdots\), 得到 \">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微积分的数值计算：简单的微积分方法">
+<meta property="og:url" content="http://rainchan.me/2024/03/15/%E5%BE%AE%E7%A7%AF%E5%88%86%E7%9A%84%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%EF%BC%9A%E7%AE%80%E5%8D%95%E7%9A%84%E5%BE%AE%E7%A7%AF%E5%88%86%E6%96%B9%E6%B3%95/">
+<meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="本节给出一些相当trivial的微积分的数值计算方法. 数值微分 差分法 从定义出发即可, 与数学不同的是, 我们无法做到计算&quot;无穷小&quot;, 它压根不是个数, 只能尽量给出较小的差分长度: \[ f&#39;(x)\approx\frac{f(x+h)-f(x)}{h} \] 对\(f(x)\)作展开, 即\(f(x+h)&#x3D;f(x)+c_1h+c_2h^2+\cdots\), 得到 \">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-15T14:46:19.000Z">
+<meta property="article:modified_time" content="2024-03-15T16:03:50.581Z">
+<meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="计算物理">
+<meta property="article:tag" content="微积分的数值计算">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  
+  <title>微积分的数值计算：简单的微积分方法 - Rain Chan&#39;s Notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"rainchan.me","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rain Chan&#39;s Notes</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="微积分的数值计算：简单的微积分方法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-15 22:46" pubdate>
+          2024年3月15日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          752 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          7 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">微积分的数值计算：简单的微积分方法</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>本节给出一些相当trivial的微积分的数值计算方法.</p>
+<h2 id="数值微分">数值微分</h2>
+<h3 id="差分法">差分法</h3>
+<p>从定义出发即可, 与数学不同的是, 我们无法做到计算"无穷小",
+它压根不是个数, 只能尽量给出较小的差分长度: <span
+class="math display">\[
+f&#39;(x)\approx\frac{f(x+h)-f(x)}{h}
+\]</span> 对<span class="math inline">\(f(x)\)</span>作展开, 即<span
+class="math inline">\(f(x+h)=f(x)+c_1h+c_2h^2+\cdots\)</span>, 得到
+<span class="math display">\[
+f&#39;(x)\approx c_1+c_2h+o(h)
+\]</span> 这给出<span class="math inline">\(\sim h\)</span>的误差.
+不难想到一个改进方案 <span class="math display">\[
+f&#39;(x)\approx\frac{f(x+h)-f(x-h)}{2h}
+\]</span> 同样代入展开式, 得到 <span class="math display">\[
+f&#39;(x)\approx c_1+c_3h^2+o(h^2)
+\]</span> 它给出<span class="math inline">\(\sim h^2\)</span>的误差.</p>
+<h3 id="基函数法">基函数法</h3>
+<p>当然还有相对复杂的计算方法, 比如, 如果已经有<span
+class="math inline">\(f(x)\)</span>​的 Chebyshev 展开 <span
+class="math display">\[
+f(x)\approx\sum_{k=0}^Nc_kT_k(x)
+\]</span> 那么它的导数可以表示为 <span class="math display">\[
+f&#39;(x)\approx\sum_{k=0}^Nc_k&#39;T_k(x)
+\]</span> 其中, <span
+class="math inline">\(c_{k-1}&#39;=c_{k+1}&#39;+2kc_k\)</span>,
+并且<span class="math inline">\(c_{N}&#39;=c_{N-1}&#39;=0\)</span>.</p>
+<h2 id="数值积分的-newton-cortes-方法">数值积分的 Newton-Cortes
+方法</h2>
+<h3 id="微元法">微元法</h3>
+<p>微元法实际上不是这里的 Newton - Cortes 方法,
+它只是从定积分定义出发的方案. 考虑一个函数<span
+class="math inline">\(f(x)\)</span>在闭区间<span
+class="math inline">\([a,b]\)</span>上可积, 它的定积分为 <span
+class="math display">\[
+\int_a^bf(x)dx=\lim_{\lambda\to0^+}\sum_{l=1}^Nf(\xi_l)\Delta x_l
+\]</span> 其中将区间<span
+class="math inline">\([a,b]\)</span>分割为<span
+class="math inline">\(N\)</span>个子区间<span
+class="math inline">\((x_{l-1},x_l)\ ,\ l=1,2,\cdots,N\)</span>, <span
+class="math inline">\(\Delta x_l=x_l-x_{l-1}\)</span>, <span
+class="math inline">\(\xi_l\in(x_{l-1},x_l)\)</span>. 而<span
+class="math inline">\(\lambda\)</span>则是最大的区间长度, 即 <span
+class="math display">\[
+\lambda=\max\{\Delta x_1,\Delta x_2,\cdots,\Delta x_N\}
+\]</span> 和差分法类似, 我们实现不了<span
+class="math inline">\(\lambda\to0^+(N\to\infty)\)</span>的无穷细致,
+那就足够细致. 取分割方案为<span class="math inline">\(N\)</span>等分, 即
+<span class="math display">\[
+x_k=a+\frac{b-a}{N}\times k
+\newline
+\Delta x_l=\lambda=\frac{b-a}{N}
+\]</span> 并对每一个区间使用梯形法则, 得到 <span class="math display">\[
+\int_a^bf(x)dx\approx\frac{b-a}{N}\times(\frac{f(x_0)}{2}+\sum_{j=1}^{N-1}f(x_j)+\frac{f(x_N)}{2})
+\]</span></p>
+<h3 id="newton-cortes-方法">Newton-Cortes 方法</h3>
+<p>这个方法同样是具有上述样本点<span class="math inline">\((x_k,f(x_k))\
+,\ k=0,1,\cdots,N\)</span>​. 不同的是, 我们先进行 Lagrange 插值 <span
+class="math display">\[
+P_N(x)=\sum_{k=0}^Nf(x_k)L_k(x)
+\]</span> 用插值函数的定积分近似替代真实定积分, 有 <span
+class="math display">\[
+\int_a^bf(x)dx=\sum_{k=0}^Nf(x_k)\int_a^bL_k(x)dx
+\]</span> 其中 <span class="math display">\[
+L_k(x)=\prod_{m\ne k}\frac{x-x_m}{x_k-x_m}=\Lambda_k(t)=\prod_{m\ne
+k}\frac{t-m}{k-m}\ ,\ t=\frac{x-a}{b-a}\times N
+\]</span> 于是得到著名的 <strong>Newton-Cartes 公式</strong>: <span
+class="math display">\[
+\boxed{\int_a^bf(x)dx\approx\frac{b-a}{N}\sum_{k=0}^N\alpha_kf(x_k)}
+\]</span> 其中 <span class="math display">\[
+\alpha_k=\int_0^N\prod_{m\ne k}^{0\sim N}\frac{t-m}{k-m}dt
+\]</span></p>
+<h3 id="newton-cartes-方法的应用">Newton-Cartes 方法的应用</h3>
+<p>我们给出一些常用的公式:</p>
+<ol type="1">
+<li><p><span class="math inline">\(N=1\)</span>, 梯形法则 <span
+class="math display">\[
+I=\displaystyle\frac{b-a}{2}[f(x_0)+f(x_1)]
+\]</span></p></li>
+<li><p><span class="math inline">\(N=2\)</span>​, Simpson 公式 <span
+class="math display">\[
+I=\displaystyle\frac{b-a}{6}[f(x_0)+4f(x_1)+f(x_2)]
+\]</span></p></li>
+<li><p><span class="math inline">\(N=3\)</span>, <span
+class="math inline">\(\displaystyle\frac{3}{8}\)</span>​规则 <span
+class="math display">\[
+I=\displaystyle\frac{b-a}{8}[f(x_0)+3f(x_1)+3f(x_2)+f(x_3)]
+\]</span></p></li>
+<li><p><span class="math inline">\(N=4\)</span>​​, Milne 规则 <span
+class="math display">\[
+I=\displaystyle\frac{b-a}{90}[7f(x_0)+32f(x_1)+12f(x_2)+32f(x_3)+7f(x_4)]
+\]</span></p></li>
+<li><p><span class="math inline">\(N=6\)</span>, Weddle 规则 <span
+class="math display">\[
+I=\displaystyle\frac{b-a}{840}[41f(x_0)+216f(x_1)+27f(x_2)+272f(x_3)+27f(x_4)+216f(x_5)+41f(x_6)]
+\]</span></p></li>
+</ol>
+<p><span class="math inline">\(N&gt;6\)</span>由于正负相消, 不太有效,
+此处不表.</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/" class="category-chain-item">计算物理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/%E5%BE%AE%E7%A7%AF%E5%88%86%E7%9A%84%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="category-chain-item">微积分的数值计算</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/" class="print-no-link">#计算物理</a>
+      
+        <a href="/tags/%E5%BE%AE%E7%A7%AF%E5%88%86%E7%9A%84%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="print-no-link">#微积分的数值计算</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>微积分的数值计算：简单的微积分方法</div>
+      <div>http://rainchan.me/2024/03/15/微积分的数值计算：简单的微积分方法/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rain Chan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月15日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/03/12/%E5%87%BD%E6%95%B0%E7%9A%84%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97%E9%97%AE%E9%A2%98%EF%BC%9AClenshaw%20%E9%80%86%E5%90%91%E8%BF%AD%E4%BB%A3,%20Pad%C3%A9%20%E8%BF%91%E4%BC%BC/" title="函数的数值计算问题：Clenshaw 逆向迭代, Padé 近似">
+                        <span class="hidden-mobile">函数的数值计算问题：Clenshaw 逆向迭代, Padé 近似</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
