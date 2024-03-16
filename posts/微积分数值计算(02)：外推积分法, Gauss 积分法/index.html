@@ -1,0 +1,916 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rain Chan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="外推积分法 所谓 外推积分法, 就是将积分区间大小为\(h\)的数值积分值, 按照一定的形式外推至\(h\to0\)的情况. 比如我们如果考虑积分值满足如下表达式 \[ I(h)&#x3D;\tau_0+\tau_1h^2+\cdots+\tau_mh^{2m}+\cdots \] 那么我们就可以通过递推计算获得关于\(h\)的某一阶的数值积分. 外推积分法的基础是 Euler-Maclaurin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微积分数值计算(02)：外推积分法, Gauss 积分法">
+<meta property="og:url" content="https://karnmarth.github.io/posts/%E5%BE%AE%E7%A7%AF%E5%88%86%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(02)%EF%BC%9A%E5%A4%96%E6%8E%A8%E7%A7%AF%E5%88%86%E6%B3%95,%20Gauss%20%E7%A7%AF%E5%88%86%E6%B3%95/">
+<meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="外推积分法 所谓 外推积分法, 就是将积分区间大小为\(h\)的数值积分值, 按照一定的形式外推至\(h\to0\)的情况. 比如我们如果考虑积分值满足如下表达式 \[ I(h)&#x3D;\tau_0+\tau_1h^2+\cdots+\tau_mh^{2m}+\cdots \] 那么我们就可以通过递推计算获得关于\(h\)的某一阶的数值积分. 外推积分法的基础是 Euler-Maclaurin">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-16T10:42:37.000Z">
+<meta property="article:modified_time" content="2024-03-16T14:12:01.128Z">
+<meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="数值计算">
+<meta property="article:tag" content="数值微积分">
+<meta property="article:tag" content="外推积分法">
+<meta property="article:tag" content="Gauss 积分法">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  
+  <title>微积分数值计算(02)：外推积分法, Gauss 积分法 - Rain Chan&#39;s Notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"karnmarth.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rain Chan&#39;s Notes</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="微积分数值计算(02)：外推积分法, Gauss 积分法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-03-16 18:42" pubdate>
+          2024年3月16日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">微积分数值计算(02)：外推积分法, Gauss 积分法</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="外推积分法">外推积分法</h2>
+<p>所谓 <strong>外推积分法</strong>, 就是将积分区间大小为<span
+class="math inline">\(h\)</span>的数值积分值, 按照一定的形式外推至<span
+class="math inline">\(h\to0\)</span>的情况.
+比如我们如果考虑积分值满足如下表达式 <span class="math display">\[
+I(h)=\tau_0+\tau_1h^2+\cdots+\tau_mh^{2m}+\cdots
+\]</span> 那么我们就可以通过递推计算获得关于<span
+class="math inline">\(h\)</span>的某一阶的数值积分.</p>
+<p>外推积分法的基础是 <strong>Euler-Maclaurin 公式</strong> <span
+class="math display">\[
+T(h)-\int_a^bf(t)dt=\sum_{k=1}^m\frac{B_{2k}h^{2k}}{(2k)!}[f^{(2k-1)}(a)-f^{(2k-1)}(b)]-\frac{B_{2m+2}h^{2m+2}}{(2m+2)!}f^{(2m+2)}(\xi)\
+,\ \xi\in[a,b]
+\]</span> 其中, <span class="math inline">\(T(h)\)</span>和<span
+class="math inline">\(\displaystyle\int_a^bf(t)dt\)</span>分别是微元法给出的积分值和真实的积分值.
+<span class="math inline">\(B_{2k}\)</span>是所谓的 Bernoulli 数, 即
+<span class="math display">\[
+\frac{z}{e^z-1}=\sum_{n=0}^\infty\frac{B_n}{n!}z^n
+\]</span> 根据这个公式, <span
+class="math inline">\(T(h)\)</span>可以写为形如 <span
+class="math display">\[
+T(h)=\tau_0+\tau_1h^2+\cdots+\tau_mh^{2m}+o(h^{2m})
+\]</span> 的多项式. 因此取多个<span
+class="math inline">\(h\)</span>并计算<span
+class="math inline">\(T(h)\)</span>​的值, 由此进行多项式插值,
+得到的插值函数的零阶项, 便是对积分的数值计算.</p>
+<h3 id="neville-形式">Neville 形式</h3>
+<p>我们可以模拟 Neville 插值法进行外推. 首先, 选取一个整数序列<span
+class="math inline">\(\{N_i\}\)</span>来调整<span
+class="math inline">\(h\)</span>, 即<span
+class="math inline">\(\{h_i\}=\{\displaystyle\frac{b-a}{N_i}\}\)</span>.
+为了方便, 将<span class="math inline">\(T(h_k)\)</span>记作<span
+class="math inline">\(T_{k0}\)</span>. 而内插的<span
+class="math inline">\(m\)</span>阶多项式记为<span
+class="math inline">\(P_{mm}(h)\)</span>, 它显然满足 <span
+class="math display">\[
+P_{mm}(h_k)=T_{k0}
+\]</span> 假设<span class="math inline">\(P_{jk}(h)\)</span>是关于<span
+class="math inline">\(h^2\)</span>的<span
+class="math inline">\(k\)</span>次插值函数, 支撑点为<span
+class="math inline">\(\{h_{j-k},\cdots,h_{j}\}\)</span>. 模仿 Neville
+迭代有 <span class="math display">\[
+P_{jk}=\frac{\displaystyle\frac{h_{j-k}^2}{h_j^2}P_{j,k-1}-P_{j-1,k-1}}{\displaystyle\frac{h_{j-k}^2}{h_j^2}-1}
+\]</span> 我们可以这么表示迭代过程: <span class="math display">\[
+\begin{pmatrix}
+T_{00} &amp;&amp; T_{10} &amp;&amp; T_{20} &amp;&amp; \cdots &amp;&amp;
+T_{m0}
+\newline
+&amp; \searrow &amp; \downarrow &amp; \searrow &amp; \downarrow
+&amp;\searrow &amp; \cdots &amp; \searrow &amp; \downarrow
+\newline
+&amp;&amp;P_{11} &amp;&amp; P_{21} &amp;&amp; \cdots &amp;&amp; P_{m1}
+\newline
+&amp;&amp;&amp; \searrow &amp; \downarrow &amp;\searrow &amp; \cdots
+&amp; \searrow &amp; \downarrow
+\newline
+&amp;&amp;&amp;&amp; P_{22} &amp;&amp; \cdots &amp;&amp; P_{m2}
+\newline
+&amp;&amp;&amp;&amp;&amp;\searrow &amp; \cdots &amp; \searrow &amp;
+\downarrow
+\newline
+&amp;&amp;&amp;&amp;&amp;&amp; \cdots &amp;&amp; \cdots
+\newline
+&amp;&amp;&amp;&amp;&amp;&amp;&amp; \searrow &amp; \downarrow
+\newline
+&amp;&amp;&amp;&amp;&amp;&amp;&amp;&amp;P_{mm}
+\end{pmatrix}
+\]</span></p>
+<h2 id="gauss-积分法">Gauss 积分法</h2>
+<p>如果一个函数可以利用正交多项式的展开进行近似,
+我们就可以利用这个展开计算定积分.</p>
+<p>现在先给定积分区间<span
+class="math inline">\([a,b]\)</span>以及一个内积空间<span
+class="math inline">\(\mathbb{V}\)</span>, 权函数为<span
+class="math inline">\(\omega\)</span>, 主要研究对象为函数<span
+class="math inline">\(f\in\mathbb{V}\)</span>.
+内积空间上全体最高次系数为<span class="math inline">\(1\)</span>的<span
+class="math inline">\(j\)</span>次多项式, 构成了内积空间<span
+class="math inline">\(\mathbb{V}\)</span>的真子集, 记作<span
+class="math inline">\(\mathbb{P}_j\)</span>.</p>
+<p>我们不加证明地指出一个定理系统:</p>
+<h3 id="正交多项式与-chebyshev-系统">正交多项式与 Chebyshev 系统</h3>
+<ol type="1">
+<li><p><strong>正交基的存在性</strong></p>
+<p>存在一系列多项式<span class="math inline">\(p_k\in\mathbb{P}_k\ ,\
+k=0,1,\cdots\)</span>​​, 满足正交关系 <span class="math display">\[
+(p_j,p_k)=0\ ,\ j\ne k
+\]</span></p></li>
+<li><p><strong>Gram-Schimidt 正交化方法</strong></p>
+<p>这个正交基可以由下列递推关系给出 <span class="math display">\[
+p_{k+1}(x)=(x-\alpha_{k+1})p_k(x)-\beta_{k+1}^2p_{k-1}(x)
+\newline
+p_0(x)\equiv1\ ,\ \text{规定 }p_{-1}(x)\equiv0
+\]</span> 其中, 参数<span class="math inline">\(\alpha\)</span>和<span
+class="math inline">\(\beta\)</span>分别为 <span class="math display">\[
+\alpha_{k+1}=\frac{(xp_{k+1},p_{k+1})}{(p_{k+1},p_{k+1})}
+\newline
+\beta_{k+1}^2=\frac{(p_k,p_k)}{(p_{k-1},p_{k-1})}
+\newline
+(\text{规定 }\beta^2_1=0)
+\]</span></p></li>
+<li><p><strong>零点的性质</strong></p>
+<p><span class="math inline">\(p_k(x)\)</span>的<span
+class="math inline">\(k\)</span>个零点都是单重实根, 并且都在<span
+class="math inline">\([a,b]\)</span>上</p></li>
+<li><p><strong>Haar 条件</strong></p>
+<p>给定<span class="math inline">\(n\)</span>个两两不同的自变量<span
+class="math inline">\(\{t_i\}_{0\sim n-1}\)</span>, 下列系数矩阵是可逆的
+<span class="math display">\[
+\begin{aligned}
+\boldsymbol{A}&amp;=\begin{pmatrix}
+p_0(t_0) &amp; \cdots &amp; p_0(t_{n-1})
+\newline
+\vdots &amp; \cdots &amp; \vdots
+\newline
+p_{n-1}(t_0) &amp; \cdots &amp; p_{n-1}(t_{n-1})
+\end{pmatrix}
+\newline\newline
+(&amp;\text{或者 }a_{jk}=p_{j-1}(t_{k-1}))
+\end{aligned}
+\]</span></p></li>
+</ol>
+<p>Haar 条件意味着什么呢? 当我们计算一个插值问题时, 插值函数为 <span
+class="math display">\[
+P_{N}(x)=\sum_{k=0}^{N-1}c_kp_k(x)
+\]</span> 支撑点为<span class="math inline">\(\{(t_i,f_i)\}_{0\sim
+N-1}\)</span>, 因此它满足一个线性方程组 <span class="math display">\[
+\sum_{k=0}^{N-1}p_k(t_{j})c_k=f_j
+\]</span> 即 <span class="math display">\[
+\begin{pmatrix}c_0 &amp; c_1 &amp; \cdots &amp;
+c_{N-1}\end{pmatrix}\cdot\boldsymbol{A}=
+\begin{pmatrix}f_0 &amp; f_1 &amp; \cdots &amp; f_{N-1}\end{pmatrix}
+\]</span> 它有唯一解的条件是<span
+class="math inline">\(\boldsymbol{A}\)</span>具有full rank,
+也就要求可逆, 即所谓的 Haar 条件保证了插值问题解的唯一性.
+满足以上几个条件的一系列多项式, 称之为 <strong>Chebyshev
+系统</strong>.</p>
+<h3 id="gauss-点-权重因子">Gauss 点, 权重因子</h3>
+<p>我们把 Gram-Schimidt 正交化方法中的参数排成一个三对角矩阵 <span
+class="math display">\[
+\boldsymbol{J}_n=\begin{pmatrix}
+\alpha_1 &amp; \beta_2 &amp;
+\newline
+\beta_2 &amp; \alpha_2 &amp; \ddots
+\newline
+&amp; \ddots &amp; \ddots &amp; \ddots
+\newline
+&amp; &amp; \ddots &amp;\alpha_{n-1} &amp; \beta_n
+\newline
+&amp; &amp; &amp; \beta_n &amp; \alpha_n
+\end{pmatrix}
+\]</span> 定义函数 <span class="math display">\[
+p_n(x)=\det(x\boldsymbol{I}_n-\boldsymbol{J}_n)
+\]</span> 明显有 <span class="math display">\[
+p_n(x)=(x-\alpha_n)p_{n-1}(x)-\beta_n^2p_{n-2}(x)
+\]</span> 这明显就是之前定义的多项式基<span
+class="math inline">\(\{p_i(x)\}\)</span>, 而<span
+class="math inline">\(\boldsymbol{J}_n\)</span>的本征值, 恰好是<span
+class="math inline">\(p_n(x)\)</span>的<span
+class="math inline">\(n\)</span>个零点.</p>
+<p>假设我们选择了这<span
+class="math inline">\(n\)</span>个零点作为积分的 <strong>Gauss
+点</strong>: <span class="math display">\[
+I[f]\approx\sum_{j=1}^nw_jf(x_j)
+\]</span> <span class="math inline">\(w_j\)</span>称为
+<strong>权重因子</strong>, 为了保证支撑点都有效, 并且不出现正负相消,
+它们应该都为正. 考虑在正交多项式基上展开<span
+class="math inline">\(\displaystyle
+f(x)\approx\sum_{k=0}^{n-1}c_kp_k(x)\)</span>, 近似替代<span
+class="math inline">\(f\)</span>, 我们希望三个约等号联系起一个等号:
+<span class="math display">\[
+\sum_{k=0}^{n-1}c_k\int_a^b\omega(x)p_k(x)dx=\sum_{k=0}^{n-1}c_k\sum_{j=1}^nw_jp_k(x_j)
+\]</span> 观察左边, 不难发现其实只有<span
+class="math inline">\(k=0\)</span>项存在, 因为积分相当于<span
+class="math inline">\(p_0\equiv1\)</span>和<span
+class="math inline">\(p_k\)</span>的内积.
+为了得到普适的式子(指对于任何<span
+class="math inline">\(\{c_i\}\)</span>总能取等或者近似取等), 有 <span
+class="math display">\[
+\sum_{j=1}^nw_jp_k(x_j)=\begin{cases}
+\begin{aligned}
+\displaystyle(p_0,p_0)\qquad k=0&amp;
+\newline\newline\displaystyle
+0\qquad \text{otherwise}&amp;
+\end{aligned}
+\end{cases}
+\]</span></p>
+<h3 id="gauss-积分法总结">Gauss 积分法总结</h3>
+<p>对于一个函数<span
+class="math inline">\(f\in\C^{2n}[a,b]\)</span>和一个正交多项式基<span
+class="math inline">\(\{p_i\}\)</span>, 取<span
+class="math inline">\(p_n\)</span>的零点<span
+class="math inline">\(\{x_i\}_{1\si}\)</span>为 Gauss 点, 线性方程组
+<span class="math display">\[
+\sum_{j=1}^np_k(x_j)w_j=\begin{cases}
+\begin{aligned}
+\displaystyle(p_0,p_0)\qquad k=0&amp;
+\newline\newline\displaystyle
+0\qquad \text{otherwise}&amp;
+\end{aligned}
+\end{cases}
+\]</span> 的解<span class="math inline">\(\vec{w}\)</span>为权重因子,
+则可以用如下公式近似替代定积分: <span class="math display">\[
+\int_a^b\omega(x)f(x)dx=\sum_{j=1}^nw_jf(x_j)+\frac{f^{(2n)}(\xi)}{(2n)!}(p_n,p_n)
+\]</span> 后一项表示误差, <span
+class="math inline">\(\xi\)</span>是<span
+class="math inline">\([a,b]\)</span>上的某个数.</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/" class="category-chain-item">计算物理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/%E5%BE%AE%E7%A7%AF%E5%88%86%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="category-chain-item">微积分数值计算</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="print-no-link">#数值计算</a>
+      
+        <a href="/tags/%E6%95%B0%E5%80%BC%E5%BE%AE%E7%A7%AF%E5%88%86/" class="print-no-link">#数值微积分</a>
+      
+        <a href="/tags/%E5%A4%96%E6%8E%A8%E7%A7%AF%E5%88%86%E6%B3%95/" class="print-no-link">#外推积分法</a>
+      
+        <a href="/tags/Gauss-%E7%A7%AF%E5%88%86%E6%B3%95/" class="print-no-link">#Gauss 积分法</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>微积分数值计算(02)：外推积分法, Gauss 积分法</div>
+      <div>https://karnmarth.github.io/posts/微积分数值计算(02)：外推积分法, Gauss 积分法/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rain Chan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年3月16日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/%E5%BE%AE%E7%A7%AF%E5%88%86%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(01)%EF%BC%9A%E7%AE%80%E5%8D%95%E7%9A%84%E5%BE%AE%E7%A7%AF%E5%88%86%E6%96%B9%E6%B3%95/" title="微积分数值计算(01)：简单的微积分方法">
+                        <span class="hidden-mobile">微积分数值计算(01)：简单的微积分方法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
