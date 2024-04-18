@@ -16,15 +16,15 @@
   <meta name="author" content="Rain Chan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="外推积分法 所谓 外推积分法, 就是将积分区间大小为\(h\)的数值积分值, 按照一定的形式外推至\(h\to0\)的情况. 比如我们如果考虑积分值满足如下表达式 \[ I(h)&#x3D;\tau_0+\tau_1h^2+\cdots+\tau_mh^{2m}+\cdots \] 那么我们就可以通过递推计算获得关于\(h\)的某一阶的数值积分. 外推积分法的基础是 Euler-Maclaurin">
+    <meta name="description" content="本节介绍两种积分方法: 外推法和 Gauss 法, 其中后者比较重要.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="微积分数值计算(02)：外推积分法, Gauss 积分法">
 <meta property="og:url" content="https://karnmarth.github.io/posts/%E5%BE%AE%E7%A7%AF%E5%88%86%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(02)%EF%BC%9A%E5%A4%96%E6%8E%A8%E7%A7%AF%E5%88%86%E6%B3%95,%20Gauss%20%E7%A7%AF%E5%88%86%E6%B3%95/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
-<meta property="og:description" content="外推积分法 所谓 外推积分法, 就是将积分区间大小为\(h\)的数值积分值, 按照一定的形式外推至\(h\to0\)的情况. 比如我们如果考虑积分值满足如下表达式 \[ I(h)&#x3D;\tau_0+\tau_1h^2+\cdots+\tau_mh^{2m}+\cdots \] 那么我们就可以通过递推计算获得关于\(h\)的某一阶的数值积分. 外推积分法的基础是 Euler-Maclaurin">
+<meta property="og:description" content="本节介绍两种积分方法: 外推法和 Gauss 法, 其中后者比较重要.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-16T10:42:37.000Z">
-<meta property="article:modified_time" content="2024-03-16T14:12:01.128Z">
+<meta property="article:modified_time" content="2024-04-18T11:50:43.637Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="数值计算">
 <meta property="article:tag" content="数值微积分">
@@ -470,10 +470,10 @@ class="math display">\[
 \]</span></p>
 <h3 id="gauss-积分法总结">Gauss 积分法总结</h3>
 <p>对于一个函数<span
-class="math inline">\(f\in\C^{2n}[a,b]\)</span>和一个正交多项式基<span
+class="math inline">\(f\in\mathbb{C}^{2n}[a,b]\)</span>和一个正交多项式基<span
 class="math inline">\(\{p_i\}\)</span>, 取<span
 class="math inline">\(p_n\)</span>的零点<span
-class="math inline">\(\{x_i\}_{1\si}\)</span>为 Gauss 点, 线性方程组
+class="math inline">\(\{x_i\}_{1\sim n}\)</span>为 Gauss 点, 线性方程组
 <span class="math display">\[
 \sum_{j=1}^np_k(x_j)w_j=\begin{cases}
 \begin{aligned}
@@ -590,6 +590,12 @@ class="math inline">\([a,b]\)</span>上的某个数.</p>
                 <div class="post-prevnext my-3">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/posts/%E6%95%B0%E5%80%BC%E8%A7%A3%E5%92%8C%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98(01)%EF%BC%9A%E5%AF%B9%E5%88%86%E6%B3%95,%20%E5%88%87%E7%BA%BF%E6%B3%95%E5%92%8C%E5%89%B2%E7%BA%BF%E6%B3%95/" title="数值解和优化问题(01)：对分法, 切线法和割线法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">数值解和优化问题(01)：对分法, 切线法和割线法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

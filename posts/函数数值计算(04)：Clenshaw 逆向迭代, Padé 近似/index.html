@@ -16,15 +16,15 @@
   <meta name="author" content="Rain Chan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Clenshaw 逆向迭代 真正用类似的展开来算目标函数值的时候, 我们可以采用 Clenshaw 提出的逆向迭代的算法. 先回顾对一个函数展开的近似方案. 首先有一个可展开的函数\(f(x)\), 以及一个基\(\{P_i(x)\}\)(不一定要求正交归一), 对于无穷维的基, 在\(i&#x3D;N\)处截断, 用部分的基函数来近似描述\(f(x)\): \[ f(x)\approx S_">
+    <meta name="description" content="本节简略带过 Clenshaw 逆向迭代和 Padé 近似这两种方法, 它们都不是单独使用的, 而是通常作为多项式展开的补充">
 <meta property="og:type" content="article">
 <meta property="og:title" content="函数数值计算(04)：Clenshaw 逆向迭代, Padé 近似">
 <meta property="og:url" content="https://karnmarth.github.io/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(04)%EF%BC%9AClenshaw%20%E9%80%86%E5%90%91%E8%BF%AD%E4%BB%A3,%20Pad%C3%A9%20%E8%BF%91%E4%BC%BC/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
-<meta property="og:description" content="Clenshaw 逆向迭代 真正用类似的展开来算目标函数值的时候, 我们可以采用 Clenshaw 提出的逆向迭代的算法. 先回顾对一个函数展开的近似方案. 首先有一个可展开的函数\(f(x)\), 以及一个基\(\{P_i(x)\}\)(不一定要求正交归一), 对于无穷维的基, 在\(i&#x3D;N\)处截断, 用部分的基函数来近似描述\(f(x)\): \[ f(x)\approx S_">
+<meta property="og:description" content="本节简略带过 Clenshaw 逆向迭代和 Padé 近似这两种方法, 它们都不是单独使用的, 而是通常作为多项式展开的补充">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-15T12:55:33.000Z">
-<meta property="article:modified_time" content="2024-03-16T10:44:25.176Z">
+<meta property="article:modified_time" content="2024-03-17T16:34:52.658Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="数值计算">
 <meta property="article:tag" content="Clenshaw 逆向迭代">
@@ -327,7 +327,7 @@ class="math inline">\(b_0(x)\)</span>(这样就可以少迭代一阶了),
 而是考虑<span
 class="math inline">\(b_0(x)=c_0+\alpha_0(x)b_1(x)+\beta_1(x)b_2(x)\)</span>,
 得到 <span class="math display">\[
-\boxed{S_N(x)=c_0P_0(x)+b_1(x)P_1(x)+\beta_1(x)b_2(x)P_2(x)}\label{eq1}
+\boxed{S_N(x)=c_0P_0(x)+b_1(x)P_1(x)+\beta_1(x)b_2(x)P_2(x)}\label{eq1}\tag{eq1}
 \]</span></p>
 <h3 id="方法总结">方法总结</h3>
 <p>所谓 <strong>Clenshaw 逆向迭代法</strong>, 就是已知:</p>
@@ -386,7 +386,7 @@ class="math display">\[
 a_k&amp;=\sum_{m=0}^kc_{k-m}b_m
 \newline
 (k&amp;=1,\cdots,N)
-\end{aligned}\label{eq2}
+\end{aligned}\label{eq2}\tag{eq2}
 \]</span> <span
 class="math inline">\(\eqref{eq2}\)</span>上式是一个<span
 class="math inline">\(N\)</span>元线性方程组, 可解出<span

@@ -16,25 +16,32 @@
   <meta name="author" content="Rain Chan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本节介绍一种 Taylor 展开的替代: Chebyshev 展开, 它基于 Chebyshev 多项式构成的一个正交基.">
+    <meta name="description" content="作为计算物理的开篇, 先介绍几类常见的多项式插值方法, 最后描述奇特的 Runge 现象表明多项式插值的局限性.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="函数数值计算(03)：Chebyshev 多项式近似">
-<meta property="og:url" content="https://karnmarth.github.io/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(03)%EF%BC%9AChebyshev%20%E5%A4%9A%E9%A1%B9%E5%BC%8F%E8%BF%91%E4%BC%BC/">
+<meta property="og:title" content="函数数值计算(01)：多项式插值">
+<meta property="og:url" content="https://karnmarth.github.io/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(01)%EF%BC%9A%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
-<meta property="og:description" content="本节介绍一种 Taylor 展开的替代: Chebyshev 展开, 它基于 Chebyshev 多项式构成的一个正交基.">
+<meta property="og:description" content="作为计算物理的开篇, 先介绍几类常见的多项式插值方法, 最后描述奇特的 Runge 现象表明多项式插值的局限性.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-12T12:55:33.000Z">
-<meta property="article:modified_time" content="2024-04-18T11:50:13.606Z">
+<meta property="og:image" content="https://karnmarth.github.io/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(01)%EF%BC%9A%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(01)%EF%BC%9A%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC/runge%27s_phenomenon.png">
+<meta property="article:published_time" content="2024-02-28T15:11:18.000Z">
+<meta property="article:modified_time" content="2024-03-17T16:43:55.384Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="数值计算">
-<meta property="article:tag" content="Chebyshev 多项式">
+<meta property="article:tag" content="插值法">
+<meta property="article:tag" content="多项式插值">
+<meta property="article:tag" content="Lagrange 插值法">
+<meta property="article:tag" content="Newton 插值法">
+<meta property="article:tag" content="Neville 迭代法">
+<meta property="article:tag" content="Runge 现象">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://karnmarth.github.io/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(01)%EF%BC%9A%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(01)%EF%BC%9A%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC/runge%27s_phenomenon.png">
   
   
   
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
   
-  <title>函数数值计算(03)：Chebyshev 多项式近似 - Rain Chan&#39;s Notes</title>
+  <title>函数数值计算(01)：多项式插值 - Rain Chan&#39;s Notes</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -204,7 +211,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="函数数值计算(03)：Chebyshev 多项式近似"></span>
+            <span id="subtitle" data-typed-text="函数数值计算(01)：多项式插值"></span>
           
         </div>
 
@@ -215,8 +222,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-12 20:55" pubdate>
-          2024年3月12日 晚上
+        <time datetime="2024-02-28 23:11" pubdate>
+          2024年2月28日 晚上
         </time>
       </span>
     
@@ -227,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          836 字
+          820 字
         
       </span>
     
@@ -275,111 +282,134 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">函数数值计算(03)：Chebyshev 多项式近似</h1>
+            <h1 id="seo-header">函数数值计算(01)：多项式插值</h1>
             
             
               <div class="markdown-body">
                 
-                <p>很多的函数是以级数的形式表达的, 比如 Bessel 函数, Legendre 函数.
-级数展开在数学上是收敛的, 但是直接按照级数去计算往往并不是最合适的方法,
-例如</p>
+                <h2 id="lagrange-插值法">Lagrange 插值法</h2>
+<p>考虑区间<span
+class="math inline">\([x_0,x_n]\)</span>上的n次多项式内插</p>
 <p><span class="math display">\[
-\arctan x=x-\frac{1}{3}x^3+\frac{1}{5}x^5-\cdots\ ,\ x\in[-1,1]
+P_n(x)=a_0+a_1x+\cdots+a_nx^n
 \]</span></p>
-<p>利用这个展开式计算<span class="math inline">\(\arctan1\)</span>,
-即<span class="math inline">\(\displaystyle\frac{\pi}{4}\)</span>,
-收敛速度慢得离谱. 我们介绍一种新的展开方式.</p>
-<h2 id="chebyshev-多项式及其基本性质">Chebyshev 多项式及其基本性质</h2>
-<p><strong>Chebyshev 多项式</strong> 定义为 <span
-class="math display">\[
-T_n(x)=\cos(n\arccos x)\ ,\ x\in[-1,1]
-\]</span></p>
-<p>引入辅助角<span class="math inline">\(x=\cos\phi\)</span>,
-得到一个正交归一关系</p>
+<p>已知的点为<span
+class="math inline">\((x_0,y_0),(x_1,y_1),\cdots,(x_n,y_n)\)</span>.
+内插要求多项式的曲线通过这些点:</p>
 <p><span class="math display">\[
-\int_{0}^\pi
-T_i(\cos\phi)T_j(\cos\phi)d\phi=\frac{\pi}{2}(1+\delta_{0i})\delta_{ij}
+P_n(x_j)=y_j\ ,\ j = 0, 1, \cdots, n
 \]</span></p>
-<p>用<span class="math inline">\(x\)</span>表达:</p>
+<p>为了求出这个问题的一般解, 我们将<span
+class="math inline">\(P_n\)</span>写成多项式的和:</p>
 <p><span class="math display">\[
-\int_{-1}^1
-\frac{T_i(x)T_j(x)}{\sqrt{1-x^2}}dx=\begin{aligned}\begin{cases}\displaystyle
-0&amp;\text{if }i\ne j
-\\\displaystyle
-\frac{\pi}{2}&amp;\text{if }i=j\ne0
-\\\displaystyle
-\pi&amp;\text{if }i=j=0
-\end{cases}\end{aligned}
+P_n(x) = \sum_jp_{nj}(x)
 \]</span></p>
-<h2 id="零点处的正交归一关系">零点处的正交归一关系</h2>
-<p>在<span
-class="math inline">\([-1,1]\)</span>上的正交归一关系提示我们将其用作函数展开的基:
-<span class="math display">\[
-f(x)=\frac{c_0}{2}+\sum_{k=1}^{N-1}c_kT_k(x)
-\]</span></p>
-<p>如果希望这个式子在<span
-class="math inline">\(T_N(x)\)</span>的零点处严格成立, 则</p>
+<p>其中, <span
+class="math inline">\(p_{nj}(x_k)=y_j\delta_{jk}\)</span>.</p>
+<p>由于<span class="math inline">\(p_{nj}\)</span>具有<span
+class="math inline">\(n\)</span>个零点, 故它必然能写成</p>
 <p><span class="math display">\[
-f\left[\cos((k+\frac{1}{2})\pi/N)\right]=\frac{c_0}{2}+\sum_{m=1}^{N-1}c_m\cos((k+\frac{1}{2})m\pi/N)
-\]</span> 我们先考虑两个特别的求和式.</p>
-<h3 id="displaystylesum_k0n-1coskfrac12theta">1. <span
-class="math inline">\(\displaystyle\sum_{k=0}^{N-1}\cos((k+\frac{1}{2})\theta)\)</span></h3>
-<p>这个式子没啥好说的, 凑一个因子<span
-class="math inline">\(\sin(\theta/2)\)</span>, 得 <span
-class="math display">\[
-\begin{aligned}
-\sum_{k=0}^{N-1}\cos((k+\frac{1}{2})\theta)&amp;=
-\frac{1}{\sin\theta/2}\sum_{k=0}^{N-1}\cos((k+\frac{1}{2})\theta)\sin\theta/2
-\newline&amp;=
-\sum_{k=0}^{N-1}\frac{\sin[][(k+1)\theta]-\sin k\theta}{2\sin\theta/2}
-\newline&amp;=
-\frac{\sin(N\theta)}{2\sin\theta/2}
-\end{aligned}
+p_{nj}(x)=a_{nj}\prod_{m=0且m\ne j}^{n}(x-x_m)
 \]</span></p>
-<h3 id="displaystylesum_k0n-1coskfrac12mpincoskfrac12mpin">2. <span
-class="math inline">\(\displaystyle\sum_{k=0}^{N-1}\cos((k+\frac{1}{2})m\pi/N)\cos((k+\frac{1}{2})m&#39;\pi/N)\)</span></h3>
-<p>同样进行积化和差 <span class="math display">\[
-\begin{aligned}
-\text{原式}&amp;=
-\frac{1}{2}\sum_{k=0}^{N-1}\cos((k+\frac{1}{2})(m+m&#39;)\pi/N)+\frac{1}{2}\sum_{k=0}^{N-1}\cos((k+\frac{1}{2})(m-m&#39;)\pi/N)
-\newline&amp;=
-\frac{\sin(m+m&#39;)\pi}{4\displaystyle\sin\frac{m+m&#39;}{2N}\pi}+\frac{\sin(m-m&#39;)\pi}{4\displaystyle\sin\frac{m-m&#39;}{2N}\pi}
-\end{aligned}
-\]</span> 简单地讨论<span class="math inline">\(m\)</span>和<span
-class="math inline">\(m&#39;\)</span>的取值, 得到 <span
-class="math display">\[
-\sum_{k=0}^{N-1}\cos((k+\frac{1}{2})m\pi/N)\cos((k+\frac{1}{2})m&#39;\pi/N)=\begin{aligned}\begin{cases}\displaystyle
-0&amp;\text{if }m\ne m&#39;
-\newline\displaystyle
-\frac{N}{2}&amp;\text{if }m=m&#39;\ne0
-\newline\displaystyle
-N&amp;\text{if }m=m&#39;=0
-\end{cases}\end{aligned}
-\]</span> 记作<span class="math inline">\(T_{mm&#39;}\)</span></p>
-<h2 id="chebyshev-展开">Chebyshev 展开</h2>
-<p>回到系数满足的条件 <span class="math display">\[
-f\left[\cos((k+\frac{1}{2})\pi/N)\right]=\frac{c_0}{2}+\sum_{m=1}^{N-1}c_m\cos((k+\frac{1}{2})m\pi/N)
-\]</span> 两边同乘以<span
-class="math inline">\(\displaystyle\cos((k+\frac{1}{2})m&#39;\pi/N)\)</span>并对<span
-class="math inline">\(k\)</span>​​求和, 得到 <span class="math display">\[
-\sum_{k=0}^{N-1}f\left[\cos((k+\frac{1}{2})\pi/N)\right]\cos((k+\frac{1}{2})m&#39;\pi/N)
-=\frac{c_0}{2}T_{0m&#39;}
-+\sum_{m=1}^{N-1}c_mT_{mm&#39;}=\frac{N}{2}c_0\delta_{0m&#39;}
-+\frac{N}{2}c_{m}\delta_{mm&#39;}
-\]</span> 取<span class="math inline">\(m&#39;\)</span>为<span
-class="math inline">\([0,N-1]\)</span>上不同的整数, 得到 <span
-class="math display">\[
-\boxed{c_m=\frac{2}{N}\sum_{k=0}^{N-1}f\left[\cos((k+\frac{1}{2})\pi/N)\right]\cos((k+\frac{1}{2})m\pi/N)}
-\]</span> 这就是 Chebyshev 展开的系数计算公式.</p>
-<p>这里给出 Chebyshev 展开在 Runge 现象中的应用, 它的各个基之间是正交的,
-而幂级数的基之间具有很大的overlap, 所以前者才能解决所谓的 Runge
-现象.</p>
-<figure>
-<img
-src="%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(03)%EF%BC%9AChebyshev%20%E5%A4%9A%E9%A1%B9%E5%BC%8F%E8%BF%91%E4%BC%BC/chebyshev_expansion_of_runge_function.png" srcset="/img/loading.gif" lazyload
-alt="Runge 函数的 Chebyshev 展开" />
-<figcaption aria-hidden="true">Runge 函数的 Chebyshev 展开</figcaption>
-</figure>
+<p><span class="math inline">\(a_{nj}\)</span>只是系数, 因为<span
+class="math inline">\(n\)</span>个零点已经构成了<span
+class="math inline">\(n\)</span>次多项式. 代入<span
+class="math inline">\((x_j, y_j)\)</span>得到</p>
+<p><span class="math display">\[
+a_{nj}=\frac{y_j}{\prod_{m=0且m\ne j}^{n}(x_j-x_m)}
+\]</span></p>
+<p>最终我们得到</p>
+<p><span class="math display">\[
+\boxed{P_n(x)=\sum_jy_jL_j(x)}
+\newline \ \newline
+\text{其中, } \boxed{L_j(x)=\prod_{m\ne j}\frac{x-x_m}{x_j-x_m}}
+\]</span></p>
+<p>这个结果被称作 <strong>Larange多项式</strong>, 也称
+<strong>Lagrange内插公式</strong>.</p>
+<h2 id="newton-插值法">Newton 插值法</h2>
+<p>Newton 的多项式内插法是一种递推方法:</p>
+<p><span class="math display">\[
+N(x)=\sum_{j=0}^{n}a_jn_j(x)
+\newline\text{其中, }
+n_j(x)=\prod_{k=0}^{j-1}(x-x_k),\ n_0(x)=1
+\]</span></p>
+<p>好处是如果增加一个支撑点, 不破坏之前所有支撑条件, 仅需计算<span
+class="math inline">\(a_{n+1}\)</span>和<span
+class="math inline">\(n_{n+1}(x)\)</span>:</p>
+<p><span class="math display">\[
+a_0+\sum_{j=1}^{n+1}a_j\cdot\prod_{k=0}^{j-1}(x_{n+1}-x_k) = y_{n+1}
+\]</span></p>
+<p>如何求解系数呢? 上式相当于一个方程组</p>
+<p><span class="math display">\[
+\begin{pmatrix}
+1 &amp; 0 &amp; 0 &amp; \cdots &amp; 0\\
+1 &amp; x_1-x_0 &amp; 0 &amp; \cdots &amp; 0\\
+1 &amp; x_2-x_0 &amp; (x_2-x_0)(x_2-x_1) &amp; \cdots &amp; 0\\
+\cdots &amp; \cdots &amp; \cdots &amp; \cdots &amp; 0\\
+1 &amp; x_n-x_0 &amp; (x_n-x_0)(x_n-x_1) &amp; \cdots &amp;
+\prod_{j=0}^{n-1}(x_n-x_j)
+\end{pmatrix}
+\begin{pmatrix}
+a_0 \\ a_1 \\ a_2 \\ \cdots \\ a_n
+\end{pmatrix}
+=
+\begin{pmatrix}
+y_0 \\ y_1 \\ y_2 \\ \cdots \\ y_n
+\end{pmatrix}
+\]</span></p>
+<p>解这个下三角矩阵描述的线性方程组问题, 即得各项系数.</p>
+<h2 id="neville-迭代法">Neville 迭代法</h2>
+<p>先构造<span class="math inline">\(n+1\)</span>个常数函数:</p>
+<p><span class="math display">\[
+Q_i(x)=y_i
+\]</span></p>
+<p>按指标大小顺序排列<span class="math inline">\(Q_i\)</span>,
+再用每对相邻的函数构造更高阶函数, 并且用双下标做记号:</p>
+<p><span class="math display">\[
+P_{ij}=\frac{(x-x_i)Q_j-(x-x_j)Q_i}{x_j-x_i}
+\]</span></p>
+<p>现在得到<span class="math inline">\(n\)</span>个双下标的一次函数,
+按第一指标顺序排列, 再用相邻的函数对构造二次函数:</p>
+<p><span class="math display">\[
+P_{ijk}=\frac{(x-x_i)P_{jk}-(x-x_k)P_{ij}}{x_k-x_i}
+\]</span></p>
+<p>至于下标, 略去重复数字, 为三下标. 如法炮制, 最终得到单个<span
+class="math inline">\(n\)</span>次函数.</p>
+<h2 id="runge-现象">Runge 现象</h2>
+<p>一般情况下, 多项式的次数越多, 需要的数据就越多, 而预测也就越准确.
+但也存在插值次数越高, 插值结果越偏离原函数的现象,
+特别常发生在区间的端点处, 称为 <strong>Runge
+现象</strong><sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="关于 Runge 现象的定性介绍, 可以参见[它的维基百科](https://zh.wikipedia.org/wiki/龙格现象).">[1]</span></a></sup>.</p>
+<p>特别地, 考虑函数</p>
+<p><span class="math display">\[
+f(x)=\frac{1}{1+25x^2}
+\]</span></p>
+<p>称为 <strong>Runge 函数</strong>. 在区间<span
+class="math inline">\([-1, 1]\)</span>上, 以<span
+class="math inline">\(\frac{2}{n}\)</span>为步长选取支撑点进行 Lagrange
+插值, 得到的结果如下所示:</p>
+<p><img title="Runge 现象" src="%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(01)%EF%BC%9A%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC/runge%27s_phenomenon.png" srcset="/img/loading.gif" lazyload alt="Runge 现象" data-align="inline" width="662"></p>
+<p>造成这种现象的主要原因是，拉格朗日插值使用的函数基组<span
+class="math inline">\(1,𝑥,𝑥^2,\cdots\)</span>并不是正交基,
+插值结果十分病态, 可以考虑对基函数进行 Schmidt 正交化,
+但更方便的方案是选取既正交又简单的非多项式基,
+或者干脆不使用这种内插方案, 这是<a
+href="notes.rainchan.me/posts/函数数值计算(02)：有理函数插值法,%20样条函数插值法.md">下篇笔记</a>将要讨论到的.</p>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1" class="footnote-text"><span>关于 Runge 现象的定性介绍,
+可以参见<a
+target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/龙格现象">它的维基百科</a>.
+<a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+</ol>
+</div>
+</section>
 
                 
               </div>
@@ -422,7 +452,17 @@ alt="Runge 函数的 Chebyshev 展开" />
       
         <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="print-no-link">#数值计算</a>
       
-        <a href="/tags/Chebyshev-%E5%A4%9A%E9%A1%B9%E5%BC%8F/" class="print-no-link">#Chebyshev 多项式</a>
+        <a href="/tags/%E6%8F%92%E5%80%BC%E6%B3%95/" class="print-no-link">#插值法</a>
+      
+        <a href="/tags/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC/" class="print-no-link">#多项式插值</a>
+      
+        <a href="/tags/Lagrange-%E6%8F%92%E5%80%BC%E6%B3%95/" class="print-no-link">#Lagrange 插值法</a>
+      
+        <a href="/tags/Newton-%E6%8F%92%E5%80%BC%E6%B3%95/" class="print-no-link">#Newton 插值法</a>
+      
+        <a href="/tags/Neville-%E8%BF%AD%E4%BB%A3%E6%B3%95/" class="print-no-link">#Neville 迭代法</a>
+      
+        <a href="/tags/Runge-%E7%8E%B0%E8%B1%A1/" class="print-no-link">#Runge 现象</a>
       
     </div>
   
@@ -434,8 +474,8 @@ alt="Runge 函数的 Chebyshev 展开" />
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>函数数值计算(03)：Chebyshev 多项式近似</div>
-      <div>https://karnmarth.github.io/posts/函数数值计算(03)：Chebyshev 多项式近似/</div>
+      <div>函数数值计算(01)：多项式插值</div>
+      <div>https://karnmarth.github.io/posts/函数数值计算(01)：多项式插值/</div>
     </div>
     <div class="license-meta">
       
@@ -447,7 +487,7 @@ alt="Runge 函数的 Chebyshev 展开" />
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月12日</div>
+          <div>2024年2月28日</div>
         </div>
       
       
@@ -479,21 +519,15 @@ alt="Runge 函数的 Chebyshev 展开" />
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(04)%EF%BC%9AClenshaw%20%E9%80%86%E5%90%91%E8%BF%AD%E4%BB%A3,%20Pad%C3%A9%20%E8%BF%91%E4%BC%BC/" title="函数数值计算(04)：Clenshaw 逆向迭代, Padé 近似">
+                      <a href="/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(02)%EF%BC%9A%E6%9C%89%E7%90%86%E5%87%BD%E6%95%B0%E6%8F%92%E5%80%BC%E6%B3%95,%20%E6%A0%B7%E6%9D%A1%E5%87%BD%E6%95%B0%E6%8F%92%E5%80%BC%E6%B3%95/" title="函数数值计算(02)：有理函数插值法, 样条函数插值法">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">函数数值计算(04)：Clenshaw 逆向迭代, Padé 近似</span>
+                        <span class="hidden-mobile">函数数值计算(02)：有理函数插值法, 样条函数插值法</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
                   </article>
                   <article class="post-next col-6">
                     
-                    
-                      <a href="/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(02)%EF%BC%9A%E6%9C%89%E7%90%86%E5%87%BD%E6%95%B0%E6%8F%92%E5%80%BC%E6%B3%95,%20%E6%A0%B7%E6%9D%A1%E5%87%BD%E6%95%B0%E6%8F%92%E5%80%BC%E6%B3%95/" title="函数数值计算(02)：有理函数插值法, 样条函数插值法">
-                        <span class="hidden-mobile">函数数值计算(02)：有理函数插值法, 样条函数插值法</span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
                     
                   </article>
                 </div>

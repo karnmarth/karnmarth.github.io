@@ -16,25 +16,27 @@
   <meta name="author" content="Rain Chan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本节介绍一种 Taylor 展开的替代: Chebyshev 展开, 它基于 Chebyshev 多项式构成的一个正交基.">
+    <meta name="description" content="本节介绍不同于多项式插值的新插值方法, 即基于有理函数或样条函数的插值方法. 虽然更加繁琐, 但它们不失为解决 Runge 现象的好方法.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="函数数值计算(03)：Chebyshev 多项式近似">
-<meta property="og:url" content="https://karnmarth.github.io/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(03)%EF%BC%9AChebyshev%20%E5%A4%9A%E9%A1%B9%E5%BC%8F%E8%BF%91%E4%BC%BC/">
+<meta property="og:title" content="函数数值计算(02)：有理函数插值法, 样条函数插值法">
+<meta property="og:url" content="https://karnmarth.github.io/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(02)%EF%BC%9A%E6%9C%89%E7%90%86%E5%87%BD%E6%95%B0%E6%8F%92%E5%80%BC%E6%B3%95,%20%E6%A0%B7%E6%9D%A1%E5%87%BD%E6%95%B0%E6%8F%92%E5%80%BC%E6%B3%95/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
-<meta property="og:description" content="本节介绍一种 Taylor 展开的替代: Chebyshev 展开, 它基于 Chebyshev 多项式构成的一个正交基.">
+<meta property="og:description" content="本节介绍不同于多项式插值的新插值方法, 即基于有理函数或样条函数的插值方法. 虽然更加繁琐, 但它们不失为解决 Runge 现象的好方法.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-03-12T12:55:33.000Z">
-<meta property="article:modified_time" content="2024-04-18T11:50:13.606Z">
+<meta property="article:published_time" content="2024-02-29T08:30:30.000Z">
+<meta property="article:modified_time" content="2024-03-17T16:44:23.650Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="数值计算">
-<meta property="article:tag" content="Chebyshev 多项式">
+<meta property="article:tag" content="插值法">
+<meta property="article:tag" content="有理函数插值">
+<meta property="article:tag" content="样条函数插值法">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
   
-  <title>函数数值计算(03)：Chebyshev 多项式近似 - Rain Chan&#39;s Notes</title>
+  <title>函数数值计算(02)：有理函数插值法, 样条函数插值法 - Rain Chan&#39;s Notes</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -204,7 +206,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="函数数值计算(03)：Chebyshev 多项式近似"></span>
+            <span id="subtitle" data-typed-text="函数数值计算(02)：有理函数插值法, 样条函数插值法"></span>
           
         </div>
 
@@ -215,8 +217,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-03-12 20:55" pubdate>
-          2024年3月12日 晚上
+        <time datetime="2024-02-29 16:30" pubdate>
+          2024年2月29日 下午
         </time>
       </span>
     
@@ -227,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          836 字
+          1.4k 字
         
       </span>
     
@@ -238,7 +240,7 @@
         
         
         
-          7 分钟
+          12 分钟
         
       </span>
     
@@ -275,111 +277,168 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">函数数值计算(03)：Chebyshev 多项式近似</h1>
+            <h1 id="seo-header">函数数值计算(02)：有理函数插值法, 样条函数插值法</h1>
             
             
               <div class="markdown-body">
                 
-                <p>很多的函数是以级数的形式表达的, 比如 Bessel 函数, Legendre 函数.
-级数展开在数学上是收敛的, 但是直接按照级数去计算往往并不是最合适的方法,
-例如</p>
+                <h2 id="有理函数插值法">有理函数插值法</h2>
+<p><a
+target="_blank" rel="noopener" href="https://notes.rainchan.me/posts/函数数值计算(01)：多项式内插">上篇笔记</a>提到,
+当函数在某个区间内的变化行为比较剧烈时, 多项式内插会出现剧烈震荡的行为.
+这时候利用有理函数进行内插可能会更加合适一些,
+它的构造可以采用一个分式的形式: <span class="math display">\[
+\Phi_{n,n}(x)=\frac{P_n(x)}{Q_n(x)}
+\]</span></p>
+<p>其中<span class="math inline">\(P_n\)</span>和<span
+class="math inline">\(Q_n\)</span>都是<span
+class="math inline">\(n\)</span>阶多项式, 并且它们互素.</p>
+<p>想要完全确定两者, 需要<span
+class="math inline">\(2n+2\)</span>个支撑点, 但是在<span
+class="math inline">\(\Phi_{n,n}\)</span>中, 两者相除,
+实际上造成了一个自由的公倍数, 也就是只需要<span
+class="math inline">\(2n+1\)</span>个支撑点, 记为<span
+class="math inline">\((x_0,y_0),(x_1,y_1),\cdots,(x_{2n},y_{2n})\)</span>.
+作为内插函数, <span
+class="math inline">\(\Phi_{n,n}\)</span>需要通过所有的支撑点,
+可以写成如下形式:</p>
 <p><span class="math display">\[
-\arctan x=x-\frac{1}{3}x^3+\frac{1}{5}x^5-\cdots\ ,\ x\in[-1,1]
+\Phi_{n,n}(x)=\phi_0(x_0)+\frac{x-x_0}{\Phi_{n-1,n-1}(x)}
 \]</span></p>
-<p>利用这个展开式计算<span class="math inline">\(\arctan1\)</span>,
-即<span class="math inline">\(\displaystyle\frac{\pi}{4}\)</span>,
-收敛速度慢得离谱. 我们介绍一种新的展开方式.</p>
-<h2 id="chebyshev-多项式及其基本性质">Chebyshev 多项式及其基本性质</h2>
-<p><strong>Chebyshev 多项式</strong> 定义为 <span
-class="math display">\[
-T_n(x)=\cos(n\arccos x)\ ,\ x\in[-1,1]
-\]</span></p>
-<p>引入辅助角<span class="math inline">\(x=\cos\phi\)</span>,
-得到一个正交归一关系</p>
+<p>其中, <span
+class="math inline">\(\phi_0(x_0)=y_0\)</span>以通过支撑点<span
+class="math inline">\(0\)</span>. 分母又可以写为:</p>
 <p><span class="math display">\[
-\int_{0}^\pi
-T_i(\cos\phi)T_j(\cos\phi)d\phi=\frac{\pi}{2}(1+\delta_{0i})\delta_{ij}
+\Phi_{n-1,n-1}(x)=\phi_1(x_0,x_1)+\frac{x-x_1}{\Phi_{n-2,n-2}(x)}
 \]</span></p>
-<p>用<span class="math inline">\(x\)</span>表达:</p>
+<p>这样, <span
+class="math inline">\(\phi_1(x_0,x_1)\)</span>必须满足</p>
 <p><span class="math display">\[
-\int_{-1}^1
-\frac{T_i(x)T_j(x)}{\sqrt{1-x^2}}dx=\begin{aligned}\begin{cases}\displaystyle
-0&amp;\text{if }i\ne j
-\\\displaystyle
-\frac{\pi}{2}&amp;\text{if }i=j\ne0
-\\\displaystyle
-\pi&amp;\text{if }i=j=0
-\end{cases}\end{aligned}
+\phi_0(x_0)+\frac{x_1-x_0}{\phi_1(x_0,x_1)}=y_1\Rightarrow\phi_1=\frac{x_1-x_0}{y_1-\phi_0(x_0)}
 \]</span></p>
-<h2 id="零点处的正交归一关系">零点处的正交归一关系</h2>
-<p>在<span
-class="math inline">\([-1,1]\)</span>上的正交归一关系提示我们将其用作函数展开的基:
-<span class="math display">\[
-f(x)=\frac{c_0}{2}+\sum_{k=1}^{N-1}c_kT_k(x)
-\]</span></p>
-<p>如果希望这个式子在<span
-class="math inline">\(T_N(x)\)</span>的零点处严格成立, 则</p>
+<p>为了形式对称性, 把<span class="math inline">\(y_1\)</span>改写为<span
+class="math inline">\(\phi_0(x_1)\)</span>, 则</p>
 <p><span class="math display">\[
-f\left[\cos((k+\frac{1}{2})\pi/N)\right]=\frac{c_0}{2}+\sum_{m=1}^{N-1}c_m\cos((k+\frac{1}{2})m\pi/N)
-\]</span> 我们先考虑两个特别的求和式.</p>
-<h3 id="displaystylesum_k0n-1coskfrac12theta">1. <span
-class="math inline">\(\displaystyle\sum_{k=0}^{N-1}\cos((k+\frac{1}{2})\theta)\)</span></h3>
-<p>这个式子没啥好说的, 凑一个因子<span
-class="math inline">\(\sin(\theta/2)\)</span>, 得 <span
-class="math display">\[
-\begin{aligned}
-\sum_{k=0}^{N-1}\cos((k+\frac{1}{2})\theta)&amp;=
-\frac{1}{\sin\theta/2}\sum_{k=0}^{N-1}\cos((k+\frac{1}{2})\theta)\sin\theta/2
-\newline&amp;=
-\sum_{k=0}^{N-1}\frac{\sin[][(k+1)\theta]-\sin k\theta}{2\sin\theta/2}
-\newline&amp;=
-\frac{\sin(N\theta)}{2\sin\theta/2}
-\end{aligned}
+\phi_1(x_0,x_1)=\frac{x_1-x_0}{\phi_0(x_1)-\phi_0(x_0)}
 \]</span></p>
-<h3 id="displaystylesum_k0n-1coskfrac12mpincoskfrac12mpin">2. <span
-class="math inline">\(\displaystyle\sum_{k=0}^{N-1}\cos((k+\frac{1}{2})m\pi/N)\cos((k+\frac{1}{2})m&#39;\pi/N)\)</span></h3>
-<p>同样进行积化和差 <span class="math display">\[
-\begin{aligned}
-\text{原式}&amp;=
-\frac{1}{2}\sum_{k=0}^{N-1}\cos((k+\frac{1}{2})(m+m&#39;)\pi/N)+\frac{1}{2}\sum_{k=0}^{N-1}\cos((k+\frac{1}{2})(m-m&#39;)\pi/N)
-\newline&amp;=
-\frac{\sin(m+m&#39;)\pi}{4\displaystyle\sin\frac{m+m&#39;}{2N}\pi}+\frac{\sin(m-m&#39;)\pi}{4\displaystyle\sin\frac{m-m&#39;}{2N}\pi}
-\end{aligned}
-\]</span> 简单地讨论<span class="math inline">\(m\)</span>和<span
-class="math inline">\(m&#39;\)</span>的取值, 得到 <span
-class="math display">\[
-\sum_{k=0}^{N-1}\cos((k+\frac{1}{2})m\pi/N)\cos((k+\frac{1}{2})m&#39;\pi/N)=\begin{aligned}\begin{cases}\displaystyle
-0&amp;\text{if }m\ne m&#39;
-\newline\displaystyle
-\frac{N}{2}&amp;\text{if }m=m&#39;\ne0
-\newline\displaystyle
-N&amp;\text{if }m=m&#39;=0
-\end{cases}\end{aligned}
-\]</span> 记作<span class="math inline">\(T_{mm&#39;}\)</span></p>
-<h2 id="chebyshev-展开">Chebyshev 展开</h2>
-<p>回到系数满足的条件 <span class="math display">\[
-f\left[\cos((k+\frac{1}{2})\pi/N)\right]=\frac{c_0}{2}+\sum_{m=1}^{N-1}c_m\cos((k+\frac{1}{2})m\pi/N)
-\]</span> 两边同乘以<span
-class="math inline">\(\displaystyle\cos((k+\frac{1}{2})m&#39;\pi/N)\)</span>并对<span
-class="math inline">\(k\)</span>​​求和, 得到 <span class="math display">\[
-\sum_{k=0}^{N-1}f\left[\cos((k+\frac{1}{2})\pi/N)\right]\cos((k+\frac{1}{2})m&#39;\pi/N)
-=\frac{c_0}{2}T_{0m&#39;}
-+\sum_{m=1}^{N-1}c_mT_{mm&#39;}=\frac{N}{2}c_0\delta_{0m&#39;}
-+\frac{N}{2}c_{m}\delta_{mm&#39;}
-\]</span> 取<span class="math inline">\(m&#39;\)</span>为<span
-class="math inline">\([0,N-1]\)</span>上不同的整数, 得到 <span
-class="math display">\[
-\boxed{c_m=\frac{2}{N}\sum_{k=0}^{N-1}f\left[\cos((k+\frac{1}{2})\pi/N)\right]\cos((k+\frac{1}{2})m\pi/N)}
-\]</span> 这就是 Chebyshev 展开的系数计算公式.</p>
-<p>这里给出 Chebyshev 展开在 Runge 现象中的应用, 它的各个基之间是正交的,
-而幂级数的基之间具有很大的overlap, 所以前者才能解决所谓的 Runge
-现象.</p>
-<figure>
-<img
-src="%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(03)%EF%BC%9AChebyshev%20%E5%A4%9A%E9%A1%B9%E5%BC%8F%E8%BF%91%E4%BC%BC/chebyshev_expansion_of_runge_function.png" srcset="/img/loading.gif" lazyload
-alt="Runge 函数的 Chebyshev 展开" />
-<figcaption aria-hidden="true">Runge 函数的 Chebyshev 展开</figcaption>
-</figure>
+<p>对于更一般的情况, 我们不妨倒转递推方向</p>
+<p><span class="math display">\[
+\Phi_{n-j-1,n-j-1}(x)=\frac{x-x_j}{\Phi_{n-j,n-j}(x)-\phi_j(x_0,x_1,\cdots,x_j)}
+\]</span></p>
+<p>令<span class="math inline">\(x=x_{j+1}\)</span>, 立即得到</p>
+<p><span class="math display">\[
+\phi_{j+1}(x_0, x_1, \cdots,
+x_{j+1})=\frac{x_{j+1}-x_{j}}{\phi_j(x_0,x_1,\cdots,x_{j-1},x_{j+1})-\phi_j(x_0,x_1,\cdots,x_{j-1},x_{j}}
+\]</span></p>
+<p>它给出了各阶<span class="math inline">\(\phi\)</span>函数的递推关系.
+而<span class="math inline">\(\Phi_{n,n}\)</span>写成连分数的形式:</p>
+<p><span class="math display">\[
+\Phi_{n,n}(x)=\phi_0(x_0)+\frac{x-x_0}{\phi_1(x_0,x_1)+\displaystyle\frac{x-x_1}{\phi_2(x_0,x_1,x_2)+\displaystyle\frac{x-x_2}{\ddots+\displaystyle\frac{x-x_{2n-1}}{\phi_{2n}(x_0,\cdots,x_{2n})}}}}
+\]</span></p>
+<p>如果我们在一个单调的区间插值, 那么上述构造不会发散. 特别是对于 Runge
+函数这种有理分式, 把<span class="math inline">\(x^2\)</span>看作自变量,
+只需构造<span
+class="math inline">\(\Phi_{1,1}\)</span>形式的有理内插函数,
+取三个支撑点就能完成内插, 并且和原函数一模一样, 所谓的 Runge
+现象自然也就不再出现.</p>
+<h2 id="样条函数插值法">样条函数插值法</h2>
+<p>样条函数的基本思想是在每两个支撑点之间用一段多项式函数来表示,
+最常用的是三次样条函数, 这里也仅介绍三次样条函数.</p>
+<h3 id="基本准备">基本准备</h3>
+<p>在区间<span class="math inline">\([a,b]\)</span>上包括两端一共有<span
+class="math inline">\(n+1\)</span>个支撑点: <span
+class="math inline">\((x_0,y_0),(x_1,y_1),\cdots,(x_n,y_n)\)</span>.
+样条函数记作<span class="math inline">\(S(x), x\in[a,b]\)</span>.</p>
+<p>每个子区间都具有一个三次多项式作为样条函数, 也就是<span
+class="math inline">\(4n\)</span>个待定参数. 可用的方程又有多少个呢?</p>
+<ul>
+<li><p>每个内部支撑点限制左右两个子区间的函数值, 给出两个方程,
+而外部两个支撑点各自只给出一个限制, 一共<span
+class="math inline">\(2n\)</span>个方程;</p></li>
+<li><p>每个内部支撑点限制左右导函数相等, 一共<span
+class="math inline">\(n-1\)</span>个方程;</p></li>
+<li><p>每个内部支撑点限制左右二阶导数相等, 一共<span
+class="math inline">\(n-1\)</span>个方程.</p></li>
+</ul>
+<p>我们现在有<span class="math inline">\(4n-2\)</span>个限制条件可用,
+得到的样条函数具有<span class="math inline">\(2\)</span>个自由度.
+自由度的来源无非是端点处边界条件不够完备, 我们只知道边界处的函数值,
+不知道边界处的导函数或者是二阶导函数的取值,
+因此需要再引入两个独立的约束方程,
+具体形式可以研究问题的数学或物理性质得到.</p>
+<h3 id="计算参数">计算参数</h3>
+<p>定义二阶导数在各个支撑点处的取值为 <strong>矩</strong>:</p>
+<p><span class="math display">\[
+M_j=S&#39;&#39;(x_j)\ ,\ j =0,1,\cdots,n
+\]</span></p>
+<p>三次多项式的二阶导数是一次函数, 因而对于每一段<span
+class="math inline">\([x_j,x_{j+1}], \ j=0,1,\cdots,n-1\)</span>,
+不难写出<span class="math inline">\(S&#39;&#39;\)</span>的表达式</p>
+<p><span class="math display">\[
+S&#39;&#39;(x)=\frac{M_j(x_{j+1}-x)+M_{j+1}(x-x_j)}{x_{j+1}-x_j}
+\]</span></p>
+<p>连续两次积分, 得到</p>
+<p><span class="math display">\[
+S(x)=\frac{M_j(x_{j+1}-x)^3}{6(x_{j+1}-x_j)}+\frac{M_{j+1}(x-x_j)^3}{6(x_{j+1}-x_j)}+A_j(x-x_j)+B_j\
+, x\in[x_j,x_{j+1}]
+\]</span></p>
+<p>这里<span class="math inline">\(A, B, M\)</span>一共是<span
+class="math inline">\(3n+1\)</span>个参数<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="为什么不是 $4n$ 个? 因为提前使用了二阶导连续的条件, 消去了 $n-1$ 个系数">[1]</span></a></sup>,
+考虑<span class="math inline">\(x_j\)</span>处函数值连续, 有</p>
+<p><span class="math display">\[
+\frac{M_j(x_{j+1}-x_j)^2}{6}+B_j=\frac{M_j(x_{j}-x_{j-1})^2}{6}+A_{j-1}(x_j-x_{j-1})+B_{j-1}=y_j
+\]</span></p>
+<p>得到</p>
+<p><span class="math display">\[
+\boxed{\begin{aligned}
+B_j&amp;=y_j-\frac{M_j(x_{j+1}-x_j)^2}{6}
+\newline
+A_j&amp;=\frac{y_{j+1}-y_j}{x_{j+1}-x_j}-\frac{M_{j+1}-M_j}{6}(x_{j+1}-x_j)
+\end{aligned}}
+\]</span></p>
+<p>现在只剩<span class="math inline">\(n+1\)</span>个待定参数了, 同样地,
+内部限制条件只有<span
+class="math inline">\(n-1\)</span>个支撑点处的导数连续.</p>
+<p><span class="math display">\[
+S&#39;(x)=-\frac{M_j(x_{j+1}-x)^2}{2(x_{j+1}-x_j)}+\frac{M_{j+1}(x-x_j)^2}{2(x_{j+1}-x_j)}+A_j\
+, x\in[x_j,x_{j+1}]
+\]</span></p>
+<p>考虑<span class="math inline">\(x_j\)</span>处的导函数连续, 有</p>
+<p><span class="math display">\[
+-\frac{M_j(x_{j+1}-x_j)}{2}+A_j=\frac{M_j(x_j-x_{j-1})}{2}+A_{j-1}
+\]</span></p>
+<p>代入整理, 最终得到</p>
+<p><span class="math display">\[
+\boxed{
+    \frac{x_{j+1}-x_j}{6}M_{j+1}+\frac{x_{j+1}-x_j}{3}M_j+\frac{x_j-x_{j-1}}{6}M_{j-1}=\frac{y_{j+1}-y_j}{x_{j+1}-x_j}-\frac{y_j-y_{j-1}}{x_j-x_{j-1}}
+}
+\]</span></p>
+<p>这些式子给出全部的支撑点的约束方程,
+只要再给边界上<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="事实上可以是任两个无关且独立于之前所有约束方程的方程即可, 但实际问题中常常更容易得知边界处的条件">[2]</span></a></sup>引入两个独立约束即可.</p>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1" class="footnote-text"><span>为什么不是 <span
+class="math inline">(4n)</span> 个? 因为提前使用了二阶导连续的条件,
+消去了 <span class="math inline">(n-1)</span> 个系数
+<a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:2"
+class="footnote-text"><span>事实上可以是任两个无关且独立于之前所有约束方程的方程即可,
+但实际问题中常常更容易得知边界处的条件
+<a href="#fnref:2" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+</ol>
+</div>
+</section>
 
                 
               </div>
@@ -422,7 +481,11 @@ alt="Runge 函数的 Chebyshev 展开" />
       
         <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="print-no-link">#数值计算</a>
       
-        <a href="/tags/Chebyshev-%E5%A4%9A%E9%A1%B9%E5%BC%8F/" class="print-no-link">#Chebyshev 多项式</a>
+        <a href="/tags/%E6%8F%92%E5%80%BC%E6%B3%95/" class="print-no-link">#插值法</a>
+      
+        <a href="/tags/%E6%9C%89%E7%90%86%E5%87%BD%E6%95%B0%E6%8F%92%E5%80%BC/" class="print-no-link">#有理函数插值</a>
+      
+        <a href="/tags/%E6%A0%B7%E6%9D%A1%E5%87%BD%E6%95%B0%E6%8F%92%E5%80%BC%E6%B3%95/" class="print-no-link">#样条函数插值法</a>
       
     </div>
   
@@ -434,8 +497,8 @@ alt="Runge 函数的 Chebyshev 展开" />
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>函数数值计算(03)：Chebyshev 多项式近似</div>
-      <div>https://karnmarth.github.io/posts/函数数值计算(03)：Chebyshev 多项式近似/</div>
+      <div>函数数值计算(02)：有理函数插值法, 样条函数插值法</div>
+      <div>https://karnmarth.github.io/posts/函数数值计算(02)：有理函数插值法, 样条函数插值法/</div>
     </div>
     <div class="license-meta">
       
@@ -447,7 +510,7 @@ alt="Runge 函数的 Chebyshev 展开" />
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年3月12日</div>
+          <div>2024年2月29日</div>
         </div>
       
       
@@ -479,9 +542,9 @@ alt="Runge 函数的 Chebyshev 展开" />
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(04)%EF%BC%9AClenshaw%20%E9%80%86%E5%90%91%E8%BF%AD%E4%BB%A3,%20Pad%C3%A9%20%E8%BF%91%E4%BC%BC/" title="函数数值计算(04)：Clenshaw 逆向迭代, Padé 近似">
+                      <a href="/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(03)%EF%BC%9AChebyshev%20%E5%A4%9A%E9%A1%B9%E5%BC%8F%E8%BF%91%E4%BC%BC/" title="函数数值计算(03)：Chebyshev 多项式近似">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">函数数值计算(04)：Clenshaw 逆向迭代, Padé 近似</span>
+                        <span class="hidden-mobile">函数数值计算(03)：Chebyshev 多项式近似</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -489,8 +552,8 @@ alt="Runge 函数的 Chebyshev 展开" />
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(02)%EF%BC%9A%E6%9C%89%E7%90%86%E5%87%BD%E6%95%B0%E6%8F%92%E5%80%BC%E6%B3%95,%20%E6%A0%B7%E6%9D%A1%E5%87%BD%E6%95%B0%E6%8F%92%E5%80%BC%E6%B3%95/" title="函数数值计算(02)：有理函数插值法, 样条函数插值法">
-                        <span class="hidden-mobile">函数数值计算(02)：有理函数插值法, 样条函数插值法</span>
+                      <a href="/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(01)%EF%BC%9A%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC/" title="函数数值计算(01)：多项式插值">
+                        <span class="hidden-mobile">函数数值计算(01)：多项式插值</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
