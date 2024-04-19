@@ -16,27 +16,26 @@
   <meta name="author" content="Rain Chan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="所谓优化问题, 就是求一个函数的极小值点. 极值与导数有着千丝万缕的联系, 但有时我们并不需要求导就能设法求解优化问题, 本节给出单元和多元函数优化方法各一例: 黄金分割搜寻法和单纯形方法.">
+    <meta name="description" content="介绍快速 Fourier 变换的数学基础, 也即时域离散 Fourier 变换.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数值解和优化问题(03)：无导数的优化方法">
-<meta property="og:url" content="https://karnmarth.github.io/posts/%E6%95%B0%E5%80%BC%E8%A7%A3%E5%92%8C%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98(03)%EF%BC%9A%E6%97%A0%E5%AF%BC%E6%95%B0%E7%9A%84%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/">
+<meta property="og:title" content="Fourier 方法(01)：从连续到离散">
+<meta property="og:url" content="https://karnmarth.github.io/posts/Fourier%20%E6%96%B9%E6%B3%95(01)%EF%BC%9A%E4%BB%8E%E8%BF%9E%E7%BB%AD%E5%88%B0%E7%A6%BB%E6%95%A3/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
-<meta property="og:description" content="所谓优化问题, 就是求一个函数的极小值点. 极值与导数有着千丝万缕的联系, 但有时我们并不需要求导就能设法求解优化问题, 本节给出单元和多元函数优化方法各一例: 黄金分割搜寻法和单纯形方法.">
+<meta property="og:description" content="介绍快速 Fourier 变换的数学基础, 也即时域离散 Fourier 变换.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-04-17T08:45:02.000Z">
-<meta property="article:modified_time" content="2024-04-18T11:55:17.685Z">
+<meta property="article:published_time" content="2024-04-18T12:05:18.000Z">
+<meta property="article:modified_time" content="2024-04-19T14:45:32.444Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="数值计算">
-<meta property="article:tag" content="极值搜索">
-<meta property="article:tag" content="黄金分割搜寻法">
-<meta property="article:tag" content="单纯形方法">
+<meta property="article:tag" content="Fourier 分析">
+<meta property="article:tag" content="DTFT">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
   
-  <title>数值解和优化问题(03)：无导数的优化方法 - Rain Chan&#39;s Notes</title>
+  <title>Fourier 方法(01)：从连续到离散 - Rain Chan&#39;s Notes</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -206,7 +205,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="数值解和优化问题(03)：无导数的优化方法"></span>
+            <span id="subtitle" data-typed-text="Fourier 方法(01)：从连续到离散"></span>
           
         </div>
 
@@ -217,8 +216,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-04-17 16:45" pubdate>
-          2024年4月17日 下午
+        <time datetime="2024-04-18 20:05" pubdate>
+          2024年4月18日 晚上
         </time>
       </span>
     
@@ -229,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          779 字
         
       </span>
     
@@ -240,7 +239,7 @@
         
         
         
-          12 分钟
+          7 分钟
         
       </span>
     
@@ -277,206 +276,95 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">数值解和优化问题(03)：无导数的优化方法</h1>
+            <h1 id="seo-header">Fourier 方法(01)：从连续到离散</h1>
             
             
               <div class="markdown-body">
                 
-                <p>所谓优化问题, 就是求一个函数的极小值点. 极值与导数有着千丝万缕的联系,
-但有时我们并不需要求导就能设法求解优化问题,
-本节给出单元和多元函数优化方法各一例: 黄金分割搜寻法和单纯形方法.</p>
-<div style="font-family: KaiTi; font-weight: bold;">
-<pre><code class="hljs">&lt;table frame = &quot;void&quot;&gt;
-    &lt;tr&gt;
-        &lt;td width = &quot;50%&quot;&gt;
-            &lt;img src = &quot;./数值解和优化问题(03)：无导数的优化方法/gold_division.png&quot;&gt;
-        &lt;/td&gt;
-        &lt;td&gt;
-            &lt;img src = &quot;./数值解和优化问题(03)：无导数的优化方法/simplx.png&quot;&gt;
-        &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td style = &quot;text-align: center;&quot;&gt;
-            (摘自刘川《计算物理导论》图 5.1)
-        &lt;/td&gt;
-        &lt;td style = &quot;text-align: center;&quot;&gt;
-            (摘自刘川《计算物理导论》图 5.2)
-        &lt;/td&gt;
-    &lt;/tr&gt;
-&lt;/table&gt;</code></pre>
-</div>
-<h2 id="黄金分割搜寻法">黄金分割搜寻法</h2>
-<p>假设我们从预估的区域内选择三个点:<span
-class="math inline">\(x_0&lt;x_1&lt;x_3\)</span>. 它们的函数值可以计算.
-假如这三个函数值中最小者为<span class="math inline">\(f(x_1)\)</span>,
-只要函数和区域不太奇特, 那么在<span class="math inline">\((x_0,
-x_3)\)</span>上必然存在极小值点.</p>
-<p>然后我们产生一个点<span
-class="math inline">\(x_2\in(x_1,x_3)\)</span>, 那么分两种情况:</p>
-<ol type="1">
-<li><span class="math inline">\(f(x_1)&lt;f(x_2)\)</span>, 则<span
-class="math inline">\(f(x_1)\)</span>仍维持最小, 新区间取作<span
-class="math inline">\((x_0,x_2)\)</span>, <span
-class="math inline">\(x_1\)</span>留作比较;</li>
-<li><span class="math inline">\(f(x_1)&gt;f(x_2)\)</span>, 则<span
-class="math inline">\(f(x_2)\)</span>成为新的最小, 新区间取作<span
-class="math inline">\((x_1,x_3)\)</span>, <span
-class="math inline">\(x_2\)</span>留作比较.</li>
-</ol>
-<p>那么如何得到<span class="math inline">\(x_2\)</span>呢? 设定三个长度:
+                <p>考虑函数<span class="math inline">\(g(x)\)</span>​的 Fourier
+变换以及逆变换 <span class="math display">\[
+G(k)=\int_{-\infty}^{+\infty}g(x)e^{-2\pi ikx}dx
+\\
+g(x)=\int_{-\infty}^{+\infty}G(k)e^{2\pi ikx}dk
+\]</span> 数值计算中, 很多时候连续函数也是用离散的形式表达的,
+积分不是针对一个解析式进行符号计算,
+而是输入一个有限规模的样本来近似替代积分, 例如 <span
+class="math display">\[
+\{g(x_0+\frac{n}{f_s})|n\in\N\ ,n&lt;N\}
+\]</span> 因此我们实际计算的并不是<span
+class="math inline">\(g(x)\)</span>本身的变换, 而是如下分段函数的变换
 <span class="math display">\[
-a:=x_1 - x_0\ ,\qquad b = x_2 - x_1\ ,\qquad c := x_3-x_1
-\]</span> 两种情况下的新区间总长度分别是<span
-class="math inline">\(a+b\)</span>和<span
-class="math inline">\(c\)</span>, 我们希望两者一致. 另外,
-我们还希望两种新区间有相似性, 即各个点比例一致. 那么 <span
-class="math display">\[
-b = c - a
+\bar{g}(x)=\begin{aligned}\begin{cases}
+0\qquad &amp; x\in(-\infty,x_0)
 \\
-\frac{b}{c} = \frac{a}{a + c}
-\]</span> 解得 <span class="math display">\[
-c = \frac{\sqrt{5}+1}{2}a\ ,\qquad b = \frac{\sqrt{5}-1}{2}a
-\]</span> 这恰好是黄金分割比, 因此这种方法称作
-<strong>黄金分割搜寻法</strong>.</p>
-<h3 id="方法总结">方法总结</h3>
-<ol type="1">
-<li><p>给定区间两端点<span class="math inline">\(x_0&lt;x_3\)</span>​,
-由此求出两值为 <span class="math display">\[
-x_1 = \frac{\sqrt{5}-1}{2}x_0 + \frac{3-\sqrt{5}}{2}x_3
+g(x_0)\qquad &amp;\displaystyle x\in[x_0,x_0+\frac{1}{f_s})
+\\\displaystyle
+g(x_0+\frac{1}{f_s})\qquad &amp;\displaystyle x\in[x_0+\frac{1}{f_s},
+x_0+\frac{2}{f_s})
+\\\vdots\\\displaystyle
+g(x_0+\frac{N-1}{f_s})\qquad &amp;\displaystyle
+x\in[x_0+\frac{N-1}{f_s}, x_0+\frac{N}{f_s}]
+\\0\qquad &amp;\displaystyle x\in(x_0+\frac{N}{f_s},+\infty)
+\end{cases}\end{aligned}
+\]</span> 相应的频谱为 <span class="math display">\[
+\bar{G}(k)=\frac{1-\exp{(\displaystyle-\frac{2\pi ik}{f_s})}}{2\pi
+ik}e^{-2\pi ikx_0}
+\sum_{n=0}^{N-1} g(x_0+\frac{n}{f_s})e^{-\frac{2\pi ikn}{f_s}}
+\]</span> 如果我们将<span
+class="math inline">\(g(x_0+\displaystyle\frac{n}{f_s})\)</span>简记为<span
+class="math inline">\(g_n\)</span>, 同时<span
+class="math inline">\(k\)</span>也不取连续变量, 令 <span
+class="math display">\[
+k=\frac{mf_s}{N}\ ,\ m=0,1,\cdots,N-1
 \\
-x_2 = \frac{3-\sqrt{5}}{2}x_0 + \frac{\sqrt{5}-1}{2}x_3
-\]</span></p></li>
-<li><p>研究结束条件<span
-class="math inline">\(g(x_0,x_1,x_2,x_3)\le\epsilon\)</span>是否满足,
-满足则终止, 不满足则来到步骤3.</p></li>
-<li><p>比较<span class="math inline">\(f(x_1)\)</span>和<span
-class="math inline">\(f(x_2)\)</span>, 如果前者更小, 来到步骤4.a;
-如果前者更大, 来到步骤4.b.</p></li>
-<li><p>根据上一步的情况选择其一:</p>
-<ol type="1">
-<li>将<span class="math inline">\(x_0,x_1,x_2\)</span>作为新的<span
-class="math inline">\(x_0,x_2,x_3\)</span>, 新的<span
-class="math inline">\(x_1\)</span>按照步骤1计算, 进入步骤2.</li>
-<li>将<span class="math inline">\(x_1,x_2,x_3\)</span>作为新的<span
-class="math inline">\(x_0, x_1,x_3\)</span>, 新的<span
-class="math inline">\(x_2\)</span>按照步骤1计算, 进入步骤2.</li>
-</ol></li>
-</ol>
-<h2 id="单纯形方法">单纯形方法</h2>
-<h3 id="前置知识">前置知识</h3>
-<p>单纯形方法是适用于多元函数的无导数优化方法, 也叫 <strong>Nelder-Mead
-方法</strong>. 要使用这种方法, 就要先定义所谓的
-<strong>单纯形</strong>:</p>
-<blockquote>
-<p>考虑<span class="math inline">\(n\)</span>维空间中完全联通的<span
-class="math inline">\(n+1\)</span>个不共超平面的点, 任选<span
-class="math inline">\(n\)</span>个点即共超平面. 按照<span
-class="math inline">\(C_{n+1}^n\)</span>组合出的<span
-class="math inline">\(n+1\)</span>个超平面围成的几何体, 称作<span
-class="math inline">\(n\)</span>维空间的单纯形.</p>
-</blockquote>
-<p>举例说明即是: <span class="math inline">\(1\)</span>维的线段, <span
-class="math inline">\(2\)</span>维的三角形, <span
-class="math inline">\(3\)</span>维的四面体......</p>
-<p>构造单纯形的方法非常简单, 给定一个出发点<span
-class="math inline">\(\vec{x}^{(0)}\)</span>, 构造另外<span
-class="math inline">\(n\)</span>个点</p>
-<ul>
-<li><strong>最佳点</strong>: 函数值最小的点, 记作<span
-class="math inline">\(\vec{x}^{(m)}\)</span>.</li>
-<li><strong>最差点</strong>: 函数值最大的点, 记作<span
-class="math inline">\(\vec{x}^{(M)}\)</span>.</li>
-<li><strong>次差点</strong>: 函数值次大的点, 记作<span
-class="math inline">\(\vec{x}^{(\mu)}\)</span>.</li>
-</ul>
-<p>对于每个点定义它的<strong>对偶中心点</strong>: <span
-class="math display">\[
-\vec{x}_c^{(k)}=\frac{1}{n}\sum_{j=0,j\ne k}^n\vec{x}^{(j)}
-\]</span></p>
-<h3 id="算法步骤">算法步骤</h3>
-<ol type="1">
-<li><p>对给定的起始点确定其它<span
-class="math inline">\(n\)</span>个点和<span
-class="math inline">\(\vec{x}^{(M)},\vec{x}^{(m)},\vec{x}^{(\mu)}\)</span>.</p></li>
-<li><p><strong>反射步骤</strong></p>
-<ol type="1">
-<li><p>求出<span
-class="math inline">\(n+1\)</span>个点的<strong>样本方差</strong><span
-class="math inline">\(s^2\)</span>并与规定的误差<span
-class="math inline">\(\epsilon\)</span>​​比较, 如果更低就停止迭代,
-否则进行反射, 具体地: <span class="math display">\[
-\vec{x}_r=(\alpha+1)\vec{x}_c^{(M)}-\alpha\vec{x}^{(M)}
-\]</span> 其中<span
-class="math inline">\(\alpha&gt;0\)</span>是可调的反射系数.</p></li>
-<li><p>判断函数值, 如果满足<span
-class="math inline">\(f(\vec{x}^{(m)})&lt;f(\vec{x}_r)&lt;f(\vec{x}^{(\mu)})\)</span>,
-则用<span class="math inline">\(\vec{x}_r\)</span>替代<span
-class="math inline">\(\vec{x}^{(M)}\)</span>(尽管还有比它更差的点)并回到步骤2.a;
-如果<span
-class="math inline">\(f(\vec{x}_r)&lt;f(\vec{x}^{(m)})\)</span>,
-即它成了最佳的点, 进入步骤3; 如果<span
-class="math inline">\(f(\vec{x}_r)&gt;f(\vec{x}^{(\mu)})\)</span>,
-进入步骤4.</p></li>
-</ol></li>
-<li><p><strong>扩展步骤</strong></p>
-<ol type="1">
-<li><p>定义新的扩展点<span class="math inline">\(\vec{x}_e\)</span>​​,
-使得 <span class="math display">\[
-\vec{x}_e=\beta\vec{x}_r+(1-\beta)\vec{x}_c^{(M)}
-\]</span> 其中<span
-class="math inline">\(\beta&gt;1\)</span>是一个可调的扩展参数.</p></li>
-<li><p>判断函数值, 如果<span
-class="math inline">\(f(\vec{x}_e)&lt;f(\vec{x}^{(m)})\)</span>,
-则用<span class="math inline">\(\vec{x}_e\)</span>替代<span
-class="math inline">\(\vec{x}^{(M)}\)</span>; 否则用<span
-class="math inline">\(\vec{x}_r\)</span>替代<span
-class="math inline">\(\vec{x}^{(M)}\)</span>.
-不管用谁替代都回到步骤2.</p></li>
-</ol></li>
-<li><p><strong>收缩步骤</strong></p>
-<ol type="1">
-<li><p>判断函数值. 如果<span
-class="math inline">\(f(\vec{x}_r)&lt;f(\vec{x}_c^{(M)})\)</span>,
-则极小值点位于<span class="math inline">\(\vec{x}_r\)</span>和<span
-class="math inline">\(\vec{x}_c^{(M)}\)</span>​之间, 收缩点选为 <span
-class="math display">\[
-\vec{x}_{con}=\gamma\vec{x}_r+(1-\gamma)\vec{x}_c^{(M)}\
-,\qquad\gamma\in(0,1)
-\]</span> 如果<span class="math inline">\(f(\vec{x}_r)\ge
-f(\vec{x}_c^{(M)})\)</span>, 则极小值点位于<span
-class="math inline">\(\vec{x}^{(M)}\)</span>和<span
-class="math inline">\(\vec{x}_c^{(M)}\)</span>之间, 收缩点选为 <span
-class="math display">\[
-\vec{x}_{con}=\gamma\vec{x}^{(M)}+(1-\gamma)\vec{x}_c^{(M)}
-\]</span></p></li>
-<li><p>判断函数值, 如果<span
-class="math inline">\(f(\vec{x}_{con})&lt;f(\vec{x}^{(M)})\)</span>且<span
-class="math inline">\(f(\vec{x}_{con})&lt;f(\vec{x}_r)\)</span>, 用<span
-class="math inline">\(\vec{x}_{con}\)</span>替代<span
-class="math inline">\(\vec{x}^{(M)}\)</span>回到步骤2; 否则,
-回到步骤1将每个<span class="math inline">\(h_k\)</span>都减半,
-重新构造各个点.</p></li>
-</ol></li>
-</ol>
-<section class="footnotes">
-<div class="footnote-list">
-<ol>
-<li>
-<span id="fn:1" class="footnote-text"><span><span class="math display">[
-<sup>{(i)}=</sup>{(0)}+h_i_i ,i = 1, 2, , n ]</span> <span
-class="math inline">(n+1)</span>个点中, 有三个点尤其应该关注:
-<a href="#fnref:1" rev="footnote" class="footnote-backref">
-↩︎</a></span></span>
-</li>
-<li>
-<span id="fn:1" class="footnote-text"><span>这里的构造只需要线性无关,
-不需要正交性, 斜交是完全允许的.
-<a href="#fnref:1" rev="footnote" class="footnote-backref">
-↩︎</a></span></span>
-</li>
-</ol>
-</div>
-</section>
+G_m:=\frac{2\pi ike^{2\pi ikx_0}
+\bar{G}(k)}{1-\exp{(\displaystyle-\frac{2\pi
+ik}{f_s})}}\Bigg|_{k=\frac{mf_s}{N}}
+\]</span> 也就给出 <span class="math display">\[
+G_m=\sum_{n=0}^{N-1}g_ne^{-\frac{2\pi imn}{N}}
+\]</span> 这就是所谓的 <strong>时域离散 Fourier 变换(DTFT)</strong>,
+它的反变换如何? 可以猜测为 <span class="math display">\[
+\mathcal{F}^{-1}[G]_n=\sum_{m=0}^{N-1}G_me^{\frac{2\pi
+imn}{N}}=\sum_{m,n&#39;}g_{n&#39;}\exp{(\frac{2\pi im(n-n&#39;)}{N})}
+\]</span> 幸好时域样本<span
+class="math inline">\(g_{n&#39;}\)</span>不依赖于<span
+class="math inline">\(m\)</span>, 可以按照等比序列的方法对<span
+class="math inline">\(m\)</span>求和, 即 <span class="math display">\[
+\mathcal{F}^{-1}[G]_n=\sum_{n&#39;=0}^{N-1}g_{n&#39;}\frac{1-e^{iN\phi}}{1-e^{i\phi}}\
+,\ \phi=\frac{2\pi(n-n&#39;)}{N}
+\]</span> 显然, <span class="math inline">\(N\phi\)</span>总是导向<span
+class="math inline">\(2\pi\)</span>的整数倍, 因此分子总是<span
+class="math inline">\(0\)</span>, 只要分数不构成<span
+class="math inline">\(\displaystyle\frac{0}{0}\)</span>型未定式,
+就给出零结果, 又<span class="math inline">\(\abs{n-n&#39;}\le
+N-1\)</span>, 因此当且仅当<span
+class="math inline">\(n&#39;=n\)</span>时构成未定式, <span
+class="math inline">\(n&#39;\ne n\)</span>时都给出零结果.</p>
+<p>现在只需要关注<span class="math inline">\(n&#39;=n\)</span>项,
+退回计算等比序列和之前, 立即得到 <span class="math display">\[
+\mathcal{F}^{-1}[G]_n=\sum_{m=0}^{N-1}g_n=Ng_n
+\]</span> 我们最终得到完整的变换-反变换式: <span class="math display">\[
+\begin{aligned}
+G_m&amp;=\sum_{n=0}^{N-1}g_n\exp{(-\frac{2\pi imn}{N})}
+\\
+g_n&amp;=\frac{1}{N}\sum_{m=0}^{N-1}G_m\exp{(\frac{2\pi imn}{N})}
+\end{aligned}
+\]</span> <span class="math inline">\(N\)</span>因子依然可以随意分配,
+也就是说可以改写为 <span class="math display">\[
+\begin{aligned}
+G_m&amp;=\frac{1}{N}\sum_{n=0}^{N-1}g_n\exp{(-\frac{2\pi imn}{N})}
+\\
+g_n&amp;=\sum_{m=0}^{N-1}G_m\exp{(\frac{2\pi imn}{N})}
+\end{aligned}
+\]</span> 这样写的好处是, 数学上使用反变换更多, 或者说将信号 Fourier
+分解为频域上的谱, 频谱前面最好不带有系数,
+但是前一种写法在程序中也不少见.</p>
+<p>像这样计算一次完整的变换或反变换, 需要对<span
+class="math inline">\(m\)</span>和<span
+class="math inline">\(n\)</span>二重循环, 给出<span
+class="math inline">\(O(N^2)\)</span>的时间复杂度. 下面将要介绍的
+<strong>快速 Fourier 变换(FFT)</strong> 是一种可以简化至<span
+class="math inline">\(O(N\log N)\)</span>​的算法.</p>
 
                 
               </div>
@@ -500,7 +388,7 @@ class="math inline">(n+1)</span>个点中, 有三个点尤其应该关注:
   
     <span>></span>
     
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/%E6%95%B0%E5%80%BC%E8%A7%A3%E5%92%8C%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98/" class="category-chain-item">数值解和优化问题</a>
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/Fourier-%E6%96%B9%E6%B3%95/" class="category-chain-item">Fourier 方法</a>
   
   
 
@@ -519,11 +407,9 @@ class="math inline">(n+1)</span>个点中, 有三个点尤其应该关注:
       
         <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="print-no-link">#数值计算</a>
       
-        <a href="/tags/%E6%9E%81%E5%80%BC%E6%90%9C%E7%B4%A2/" class="print-no-link">#极值搜索</a>
+        <a href="/tags/Fourier-%E5%88%86%E6%9E%90/" class="print-no-link">#Fourier 分析</a>
       
-        <a href="/tags/%E9%BB%84%E9%87%91%E5%88%86%E5%89%B2%E6%90%9C%E5%AF%BB%E6%B3%95/" class="print-no-link">#黄金分割搜寻法</a>
-      
-        <a href="/tags/%E5%8D%95%E7%BA%AF%E5%BD%A2%E6%96%B9%E6%B3%95/" class="print-no-link">#单纯形方法</a>
+        <a href="/tags/DTFT/" class="print-no-link">#DTFT</a>
       
     </div>
   
@@ -535,8 +421,8 @@ class="math inline">(n+1)</span>个点中, 有三个点尤其应该关注:
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>数值解和优化问题(03)：无导数的优化方法</div>
-      <div>https://karnmarth.github.io/posts/数值解和优化问题(03)：无导数的优化方法/</div>
+      <div>Fourier 方法(01)：从连续到离散</div>
+      <div>https://karnmarth.github.io/posts/Fourier 方法(01)：从连续到离散/</div>
     </div>
     <div class="license-meta">
       
@@ -548,7 +434,7 @@ class="math inline">(n+1)</span>个点中, 有三个点尤其应该关注:
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年4月17日</div>
+          <div>2024年4月18日</div>
         </div>
       
       
@@ -580,9 +466,9 @@ class="math inline">(n+1)</span>个点中, 有三个点尤其应该关注:
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/%E6%95%B0%E5%80%BC%E8%A7%A3%E5%92%8C%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98(04)%EF%BC%9A%E5%9F%BA%E4%BA%8E%E6%A2%AF%E5%BA%A6%E7%9A%84%E5%A4%9A%E5%85%83%E5%87%BD%E6%95%B0%E4%BC%98%E5%8C%96/" title="数值解和优化问题(04)：基于梯度的多元函数优化">
+                      <a href="/posts/Fourier%20%E6%96%B9%E6%B3%95(02)%EF%BC%9AFFT%20%E5%8F%8A%E5%85%B6%20python%20%E5%AE%9E%E7%8E%B0/" title="Fourier 方法(02)：FFT 及其 python 实现">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">数值解和优化问题(04)：基于梯度的多元函数优化</span>
+                        <span class="hidden-mobile">Fourier 方法(02)：FFT 及其 python 实现</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -590,8 +476,8 @@ class="math inline">(n+1)</span>个点中, 有三个点尤其应该关注:
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/%E6%95%B0%E5%80%BC%E8%A7%A3%E5%92%8C%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98(02)%EF%BC%9AAitken%20%E7%AE%97%E6%B3%95,%20Steffensen%20%E7%AE%97%E6%B3%95/" title="数值解和优化问题(02)：Aitken 算法, Steffensen 算法">
-                        <span class="hidden-mobile">数值解和优化问题(02)：Aitken 算法, Steffensen 算法</span>
+                      <a href="/posts/%E6%95%B0%E5%80%BC%E8%A7%A3%E5%92%8C%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98(04)%EF%BC%9A%E5%9F%BA%E4%BA%8E%E6%A2%AF%E5%BA%A6%E7%9A%84%E5%A4%9A%E5%85%83%E5%87%BD%E6%95%B0%E4%BC%98%E5%8C%96/" title="数值解和优化问题(04)：基于梯度的多元函数优化">
+                        <span class="hidden-mobile">数值解和优化问题(04)：基于梯度的多元函数优化</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
