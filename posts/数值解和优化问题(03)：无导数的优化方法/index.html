@@ -19,12 +19,12 @@
     <meta name="description" content="所谓优化问题, 就是求一个函数的极小值点. 极值与导数有着千丝万缕的联系, 但有时我们并不需要求导就能设法求解优化问题, 本节给出单元和多元函数优化方法各一例: 黄金分割搜寻法和单纯形方法.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数值解和优化问题(03)：无导数的优化方法">
-<meta property="og:url" content="https://karnmarth.github.io/posts/%E6%95%B0%E5%80%BC%E8%A7%A3%E5%92%8C%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98(03)%EF%BC%9A%E6%97%A0%E5%AF%BC%E6%95%B0%E7%9A%84%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E6%95%B0%E5%80%BC%E8%A7%A3%E5%92%8C%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98(03)%EF%BC%9A%E6%97%A0%E5%AF%BC%E6%95%B0%E7%9A%84%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
 <meta property="og:description" content="所谓优化问题, 就是求一个函数的极小值点. 极值与导数有着千丝万缕的联系, 但有时我们并不需要求导就能设法求解优化问题, 本节给出单元和多元函数优化方法各一例: 黄金分割搜寻法和单纯形方法.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-17T08:45:02.000Z">
-<meta property="article:modified_time" content="2024-04-18T11:55:17.685Z">
+<meta property="article:modified_time" content="2024-04-20T06:19:29.209Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="数值计算">
 <meta property="article:tag" content="极值搜索">
@@ -78,7 +78,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"karnmarth.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -229,7 +229,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.3k 字
         
       </span>
     
@@ -285,26 +285,24 @@
                 <p>所谓优化问题, 就是求一个函数的极小值点. 极值与导数有着千丝万缕的联系,
 但有时我们并不需要求导就能设法求解优化问题,
 本节给出单元和多元函数优化方法各一例: 黄金分割搜寻法和单纯形方法.</p>
-<div style="font-family: KaiTi; font-weight: bold;">
-<pre><code class="hljs">&lt;table frame = &quot;void&quot;&gt;
-    &lt;tr&gt;
-        &lt;td width = &quot;50%&quot;&gt;
-            &lt;img src = &quot;./数值解和优化问题(03)：无导数的优化方法/gold_division.png&quot;&gt;
-        &lt;/td&gt;
-        &lt;td&gt;
-            &lt;img src = &quot;./数值解和优化问题(03)：无导数的优化方法/simplx.png&quot;&gt;
-        &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-        &lt;td style = &quot;text-align: center;&quot;&gt;
-            (摘自刘川《计算物理导论》图 5.1)
-        &lt;/td&gt;
-        &lt;td style = &quot;text-align: center;&quot;&gt;
-            (摘自刘川《计算物理导论》图 5.2)
-        &lt;/td&gt;
-    &lt;/tr&gt;
-&lt;/table&gt;</code></pre>
-</div>
+<table frame="void">
+<tr>
+<td width="50%">
+<img src = "../img/gold_division.png">
+</td>
+<td>
+<img src = "../img/simplx.png">
+</td>
+</tr>
+<tr>
+<td style="text-align: center; font-family: KaiTi; font-weight: bold;">
+(摘自刘川《计算物理导论》图 5.1)
+</td>
+<td style="text-align: center; font-family: KaiTi; font-weight: bold;">
+(摘自刘川《计算物理导论》图 5.2)
+</td>
+</tr>
+</table>
 <h2 id="黄金分割搜寻法">黄金分割搜寻法</h2>
 <p>假设我们从预估的区域内选择三个点:<span
 class="math inline">\(x_0&lt;x_1&lt;x_3\)</span>. 它们的函数值可以计算.
@@ -325,15 +323,17 @@ class="math inline">\(x_2\)</span>留作比较.</li>
 </ol>
 <p>那么如何得到<span class="math inline">\(x_2\)</span>呢? 设定三个长度:
 <span class="math display">\[
-a:=x_1 - x_0\ ,\qquad b = x_2 - x_1\ ,\qquad c := x_3-x_1
+a:=x_1 - x_0\ ,\qquad b := x_2 - x_1\ ,\qquad c := x_3-x_1
 \]</span> 两种情况下的新区间总长度分别是<span
 class="math inline">\(a+b\)</span>和<span
 class="math inline">\(c\)</span>, 我们希望两者一致. 另外,
 我们还希望两种新区间有相似性, 即各个点比例一致. 那么 <span
 class="math display">\[
-b = c - a
+\begin{aligned}
+b &amp;= c - a
 \\
-\frac{b}{c} = \frac{a}{a + c}
+\frac{b}{c} &amp;= \frac{a}{a + c}
+\end{aligned}
 \]</span> 解得 <span class="math display">\[
 c = \frac{\sqrt{5}+1}{2}a\ ,\qquad b = \frac{\sqrt{5}-1}{2}a
 \]</span> 这恰好是黄金分割比, 因此这种方法称作
@@ -380,7 +380,13 @@ class="math inline">\(2\)</span>维的三角形, <span
 class="math inline">\(3\)</span>维的四面体......</p>
 <p>构造单纯形的方法非常简单, 给定一个出发点<span
 class="math inline">\(\vec{x}^{(0)}\)</span>, 构造另外<span
-class="math inline">\(n\)</span>个点</p>
+class="math inline">\(n\)</span>个点<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="这里的构造只需要线性无关, 不需要正交性, 斜交是完全允许的.">[1]</span></a></sup>
+<span class="math display">\[
+\vec{x}^{(i)}=\vec{x}^{(0)}+h_i\hat{e}_i\ ,\qquad i = 1, 2, \cdots, n
+\]</span> <span class="math inline">\(n+1\)</span>个点中,
+有三个点尤其应该关注:</p>
 <ul>
 <li><strong>最佳点</strong>: 函数值最小的点, 记作<span
 class="math inline">\(\vec{x}^{(m)}\)</span>.</li>
@@ -462,13 +468,6 @@ class="math inline">\(\vec{x}^{(M)}\)</span>回到步骤2; 否则,
 <div class="footnote-list">
 <ol>
 <li>
-<span id="fn:1" class="footnote-text"><span><span class="math display">[
-<sup>{(i)}=</sup>{(0)}+h_i_i ,i = 1, 2, , n ]</span> <span
-class="math inline">(n+1)</span>个点中, 有三个点尤其应该关注:
-<a href="#fnref:1" rev="footnote" class="footnote-backref">
-↩︎</a></span></span>
-</li>
-<li>
 <span id="fn:1" class="footnote-text"><span>这里的构造只需要线性无关,
 不需要正交性, 斜交是完全允许的.
 <a href="#fnref:1" rev="footnote" class="footnote-backref">
@@ -536,7 +535,7 @@ class="math inline">(n+1)</span>个点中, 有三个点尤其应该关注:
   <div class="license-box my-3">
     <div class="license-title">
       <div>数值解和优化问题(03)：无导数的优化方法</div>
-      <div>https://karnmarth.github.io/posts/数值解和优化问题(03)：无导数的优化方法/</div>
+      <div>https://notes.rainchan.me/posts/数值解和优化问题(03)：无导数的优化方法/</div>
     </div>
     <div class="license-meta">
       

@@ -19,18 +19,20 @@
     <meta name="description" content="本节从最理想的二次型出发, 基于函数的导函数来研究优化问题, 其中的共轭梯度法是最常用的多元函数下降方法之一.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数值解和优化问题(04)：基于梯度的多元函数优化">
-<meta property="og:url" content="https://karnmarth.github.io/posts/%E6%95%B0%E5%80%BC%E8%A7%A3%E5%92%8C%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98(04)%EF%BC%9A%E5%9F%BA%E4%BA%8E%E6%A2%AF%E5%BA%A6%E7%9A%84%E5%A4%9A%E5%85%83%E5%87%BD%E6%95%B0%E4%BC%98%E5%8C%96/">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E6%95%B0%E5%80%BC%E8%A7%A3%E5%92%8C%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98(04)%EF%BC%9A%E5%9F%BA%E4%BA%8E%E6%A2%AF%E5%BA%A6%E7%9A%84%E5%A4%9A%E5%85%83%E5%87%BD%E6%95%B0%E4%BC%98%E5%8C%96/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
 <meta property="og:description" content="本节从最理想的二次型出发, 基于函数的导函数来研究优化问题, 其中的共轭梯度法是最常用的多元函数下降方法之一.">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://notes.rainchan.me/posts/img/banana_steepdesc.gif">
 <meta property="article:published_time" content="2024-04-17T14:00:18.000Z">
-<meta property="article:modified_time" content="2024-04-18T11:36:40.540Z">
+<meta property="article:modified_time" content="2024-04-20T06:10:01.959Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="数值计算">
 <meta property="article:tag" content="极值搜索">
 <meta property="article:tag" content="最速下降法">
 <meta property="article:tag" content="共轭梯度法">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://notes.rainchan.me/posts/img/banana_steepdesc.gif">
   
   
   
@@ -78,7 +80,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"karnmarth.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -229,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2 字
+          1k 字
         
       </span>
     
@@ -240,7 +242,7 @@
         
         
         
-          1 分钟
+          9 分钟
         
       </span>
     
@@ -282,7 +284,105 @@
             
               <div class="markdown-body">
                 
-                <p>$\newcommand{}[1]{</p>
+                <p>上一节绕过求导数直接对函数优化, 可以看到还是比较复杂的,
+而本节打算从最理想的二次型出发, 基于函数的导函数来研究优化问题,
+因为二次型的形式比较简单: <span class="math display">\[
+f_{p}(\boldsymbol{x})=f_p(\boldsymbol{x}_0)-\boldsymbol{b}^{\mathbf{T}}\cdot(\boldsymbol{x}-\boldsymbol{x}_0)+\frac{1}{2}(\boldsymbol{x}-\boldsymbol{x}_0)^{\mathbf{T}}\mathbf{A}(\boldsymbol{x}-\boldsymbol{x}_0)
+\]</span> 即二次型是一种一二阶导都是常量且高阶导数为零的同时,
+还可优化的函数. 不失一般性, 对于函数<span class="math inline">\(f\in
+\mathbb{C}^{2}\)</span>, 平移初始位置和函数值的零点, 使得它总能写成形如
+<span class="math display">\[
+f(\boldsymbol{x})=-\boldsymbol{b}^\mathbf{T}\cdot\boldsymbol{x}+\frac{1}{2}\boldsymbol{x}^\mathbf{T}\mathbf{A}\boldsymbol{x}+o(|\boldsymbol{x}|^2)
+\]</span> 的形式. <span
+class="math inline">\(\boldsymbol{b}\)</span>和<span
+class="math inline">\(\mathbf{A}\)</span>分别给定<span
+class="math inline">\(f(\boldsymbol{x})\)</span>在原点的一阶和二阶偏导数.
+还可以定义 <strong>残差</strong>: <span class="math display">\[
+\begin{aligned}
+\boldsymbol{r}(\boldsymbol{x}) &amp;= -\boldsymbol{\nabla}
+f(\boldsymbol{x})
+\\
+\text{对于上述平移}&amp;\text{过的函数式, 有}
+\\
+\boldsymbol{r}(\boldsymbol{x}) &amp;\approx
+\boldsymbol{b}-\mathbf{A}\boldsymbol{x}
+\end{aligned}
+\]</span> 现在我们从原点出发, 希望对函数进行优化.</p>
+<h2 id="最速下降法">最速下降法</h2>
+<p>最速下降法的逻辑十分简单:
+在一个点附近最好的局部优化方向自然是负梯度方向, 即残差方向: <span
+class="math display">\[
+\boldsymbol{x}_{k+1}=\boldsymbol{x}_k+\lambda_k\boldsymbol{r}_k
+\]</span> 其中<span
+class="math inline">\(\lambda_k\)</span>是个待定参数,
+它自身构成一维优化问题, 因为: <span class="math display">\[
+\phi_k(\lambda_k):=f(\boldsymbol{x}_k+\lambda_k\boldsymbol{r}_k)
+\]</span> 像这样反复迭代, 最终加上一定的结束条件即可.</p>
+<h2 id="共轭梯度法">共轭梯度法</h2>
+<p>上面的最速下降法类似一种贪心策略, 通过一系列局部最优达到整体的最优,
+但是很多时候, 局部最优并不导向整体最优,
+或者处处进行局部优化并不是很高效的方案.
+如果函数的二阶导数在某些方向比较奇葩,
+例如相较于其他方向而言具有特别大的数值,
+在这样复杂的地形中优化函数的时候,
+如果按照最陡下降法来做就会沿着一个多重曲折的折线行进.
+这样的效果是需要很多小碎步才能接近极小值, 因此实际上是效率很低的.</p>
+<p>请看下面的函数, 它是著名的 <a
+target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Rosenbrock_function">Rosenbrock
+函数</a>, 使用最速下降法进行优化, 竟然整整迭代了1000次,
+这多少有些超出了我们的接受范围.</p>
+<figure>
+<img src="../img/banana_steepdesc.gif" srcset="/img/loading.gif" lazyload alt="Rosenbrock 函数" />
+<figcaption aria-hidden="true">Rosenbrock 函数</figcaption>
+</figure>
+<p>为什么会造成这样的结果? 因为最速下降法的两次线搜索的位移是正交的,
+这其实一定程度上破坏了搜索的成果. 如果引入参数, 确保搜索方向<span
+class="math inline">\(\boldsymbol{p}_i\)</span>并不是只依赖于负梯度<span
+class="math inline">\(\boldsymbol{r}_i\)</span>, 而是 <span
+class="math display">\[
+\boldsymbol{p}_i=\boldsymbol{r}_i+\beta_{i-1}\boldsymbol{p}_{i-1}
+\]</span> 位置的递推式为 <span class="math display">\[
+\boldsymbol{x}_{i+1}=\boldsymbol{x}_i+\alpha_i\boldsymbol{p}_i
+\]</span> <span
+class="math inline">\(\alpha_i\)</span>可以用一维优化来求出, <span
+class="math inline">\(\beta_i\)</span>可以证明具有形式 <span
+class="math display">\[
+\beta_i=\frac{\boldsymbol{r}_{i+1}^\mathbf{T}\boldsymbol{r}_{i+1}}{\boldsymbol{r}_i^\mathbf{T}\boldsymbol{r}_i}
+\]</span></p>
+<h3 id="步骤">步骤</h3>
+<ol start="0" type="1">
+<li><p>给定<span
+class="math inline">\(\boldsymbol{p}_0=\boldsymbol{r}_0=-\displaystyle\boldsymbol{\nabla}
+f(\boldsymbol{x}_0)\)</span>, <span
+class="math inline">\(k=0\)</span></p></li>
+<li><p>根据 <span class="math display">\[
+\phi(\alpha_k):= f(\boldsymbol{x}_k+\alpha_k\boldsymbol{p}_k)
+\]</span> 进行一维优化. 对于二次型可以直接利用公式计算<span
+class="math inline">\(\alpha_k\)</span> <span class="math display">\[
+\alpha_k=\frac{\boldsymbol{p}_k^\mathbf{T}\boldsymbol{r}_k}{\boldsymbol{p}_k^\mathbf{T}\mathbf{A}\boldsymbol{p}_k}
+\]</span></p></li>
+<li><p>更新位置和残差: <span class="math display">\[
+\begin{aligned}
+\boldsymbol{x}_{k+1}&amp;=\boldsymbol{x}_k+\alpha_k\boldsymbol{p}_k
+\\
+\boldsymbol{r}_{k+1}&amp;=-\boldsymbol{\nabla}
+f(\boldsymbol{x}_{k+1})\qquad(\text{一般形式})
+\\
+&amp;=\boldsymbol{r}_k-\alpha_k\mathbf{A}\boldsymbol{p}_k\qquad(二次型)
+\end{aligned}
+\]</span></p></li>
+<li><p>判定循环终止条件, 如果满足即跳出循环, 否则继续.</p></li>
+<li><p>更新搜索方向 <span class="math display">\[
+\begin{aligned}
+\beta_k&amp;=\frac{\boldsymbol{r}_{k+1}^\mathbf{T}\boldsymbol{r}_{k+1}}{\boldsymbol{r}_k^\mathbf{T}\boldsymbol{r}_k}
+\\
+\boldsymbol{p}_{k+1}&amp;=\boldsymbol{r}_{k+1}+\beta_k\boldsymbol{p}_k
+\end{aligned}
+\]</span></p></li>
+<li><p><span class="math inline">\(k\)</span>递增<span
+class="math inline">\(1\)</span>, 将新的<span
+class="math inline">\(k,\boldsymbol{x}_k,\boldsymbol{p}_k,\boldsymbol{r}_k\)</span>带到步骤1迭代.</p></li>
+</ol>
 
                 
               </div>
@@ -342,7 +442,7 @@
   <div class="license-box my-3">
     <div class="license-title">
       <div>数值解和优化问题(04)：基于梯度的多元函数优化</div>
-      <div>https://karnmarth.github.io/posts/数值解和优化问题(04)：基于梯度的多元函数优化/</div>
+      <div>https://notes.rainchan.me/posts/数值解和优化问题(04)：基于梯度的多元函数优化/</div>
     </div>
     <div class="license-meta">
       

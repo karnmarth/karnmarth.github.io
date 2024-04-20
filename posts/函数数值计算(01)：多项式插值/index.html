@@ -19,13 +19,13 @@
     <meta name="description" content="作为计算物理的开篇, 先介绍几类常见的多项式插值方法, 最后描述奇特的 Runge 现象表明多项式插值的局限性.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="函数数值计算(01)：多项式插值">
-<meta property="og:url" content="https://karnmarth.github.io/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(01)%EF%BC%9A%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC/">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(01)%EF%BC%9A%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
 <meta property="og:description" content="作为计算物理的开篇, 先介绍几类常见的多项式插值方法, 最后描述奇特的 Runge 现象表明多项式插值的局限性.">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://karnmarth.github.io/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(01)%EF%BC%9A%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(01)%EF%BC%9A%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC/runge%27s_phenomenon.png">
+<meta property="og:image" content="https://notes.rainchan.me/posts/img/runge&#39;s_phenomenon.png">
 <meta property="article:published_time" content="2024-02-28T15:11:18.000Z">
-<meta property="article:modified_time" content="2024-03-17T16:43:55.384Z">
+<meta property="article:modified_time" content="2024-04-20T05:37:45.281Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="数值计算">
 <meta property="article:tag" content="插值法">
@@ -35,7 +35,7 @@
 <meta property="article:tag" content="Neville 迭代法">
 <meta property="article:tag" content="Runge 现象">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://karnmarth.github.io/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(01)%EF%BC%9A%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(01)%EF%BC%9A%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC/runge%27s_phenomenon.png">
+<meta name="twitter:image" content="https://notes.rainchan.me/posts/img/runge&#39;s_phenomenon.png">
   
   
   
@@ -83,7 +83,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"karnmarth.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -234,7 +234,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          820 字
+          822 字
         
       </span>
     
@@ -390,13 +390,15 @@ f(x)=\frac{1}{1+25x^2}
 class="math inline">\([-1, 1]\)</span>上, 以<span
 class="math inline">\(\frac{2}{n}\)</span>为步长选取支撑点进行 Lagrange
 插值, 得到的结果如下所示:</p>
-<p><img title="Runge 现象" src="%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(01)%EF%BC%9A%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8F%92%E5%80%BC/runge%27s_phenomenon.png" srcset="/img/loading.gif" lazyload alt="Runge 现象" data-align="inline" width="662"></p>
+<figure>
+<img src="../img/runge&#39;s_phenomenon.png" srcset="/img/loading.gif" lazyload alt="Runge 现象" />
+<figcaption aria-hidden="true">Runge 现象</figcaption>
+</figure>
 <p>造成这种现象的主要原因是，拉格朗日插值使用的函数基组<span
-class="math inline">\(1,𝑥,𝑥^2,\cdots\)</span>并不是正交基,
+class="math inline">\(1,𝑥,𝑥^2,\cdots\)</span>​并不是正交基,
 插值结果十分病态, 可以考虑对基函数进行 Schmidt 正交化,
 但更方便的方案是选取既正交又简单的非多项式基,
-或者干脆不使用这种内插方案, 这是<a
-href="notes.rainchan.me/posts/函数数值计算(02)：有理函数插值法,%20样条函数插值法.md">下篇笔记</a>将要讨论到的.</p>
+或者干脆不使用这种内插方案, 这是下一节将要讨论到的.</p>
 <section class="footnotes">
 <div class="footnote-list">
 <ol>
@@ -475,7 +477,7 @@ target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/龙格现象"
   <div class="license-box my-3">
     <div class="license-title">
       <div>函数数值计算(01)：多项式插值</div>
-      <div>https://karnmarth.github.io/posts/函数数值计算(01)：多项式插值/</div>
+      <div>https://notes.rainchan.me/posts/函数数值计算(01)：多项式插值/</div>
     </div>
     <div class="license-meta">
       

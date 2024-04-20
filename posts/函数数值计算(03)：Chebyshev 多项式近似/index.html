@@ -19,16 +19,18 @@
     <meta name="description" content="本节介绍一种 Taylor 展开的替代: Chebyshev 展开, 它基于 Chebyshev 多项式构成的一个正交基.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="函数数值计算(03)：Chebyshev 多项式近似">
-<meta property="og:url" content="https://karnmarth.github.io/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(03)%EF%BC%9AChebyshev%20%E5%A4%9A%E9%A1%B9%E5%BC%8F%E8%BF%91%E4%BC%BC/">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(03)%EF%BC%9AChebyshev%20%E5%A4%9A%E9%A1%B9%E5%BC%8F%E8%BF%91%E4%BC%BC/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
 <meta property="og:description" content="本节介绍一种 Taylor 展开的替代: Chebyshev 展开, 它基于 Chebyshev 多项式构成的一个正交基.">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://notes.rainchan.me/posts/img/chebyshev_expansion_of_runge_function.png">
 <meta property="article:published_time" content="2024-03-12T12:55:33.000Z">
-<meta property="article:modified_time" content="2024-04-18T11:50:13.606Z">
+<meta property="article:modified_time" content="2024-04-20T06:01:01.112Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="数值计算">
 <meta property="article:tag" content="Chebyshev 多项式">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://notes.rainchan.me/posts/img/chebyshev_expansion_of_runge_function.png">
   
   
   
@@ -76,7 +78,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"karnmarth.github.io","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -331,7 +333,7 @@ class="math display">\[
 \sum_{k=0}^{N-1}\cos((k+\frac{1}{2})\theta)&amp;=
 \frac{1}{\sin\theta/2}\sum_{k=0}^{N-1}\cos((k+\frac{1}{2})\theta)\sin\theta/2
 \newline&amp;=
-\sum_{k=0}^{N-1}\frac{\sin[][(k+1)\theta]-\sin k\theta}{2\sin\theta/2}
+\sum_{k=0}^{N-1}\frac{\sin(k+1)\theta-\sin k\theta}{2\sin\theta/2}
 \newline&amp;=
 \frac{\sin(N\theta)}{2\sin\theta/2}
 \end{aligned}
@@ -355,7 +357,7 @@ class="math display">\[
 \newline\displaystyle
 N&amp;\text{if }m=m&#39;=0
 \end{cases}\end{aligned}
-\]</span> 记作<span class="math inline">\(T_{mm&#39;}\)</span></p>
+\]</span> 记作<span class="math inline">\(T_{mm&#39;}\)</span>.</p>
 <h2 id="chebyshev-展开">Chebyshev 展开</h2>
 <p>回到系数满足的条件 <span class="math display">\[
 f\left[\cos((k+\frac{1}{2})\pi/N)\right]=\frac{c_0}{2}+\sum_{m=1}^{N-1}c_m\cos((k+\frac{1}{2})m\pi/N)
@@ -375,8 +377,7 @@ class="math display">\[
 而幂级数的基之间具有很大的overlap, 所以前者才能解决所谓的 Runge
 现象.</p>
 <figure>
-<img
-src="%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(03)%EF%BC%9AChebyshev%20%E5%A4%9A%E9%A1%B9%E5%BC%8F%E8%BF%91%E4%BC%BC/chebyshev_expansion_of_runge_function.png" srcset="/img/loading.gif" lazyload
+<img src="../img/chebyshev_expansion_of_runge_function.png" srcset="/img/loading.gif" lazyload
 alt="Runge 函数的 Chebyshev 展开" />
 <figcaption aria-hidden="true">Runge 函数的 Chebyshev 展开</figcaption>
 </figure>
@@ -435,7 +436,7 @@ alt="Runge 函数的 Chebyshev 展开" />
   <div class="license-box my-3">
     <div class="license-title">
       <div>函数数值计算(03)：Chebyshev 多项式近似</div>
-      <div>https://karnmarth.github.io/posts/函数数值计算(03)：Chebyshev 多项式近似/</div>
+      <div>https://notes.rainchan.me/posts/函数数值计算(03)：Chebyshev 多项式近似/</div>
     </div>
     <div class="license-meta">
       
