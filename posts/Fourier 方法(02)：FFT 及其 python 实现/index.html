@@ -24,7 +24,7 @@
 <meta property="og:description" content="本节介绍基于 DTFT 的算法————快速 Fourier 变换, 以及用于实现这一算法的 python 模块.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-04-19T14:42:14.000Z">
-<meta property="article:modified_time" content="2024-04-20T07:22:08.648Z">
+<meta property="article:modified_time" content="2024-04-20T08:09:52.582Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="数值计算">
 <meta property="article:tag" content="Fourier 分析">
@@ -285,7 +285,7 @@
             
               <div class="markdown-body">
                 
-                <p>本节介绍基于 DTFT 的算法————快速 Fourier 变换, 以及用于实现这一算法的
+                <p>本节介绍基于 DTFT 的算法——快速 Fourier 变换, 以及用于实现这一算法的
 python 模块.</p>
 <h2 id="快速-fourier-变换fft">快速 Fourier 变换(FFT)</h2>
 <p>FFT 的基本原理其实很简单, 基本上就是 <strong>分而治之 (divide and
@@ -394,7 +394,7 @@ class="math inline">\(\displaystyle\frac{(m-N)f_s}{N}\)</span>.
 class="math inline">\(\displaystyle\frac{1}{f_s}\)</span>, 因此<span
 class="math inline">\(\displaystyle\frac{mf_s}{n}\)</span>​​即是<code>m / (n * d)</code>.</p></li>
 </ul>
-<p>具体地, 频率序列的具体形式见如下代码与注释.</p>
+<p>频率序列的具体形式见如下代码与注释.</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python">d = <span class="hljs-number">1</span> / fs<br>freqs = numpy.fft.fftfreq(N, d)<br><span class="hljs-comment"># N = 2 * k: freqs = [0, 1, ..., k - 1, - k, - k + 1, ..., -1] / (N * d)</span><br><span class="hljs-comment"># N = 2 * k + 1: freqs = [0, 1, ..., k,  - k, - k + 1, ..., -1] / (N * d)</span><br></code></pre></td></tr></table></figure>
 <p>即大约前一半是零频率以及递增的正频率,
 大约后一半是递增的负频率(绝对值递减), 如果<code>N</code>是偶数,
