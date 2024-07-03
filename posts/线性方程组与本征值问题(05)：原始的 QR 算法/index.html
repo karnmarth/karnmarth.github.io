@@ -24,7 +24,7 @@
 <meta property="og:description" content="\(\newcommand{\mb}{\mathbf}\)对于矩阵的谱, 有几种求法:  解特征多项式 任何一本线代教材都会讲到的对角化手续 ...  第一种方法求方程的数值解, 原则上需要迭代; 第二种不一定适用, 因为矩阵未必能够对角化. 是否可以找到一个求一般矩阵的本征值的&quot;直接解法&quot;呢? 很不幸的是, 这一点原则上是不可能的. 假设存在一个有限步骤的所谓&quot;直接算法&quot;,">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-09T10:29:14.000Z">
-<meta property="article:modified_time" content="2024-07-03T07:53:40.687Z">
+<meta property="article:modified_time" content="2024-07-03T08:50:54.440Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="数值计算">
 <meta property="article:tag" content="本征值问题">
@@ -305,7 +305,7 @@ class="math inline">\(\newcommand{\mb}{\mathbf}\)</span>对于矩阵的谱,
 <h2 id="qr-分解">QR 分解</h2>
 <p>在引入 QR 算法前, 先介绍实矩阵的 QR 分解:</p>
 <blockquote>
-<p>如果矩阵<span class="math inline">\(\mb{A}\in\R^{n\times
+<p>如果矩阵<span class="math inline">\(\mb{A}\in\mathbb{R}^{n\times
 n}\)</span>并且满足 <span class="math display">\[
 \mb{A}=\mb{Q}\mb{R}
 \]</span> 其中, <span class="math inline">\(\mb{Q}\)</span>和<span
@@ -319,25 +319,25 @@ class="math inline">\(\mb{A}\)</span>的列向量组<span
 class="math inline">\(\{\pmb{\alpha}_1,\pmb{\alpha}_2,\cdots,\pmb{\alpha}_n\}\)</span>​线性无关,
 那么有所谓的 <strong>Schmidt 正交归一化手续</strong> 得到一个正交归一基:
 <span class="math display">\[
-\begin{flalign*}
-&amp;\pmb{\gamma}_1 &amp;= \frac{\pmb{\beta}_1}{|\!|\pmb{\beta}_1|\!|}
+\begin{align}
+\pmb{\gamma}_1 &amp;= \frac{\pmb{\beta}_1}{|\!|\pmb{\beta}_1|\!|}
 \qquad
-&amp;\pmb{\beta}_1 = \pmb{\alpha}_1
+\pmb{\beta}_1 = \pmb{\alpha}_1
 \\
-&amp;\pmb{\gamma}_2 &amp;= \frac{\pmb{\beta}_2}{|\!|\pmb{\beta}_2|\!|}
+\pmb{\gamma}_2 &amp;= \frac{\pmb{\beta}_2}{|\!|\pmb{\beta}_2|\!|}
 \qquad
-&amp;\pmb{\beta}_2 = \pmb{\alpha}_2-(\pmb{\alpha}_2,
+\pmb{\beta}_2 = \pmb{\alpha}_2-(\pmb{\alpha}_2,
 \pmb{\gamma}_1)\pmb{\gamma}_1
 \\
-&amp; &amp; \vdots
+&amp;\qquad\qquad\vdots
 \\
-&amp;\pmb{\gamma}_k &amp;= \frac{\pmb{\beta}_k}{|\!|\pmb{\beta}_k|\!|}
-\qquad&amp;
+\pmb{\gamma}_k &amp;= \frac{\pmb{\beta}_k}{|\!|\pmb{\beta}_k|\!|}
+\qquad
 \pmb{\beta}_k = \pmb{\alpha}_k-\sum_{j=1}^{k-1}
 (\pmb{\alpha}_k, \pmb{\gamma}_j)\pmb{\gamma}_j
 \\
-&amp; &amp; \vdots
-\end{flalign*}
+&amp;\qquad\qquad\vdots
+\end{align}
 \]</span> 其中, <span class="math inline">\(k=1,2,\cdots,n\)</span>,
 <span class="math inline">\((\sim_1,\sim_2)\)</span>表示向量的内积.
 如果定义新的矩阵元 <span class="math display">\[
@@ -365,8 +365,9 @@ r_{11} &amp; r_{12} &amp; \cdots &amp; r_{1n}
 \]</span> 即<span class="math inline">\(\mb{A}=\mb{Q}\mb{R}\)</span>.
 可见任何非奇异方阵都存在 QR 分解.</p>
 <h3 id="奇异矩阵">奇异矩阵</h3>
-<p>考虑<span class="math inline">\(\mb{A}\in\R^{n\times n}\)</span>,
-且<span class="math inline">\(\rank(\mb{A})=m\)</span>. 和上面相当类似,
+<p>考虑<span class="math inline">\(\mb{A}\in\mathbb{R}^{n\times
+n}\)</span>, 且<span
+class="math inline">\(\text{rank}(\mb{A})=m\)</span>. 和上面相当类似,
 对于前<span class="math inline">\(k\)</span>列构成的向量组<span
 class="math inline">\(\{\pmb{\alpha}_1,\cdots,\pmb{\alpha}_k\}\)</span>,
 设它的秩为<span class="math inline">\(m_k\)</span>, 显然<span
@@ -405,20 +406,19 @@ class="math inline">\(\mb{T}^{(0)}=\mb{A}\)</span>.</p>
 <h3 id="步骤">步骤</h3>
 <ol type="1">
 <li><p><strong>for</strong> <span
-class="math inline">\(k=1,2,\cdots\)</span> <strong>do</strong></p></li>
-<li><ul>
+class="math inline">\(k=1,2,\cdots\)</span> <strong>do</strong></p>
+<ol type="1">
 <li>对矩阵<span class="math inline">\(\mb{T}^{(k-1)}\)</span>进行 QR
-分解, 即 <span class="math display">\[
-   \mb{T}^{(k-1)}=\mb{Q}^{(k)}\mb{R}^{(k)}
-   \]</span></li>
-</ul></li>
-<li><ul>
+分解, 即</li>
+</ol>
+<p><span class="math display">\[
+\mb{T}^{(k-1)}=\mb{Q}^{(k)}\mb{R}^{(k)}
+\]</span></p>
+<ol start="2" type="1">
 <li>计算<span
 class="math inline">\(\mb{T}^{(k)}=\mb{R}^{(k)}\mb{Q}^{(k)}\)</span>.</li>
-</ul></li>
-<li><ul>
 <li>这一步进行终止条件判定.</li>
-</ul></li>
+</ol></li>
 <li><p>输出结果</p></li>
 </ol>
 <h3 id="复杂度分析">复杂度分析</h3>
@@ -442,9 +442,9 @@ class="math inline">\(\mb{A}\)</span>相似变换而成的上三角矩阵,
 class="math inline">\(\mb{A}\)</span>"尽量上三角化":</p>
 <blockquote>
 <h5 id="实-schur-形式">实 Schur 形式:</h5>
-<p><span class="math inline">\(\forall\mb{A}\in\R^{n\times n}\)</span>,
-<span class="math inline">\(\exist\mb{Q}\)</span>为正交矩阵且 <span
-class="math display">\[
+<p><span class="math inline">\(\forall\mb{A}\in\mathbb{R}^{n\times
+n}\)</span>, 存在<span class="math inline">\(\mb{Q}\)</span>为正交矩阵且
+<span class="math display">\[
 \mb{Q}^\mb{T}\mb{A}\mb{Q}=
 \begin{pmatrix}
 R_{11} &amp; R_{12} &amp; \cdots &amp; R_{1m}
@@ -455,8 +455,9 @@ R_{11} &amp; R_{12} &amp; \cdots &amp; R_{1m}
 \\
 0 &amp; 0 &amp; \cdots &amp; R_{mm}
 \end{pmatrix}
-\]</span> 其中<span class="math inline">\(R_{ii}\in\R\)</span>或<span
-class="math inline">\(R_{ii}\in\R^{2\times2}\)</span>.
+\]</span> 其中<span
+class="math inline">\(R_{ii}\in\mathbb{R}\)</span>或<span
+class="math inline">\(R_{ii}\in\mathbb{R}^{2\times2}\)</span>.
 这样的形式称作矩阵<span class="math inline">\(\mb{A}\)</span>的
 <strong>实 Schur 形式</strong>.</p>
 </blockquote>

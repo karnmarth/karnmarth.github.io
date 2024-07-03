@@ -16,15 +16,15 @@
   <meta name="author" content="Rain Chan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本节开始研究所谓的本征值问题, 让我们首先回忆一下关于本征值问题的一些数学定义和一些重要的结果. 线代知识再回顾  本征值问题 \(\forall\mathbf{A}\in\C^{n×n}\Rightarrow\exist(\pmb{x}\in\C^n\backslash \{\pmb{0}\}\and \lambda\in\C)\ ,\ \text{s.t.}\) \[ \math">
+    <meta name="description" content="本节开始研究所谓的本征值问题, 让我们首先回忆一下关于本征值问题的一些数学定义和一些重要的结果. 线代知识再回顾  本征值问题 \(\forall\mathbf{A}\in\mathbb{C}^{n×n}\), 存在非零矢量\(\pmb{x}\in\mathbb{C}^n\backslash \{\pmb{0}\}\)和常数\(\lambda\in\mathbb{C}\) \(\t">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线性方程组与本征值问题(04)：本征值问题的一般描述">
 <meta property="og:url" content="https://notes.rainchan.me/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(04)%EF%BC%9A%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E6%8F%8F%E8%BF%B0/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
-<meta property="og:description" content="本节开始研究所谓的本征值问题, 让我们首先回忆一下关于本征值问题的一些数学定义和一些重要的结果. 线代知识再回顾  本征值问题 \(\forall\mathbf{A}\in\C^{n×n}\Rightarrow\exist(\pmb{x}\in\C^n\backslash \{\pmb{0}\}\and \lambda\in\C)\ ,\ \text{s.t.}\) \[ \math">
+<meta property="og:description" content="本节开始研究所谓的本征值问题, 让我们首先回忆一下关于本征值问题的一些数学定义和一些重要的结果. 线代知识再回顾  本征值问题 \(\forall\mathbf{A}\in\mathbb{C}^{n×n}\), 存在非零矢量\(\pmb{x}\in\mathbb{C}^n\backslash \{\pmb{0}\}\)和常数\(\lambda\in\mathbb{C}\) \(\t">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-08T08:41:13.000Z">
-<meta property="article:modified_time" content="2024-05-09T10:28:09.981Z">
+<meta property="article:modified_time" content="2024-07-03T08:40:06.663Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="数值计算">
 <meta property="article:tag" content="本征值问题">
@@ -232,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.5k 字
         
       </span>
     
@@ -291,8 +291,11 @@
 <blockquote>
 <p><strong>本征值问题</strong></p>
 <p><span
-class="math inline">\(\forall\mathbf{A}\in\C^{n×n}\Rightarrow\exist(\pmb{x}\in\C^n\backslash
-\{\pmb{0}\}\and \lambda\in\C)\ ,\ \text{s.t.}\)</span> <span
+class="math inline">\(\forall\mathbf{A}\in\mathbb{C}^{n×n}\)</span>,
+存在非零矢量<span class="math inline">\(\pmb{x}\in\mathbb{C}^n\backslash
+\{\pmb{0}\}\)</span>和常数<span
+class="math inline">\(\lambda\in\mathbb{C}\)</span></p>
+<p><span class="math inline">\(\text{s.t.}\)</span> <span
 class="math display">\[
 \mathbf{A}\pmb{x}=\lambda\pmb{x}
 \]</span> 则称<span class="math inline">\(\lambda\)</span>为<span
@@ -370,10 +373,11 @@ class="math inline">\(+\infty\)</span>.</p>
 <p>先回忆一下相似变换的知识:</p>
 <blockquote>
 <p><strong>相似变换(similar transformation)</strong> 是一个线性变换<span
-class="math inline">\(S_n:\C^{n\times n}\rightarrow \C^{n\times
-n}\)</span>, 形如 <span class="math display">\[
+class="math inline">\(S_n:\mathbb{C}^{n\times n}\rightarrow
+\mathbb{C}^{n\times n}\)</span>, 形如 <span class="math display">\[
 S_n(\mathbf{A})=\mathbf{C}^{-1}\mathbf{A}\mathbf{C}
-\]</span> 其中<span class="math inline">\(\mathbf{C}\in\C^{n\times
+\]</span> 其中<span
+class="math inline">\(\mathbf{C}\in\mathbb{C}^{n\times
 n}\)</span>且满秩.</p>
 </blockquote>
 <p>显然, 相似变换不改变矩阵的谱, 而(右)本征矢会左乘一个矩阵<span
@@ -389,8 +393,9 @@ class="math inline">\(\mathbf{C}\)</span>​是一个酉矩阵(实正交矩阵),
 任意复方阵也未必能对角化. 但我们可以退而求其次:</p>
 <blockquote>
 <p><strong>Schur 分解定理</strong></p>
-<p><span class="math inline">\(\forall\mathbf{A}\in\C^{n\times n}\ ,\
-\exist\mathbf{U}\ \text{s.t.}\)</span>​ <span class="math display">\[
+<p><span class="math inline">\(\forall\mathbf{A}\in\mathbb{C}^{n\times
+n}\ \)</span>, 存在<span class="math inline">\(\mathbf{U}\
+\text{s.t.}\)</span>​ <span class="math display">\[
 \mathbf{U}^{-1}\mathbf{A}\mathbf{U}\equiv\mathbf{U}^\dagger\mathbf{A}\mathbf{U}=\begin{pmatrix}
 \lambda_1 &amp; \tilde{a}_{12} &amp; \cdots &amp; \tilde{a}_{1n}
 \\
@@ -421,7 +426,8 @@ class="math inline">\(\lambda_1\)</span>,
 对应地一个归一化的本征矢为<span
 class="math inline">\(\pmb{x}_1\)</span>: <span class="math display">\[
 \mathbf{A}\pmb{x}_n=\lambda_n\pmb{x}_n
-\]</span> 从<span class="math inline">\(\C^n\)</span>上不难挑选<span
+\]</span> 从<span
+class="math inline">\(\mathbb{C}^n\)</span>上不难挑选<span
 class="math inline">\(n-1\)</span>个正交归一的本征矢<span
 class="math inline">\(\{\pmb{x}_2,\cdots,\pmb{x}_n\}\)</span>,
 并且它们都与<span class="math inline">\(\pmb{x}_1\)</span>​正交.
@@ -472,7 +478,7 @@ class="math inline">\(\mathbf{X}\mathbf{P}\)</span>​整体承担变换矩阵�
 并且都是实数.</p>
 <p>这可以看作实对称矩阵对角化定理的推广.</p></li>
 <li><p>实矩阵当然也能上三角化, 但对角元未必是实数.
-有的问题要求把数域限制为<span class="math inline">\(\R\)</span>​,
+有的问题要求把数域限制为<span class="math inline">\(\mathbb{R}\)</span>​,
 那么实际上无法分解为上三角矩阵.</p>
 <p>这就要引出后面的实 Schur 分解.</p></li>
 </ol>
