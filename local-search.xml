@@ -125,9 +125,42 @@
       
       <tag>线性方程组</tag>
       
+      <tag>三角矩阵</tag>
+      
       <tag>厄密矩阵</tag>
       
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>线性方程组与本征值问题(01)：LU 分解</title>
+    <link href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(01)%EF%BC%9ALU%20%E5%88%86%E8%A7%A3/"/>
+    <url>/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(01)%EF%BC%9ALU%20%E5%88%86%E8%A7%A3/</url>
+    
+    <content type="html"><![CDATA[<p>LU 分解是指把一个方阵分解成一个上三角和一个下三角矩阵的乘积 <spanclass="math display">\[\mathbf{A}\pmb{x} =\pmb{b}\Rightarrow\begin{cases}\displaystyle\mathbf{L}\pmb{y}=\pmb{b}\\\\\displaystyle\mathbf{U}\pmb{x} = \pmb{y}\end{cases}\qquad (\mathbf{A}=\mathbf{L}\mathbf{U})\]</span> <strong>通常, 我们会取<spanclass="math inline">\(\mathbf{L}\)</span>的对角元为<spanclass="math inline">\(1\)</span>,并且判断唯一性时总是忽略这个自由度</strong>. 如果知道系数矩阵的 LU 分解,就把一个复杂的方程组转化为两步较简单的解方程组. 显然, LU分解的一个特例就是 Gauss 消元法.</p><p>想要把 LU 分解应用到问题中, 我们需要从数学上解决它的存在性和唯一性,或者在什么样的条件下, 有唯一的 LU 分解.</p><h3 id="lu-分解的唯一性">LU 分解的唯一性</h3><blockquote><p>给定一个矩阵<span class="math inline">\(\mathbf{A}\in\C^{n\timesn}\)</span>, 如果<span class="math inline">\(\mathbf{A}\)</span>具有 LU分解并且秩满足<span class="math inline">\(\rank(\mathbf{A})\gen-1\)</span>, 则这个分解唯一.</p></blockquote><p>证明相当简单. 假设存在另一个 LU 分解<spanclass="math inline">\(\mathbf{A} = \mathbf{D}\mathbf{H}\)</span>.先考虑<span class="math inline">\(\mathbf{A}\)</span>满秩的情形.</p><h4 id="mathbfa满秩">1. <spanclass="math inline">\(\mathbf{A}\)</span>满秩</h4><p>因为乘法运算不让秩增大, 而<spanclass="math inline">\(\mathbf{A}\)</span>已经满秩了,因此所有三角矩阵也满秩.</p><p>这样可以得到 <span class="math display">\[\mathbf{L}\mathbf{U}=\mathbf{D}\mathbf{H}\Rightarrow\mathbf{D}^{-1}\mathbf{L}=\mathbf{H}\mathbf{U}^{-1}\]</span> 上(下)三角矩阵参与的求逆和乘法运算, 结果仍然是上(下)三角矩阵,因此左边仍是下三角, 右边仍是上三角, 相等, 说明两者都是对角矩阵. 即 <spanclass="math display">\[\mathbf{D}^{-1}\mathbf{L}=\text{diag}\{c_1,c_2,\cdots,c_n\}\]</span> 把<span class="math inline">\(\mathbf{D}\)</span>乘过去,立即得到<span class="math inline">\(\mathbf{L}\)</span>的对角元 <spanclass="math display">\[l_{ii}=c_id_{ii}\ ,\qquad i=1,2,\cdots,n\]</span> 考虑到 LU 分解取下三角矩阵的对角元为<spanclass="math inline">\(1\)</span>, 有<spanclass="math inline">\(c_i=1(\forall i)\)</span>. 因此<spanclass="math inline">\(\mathbf{D}^{-1}\mathbf{L}=\mathbf{I}\)</span>, 即<span class="math display">\[\mathbf{D}=\mathbf{L}\ ,\qquad \mathbf{U}=\mathbf{H}\]</span> 这说明根本不是新的分解, 得证.</p><h4 id="mathbfa不满秩">2. <spanclass="math inline">\(\mathbf{A}\)</span>不满秩</h4><p>我们进行分块 <span class="math display">\[\mathbf{A}=\begin{pmatrix}\mathbf{A}_m &amp; \mathbf{B}\\\mathbf{C} &amp; \mathbf{D}\end{pmatrix}\]</span> 作为<span class="math inline">\(m\)</span>阶主子矩阵, <spanclass="math inline">\(\mathbf{A}_m\)</span>是满秩的,如果它具有分解(显然具有, 因为我们假设<spanclass="math inline">\(\mathbf{A}\)</span>能够分解), 则<spanclass="math inline">\(\mathbf{L}\)</span>的<spanclass="math inline">\((1,1), (1,2)\)</span>块和<spanclass="math inline">\(\mathbf{U}\)</span>的<spanclass="math inline">\((1,1),(2,1)\)</span>块已经确定了: <spanclass="math display">\[\mathbf{L}=\begin{pmatrix}\mathbf{L}_m &amp; \mathbf{O}\\\mathbf{L}_{21} &amp; \mathbf{L}_{22}\end{pmatrix}\\\mathbf{U}=\begin{pmatrix}\mathbf{U}_m &amp; \mathbf{U}_{12}\\\mathbf{O} &amp; \mathbf{U}_{22}\end{pmatrix}\]</span> 它给出 <span class="math display">\[\mathbf{L}_m\mathbf{U}_{12}=\mathbf{B}\\\mathbf{L}_{21}\mathbf{U}_m=\mathbf{C}\\\mathbf{L}_{21}\mathbf{U}_{12}+\mathbf{L}_{22}\mathbf{U}_{22}=\mathbf{D}\]</span> 由于<span class="math inline">\(\mathbf{L}_m\)</span>和<spanclass="math inline">\(\mathbf{U}_m\)</span>满秩,那么前两式相当于多个独立的线性方程组, 系数矩阵为满秩方阵, 因此<spanclass="math inline">\(\mathbf{U}_{12}\)</span>和<spanclass="math inline">\(\mathbf{L}_{21}\)</span>有唯一解.</p><p><span class="math inline">\(\mathbf{L}_{22}\)</span>和<spanclass="math inline">\(\mathbf{U}_{22}\)</span>有赖于我们给出的限制条件.前面提到, 约定<spanclass="math inline">\(\mathbf{L}\)</span>的对角元都为<spanclass="math inline">\(1\)</span>, 因此<spanclass="math inline">\(\mathbf{L}\)</span>满秩, 而<spanclass="math inline">\(\mathbf{U}\)</span>的秩为<spanclass="math inline">\(m\)</span>, 将后<spanclass="math inline">\(n-m\)</span>列用前<spanclass="math inline">\(m\)</span>列线性表出, 立即得到 <spanclass="math display">\[\mathbf{U}_{22}=\mathbf{O}\]</span> 第三式由此成为恒等式, 对于<spanclass="math inline">\(\mathbf{L}_{22}\)</span>没有更多的限制条件了.幸好<span class="math inline">\(\rank(\mathbf{A})=n-1\)</span>, <spanclass="math inline">\(\mathbf{L}_{22}\)</span>是个<spanclass="math inline">\(1\times1\)</span>的矩阵, 唯一元被强制归一了,因此仍是唯一的.</p><h3 id="lu-分解的存在性">LU 分解的存在性</h3><p>关于 LU 分解是否存在, 有如下定理:</p><blockquote><p><span class="math inline">\(\forall\mathbf{A}\in M_{n}(\R)\)</span>,<span class="math inline">\(\mathbf{A}\)</span>存在 LU分解的充分条件为:</p><p><span class="math inline">\(\mathbf{A}\)</span>的所有主子矩阵<spanclass="math inline">\(\mathbf{A}_i\ ,\i=1,2,\cdots,n-1\)</span>都是可逆的.</p><p>这个条件和<span class="math inline">\(\rank{\mathbf{A}}\gen-1\)</span>等价.</p></blockquote><p>注意, 它并没有对<spanclass="math inline">\(\mathbf{A}\)</span>本身是否可逆有要求.证明这个定理需要归纳法. 对于第<spanclass="math inline">\(m+1\)</span>个主子矩阵, 进行分块: <spanclass="math display">\[\mathbf{A}_{m+1}=\begin{pmatrix}\mathbf{A}_m &amp; \pmb{u}\\\pmb{v}^{\mathbf{T}} &amp; \lambda\end{pmatrix}\]</span> 如果<span class="math inline">\(\mathbf{A}_m\)</span>存在 LU分解: <span class="math display">\[\mathbf{A}_m=\mathbf{L}_m\mathbf{U}_m\]</span> 则可以验证, <spanclass="math inline">\(\mathbf{A}_{m+1}\)</span>可以写作 <spanclass="math display">\[\begin{aligned}\mathbf{A}_{m+1}&amp;=\mathbf{L}_{m+1}\mathbf{U}_{m+1}\\\mathbf{L}_{m+1}&amp;=\begin{pmatrix}\mathbf{L}_m &amp; \mathbf{O}\\\pmb{v}^\mathbf{T}\mathbf{U}_n^{-1}&amp;1\end{pmatrix}\\\mathbf{U}_{m+1}&amp;=\begin{pmatrix}\mathbf{U}_m &amp; \mathbf{L}_m^{-1}\pmb{u}\\\mathbf{O} &amp; \lambda - \pmb{v}^\mathbf{T}\mathbf{A}_m^{-1}\pmb{u}\end{pmatrix}\end{aligned}\]</span> 这个式子要求<spanclass="math inline">\(\mathbf{A}_m\)</span>分解为两个满秩矩阵.因此从<span class="math inline">\(m=1\)</span>开始归纳直到<spanclass="math inline">\(m=n-1\)</span>, 条件为其中各阶主子矩阵满秩,则<span class="math inline">\(\mathbf{A}\)</span>存在 LU 分解.</p><p>结合前面, 我们证明了: 当<spanclass="math inline">\(\mathbf{A}\)</span>的<spanclass="math inline">\(1\sim n-1\)</span>阶主子矩阵非奇异(即<spanclass="math inline">\(\rank A \ge n-1\)</span>), 存在唯一的 LU 分解.实际上必要性也成立(证明略), 这是个充要条件.</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>计算物理</category>
+      
+      <category>线性方程组与本征值问题</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>数值计算</tag>
+      
+      <tag>线性方程组</tag>
+      
       <tag>三角矩阵</tag>
+      
+      <tag>LU分解</tag>
       
     </tags>
     

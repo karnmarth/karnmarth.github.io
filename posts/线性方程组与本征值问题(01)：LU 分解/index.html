@@ -16,20 +16,20 @@
   <meta name="author" content="Rain Chan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Cholesky 分解基于这样一个事实: 对于一个正定厄密矩阵\(\mathbf{A}\in M_n(\C)\), 可以找到一个矩阵\(\mathbf{H}\)使得\(\mathbf{A}&#x3D;\mathbf{H}^\dagger\mathbf{H}\). 事实上, 可以要求\(\mathbf{H}\)是一个上三角矩阵, 则这个分解称为 Cholesky 分解. Cholesky 分解同样把复">
+    <meta name="description" content="作为与矩阵密切相关的一章, 前三节讲述线性方程组的解法, 之后是本征值问题. 本节为了解方程组, 引入所谓的 LU 分解.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="线性方程组与本征值问题(02)：Cholesky 分解">
-<meta property="og:url" content="https://notes.rainchan.me/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(02)%EF%BC%9ACholesky%20%E5%88%86%E8%A7%A3/">
+<meta property="og:title" content="线性方程组与本征值问题(01)：LU 分解">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(01)%EF%BC%9ALU%20%E5%88%86%E8%A7%A3/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
-<meta property="og:description" content="Cholesky 分解基于这样一个事实: 对于一个正定厄密矩阵\(\mathbf{A}\in M_n(\C)\), 可以找到一个矩阵\(\mathbf{H}\)使得\(\mathbf{A}&#x3D;\mathbf{H}^\dagger\mathbf{H}\). 事实上, 可以要求\(\mathbf{H}\)是一个上三角矩阵, 则这个分解称为 Cholesky 分解. Cholesky 分解同样把复">
+<meta property="og:description" content="作为与矩阵密切相关的一章, 前三节讲述线性方程组的解法, 之后是本征值问题. 本节为了解方程组, 引入所谓的 LU 分解.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-05-07T11:00:47.000Z">
-<meta property="article:modified_time" content="2024-05-09T14:07:48.240Z">
+<meta property="article:published_time" content="2024-05-07T08:05:17.000Z">
+<meta property="article:modified_time" content="2024-07-03T08:14:52.288Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="数值计算">
 <meta property="article:tag" content="线性方程组">
 <meta property="article:tag" content="三角矩阵">
-<meta property="article:tag" content="厄密矩阵">
+<meta property="article:tag" content="LU分解">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -38,7 +38,7 @@
   
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
   
-  <title>线性方程组与本征值问题(02)：Cholesky 分解 - Rain Chan&#39;s Notes</title>
+  <title>线性方程组与本征值问题(01)：LU 分解 - Rain Chan&#39;s Notes</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -208,7 +208,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="线性方程组与本征值问题(02)：Cholesky 分解"></span>
+            <span id="subtitle" data-typed-text="线性方程组与本征值问题(01)：LU 分解"></span>
           
         </div>
 
@@ -219,8 +219,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-05-07 19:00" pubdate>
-          2024年5月7日 晚上
+        <time datetime="2024-05-07 16:05" pubdate>
+          2024年5月7日 下午
         </time>
       </span>
     
@@ -231,7 +231,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          562 字
+          1.2k 字
         
       </span>
     
@@ -242,7 +242,7 @@
         
         
         
-          5 分钟
+          10 分钟
         
       </span>
     
@@ -279,82 +279,168 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">线性方程组与本征值问题(02)：Cholesky 分解</h1>
+            <h1 id="seo-header">线性方程组与本征值问题(01)：LU 分解</h1>
             
             
               <div class="markdown-body">
                 
-                <p>Cholesky 分解基于这样一个事实: 对于一个正定厄密矩阵<span
-class="math inline">\(\mathbf{A}\in M_n(\C)\)</span>,
-可以找到一个矩阵<span class="math inline">\(\mathbf{H}\)</span>使得<span
-class="math inline">\(\mathbf{A}=\mathbf{H}^\dagger\mathbf{H}\)</span>.
-事实上, 可以要求<span
-class="math inline">\(\mathbf{H}\)</span>是一个上三角矩阵,
-则这个分解称为 <strong>Cholesky 分解</strong>. Cholesky
-分解同样把复杂的线性方程组转化为两个较简单的方程组: <span
+                <p>LU 分解是指把一个方阵分解成一个上三角和一个下三角矩阵的乘积 <span
 class="math display">\[
-\mathbf{A}\pmb{x}=\pmb{b}\Rightarrow\begin{cases}\displaystyle
-\mathbf{H}^\dagger\pmb{y} = \pmb{b}
+\mathbf{A}\pmb{x} =
+\pmb{b}\Rightarrow\begin{cases}\displaystyle\mathbf{L}\pmb{y}=\pmb{b}
 \\\\\displaystyle
-\mathbf{H}\pmb{x}=\pmb{y}
-\end{cases}
-\]</span> 一个显而易见的引理是,
-<strong>正定厄密矩阵的主子矩阵仍是正定厄密的</strong>.
-这可以直接在如下求和式中 <span class="math display">\[
-\sum_{j=1}^n\sum_{k=1}^na_{jk}x_jx_k
-\]</span> 将<span
-class="math inline">\(j,k=m+1,m+2,\cdots,n\)</span>的<span
-class="math inline">\(x_j,x_k\)</span>取作<span
-class="math inline">\(0\)</span>, 不应影响正定二次型的结论,
-从而得证.</p>
-<p>有了这个引理, 对 Cholesky 分解的研究仍可以按照归纳法的思路进行.
-假设主子矩阵<span class="math inline">\(\mathbf{A}_{m}\)</span>
-存在分解矩阵<span class="math inline">\(\mathbf{H}_m\)</span>,
-更高阶的主子矩阵可以进行分块 <span class="math display">\[
+\mathbf{U}\pmb{x} = \pmb{y}
+\end{cases}\qquad (\mathbf{A}=\mathbf{L}\mathbf{U})
+\]</span> <strong>通常, 我们会取<span
+class="math inline">\(\mathbf{L}\)</span>的对角元为<span
+class="math inline">\(1\)</span>,
+并且判断唯一性时总是忽略这个自由度</strong>. 如果知道系数矩阵的 LU 分解,
+就把一个复杂的方程组转化为两步较简单的解方程组. 显然, LU
+分解的一个特例就是 Gauss 消元法.</p>
+<p>想要把 LU 分解应用到问题中, 我们需要从数学上解决它的存在性和唯一性,
+或者在什么样的条件下, 有唯一的 LU 分解.</p>
+<h3 id="lu-分解的唯一性">LU 分解的唯一性</h3>
+<blockquote>
+<p>给定一个矩阵<span class="math inline">\(\mathbf{A}\in\C^{n\times
+n}\)</span>, 如果<span class="math inline">\(\mathbf{A}\)</span>具有 LU
+分解并且秩满足<span class="math inline">\(\rank(\mathbf{A})\ge
+n-1\)</span>, 则这个分解唯一.</p>
+</blockquote>
+<p>证明相当简单. 假设存在另一个 LU 分解<span
+class="math inline">\(\mathbf{A} = \mathbf{D}\mathbf{H}\)</span>.
+先考虑<span class="math inline">\(\mathbf{A}\)</span>满秩的情形.</p>
+<h4 id="mathbfa满秩">1. <span
+class="math inline">\(\mathbf{A}\)</span>满秩</h4>
+<p>因为乘法运算不让秩增大, 而<span
+class="math inline">\(\mathbf{A}\)</span>已经满秩了,
+因此所有三角矩阵也满秩.</p>
+<p>这样可以得到 <span class="math display">\[
+\mathbf{L}\mathbf{U}=\mathbf{D}\mathbf{H}\Rightarrow\mathbf{D}^{-1}\mathbf{L}=\mathbf{H}\mathbf{U}^{-1}
+\]</span> 上(下)三角矩阵参与的求逆和乘法运算, 结果仍然是上(下)三角矩阵,
+因此左边仍是下三角, 右边仍是上三角, 相等, 说明两者都是对角矩阵. 即 <span
+class="math display">\[
+\mathbf{D}^{-1}\mathbf{L}=\text{diag}\{c_1,c_2,\cdots,c_n\}
+\]</span> 把<span class="math inline">\(\mathbf{D}\)</span>乘过去,
+立即得到<span class="math inline">\(\mathbf{L}\)</span>的对角元 <span
+class="math display">\[
+l_{ii}=c_id_{ii}\ ,\qquad i=1,2,\cdots,n
+\]</span> 考虑到 LU 分解取下三角矩阵的对角元为<span
+class="math inline">\(1\)</span>, 有<span
+class="math inline">\(c_i=1(\forall i)\)</span>. 因此<span
+class="math inline">\(\mathbf{D}^{-1}\mathbf{L}=\mathbf{I}\)</span>, 即
+<span class="math display">\[
+\mathbf{D}=\mathbf{L}\ ,\qquad \mathbf{U}=\mathbf{H}
+\]</span> 这说明根本不是新的分解, 得证.</p>
+<h4 id="mathbfa不满秩">2. <span
+class="math inline">\(\mathbf{A}\)</span>不满秩</h4>
+<p>我们进行分块 <span class="math display">\[
+\mathbf{A}=\begin{pmatrix}
+\mathbf{A}_m &amp; \mathbf{B}
+\\
+\mathbf{C} &amp; \mathbf{D}
+\end{pmatrix}
+\]</span> 作为<span class="math inline">\(m\)</span>阶主子矩阵, <span
+class="math inline">\(\mathbf{A}_m\)</span>是满秩的,
+如果它具有分解(显然具有, 因为我们假设<span
+class="math inline">\(\mathbf{A}\)</span>能够分解), 则<span
+class="math inline">\(\mathbf{L}\)</span>的<span
+class="math inline">\((1,1), (1,2)\)</span>块和<span
+class="math inline">\(\mathbf{U}\)</span>的<span
+class="math inline">\((1,1),(2,1)\)</span>块已经确定了: <span
+class="math display">\[
+\mathbf{L}=\begin{pmatrix}
+\mathbf{L}_m &amp; \mathbf{O}
+\\
+\mathbf{L}_{21} &amp; \mathbf{L}_{22}
+\end{pmatrix}
+\\
+\mathbf{U}=\begin{pmatrix}
+\mathbf{U}_m &amp; \mathbf{U}_{12}
+\\
+\mathbf{O} &amp; \mathbf{U}_{22}
+\end{pmatrix}
+\]</span> 它给出 <span class="math display">\[
+\mathbf{L}_m\mathbf{U}_{12}=\mathbf{B}
+\\
+\mathbf{L}_{21}\mathbf{U}_m=\mathbf{C}
+\\
+\mathbf{L}_{21}\mathbf{U}_{12}+\mathbf{L}_{22}\mathbf{U}_{22}=\mathbf{D}
+\]</span> 由于<span class="math inline">\(\mathbf{L}_m\)</span>和<span
+class="math inline">\(\mathbf{U}_m\)</span>满秩,
+那么前两式相当于多个独立的线性方程组, 系数矩阵为满秩方阵, 因此<span
+class="math inline">\(\mathbf{U}_{12}\)</span>和<span
+class="math inline">\(\mathbf{L}_{21}\)</span>有唯一解.</p>
+<p><span class="math inline">\(\mathbf{L}_{22}\)</span>和<span
+class="math inline">\(\mathbf{U}_{22}\)</span>有赖于我们给出的限制条件.
+前面提到, 约定<span
+class="math inline">\(\mathbf{L}\)</span>的对角元都为<span
+class="math inline">\(1\)</span>, 因此<span
+class="math inline">\(\mathbf{L}\)</span>满秩, 而<span
+class="math inline">\(\mathbf{U}\)</span>的秩为<span
+class="math inline">\(m\)</span>, 将后<span
+class="math inline">\(n-m\)</span>列用前<span
+class="math inline">\(m\)</span>列线性表出, 立即得到 <span
+class="math display">\[
+\mathbf{U}_{22}=\mathbf{O}
+\]</span> 第三式由此成为恒等式, 对于<span
+class="math inline">\(\mathbf{L}_{22}\)</span>没有更多的限制条件了.
+幸好<span class="math inline">\(\rank(\mathbf{A})=n-1\)</span>, <span
+class="math inline">\(\mathbf{L}_{22}\)</span>是个<span
+class="math inline">\(1\times1\)</span>的矩阵, 唯一元被强制归一了,
+因此仍是唯一的.</p>
+<h3 id="lu-分解的存在性">LU 分解的存在性</h3>
+<p>关于 LU 分解是否存在, 有如下定理:</p>
+<blockquote>
+<p><span class="math inline">\(\forall\mathbf{A}\in M_{n}(\R)\)</span>,
+<span class="math inline">\(\mathbf{A}\)</span>存在 LU
+分解的充分条件为:</p>
+<p><span class="math inline">\(\mathbf{A}\)</span>的所有主子矩阵<span
+class="math inline">\(\mathbf{A}_i\ ,\
+i=1,2,\cdots,n-1\)</span>都是可逆的.</p>
+<p>这个条件和<span class="math inline">\(\rank{\mathbf{A}}\ge
+n-1\)</span>等价.</p>
+</blockquote>
+<p>注意, 它并没有对<span
+class="math inline">\(\mathbf{A}\)</span>本身是否可逆有要求.
+证明这个定理需要归纳法. 对于第<span
+class="math inline">\(m+1\)</span>个主子矩阵, 进行分块: <span
+class="math display">\[
 \mathbf{A}_{m+1}=\begin{pmatrix}
-\mathbf{A}_m &amp; \pmb{v}
+\mathbf{A}_m &amp; \pmb{u}
 \\
-\pmb{v}^\dagger &amp; \lambda
+\pmb{v}^{\mathbf{T}} &amp; \lambda
 \end{pmatrix}
-\]</span> 我们希望它仍存在分解矩阵<span
-class="math inline">\(\mathbf{H}_{m+1}\)</span>, 同样可以分块为 <span
+\]</span> 如果<span class="math inline">\(\mathbf{A}_m\)</span>存在 LU
+分解: <span class="math display">\[
+\mathbf{A}_m=\mathbf{L}_m\mathbf{U}_m
+\]</span> 则可以验证, <span
+class="math inline">\(\mathbf{A}_{m+1}\)</span>可以写作 <span
 class="math display">\[
-\mathbf{H}_{m+1}=\begin{pmatrix}
-\mathbf{H}_m &amp; \pmb{u}
+\begin{aligned}
+\mathbf{A}_{m+1}&amp;=\mathbf{L}_{m+1}\mathbf{U}_{m+1}
 \\
-\pmb{0}^\dagger &amp; \mu
+\mathbf{L}_{m+1}&amp;=\begin{pmatrix}
+\mathbf{L}_m &amp; \mathbf{O}
+\\
+\pmb{v}^\mathbf{T}\mathbf{U}_n^{-1}&amp;1
 \end{pmatrix}
 \\
-\mathbf{H}_{m+1}^\dagger=\begin{pmatrix}
-\mathbf{H}_m^\dagger &amp; \pmb{0}
+\mathbf{U}_{m+1}&amp;=\begin{pmatrix}
+\mathbf{U}_m &amp; \mathbf{L}_m^{-1}\pmb{u}
 \\
-\pmb{u}^\dagger &amp; \mu
+\mathbf{O} &amp; \lambda - \pmb{v}^\mathbf{T}\mathbf{A}_m^{-1}\pmb{u}
 \end{pmatrix}
-\]</span> 则有 <span class="math display">\[
-\mathbf{H}_m^\dagger\pmb{u}=\pmb{v}
-\\
-\pmb{u}^\dagger\pmb{u}+\mu^2=\lambda
-\]</span> 设<span
-class="math inline">\(\mathbf{H}^\dagger\)</span>的<span
-class="math inline">\((j,k)\)</span>元为<span
-class="math inline">\(h_{jk}\)</span>, 则 <span class="math display">\[
-\sum_{l=1}^{k}h_{jl}h_{kl}^\dagger=a_{jk}
-\\(k=1,2,\cdots,j)
-\]</span> 写成<span class="math inline">\(h_{jk}\)</span>的显式 <span
-class="math display">\[
-h_{jk}=\frac{\displaystyle
-a_{jk}-\sum_{l=1}^{k-1}h_{jl}h^\dagger_{kl}}{h^\dagger_{kk}}
-\\(k=1,2,\cdots,j-1)
-\\
-h_{jj}=\sqrt{a_{jj}-\sum_{l=1}^{j-1}|h_{jl}|^2}
-\]</span></p>
-<h3 id="算法总结">算法总结</h3>
-<p>如下为算法流程:</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np <span class="hljs-comment"># 仅作为示意, 指标起点取0</span><br>h[<span class="hljs-number">0</span>,<span class="hljs-number">0</span>] = np.sqrt(a[<span class="hljs-number">0</span>,<span class="hljs-number">0</span>])<br><span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, n):<br>    <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(j):<br>        h[j,k]=(a[j, k]-h[j, :k]@np.conj(h[k, :k])) / h[j, j]<br>       <br>    h[j, j] = np.sqrt(a[j, j] - np.<span class="hljs-built_in">sum</span>(np.<span class="hljs-built_in">abs</span>(h[j, :j]) ** <span class="hljs-number">2</span>))<br></code></pre></td></tr></table></figure>
-<p>Cholesky 分解的计算量约为<span
-class="math inline">\(\displaystyle\frac{n^3}{3}\)</span>, 比 LU
-分解通常少一半. 它的特殊形式为正定实对称矩阵的分解, 这种矩阵相当常见,
-比如协方差矩阵.</p>
+\end{aligned}
+\]</span> 这个式子要求<span
+class="math inline">\(\mathbf{A}_m\)</span>分解为两个满秩矩阵.
+因此从<span class="math inline">\(m=1\)</span>开始归纳直到<span
+class="math inline">\(m=n-1\)</span>, 条件为其中各阶主子矩阵满秩,
+则<span class="math inline">\(\mathbf{A}\)</span>存在 LU 分解.</p>
+<p>结合前面, 我们证明了: 当<span
+class="math inline">\(\mathbf{A}\)</span>的<span
+class="math inline">\(1\sim n-1\)</span>阶主子矩阵非奇异(即<span
+class="math inline">\(\rank A \ge n-1\)</span>), 存在唯一的 LU 分解.
+实际上必要性也成立(证明略), 这是个充要条件.</p>
 
                 
               </div>
@@ -401,7 +487,7 @@ class="math inline">\(\displaystyle\frac{n^3}{3}\)</span>, 比 LU
       
         <a href="/tags/%E4%B8%89%E8%A7%92%E7%9F%A9%E9%98%B5/" class="print-no-link">#三角矩阵</a>
       
-        <a href="/tags/%E5%8E%84%E5%AF%86%E7%9F%A9%E9%98%B5/" class="print-no-link">#厄密矩阵</a>
+        <a href="/tags/LU%E5%88%86%E8%A7%A3/" class="print-no-link">#LU分解</a>
       
     </div>
   
@@ -413,8 +499,8 @@ class="math inline">\(\displaystyle\frac{n^3}{3}\)</span>, 比 LU
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>线性方程组与本征值问题(02)：Cholesky 分解</div>
-      <div>https://notes.rainchan.me/posts/线性方程组与本征值问题(02)：Cholesky 分解/</div>
+      <div>线性方程组与本征值问题(01)：LU 分解</div>
+      <div>https://notes.rainchan.me/posts/线性方程组与本征值问题(01)：LU 分解/</div>
     </div>
     <div class="license-meta">
       
@@ -458,9 +544,9 @@ class="math inline">\(\displaystyle\frac{n^3}{3}\)</span>, 比 LU
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(03)%EF%BC%9A%E4%B8%89%E5%AF%B9%E8%A7%92%E7%9F%A9%E9%98%B5/" title="线性方程组与本征值问题(03)：三对角矩阵">
+                      <a href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(02)%EF%BC%9ACholesky%20%E5%88%86%E8%A7%A3/" title="线性方程组与本征值问题(02)：Cholesky 分解">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">线性方程组与本征值问题(03)：三对角矩阵</span>
+                        <span class="hidden-mobile">线性方程组与本征值问题(02)：Cholesky 分解</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -468,8 +554,8 @@ class="math inline">\(\displaystyle\frac{n^3}{3}\)</span>, 比 LU
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(01)%EF%BC%9ALU%20%E5%88%86%E8%A7%A3/" title="线性方程组与本征值问题(01)：LU 分解">
-                        <span class="hidden-mobile">线性方程组与本征值问题(01)：LU 分解</span>
+                      <a href="/posts/img/" title="">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
