@@ -1,0 +1,988 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rain Chan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="本节开始研究所谓的本征值问题, 让我们首先回忆一下关于本征值问题的一些数学定义和一些重要的结果. 线代知识再回顾  本征值问题 \(\forall\mathbf{A}\in\C^{n×n}\Rightarrow\exist(\pmb{x}\in\C^n\backslash \{\pmb{0}\}\and \lambda\in\C)\ ,\ \text{s.t.}\) \[ \math">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线性方程组与本征值问题(04)：本征值问题的一般描述">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(04)%EF%BC%9A%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E6%8F%8F%E8%BF%B0/">
+<meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="本节开始研究所谓的本征值问题, 让我们首先回忆一下关于本征值问题的一些数学定义和一些重要的结果. 线代知识再回顾  本征值问题 \(\forall\mathbf{A}\in\C^{n×n}\Rightarrow\exist(\pmb{x}\in\C^n\backslash \{\pmb{0}\}\and \lambda\in\C)\ ,\ \text{s.t.}\) \[ \math">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-05-08T08:41:13.000Z">
+<meta property="article:modified_time" content="2024-05-09T10:28:09.981Z">
+<meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="数值计算">
+<meta property="article:tag" content="本征值问题">
+<meta property="article:tag" content="相似变换">
+<meta property="article:tag" content="对角化">
+<meta property="article:tag" content="Schur 形式">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  
+  <title>线性方程组与本征值问题(04)：本征值问题的一般描述 - Rain Chan&#39;s Notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rain Chan&#39;s Notes</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="线性方程组与本征值问题(04)：本征值问题的一般描述"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-05-08 16:41" pubdate>
+          2024年5月8日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">线性方程组与本征值问题(04)：本征值问题的一般描述</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>本节开始研究所谓的本征值问题,
+让我们首先回忆一下关于本征值问题的一些数学定义和一些重要的结果.</p>
+<h2 id="线代知识再回顾">线代知识再回顾</h2>
+<blockquote>
+<p><strong>本征值问题</strong></p>
+<p><span
+class="math inline">\(\forall\mathbf{A}\in\C^{n×n}\Rightarrow\exist(\pmb{x}\in\C^n\backslash
+\{\pmb{0}\}\and \lambda\in\C)\ ,\ \text{s.t.}\)</span> <span
+class="math display">\[
+\mathbf{A}\pmb{x}=\lambda\pmb{x}
+\]</span> 则称<span class="math inline">\(\lambda\)</span>为<span
+class="math inline">\(\mathbf{A}\)</span>的一个
+<strong>本征值(eigenvalue)</strong>, <span
+class="math inline">\(\pmb{x}\)</span>为这个本征值对应的
+<strong>(右)本征矢(eigenvector)</strong>. <span
+class="math inline">\(\mathbf{A}\)</span>的全体本征值构成的集合称为<span
+class="math inline">\(\mathbf{A}\)</span>的
+<strong>谱(spectrum)</strong>, 记作<span
+class="math inline">\(\sigma(\mathbf{A})\)</span>. <span
+class="math inline">\((\lambda,\pmb{x})\)</span>称作矩阵<span
+class="math inline">\(\mathbf{A}\)</span>的一个
+<strong>本征对(eigenpair)</strong>.</p>
+</blockquote>
+<p>另一个重要概念是矩阵<span class="math inline">\(\mathbf{A}\)</span>的
+<strong>谱半径(spectral radius)</strong>: <span class="math display">\[
+\rho(\mathbf{A}):=\max|\sigma(\mathbf{A})|
+\]</span> <span
+class="math inline">\(|\cdot|\)</span>表示对集合内所有元素取模构成新集合,
+显然<span
+class="math inline">\(\rho(\mathbf{A})=\rho(\mathbf{A}^\dagger)\)</span>.</p>
+<p>我们还要引入矩阵的 <strong>模(norm)</strong>.</p>
+<blockquote>
+<p><span class="math display">\[
+\begin{flalign}
+&amp; \text{e.g.} &amp;
+\\
+&amp; &amp;
+\qquad|\!|\mathbf{A}|\!|:=\sup_{\pmb{x}\ne\pmb{0}}\frac{|\!|\mathbf{A}\pmb{x}|\!|}{|\!|\pmb{x}|\!|}
+&amp; &amp;
+\end{flalign}
+\]</span></p>
+<p>称作 <strong>(矢量模诱导的)矩阵模(matrix norm)</strong>.
+通常这里的矢量模取为 Euclid 模, 那么相应的矩阵模称作
+<strong>2-模(2-norm)</strong>.</p>
+</blockquote>
+<blockquote>
+<p><span class="math display">\[
+\begin{flalign}
+&amp; \text{e.g.} &amp;
+\\
+&amp; &amp; \qquad|\!|\mathbf{A}|\!|_F:=\sqrt{\sum_{j,k}|a_{jk}|^2}
+&amp; &amp;
+\end{flalign}
+\]</span></p>
+<p>称作 <strong>Frobenius 模(Hilbert-Schmidt 模; F-norm)</strong>.</p>
+</blockquote>
+<p>可以证明</p>
+<ol type="1">
+<li><p><span
+class="math inline">\(|\!|\mathbf{A}|\!|_2\le|\!|\mathbf{A}|\!|_F\)</span></p></li>
+<li><p><span
+class="math inline">\(|\!|\mathbf{A}|\!|_2=\sqrt{\rho(\mathbf{A}^\dagger\mathbf{A})}\)</span>​</p>
+<p>推论:</p>
+<ol type="1">
+<li>厄密矩阵满足<span
+class="math inline">\(|\!|\mathbf{A}|\!|_2=\rho(\mathbf{A})\)</span></li>
+<li>酉矩阵满足<span
+class="math inline">\(|\!|\mathbf{A}|\!|_2=1\)</span>​</li>
+</ol></li>
+<li><p>两种模都允许 <span
+class="math inline">\(\mathbf{A}\)</span>乘上(无论左右)一个酉矩阵的因子而不改变矩阵模.</p>
+<p>推论:</p>
+<ol type="1">
+<li>相似变换不改变这两种矩阵模.</li>
+</ol></li>
+</ol>
+<p>对于矩阵的数值计算, <strong>条件数(condition number)</strong>
+是非常重要的: <span class="math display">\[
+\kappa(\mathbf{A}):=|\!|\mathbf{A}|\!|\cdot|\!|\mathbf{A}^{-1}|\!|
+\]</span> 这是非奇异矩阵的定义. 对于奇异矩阵, 约定为<span
+class="math inline">\(+\infty\)</span>.</p>
+<h2 id="矩阵的本征结构与对角化">矩阵的本征结构与对角化</h2>
+<p>先回忆一下相似变换的知识:</p>
+<blockquote>
+<p><strong>相似变换(similar transformation)</strong> 是一个线性变换<span
+class="math inline">\(S_n:\C^{n\times n}\rightarrow \C^{n\times
+n}\)</span>, 形如 <span class="math display">\[
+S_n(\mathbf{A})=\mathbf{C}^{-1}\mathbf{A}\mathbf{C}
+\]</span> 其中<span class="math inline">\(\mathbf{C}\in\C^{n\times
+n}\)</span>且满秩.</p>
+</blockquote>
+<p>显然, 相似变换不改变矩阵的谱, 而(右)本征矢会左乘一个矩阵<span
+class="math inline">\(\mathbf{C}^{-1}\)</span>. 即本征对: <span
+class="math display">\[
+(\lambda,\pmb{x})\rightarrow(\lambda,\mathbf{C}^{-1}\pmb{x})
+\]</span> 更特别的, 如果<span
+class="math inline">\(\mathbf{C}\)</span>​是一个酉矩阵(实正交矩阵),
+则变换称作 <strong>幺正相似变换</strong>(实数域称为
+<strong>正交变换</strong>).</p>
+<h3 id="schur-分解定理">Schur 分解定理</h3>
+<p>实数域上的代数告诉我们, 不是任意实方阵都能对角化, 推广这一结论,
+任意复方阵也未必能对角化. 但我们可以退而求其次:</p>
+<blockquote>
+<p><strong>Schur 分解定理</strong></p>
+<p><span class="math inline">\(\forall\mathbf{A}\in\C^{n\times n}\ ,\
+\exist\mathbf{U}\ \text{s.t.}\)</span>​ <span class="math display">\[
+\mathbf{U}^{-1}\mathbf{A}\mathbf{U}\equiv\mathbf{U}^\dagger\mathbf{A}\mathbf{U}=\begin{pmatrix}
+\lambda_1 &amp; \tilde{a}_{12} &amp; \cdots &amp; \tilde{a}_{1n}
+\\
+&amp; \lambda_2 &amp; \cdots &amp; \tilde{a}_{2n}
+\\
+&amp; &amp; \ddots &amp; \vdots
+\\
+&amp; &amp; &amp; \lambda_n
+\end{pmatrix}
+\]</span></p>
+</blockquote>
+<p>同样采用归纳法证明, 对于一阶矩阵, 显然成立. 下面证明,
+如果定理对于<span class="math inline">\(n-1\)</span>阶矩阵成立,
+那么对<span class="math inline">\(n\)</span>阶矩阵成立.</p>
+<p>为证明之, 考虑<span class="math inline">\(n\)</span>阶矩阵<span
+class="math inline">\(\mathbf{A}\)</span>, 它可以进行分块 <span
+class="math display">\[
+\mathbf{A}=\begin{pmatrix}
+a_{11} &amp; \pmb{v}
+\\
+\pmb{u}^\dagger &amp; A_{n-1}
+\end{pmatrix}
+\]</span> 它具备一系列本征值,
+挑选一个非零本征值<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="不必考虑本征值全为零的矩阵, 因为零矩阵情形是平庸的; 也不用考虑简并, 后面的证明不需要非简并假设.">[1]</span></a></sup>记作<span
+class="math inline">\(\lambda_1\)</span>,
+对应地一个归一化的本征矢为<span
+class="math inline">\(\pmb{x}_1\)</span>: <span class="math display">\[
+\mathbf{A}\pmb{x}_n=\lambda_n\pmb{x}_n
+\]</span> 从<span class="math inline">\(\C^n\)</span>上不难挑选<span
+class="math inline">\(n-1\)</span>个正交归一的本征矢<span
+class="math inline">\(\{\pmb{x}_2,\cdots,\pmb{x}_n\}\)</span>,
+并且它们都与<span class="math inline">\(\pmb{x}_1\)</span>​正交.
+构建相应的酉矩阵 <span class="math display">\[
+\mathbf{X}=\begin{pmatrix}
+\pmb{x}_1 &amp; \cdots &amp; \pmb{x}_n
+\end{pmatrix}
+\]</span> 以它为参量的相似变换结果为 <span class="math display">\[
+a^\mathbf{X}_{jk}=[\mathbf{X}^{-1}\mathbf{A}\mathbf{X}]_{jk}=\pmb{x}_j^\dagger\mathbf{A}\pmb{x}_k
+\]</span> 若<span class="math inline">\(k=1\)</span>, 则<span
+class="math inline">\(a_{jk}^\mathbf{X}=\pmb{x}_j^\dagger\lambda_1\pmb{x}_1=\lambda_1\delta_{j1}\)</span>.
+可见 <span class="math display">\[
+\mathbf{X}^{-1}\mathbf{A}\mathbf{X}=\begin{pmatrix}
+\lambda_1 &amp; \pmb{v}^\mathbf{X}
+\\
+\pmb{0} &amp; A_{n-1}^{\mathbf{X}}
+\end{pmatrix}
+\]</span> 其实接下来也可以继续递推, 设法将<span
+class="math inline">\(\mathbf{A}_{n-1}^\mathbf{X}\)</span>逐层地上三角化<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="这种证明方法能更直观地体现出上三角化方案不唯一, 对于同一个原始矩阵, 至少可以调整结果中本征值的顺序.">[2]</span></a></sup>,
+但一系列递推变换的总效果就是<span class="math inline">\(n-1\)</span>阶的
+Schur 分解定理. 因此还是按照 Schur 分解定理在<span
+class="math inline">\(n-1\)</span>阶上成立的前提进行证明.</p>
+<p>设<span
+class="math inline">\(\mathbf{A}_{n-1}^\mathbf{X}\)</span>上三角化所需的酉矩阵是<span
+class="math inline">\(\mathbf{P}_{n-1}\)</span>, 考虑分块矩阵 <span
+class="math display">\[
+\mathbf{P}=\begin{pmatrix}
+1 &amp; \pmb{0}^\dagger
+\\
+\pmb{0} &amp; \mathbf{P}_{n-1}
+\end{pmatrix}
+\]</span> 则 <span class="math display">\[
+\mathbf{P}^{-1}\mathbf{X}^{-1}\mathbf{A}\mathbf{X}\mathbf{P}=\begin{pmatrix}
+\lambda_1 &amp; \mathbf{P}^\dagger\pmb{v}^\mathbf{X}
+\\
+\pmb{0} &amp; \mathbf{P}^\dagger A_{n-1}^{\mathbf{X}}\mathbf{P}
+\end{pmatrix}
+\]</span> 对角块都是上三角的, 对角线以下是零块,
+因此整体是一个上三角矩阵, 且对角元都是本征值. <span
+class="math inline">\(\mathbf{X}\mathbf{P}\)</span>​整体承担变换矩阵的作用,
+并且酉矩阵之积仍是酉的. 得证.</p>
+<h3 id="推论">推论</h3>
+<p>根据 Schur 分解定理, 立即得到:</p>
+<ol type="1">
+<li><p>厄密矩阵必定可以用酉矩阵对角化, 对角元都是本征值,
+并且都是实数.</p>
+<p>这可以看作实对称矩阵对角化定理的推广.</p></li>
+<li><p>实矩阵当然也能上三角化, 但对角元未必是实数.
+有的问题要求把数域限制为<span class="math inline">\(\R\)</span>​,
+那么实际上无法分解为上三角矩阵.</p>
+<p>这就要引出后面的实 Schur 分解.</p></li>
+</ol>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1" class="footnote-text"><span>不必考虑本征值全为零的矩阵,
+因为零矩阵情形是平庸的; 也不用考虑简并, 后面的证明不需要非简并假设.
+<a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:2"
+class="footnote-text"><span>这种证明方法能更直观地体现出上三角化方案不唯一,
+对于同一个原始矩阵, 至少可以调整结果中本征值的顺序.
+<a href="#fnref:2" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+</ol>
+</div>
+</section>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/" class="category-chain-item">计算物理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98/" class="category-chain-item">线性方程组与本征值问题</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="print-no-link">#数值计算</a>
+      
+        <a href="/tags/%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98/" class="print-no-link">#本征值问题</a>
+      
+        <a href="/tags/%E7%9B%B8%E4%BC%BC%E5%8F%98%E6%8D%A2/" class="print-no-link">#相似变换</a>
+      
+        <a href="/tags/%E5%AF%B9%E8%A7%92%E5%8C%96/" class="print-no-link">#对角化</a>
+      
+        <a href="/tags/Schur-%E5%BD%A2%E5%BC%8F/" class="print-no-link">#Schur 形式</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>线性方程组与本征值问题(04)：本征值问题的一般描述</div>
+      <div>https://notes.rainchan.me/posts/线性方程组与本征值问题(04)：本征值问题的一般描述/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rain Chan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年5月8日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(05)%EF%BC%9A%E5%8E%9F%E5%A7%8B%E7%9A%84%20QR%20%E7%AE%97%E6%B3%95/" title="线性方程组与本征值问题(05)：原始的 QR 算法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">线性方程组与本征值问题(05)：原始的 QR 算法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(03)%EF%BC%9A%E4%B8%89%E5%AF%B9%E8%A7%92%E7%9F%A9%E9%98%B5/" title="线性方程组与本征值问题(03)：三对角矩阵">
+                        <span class="hidden-mobile">线性方程组与本征值问题(03)：三对角矩阵</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"79cukB0h3CG75pGa1cReFP1b-MdYXbMMI","appKey":"Er4dYXURtw037QdVUMrXVd7p","path":"window.location.pathname","placeholder":"欢迎交流讨论...","avatar":"mm","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://79cukB0h.api.lncldglobal.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"79cukB0h3CG75pGa1cReFP1b-MdYXbMMI","appkey":"Er4dYXURtw037QdVUMrXVd7p","notify":true,"verify":false,"mathJax":true},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
