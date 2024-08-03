@@ -24,7 +24,7 @@
 <meta property="og:description" content="本节介绍不同于多项式插值的新插值方法, 即基于有理函数或样条函数的插值方法. 虽然更加繁琐, 但它们不失为解决 Runge 现象的好方法.">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-02-29T08:30:30.000Z">
-<meta property="article:modified_time" content="2024-04-20T07:21:36.209Z">
+<meta property="article:modified_time" content="2024-08-03T05:06:04.741Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="数值计算">
 <meta property="article:tag" content="插值法">
@@ -569,27 +569,40 @@ class="footnote-text"><span>事实上可以是任两个无关且独立于之前�
   
     <article id="comments" lazyload>
       
-  <div id="valine"></div>
-  <script type="text/javascript">
-    Fluid.utils.loadComments('#valine', function() {
-      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
-        var options = Object.assign(
-          {"appId":"79cukB0h3CG75pGa1cReFP1b-MdYXbMMI","appKey":"Er4dYXURtw037QdVUMrXVd7p","path":"window.location.pathname","placeholder":"欢迎交流讨论...","avatar":"mm","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":true,"recordIP":true,"serverURLs":"https://79cukB0h.api.lncldglobal.com","emojiCDN":null,"emojiMaps":null,"enableQQ":false,"appid":"79cukB0h3CG75pGa1cReFP1b-MdYXbMMI","appkey":"Er4dYXURtw037QdVUMrXVd7p","notify":true,"verify":false,"mathJax":true},
-          {
-            el: "#valine",
-            path: window.location.pathname
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"karnmarth/blog-comments","repo-id":"R_kgDOMerUGQ","category":"Announcements","category-id":"DIC_kwDOMerUGc4ChX3n","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","theme":"preferred_color_scheme"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
           }
-        )
-        new Valine(options);
-        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
-          var imgSelector = '#valine .vcontent img:not(.vemoji)';
-          Fluid.plugins.imageCaption(imgSelector);
-          Fluid.plugins.fancyBox(imgSelector);
-        })
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
       });
-    });
-  </script>
-  <noscript>Please enable JavaScript to view the comments</noscript>
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
 
 
     </article>
