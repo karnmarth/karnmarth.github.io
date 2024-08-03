@@ -24,7 +24,7 @@
 <meta property="og:description" content="对于矩阵的谱, 有几种求法:  解特征多项式 任何一本线代教材都会讲到的对角化手续 ...  第一种方法求方程的数值解, 原则上需要迭代; 第二种不一定适用, 因为矩阵未必能够对角化. 是否可以找到一个求一般矩阵的本征值的&quot;直接解法&quot;呢? 很不幸的是, 这一点原则上是不可能的. 假设存在一个有限步骤的所谓&quot;直接算法&quot;, 即通过有限多次的初等代数运算就可以获得一般矩阵的本征值,">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-09T10:29:14.000Z">
-<meta property="article:modified_time" content="2024-08-03T05:16:25.836Z">
+<meta property="article:modified_time" content="2024-08-03T05:19:36.987Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="数值计算">
 <meta property="article:tag" content="本征值问题">
@@ -441,7 +441,6 @@ class="math inline">\(\mathbf{A}\)</span>相似变换而成的上三角矩阵,
 <p>尽管如此, 我们可以设法让<span
 class="math inline">\(\mathbf{A}\)</span>"尽量上三角化":</p>
 <blockquote>
-<h5 id="实-schur-形式">实 Schur 形式:</h5>
 <p><span class="math inline">\(\forall\mathbf{A}\in\mathbb{R}^{n\times
 n}\)</span>, 存在<span
 class="math inline">\(\mathbf{Q}\)</span>为正交矩阵且 <span
