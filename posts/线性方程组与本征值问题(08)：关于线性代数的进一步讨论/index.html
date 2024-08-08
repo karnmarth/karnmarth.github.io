@@ -1,0 +1,1092 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rain Chan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="对本征值问题的讨论即将收尾, 在此之前, 有必要进一步将前置的数学工具(尽管不一定用得上)陈列如下.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线性方程组与本征值问题(08)：关于线性代数的进一步讨论">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(08)%EF%BC%9A%E5%85%B3%E4%BA%8E%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0%E7%9A%84%E8%BF%9B%E4%B8%80%E6%AD%A5%E8%AE%A8%E8%AE%BA/">
+<meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="对本征值问题的讨论即将收尾, 在此之前, 有必要进一步将前置的数学工具(尽管不一定用得上)陈列如下.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-08-06T09:32:35.000Z">
+<meta property="article:modified_time" content="2024-08-08T13:38:11.760Z">
+<meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="数值计算">
+<meta property="article:tag" content="共轭梯度法">
+<meta property="article:tag" content="本征值问题">
+<meta property="article:tag" content="Gershgorin 圆盘">
+<meta property="article:tag" content="Krylov 子空间">
+<meta property="article:tag" content="正规矩阵">
+<meta property="article:tag" content="Jordan 标准型">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  
+  <title>线性方程组与本征值问题(08)：关于线性代数的进一步讨论 - Rain Chan&#39;s Notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.0.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rain Chan&#39;s Notes</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="线性方程组与本征值问题(08)：关于线性代数的进一步讨论"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-08-06 17:32" pubdate>
+          2024年8月6日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          21 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">线性方程组与本征值问题(08)：关于线性代数的进一步讨论</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><span
+class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\mdl}[1]{\left|\!\left|#1\right|\!\right|}\newcommand{\rank}[1]{\text{rank}\left(#1
+\right)}\newcommand{\dim}[1]{\text{dim}\left(#1
+\right)}\newcommand{\diag}[1]{\text{diag}\left(#1
+\right)}\newcommand{\set}[1]{\left\{ #1
+\right\}}\newcommand{\abs}[1]{\left| #1
+\right|}\)</span>对本征值问题的讨论即将收尾, 在此之前,
+有必要进一步将前置的数学工具(尽管不一定用得上)陈列如下.</p>
+<h2 id="对角化和-jordan-标准型">对角化和 Jordan 标准型</h2>
+<h3 id="正规矩阵">正规矩阵</h3>
+<p>在第4节讨论数学时, 我们提到了<a
+href="../线性方程组与本征值问题(04)：本征值问题的一般描述/#本征多项式-本征子空间-本征值的重数">重数与亏损</a>还有对角化的联系:
+亏损等价于不可对角化. 可对角化的矩阵非常常见, 例如自伴矩阵和酉矩阵,
+它们有一个共同的特点: 都和自己的共轭对易 <span class="math display">\[
+\b{A}\b{A}^\dagger=\b{A}^\dagger\b{A}
+\]</span> 这类矩阵被称为 <strong>正规矩阵</strong>. 可以证明:
+能酉对角化的矩阵必定正规: <span class="math display">\[
+\begin{cases}
+\begin{aligned}
+\b{U}^\dagger\b{A}\b{U}&amp;=\b{D}
+\\
+&amp;\Downarrow\dagger
+\\
+\b{U}^\dagger\b{A}^\dagger\b{U}&amp;=\b{D}^\dagger
+\end{aligned}
+\end{cases}
+\overset{multiply}{\Longrightarrow}
+\begin{cases}
+\begin{aligned}
+\b{U}^\dagger\b{A}\b{A}^\dagger\b{U}&amp;=\b{D}\b{D}^\dagger
+\\
+\\
+\b{U}^\dagger\b{A}^\dagger\b{A}\b{U}&amp;=\b{D}^\dagger\b{D}
+\end{aligned}
+\end{cases}
+\]</span> 对角矩阵天然地和共轭对易, 不同顺序乘法的右侧相等,
+因此左侧也相等, 得证.</p>
+<p>同理, 正规矩阵必定能酉对角化, 先考虑 Schur 分解定理: <span
+class="math display">\[
+\begin{cases}
+\begin{aligned}
+\b{U}^\dagger\b{A}\b{U}&amp;=\b{H}
+\\
+&amp;\Downarrow\dagger
+\\
+\b{U}^\dagger\b{A}^\dagger\b{U}&amp;=\b{H}^\dagger
+\end{aligned}
+\end{cases}
+\overset{multiply}{\Longrightarrow}
+\begin{cases}
+\begin{aligned}
+\b{U}^\dagger\b{A}\b{A}^\dagger\b{U}&amp;=\b{H}\b{H}^\dagger
+\\
+\\
+\b{U}^\dagger\b{A}^\dagger\b{A}\b{U}&amp;=\b{H}^\dagger\b{H}
+\end{aligned}
+\end{cases}\Longrightarrow
+\b{H}\b{H}^\dagger=\b{H}^\dagger\b{H}
+\]</span> 其中<span class="math inline">\(\b{H}\in\C^{n\times
+n}\)</span>是一个上三角矩阵: <span class="math display">\[
+h_{jk}\begin{cases}\displaystyle
+\neq0\qquad j\le k
+\\\displaystyle
+=0\qquad j&gt;k
+\end{cases}
+\qquad
+(h^\dagger)_{jk}\begin{cases}\displaystyle
+\neq0\qquad j\ge k
+\\\displaystyle
+=0\qquad j&lt;k
+\end{cases}
+\]</span> 即 <span class="math display">\[
+[\b{H}\b{H}^\dagger]_{jj}=\sum_{l=j}^n\abs{h_{jl}}^2
+=
+[\b{H}^\dagger\b{H}]_{jj}=\sum_{l=1}^j\abs{h_{lj}}^2
+\]</span></p>
+<ol type="1">
+<li>取<span class="math inline">\(j=1\)</span>, 得到<span
+class="math inline">\(h_{12},h_{13},\cdots,h_{1n}\)</span>的模方和为<span
+class="math inline">\(0\)</span></li>
+<li>取<span class="math inline">\(j=2\)</span>, 得到<span
+class="math inline">\(h_{23},
+h_{24},\cdots,h_{2n}\)</span>的模方和为<span
+class="math inline">\(\abs{h_{12}}^2\)</span>, 此前求出为<span
+class="math inline">\(0\)</span></li>
+<li>取<span class="math inline">\(j=3\)</span>, 得到<span
+class="math inline">\(h_{34},\cdots,h_{3n}\)</span>的模方和为<span
+class="math inline">\(\abs{h_{13}}^2+\abs{h_{23}}^2\)</span>,
+此前已求出为<span class="math inline">\(0\)</span></li>
+<li>...</li>
+</ol>
+<p>像这样逐步推导, 得到所有非对角元都为<span
+class="math inline">\(0\)</span>, 即上三角矩阵<span
+class="math inline">\(\b{H}\)</span>是对角矩阵, 得证.</p>
+<h3 id="jordan-标准型">Jordan 标准型</h3>
+<p>正规矩阵等价于可以酉对角化,
+而非正规的矩阵就无法酉对角化乃至无法(相似)对角化了, 例如下面的矩阵 <span
+class="math display">\[
+\b{J}_\nu(\lambda)=\begin{pmatrix}
+\lambda &amp; 1 &amp; 0 &amp; \cdots  &amp; 0
+\\
+0 &amp; \lambda &amp; \ddots &amp; \ddots &amp; \vdots
+\\
+\vdots &amp; \ddots &amp; \ddots &amp; \ddots &amp; 0
+\\
+\vdots &amp; &amp; \ddots &amp; \lambda &amp; 1
+\\
+0 &amp; \cdots &amp; \cdots &amp; 0 &amp; \lambda
+\end{pmatrix}
+\]</span> 其中<span class="math inline">\(\nu\)</span>为阶数. 不难验证,
+它具有<span class="math inline">\(\nu\)</span>重本征值<span
+class="math inline">\(\lambda\)</span>, 但本征子空间仅为<span
+class="math inline">\(1\)</span>维, 显然是亏损矩阵, 不可对角化.
+这样的矩阵叫做 <strong>Jordan 块矩阵</strong>(<span
+class="math inline">\(\nu\ge2\)</span>); 对于<span
+class="math inline">\(\nu=1\)</span>, 约定 Jordan 块矩阵退化为<span
+class="math inline">\(\lambda\)</span>.</p>
+<p>我们不加证明地给出如下定理:</p>
+<blockquote>
+<p>对于任意<span class="math inline">\(\b{A}\in\C^{n\times n}\)</span>,
+总有满秩矩阵<span class="math inline">\(\b{X}\in\C^{n\times n}\)</span>,
+<span class="math inline">\(\text{s.t.}\)</span> <span
+class="math display">\[
+\b{X}^{-1}\b{A}\b{X}=\diag{\b{J}_{\nu_1}(\lambda_1),\cdots,\b{J}_{\nu_{k}}(\lambda_k)}
+\]</span> <span
+class="math inline">\(\lambda_1\sim\lambda_k\)</span>是矩阵的本征值(可能相等).</p>
+</blockquote>
+<p>这个对角形式称作矩阵<span class="math inline">\(\b{A}\)</span>的
+<strong>Jordan 标准型</strong>. 需要说明的是</p>
+<ol type="1">
+<li><p>一个本征值可能对应多个 Jordan 块, <span
+class="math inline">\(\text{e.g.}\)</span> <span class="math display">\[
+\begin{pmatrix}
+\lambda &amp; 1 &amp; 0
+\\
+0 &amp; \lambda &amp; 0
+\\
+0 &amp; 0 &amp; \lambda
+\end{pmatrix}
+\]</span> 这其实就是两个 Jordan 块, 一个二阶和一个一阶;</p></li>
+<li><p>一个本征值对应的 Jordan 块数目等于它的独立本征矢数目(几何重数),
+整个矩阵的 Jordan 块数就是总的独立本征矢数目;</p></li>
+<li><p>矩阵可对角化<span
+class="math inline">\(\Leftrightarrow\)</span>标准型中的 Jordan
+块都是一阶.</p></li>
+</ol>
+<p>从这些结论能够立即得到: <strong>本征值全不等(即有<span
+class="math inline">\(n\)</span>个不等的本征值)的矩阵一定是可对角化的
+</strong>, 这个也可由重数的结论导出, 因为几何重数至少为<span
+class="math inline">\(1\)</span>, 因此代数重数全为<span
+class="math inline">\(1\)</span>时, 几何重数不会比代数重数更小了.</p>
+<p>简而言之, 一个矩阵是否可对角化, 与它的 Jordan 标准型挂钩.</p>
+<h3 id="jordan-标准型的不稳定性">Jordan 标准型的不稳定性</h3>
+<p>请看如下矩阵 <span class="math display">\[
+\b{A}=\begin{pmatrix}
+1 &amp; 1
+\\
+\epsilon &amp; 1
+\end{pmatrix}
+\]</span> 当<span class="math inline">\(\epsilon=0\)</span>时, 它已经是
+Jordan 标准型了; 但<span class="math inline">\(\epsilon\neq0\)</span>时,
+它的特征值为 <span class="math display">\[
+\lambda_\pm=1\pm\sqrt{\epsilon}
+\]</span> 对应 Jordan 标准型为 <span class="math display">\[
+\b{J}=\begin{pmatrix}
+1+\sqrt{\epsilon} &amp; 0
+\\
+0 &amp; 1-\sqrt{\epsilon}
+\end{pmatrix}
+\]</span> 换言之, 矩阵元<span
+class="math inline">\(j_{12}(\epsilon)\)</span>关于<span
+class="math inline">\(\epsilon\)</span>是非连续的,
+这表明它在数值计算中非常不稳定, 因此实际运算中, 很少利用 Jordan
+标准型完成某些任务, 但前面的大量分析说明它具有一定的指导意义.</p>
+<h2 id="本征值的分布">本征值的分布</h2>
+<p>Gershgorin 对于本征值在复平面上的分布提出了一系列定理,
+其中最为重要的是:</p>
+<blockquote>
+<p>对任意<span class="math inline">\(\b{A}\in\C^{n\times n}\)</span>,
+构建<span class="math inline">\(n\)</span>个圆盘 <span
+class="math display">\[
+\mathcal{R}_j=\set{z\in\C\Bigg|\abs{z-a_{jj}}\le\sum_{k=1,k\neq
+j}^{n}\abs{a_{jk}}}
+\]</span> 这种圆盘叫 <strong>Gershgorin 圆盘</strong>,
+则矩阵的本征谱满足 <span class="math display">\[
+\sigma(\b{A})\subset\bigcup_{j=1}^n\mathcal{R}_j
+\]</span></p>
+</blockquote>
+<p>这个称为 <strong>Gershgorin 圆盘定理</strong>,
+它说明矩阵的本征值一定落在这些圆盘中. 特别是自伴矩阵,
+它的本征值一定是实数, 圆盘退化为实轴上的区间.</p>
+<h2 id="krylov-子空间">Krylov 子空间</h2>
+<h3 id="解线性方程组和-krylov-子空间">解线性方程组和 Krylov 子空间</h3>
+<p>这个方法可能最早来自求解线性方程组.
+有时候线性方程组的系数矩阵是大型稀疏矩阵, 而求解又不需要严格成立,
+这时可以设法在一个子空间中求它的近似解.</p>
+<p>线代中有一条 Cayley-Hamilton 定理: <span
+class="math inline">\(p_\b{A}(\b{A})=\b{O}\)</span>, 其中<span
+class="math inline">\(p_\b{A}(x)\)</span>是矩阵<span
+class="math inline">\(\b{A}\)</span>的特征多项式. 具体地, 可以写作 <span
+class="math display">\[
+c_{n}\b{A}^n+c_{n-1}\b{A}^{n-1}+\cdots+1=\b{O}
+\]</span> 进一步假设<span class="math inline">\(\b{A}\)</span>是可逆的,
+那么<span
+class="math inline">\(\b{A}^{-1}=-c_{n}\b{A}^{n-1}-c_{n-1}\b{A}^{n-2}-\cdots\)</span>,
+而线性方程组也可表示为 <span class="math display">\[
+\b{A}\bi{x}=\bi{b}\Rightarrow\bi{x}=-\sum_{j=0}^{n-1}c_{j+1}\b{A}^j\bi{b}
+\]</span> 这实际上给了我们一定的灵感.
+我们深知方程求根和优化问题的相似性: <span class="math display">\[
+\text{solve
+}\b{A}\bi{x}=\bi{b}\Leftrightarrow\underset{\bi{x}\in\K^n}{\displaystyle\text{min}}\mdl{\bi{b}-\b{A}\bi{x}}
+\]</span> 那么近似求根,
+也就相当于在更低维(独立矢量和包含信息更少)的子空间进行优化: <span
+class="math display">\[
+\text{approx-solve }\b{A}\bi{x}=\bi{b}\Leftrightarrow\underset{\bi{x}\in
+K_m}{\displaystyle\text{min}}\mdl{\bi{b}-\b{A}\bi{x}}
+\]</span> 其中, <span
+class="math inline">\(K_m(\b{A};\bi{b})\)</span>是一个子空间,
+它由如下矢量生成: <span class="math display">\[
+K_m(\b{A};\bi{b}):=\text{span}\{\bi{b},\b{A}\bi{b},\cdots,\b{A}^{m-1}\bi{b}
+\}
+\]</span> 称为 <strong>Krylov 子空间</strong>. 根据 Cayley-Hamilton
+定理, 当<span class="math inline">\(m=n+1\)</span>时,
+这个矢量组就必定能互相线性表出, 因此<span
+class="math inline">\(m\)</span>无论取多少, 总有<span
+class="math inline">\(\dim{K_m}\le\min{\{m,n\}}\)</span>.</p>
+<h3 id="krylov-子空间的实例-共轭梯度法">Krylov 子空间的实例:
+共轭梯度法</h3>
+<p>之前的数学准备不足, 现在可以介绍一下共轭梯度法和 Krylov
+子空间的联系了. 我们考虑一个二次型函数 <span class="math display">\[
+f(\bi{x})=-\bi{b}^\b{T}\bi{x}+\frac{1}{2}\bi{x}^\b{T}\b{A}\bi{x}
+\]</span> 它的优化条件是<span
+class="math inline">\(\bi{r}=\bi{b}-\b{A}\bi{x}=0\)</span>, 或者<span
+class="math inline">\(\underset{\bi{x}\in\R^n}{\min}\mdl{\bi{b}-\b{A}\bi{x}}\)</span>.</p>
+<p>共轭梯度法采用的 Krylov 子空间为<span
+class="math inline">\(K_m(\b{A};\bi{r}_0)\)</span>,
+每一步搜索方向都从这个子空间中挑选. 单纯的<span
+class="math inline">\(\b{A}^j\bi{r}_0\)</span>往往并不是正交的,
+而且计算不便,
+所以搜索方向<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="它同样不是正交的, 很快会得到解释">[1]</span></a></sup>也不是单纯的<span
+class="math inline">\(\b{A}^j\bi{r}_0\)</span>: <span
+class="math display">\[
+\bi{p}_k=g_k(\bi{r}_0,\b{A}\bi{r}_0, \cdots,\b{A}^{k-1}\bi{r}_0)
+\]</span> 每次搜索<span
+class="math inline">\(\bi{x}_k+\!\!=\alpha_k\bi{p}_k,
+\bi{r}_k-\!\!=\alpha_k\b{A}\bi{p}_k\)</span>, 都保证残差<span
+class="math inline">\(\bi{r}\)</span>完全失去一个方向上的值: <span
+class="math inline">\(\bi{r}_{k+1}^\b{T}\bi{p}_k=0\)</span>.</p>
+<p>这时, 残差(等价于位置)的递推式已经给出: <span class="math display">\[
+\bi{r}_{k+1}=\bi{r}_k-\alpha_k\b{A}\bi{p}_k
+\qquad
+\alpha_k\text{满足:}\quad\bi{r}_{k+1}^\b{T}\bi{p}_k=0
+\]</span> 现在有必要考虑搜索方向如何更新, 一种思路是, 保证搜索方向在
+Krylov 子空间构成正交矢量组 <span class="math display">\[
+\bi{p}_{k+1}^\b{T}\bi{p}_k=0
+\]</span> 这看起来非常好, 承担着 Schmidt 正交化的任务;
+但是稍加思索就能发现这是不合理的. 每一步残差扣除的部分为<span
+class="math inline">\(\b{A}\bi{p}_k\)</span>,
+需要避免新的搜索方向"破坏"这个既有成果, 因此 <span
+class="math display">\[
+\bi{p}_{k+1}^\b{T}\b{A}\bi{p}_k=0
+\]</span> 另外, <span
+class="math inline">\(\bi{p}_{k+1}\)</span>当然和新的残差有关<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="应该没人喜欢完全用原始的矢量组构建各级搜索方向">[2]</span></a></sup>,
+你总是从残差的大小和方向确定优化方向, 所以<span
+class="math inline">\(\bi{p}_{k+1}\)</span>由<span
+class="math inline">\(\bi{r}_{k+1}\)</span>和<span
+class="math inline">\(\bi{p}_k\)</span>决定 <span
+class="math display">\[
+\bi{p}_{k+1}=\bi{r}_{k+1}+\beta_k\bi{p}_k\qquad\beta_k满足:\quad\bi{p}_{k+1}^\b{T}\b{A}\bi{p}_k=0
+\]</span></p>
+<p>这些正是共轭梯度法的基本思路. 共轭梯度法的各级搜索方向在 Krylov
+子空间中构成了共轭正交的矢量组. 实际上还可以证明, 残差也在子空间中,
+并且是正交矢量组.</p>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1" class="footnote-text"><span>它同样不是正交的,
+很快会得到解释
+<a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:2"
+class="footnote-text"><span>应该没人喜欢完全用原始的矢量组构建各级搜索方向
+<a href="#fnref:2" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+</ol>
+</div>
+</section>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/" class="category-chain-item">计算物理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98/" class="category-chain-item">线性方程组与本征值问题</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="print-no-link">#数值计算</a>
+      
+        <a href="/tags/%E5%85%B1%E8%BD%AD%E6%A2%AF%E5%BA%A6%E6%B3%95/" class="print-no-link">#共轭梯度法</a>
+      
+        <a href="/tags/%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98/" class="print-no-link">#本征值问题</a>
+      
+        <a href="/tags/Gershgorin-%E5%9C%86%E7%9B%98/" class="print-no-link">#Gershgorin 圆盘</a>
+      
+        <a href="/tags/Krylov-%E5%AD%90%E7%A9%BA%E9%97%B4/" class="print-no-link">#Krylov 子空间</a>
+      
+        <a href="/tags/%E6%AD%A3%E8%A7%84%E7%9F%A9%E9%98%B5/" class="print-no-link">#正规矩阵</a>
+      
+        <a href="/tags/Jordan-%E6%A0%87%E5%87%86%E5%9E%8B/" class="print-no-link">#Jordan 标准型</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>线性方程组与本征值问题(08)：关于线性代数的进一步讨论</div>
+      <div>https://notes.rainchan.me/posts/线性方程组与本征值问题(08)：关于线性代数的进一步讨论/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rain Chan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年8月6日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(09)%EF%BC%9A%E5%AE%9E%E5%AF%B9%E7%A7%B0%E7%9F%A9%E9%98%B5%E7%9A%84%E6%9C%AC%E5%BE%81%E5%80%BC%E6%B1%82%E6%B3%95/" title="线性方程组与本征值问题(09)：实对称矩阵的本征值求法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">线性方程组与本征值问题(09)：实对称矩阵的本征值求法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(07)%EF%BC%9A%E9%9D%9E%E6%A0%87%E5%87%86%E7%9A%84%20QR%20%E7%AE%97%E6%B3%95/" title="线性方程组与本征值问题(07)：非标准的 QR 算法">
+                        <span class="hidden-mobile">线性方程组与本征值问题(07)：非标准的 QR 算法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"karnmarth/blog-comments","repo-id":"R_kgDOMerUGQ","category":"Announcements","category-id":"DIC_kwDOMerUGc4ChX3n","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","theme":"preferred_color_scheme"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+  
+</div>
+
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

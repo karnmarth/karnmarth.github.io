@@ -16,20 +16,20 @@
   <meta name="author" content="Rain Chan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="Cholesky 分解基于这样一个事实: 对于一个正定厄密矩阵\(\mathbf{A}\in \mathbb{C}^{n\times n}\), 可以找到一个矩阵\(\mathbf{H}\)使得\(\mathbf{A}&#x3D;\mathbf{H}^\dagger\mathbf{H}\). 事实上, 可以要求\(\mathbf{H}\)是一个上三角矩阵, 则这个分解称为 Cholesky 分解. C">
+    <meta name="description" content="Cholesky 分解基于这样一个事实: 对于一个正定自伴矩阵\(\mathbf{A}\in \mathbb{C}^{n\times n}\), 可以找到一个矩阵\(\mathbf{H}\)使得\(\mathbf{A}&#x3D;\mathbf{H}^\dagger\mathbf{H}\). 事实上, 可以要求\(\mathbf{H}\)是一个上三角矩阵, 则这个分解称为 Cholesky 分解. C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线性方程组与本征值问题(02)：Cholesky 分解">
 <meta property="og:url" content="https://notes.rainchan.me/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(02)%EF%BC%9ACholesky%20%E5%88%86%E8%A7%A3/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
-<meta property="og:description" content="Cholesky 分解基于这样一个事实: 对于一个正定厄密矩阵\(\mathbf{A}\in \mathbb{C}^{n\times n}\), 可以找到一个矩阵\(\mathbf{H}\)使得\(\mathbf{A}&#x3D;\mathbf{H}^\dagger\mathbf{H}\). 事实上, 可以要求\(\mathbf{H}\)是一个上三角矩阵, 则这个分解称为 Cholesky 分解. C">
+<meta property="og:description" content="Cholesky 分解基于这样一个事实: 对于一个正定自伴矩阵\(\mathbf{A}\in \mathbb{C}^{n\times n}\), 可以找到一个矩阵\(\mathbf{H}\)使得\(\mathbf{A}&#x3D;\mathbf{H}^\dagger\mathbf{H}\). 事实上, 可以要求\(\mathbf{H}\)是一个上三角矩阵, 则这个分解称为 Cholesky 分解. C">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-07T11:00:47.000Z">
-<meta property="article:modified_time" content="2024-08-03T05:05:05.614Z">
+<meta property="article:modified_time" content="2024-08-06T09:45:56.573Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="数值计算">
 <meta property="article:tag" content="线性方程组">
-<meta property="article:tag" content="厄密矩阵">
 <meta property="article:tag" content="三角矩阵">
+<meta property="article:tag" content="自伴矩阵">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -284,7 +284,7 @@
             
               <div class="markdown-body">
                 
-                <p>Cholesky 分解基于这样一个事实: 对于一个正定厄密矩阵<span
+                <p>Cholesky 分解基于这样一个事实: 对于一个正定自伴矩阵<span
 class="math inline">\(\mathbf{A}\in \mathbb{C}^{n\times n}\)</span>,
 可以找到一个矩阵<span class="math inline">\(\mathbf{H}\)</span>使得<span
 class="math inline">\(\mathbf{A}=\mathbf{H}^\dagger\mathbf{H}\)</span>.
@@ -299,7 +299,7 @@ class="math display">\[
 \mathbf{H}\pmb{x}=\pmb{y}
 \end{cases}
 \]</span> 一个显而易见的引理是,
-<strong>正定厄密矩阵的主子矩阵仍是正定厄密的</strong>.
+<strong>正定自伴矩阵的主子矩阵仍是正定自伴的</strong>.
 这可以直接在如下求和式中 <span class="math display">\[
 \sum_{j=1}^n\sum_{k=1}^na_{jk}x_jx_k
 \]</span> 将<span
@@ -401,9 +401,9 @@ class="math inline">\(\displaystyle\frac{n^3}{3}\)</span>, 比 LU
       
         <a href="/tags/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84/" class="print-no-link">#线性方程组</a>
       
-        <a href="/tags/%E5%8E%84%E5%AF%86%E7%9F%A9%E9%98%B5/" class="print-no-link">#厄密矩阵</a>
-      
         <a href="/tags/%E4%B8%89%E8%A7%92%E7%9F%A9%E9%98%B5/" class="print-no-link">#三角矩阵</a>
+      
+        <a href="/tags/%E8%87%AA%E4%BC%B4%E7%9F%A9%E9%98%B5/" class="print-no-link">#自伴矩阵</a>
       
     </div>
   

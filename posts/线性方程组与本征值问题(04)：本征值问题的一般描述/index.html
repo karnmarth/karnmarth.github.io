@@ -16,15 +16,15 @@
   <meta name="author" content="Rain Chan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本节开始研究所谓的本征值问题, 让我们首先回忆一下关于本征值问题的一些数学定义和一些重要的结果. 线代知识再回顾  本征值问题 \(\forall\mathbf{A}\in\mathbb{C}^{n×n}\), 存在非零矢量\(\pmb{x}\in\mathbb{C}^n\backslash \{\pmb{0}\}\)和常数\(\lambda\in\mathbb{C}\) \(\t">
+    <meta name="description" content="\(\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\R}{\mathbb{R}}\newcommand{\rank}[1]{\text{rank}\left(#1 \right)}\newcommand{\">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线性方程组与本征值问题(04)：本征值问题的一般描述">
 <meta property="og:url" content="https://notes.rainchan.me/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(04)%EF%BC%9A%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E6%8F%8F%E8%BF%B0/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
-<meta property="og:description" content="本节开始研究所谓的本征值问题, 让我们首先回忆一下关于本征值问题的一些数学定义和一些重要的结果. 线代知识再回顾  本征值问题 \(\forall\mathbf{A}\in\mathbb{C}^{n×n}\), 存在非零矢量\(\pmb{x}\in\mathbb{C}^n\backslash \{\pmb{0}\}\)和常数\(\lambda\in\mathbb{C}\) \(\t">
+<meta property="og:description" content="\(\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\R}{\mathbb{R}}\newcommand{\rank}[1]{\text{rank}\left(#1 \right)}\newcommand{\">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-05-08T08:41:13.000Z">
-<meta property="article:modified_time" content="2024-08-03T05:04:43.498Z">
+<meta property="article:modified_time" content="2024-08-08T13:38:38.631Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="数值计算">
 <meta property="article:tag" content="本征值问题">
@@ -232,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.5k 字
+          2.3k 字
         
       </span>
     
@@ -243,7 +243,7 @@
         
         
         
-          13 分钟
+          19 分钟
         
       </span>
     
@@ -285,7 +285,11 @@
             
               <div class="markdown-body">
                 
-                <p>本节开始研究所谓的本征值问题,
+                <p><span
+class="math inline">\(\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\R}{\mathbb{R}}\newcommand{\rank}[1]{\text{rank}\left(#1
+\right)}\newcommand{\set}[1]{\left\{ #1
+\right\}}\newcommand{\abs}[1]{\left| #1
+\right|}\)</span>本节开始研究所谓的本征值问题,
 让我们首先回忆一下关于本征值问题的一些数学定义和一些重要的结果.</p>
 <h2 id="线代知识再回顾">线代知识再回顾</h2>
 <blockquote>
@@ -352,7 +356,7 @@ class="math inline">\(|\!|\mathbf{A}|\!|_2\le|\!|\mathbf{A}|\!|_F\)</span></p></
 class="math inline">\(|\!|\mathbf{A}|\!|_2=\sqrt{\rho(\mathbf{A}^\dagger\mathbf{A})}\)</span>​</p>
 <p>推论:</p>
 <ol type="1">
-<li>厄密矩阵满足<span
+<li>自伴矩阵满足<span
 class="math inline">\(|\!|\mathbf{A}|\!|_2=\rho(\mathbf{A})\)</span></li>
 <li>酉矩阵满足<span
 class="math inline">\(|\!|\mathbf{A}|\!|_2=1\)</span>​</li>
@@ -370,7 +374,10 @@ class="math inline">\(\mathbf{A}\)</span>乘上(无论左右)一个酉矩阵的�
 \]</span> 这是非奇异矩阵的定义. 对于奇异矩阵, 约定为<span
 class="math inline">\(+\infty\)</span>.</p>
 <h2 id="矩阵的本征结构与对角化">矩阵的本征结构与对角化</h2>
-<p>先回忆一下相似变换的知识:</p>
+<h3 id="相似变换">相似变换</h3>
+<p>有必要声明: <strong>我们在这一章接下来讨论的所谓"对角化",
+都是建立在相似变换的基础上的</strong>. 因为目的是得到本征谱,
+所以相似变换是对角化的不二选择:</p>
 <blockquote>
 <p><strong>相似变换(similar transformation)</strong> 是一个线性变换<span
 class="math inline">\(S_n:\mathbb{C}^{n\times n}\rightarrow
@@ -378,7 +385,7 @@ class="math inline">\(S_n:\mathbb{C}^{n\times n}\rightarrow
 S_n(\mathbf{A})=\mathbf{C}^{-1}\mathbf{A}\mathbf{C}
 \]</span> 其中<span
 class="math inline">\(\mathbf{C}\in\mathbb{C}^{n\times
-n}\)</span>且满秩.</p>
+n}\)</span>并且满秩.</p>
 </blockquote>
 <p>显然, 相似变换不改变矩阵的谱, 而(右)本征矢会左乘一个矩阵<span
 class="math inline">\(\mathbf{C}^{-1}\)</span>. 即本征对: <span
@@ -386,8 +393,93 @@ class="math display">\[
 (\lambda,\pmb{x})\rightarrow(\lambda,\mathbf{C}^{-1}\pmb{x})
 \]</span> 更特别的, 如果<span
 class="math inline">\(\mathbf{C}\)</span>​是一个酉矩阵(实正交矩阵),
-则变换称作 <strong>幺正相似变换</strong>(实数域称为
+则变换称作 <strong>酉变换</strong>(实数域称为
 <strong>正交变换</strong>).</p>
+<h3 id="本征多项式-本征子空间-本征值的重数">本征多项式, 本征子空间,
+本征值的重数</h3>
+<p>从代数角度讲, 求解本征谱就是在解多项式方程<span
+class="math inline">\(\det(\b{A}-\lambda\b{I})=0\)</span>.
+根据代数学基本定理, 它能够写成一系列一次多项式的积: <span
+class="math display">\[
+p_\b{A}(\lambda)=\prod_{j=1}^{\sum_{j}\mu_j=n}(\lambda-\lambda_j)^{\mu_j}=0
+\]</span> <span
+class="math inline">\(\lambda_j\)</span>项对应的次数<span
+class="math inline">\(\mu_j\)</span>非常重要, 对于<span
+class="math inline">\(\mu_j=1\)</span>, 本征值是 <strong>单重</strong>
+的, 否则是 <strong>多重</strong> 的.</p>
+<p>这个次数<span class="math inline">\(\mu_j\)</span>是否有几何意义?
+如果有的话, 很自然会想到<span
+class="math inline">\(\lambda_j\)</span>的本征子空间, 即</p>
+<blockquote>
+<p>所谓<span class="math inline">\(\lambda\)</span>对应的
+<strong>本征子空间</strong>, 就是<span
+class="math inline">\(\lambda\)</span>对应的全部本征矢张成的子空间:
+<span class="math display">\[
+V_{\lambda}:=\set{\bi{v}\in V|\b{A}\bi{v}=\lambda\bi{v}}
+\]</span></p>
+</blockquote>
+<p>它的维数实际上就是<span
+class="math inline">\((\b{A}-\lambda\b{I})\bi{x}=\b{0}\)</span>的解空间维数,
+即<span class="math inline">\(n-\rank{\b{A}-\lambda\b{I}}\)</span>.</p>
+<blockquote>
+<p>称: <span class="math inline">\(\mu_j\)</span>为
+<strong>代数重数</strong>, <span
+class="math inline">\(\gamma_j:=n-\rank{\b{A}-\lambda_j\b{I}}\)</span>为
+<strong>几何重数</strong>.</p>
+</blockquote>
+<p>这两种重数是否等价? 从<span
+class="math inline">\(V_{\lambda_j}\)</span>中选取一组基<span
+class="math inline">\(\set{\bi{v}_1,\bi{v}_2,\cdots,\bi{v}_{\gamma_j}}\)</span>,
+扩充为<span class="math inline">\(V\)</span>中的基<span
+class="math inline">\(\set{\bi{v}_1,\cdots,\bi{v}_n}\)</span>. 则 <span
+class="math display">\[
+\begin{align}
+(\bi{v}_1,\cdots,\bi{v}_n)^\b{T}\b{A}(\bi{v}_1,\cdots,\bi{v}_n)&amp;=(\bi{v}_1,\cdots,\bi{v}_n)^\b{T}(\lambda_j\bi{v}_1,\cdots,\lambda_j\bi{v}_{\gamma_j},\b{A}\bi{v}_{\gamma_j+1},\cdots,\b{A}\bi{v}_n)
+\\
+&amp;=\begin{pmatrix}
+\lambda_j\b{I}_{\gamma_j} &amp; \b{O}
+\\
+\b{O} &amp; \b{B}
+\end{pmatrix}
+\end{align}
+\]</span> 由于以基矢量为各列的矩阵是正交矩阵, 所以上式是一个相似变换,
+可以用计算结果代替<span
+class="math inline">\(\b{A}\)</span>研究本征多项式 <span
+class="math display">\[
+p_\b{A}(\lambda)=\abs{\begin{matrix}(\lambda_j-\lambda)\b{I}_{\gamma_j}
+&amp; \b{O}
+\\
+\b{O} &amp; \b{B}-\lambda\b{I}_{n-\gamma_j} \end{matrix}}
+\]</span> 这个多项式显然至少具有<span
+class="math inline">\(\gamma_j\)</span>重的<span
+class="math inline">\(\lambda_j\)</span>, 甚至可能更高,
+依赖于另一个对角块的计算. 即: <span
+class="math inline">\(\mu_j\ge\gamma_j\)</span>,
+<strong>代数重数不小于几何重数</strong>.</p>
+<p>为证明两者未必取等, 找一个特例即可: <span class="math display">\[
+\begin{align}
+&amp;\text{考虑矩阵}\b{A}=\begin{pmatrix}
+1 &amp; 1
+\\
+0 &amp; 1
+\end{pmatrix}
+\\
+&amp;代数重数:\text{ }p_\b{A}(\lambda)=(\lambda-1)^2, \mu_1=2
+\\
+&amp;几何重数:\gamma_1=2-\rank{\b{A}-\b{I}}=2-1=1
+\end{align}
+\]</span> 可见, 两者不等价, 只有不等关系. 我们称一个本征值<span
+class="math inline">\(\lambda\)</span>是 <strong>亏损的</strong>,
+如果它的几何重数小于代数重数; 称<span
+class="math inline">\(\b{A}\)</span>是 <strong>亏损的</strong>,
+如果它存在亏损本征值.</p>
+<p>亏损这个概念一经引入就有意义. 如果矩阵亏损,
+那么它某个本征值的本征矢数量过少,
+不足以在相似变换的矩阵中张成维数为<span
+class="math inline">\(\mu_j\)</span>的子空间, 也就不可能出现<span
+class="math inline">\(\mu_j\)</span>个对角元为<span
+class="math inline">\(\lambda_j\)</span>, 对角化一定不能实现. 同样地,
+容易证明, 如果矩阵非亏损, 一定能对角化.</p>
 <h3 id="schur-分解定理">Schur 分解定理</h3>
 <p>实数域上的代数告诉我们, 不是任意实方阵都能对角化, 推广这一结论,
 任意复方阵也未必能对角化. 但我们可以退而求其次:</p>
@@ -471,10 +563,10 @@ class="math display">\[
 因此整体是一个上三角矩阵, 且对角元都是本征值. <span
 class="math inline">\(\mathbf{X}\mathbf{P}\)</span>​整体承担变换矩阵的作用,
 并且酉矩阵之积仍是酉的. 得证.</p>
-<h3 id="推论">推论</h3>
+<h3 id="schur-分解定理推论">Schur 分解定理推论</h3>
 <p>根据 Schur 分解定理, 立即得到:</p>
 <ol type="1">
-<li><p>厄密矩阵必定可以用酉矩阵对角化, 对角元都是本征值,
+<li><p>自伴矩阵必定可以用酉矩阵对角化, 对角元都是本征值,
 并且都是实数.</p>
 <p>这可以看作实对称矩阵对角化定理的推广.</p></li>
 <li><p>实矩阵当然也能上三角化, 但对角元未必是实数.
