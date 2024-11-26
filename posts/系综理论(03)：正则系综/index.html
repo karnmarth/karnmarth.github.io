@@ -1,0 +1,931 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rain Chan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="上一节中讨论的微正则系综是对应于能量 E、体积 V 和粒子数 N 的系综. 一旦系统微观状态数(或者说系统的熵)计算出来以后, 我们就可以得到系统的所有热力学性质. 但是微正则系综在实际运用上并不十分便利, 在多数实际应用中, 我们需要知道系统在固定温度和粒子数时的热力学性质. 这就对应于我们现在要讨论的正则系综.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系综理论(03)：正则系综">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA(03)%EF%BC%9A%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/">
+<meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="上一节中讨论的微正则系综是对应于能量 E、体积 V 和粒子数 N 的系综. 一旦系统微观状态数(或者说系统的熵)计算出来以后, 我们就可以得到系统的所有热力学性质. 但是微正则系综在实际运用上并不十分便利, 在多数实际应用中, 我们需要知道系统在固定温度和粒子数时的热力学性质. 这就对应于我们现在要讨论的正则系综.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-11-23T15:18:06.000Z">
+<meta property="article:modified_time" content="2024-11-26T08:20:47.678Z">
+<meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="平衡态统计物理">
+<meta property="article:tag" content="系综">
+<meta property="article:tag" content="正则系综">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  
+  <title>系综理论(03)：正则系综 - Rain Chan&#39;s Notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rain Chan&#39;s Notes</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/%E5%8F%82%E8%80%83%E4%B9%A6%E7%9B%AE" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>参考</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="系综理论(03)：正则系综"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-11-23 23:18" pubdate>
+          2024年11月23日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">系综理论(03)：正则系综</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p><span
+class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1
+\right)}\newcommand{\dim}[1]{\text{dim}\left(#1
+\right)}\newcommand{\diag}[1]{\text{diag}\left(#1
+\right)}\newcommand{\det}[1]{\text{det}\left(#1
+\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1
+\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1
+\right\}}\newcommand{\abs}[1]{\left| #1
+\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span>上一节中讨论的微正则系综是对应于能量
+E、体积 V 和粒子数 N 的系综.
+一旦系统微观状态数(或者说系统的熵)计算出来以后,
+我们就可以得到系统的所有热力学性质.
+但是微正则系综在实际运用上并不十分便利, 在多数实际应用中,
+我们需要知道系统在固定温度和粒子数时的热力学性质.
+这就对应于我们现在要讨论的正则系综.</p>
+<h2 id="正则分布的导出">正则分布的导出</h2>
+<p>从物理上讲, 微正则系综对应孤立系统, 即没有物质和能量交换;
+而正则系综对应的是一般的封闭系统, 即没有物质交换, 但是允许能量交换.
+这样的系统独自拿出来分析, 显然不具有一个守恒的内能.</p>
+<p>为了导出它以特定态<span
+class="math inline">\(S\)</span>出现的概率<span
+class="math inline">\(\rho_S\)</span>, 我们借助一个大热源来分析.
+所谓大热源, 就是能量远大于<span class="math inline">\(E_S\)</span>,
+总可以展开到最低阶非零项; 并且热容趋于无穷大,
+因而与系统的任何热量交换不会改变温度<span
+class="math inline">\(T\)</span>. 两者能量之和记作<span
+class="math inline">\(E_0\)</span>, 则总状态数为 <span
+class="math display">\[
+\Omega_{tot}=\sum_{E_S}\Omega_0(E_0-E_S)\cdot\Omega(E_S)
+\]</span> 两个因子分别是热源状态数和系统状态数, 能量之外的宗量被略写.
+因为<span class="math inline">\(E_S\ll E_0\)</span>,
+可以把热源的熵函数展开 <span class="math display">\[
+\log\Omega_0(E_0-E_S)=\log\Omega_0(E_0)-\frac{\partial\log\Omega(E)}{\partial
+E}\Bigg|_{E=E_0}E_S=\log\Omega_0(E_0)-\beta E_S
+\]</span> 其中<span
+class="math inline">\(\beta=1/k_BT\)</span>是具有能量倒数量纲的温度倒数.
+代回总状态数公式可以得知 <span class="math display">\[
+\Omega_{tot}=\Omega_0(E_0)\sum_{E_S}\Omega(E_S)e^{-\beta E_S}
+\]</span> 从这个公式, 立即求得系统处于能量<span
+class="math inline">\(E_S\)</span>的概率为 <span class="math display">\[
+\rho_S=\frac{\Omega(E_S)e^{-\beta
+E_S}}{\displaystyle\sum_{E_S}\Omega(E_S)e^{-\beta E_S}}
+\]</span> 需要注意的是, 能量<span
+class="math inline">\(E_S\)</span>和量子态<span
+class="math inline">\(S\)</span>不是一一对应的关系,
+一个总能量可能对应多个量子态, 即简并性, <span
+class="math inline">\(\Omega(E_S)\)</span>就是能级的简并度.
+如果我们不按能量求和, 而是按态求和, 就有</p>
+<blockquote>
+<p>正则分布和配分函数</p>
+<p>具有给定的<span class="math inline">\(T,V,N\)</span>的系统,
+处于态<span class="math inline">\(S\)</span>的概率为 <span
+class="math display">\[
+  \rho_S=\frac{e^{-\beta E_S}}{Z}
+  \]</span> 其中<span
+class="math inline">\(Z(T,V,N)\)</span>是归一化系数, 称为配分函数.</p>
+</blockquote>
+<h2 id="热力学公式">热力学公式</h2>
+<p>所谓热力学公式, 就是用微观的、统计的配分函数,
+推导宏观热力学函数的公式. 我们全部的出发点, 一是 Gibbs 假设,
+即宏观量是相应微观量的系综平均; 二是概率分布公式和配分函数的定义: <span
+class="math display">\[
+\rho_S=\frac{e^{-\beta E_S}}{Z} \qquad Z(T,V,N)=\sum_Se^{-\beta E_S}
+\]</span></p>
+<h3 id="能量">能量</h3>
+<p>宏观内能<span class="math inline">\(U\)</span>对应于微观量子态<span
+class="math inline">\(S\)</span>的能量<span
+class="math inline">\(E_S\)</span>, 因此 <span class="math display">\[
+U=\frac{1}{Z}\sum_SE_Se^{-\beta
+E_S}=\frac{-1}{Z}\frac{\partial}{\partial\beta}\sum_Se^{-\beta
+E_S}=-\frac{\partial\log Z}{\partial\beta}
+\]</span></p>
+<h3 id="状态方程-化学势">状态方程, 化学势</h3>
+<p>宏观的做功表现为 <span class="math display">\[
+-pdV=\frac{1}{Z}\sum_S\frac{\partial E_S}{\partial V}dV e^{-\beta
+E_S}=-\frac{1}{\beta}\frac{\partial\log Z}{\partial V}dV
+\]</span> 得到状态方程为 <span class="math display">\[
+p=\frac{\partial\log Z}{\beta\partial V}
+\]</span> 对于普遍的做功<span class="math inline">\(Ydy\)</span>,
+只需要认为<span class="math inline">\(-pdV=Ydy\)</span>, 代换即可.</p>
+<p>类比状态方程的推导, 很容易得到化学势的公式 <span
+class="math display">\[
+\mu=-\frac{1}{\beta}\frac{\partial\log Z}{\partial N}
+\]</span></p>
+<h3 id="熵和信息熵">熵和信息熵</h3>
+<p>有了内能和做功, 就能求出熵的公式. 利用 <span class="math display">\[
+\begin{aligned}
+dS&amp;=k_B\beta(dU+pdV-\mu dN)
+\newline&amp;=k_B\left[-\beta d\left(\frac{\partial\log
+Z}{\partial\beta}\right)+\frac{\partial\log Z}{\partial
+V}dV+\frac{\partial\log Z}{\partial N}dN\right]
+\\&amp;=k_B\left[-d\left(\beta\frac{\partial\log
+Z}{\partial\beta}\right)+d\log Z \right]
+\end{aligned}
+\]</span> 求得 <span class="math display">\[
+S=k_B\left(\log Z-\beta\frac{\partial\log Z}{\partial\beta}\right)
+\]</span> 基于熵的一般公式, 还可以推导另一种主要用<span
+class="math inline">\(\rho_S\)</span>表出的形式, 注意到 <span
+class="math display">\[
+\begin{aligned}
+-\beta\frac{\partial\log Z}{\partial\beta}&amp;=\beta U=\sum_S\beta
+E_S\rho_S
+\\
+\log Z&amp;=\sum_S\rho_S\log Z
+\end{aligned}
+\]</span> 代入熵公式可得 <span class="math display">\[
+S=k_B\sum_S\rho_S\log(Ze^{\beta E_S})=-k_B\sum_S\rho_S\log\rho_S
+\]</span> 这种表示常见于熵在其它学科的推广, 即信息熵.</p>
+<h3 id="自由能">自由能</h3>
+<p>根据熵的表达式立即得到 <span class="math display">\[
+k_BT\log Z=TS-U=-F
+\]</span> 即, 系统的配分函数直接和自由能相关,
+配分函数的基本变量正好使得<span
+class="math inline">\(F\)</span>构成特性函数.</p>
+<h3 id="能量涨落">能量涨落</h3>
+<p>显然, 根据配分函数和概率分布, 可以定义任意阶的能量期望, 因此 <span
+class="math display">\[
+\text{Var}[U]=\frac{1}{Z}\frac{\partial^2Z}{\partial\beta^2}-\frac{1}{Z^2}\left(\frac{\partial
+Z}{\partial\beta}\right)^2=\frac{\partial^2\log
+Z}{\partial\beta^2}=-\frac{\partial U}{\partial\beta}
+\]</span> 注意到这个偏导数是保持<span
+class="math inline">\(V,N\)</span>不变的, 因此结果中包含等容热容 <span
+class="math display">\[
+\frac{\sqrt{\text{Var}[U]}}{U}=\frac{\sqrt{k_BT^2C_V}}{U}
+\]</span> 由于<span class="math inline">\(C_V\)</span>和<span
+class="math inline">\(U\)</span>都是广延量, 因此内能的相对涨落关于<span
+class="math inline">\(N\)</span>的变化规律为 <span
+class="math display">\[
+\frac{\sqrt{\text{Var}[U]}}{U}=\frac{\sqrt{k_BT^2C_V}}{U}\sim\frac{1}{\sqrt{N}}
+\]</span></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/" class="category-chain-item">统计物理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA/" class="category-chain-item">系综理论</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%B9%B3%E8%A1%A1%E6%80%81%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/" class="print-no-link">#平衡态统计物理</a>
+      
+        <a href="/tags/%E7%B3%BB%E7%BB%BC/" class="print-no-link">#系综</a>
+      
+        <a href="/tags/%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/" class="print-no-link">#正则系综</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>系综理论(03)：正则系综</div>
+      <div>https://notes.rainchan.me/posts/系综理论(03)：正则系综/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rain Chan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年11月23日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA(04)%EF%BC%9A%E5%B7%A8%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/" title="系综理论(04)：巨正则系综">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">系综理论(04)：巨正则系综</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA(02)%EF%BC%9A%E5%BE%AE%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/" title="系综理论(02)：微正则系综">
+                        <span class="hidden-mobile">系综理论(02)：微正则系综</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"karnmarth/blog-comments","repo-id":"R_kgDOMerUGQ","category":"Announcements","category-id":"DIC_kwDOMerUGc4ChX3n","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","theme":"preferred_color_scheme"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

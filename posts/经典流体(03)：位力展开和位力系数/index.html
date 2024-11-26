@@ -7,8 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
+
   <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
   <link rel="icon" href="/img/fluid.png">
+  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -16,14 +19,20 @@
   <meta name="author" content="Rain Chan">
   <meta name="keywords" content="">
   
-    <meta property="og:type" content="article">
-<meta property="og:title" content="Rain Chan&#39;s Notes">
-<meta property="og:url" content="https://notes.rainchan.me/posts/img/">
+    <meta name="description" content="本节利用集团展开, 计算实际气体的位力方程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="经典流体(03)：位力展开和位力系数">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E7%BB%8F%E5%85%B8%E6%B5%81%E4%BD%93(03)%EF%BC%9A%E4%BD%8D%E5%8A%9B%E5%B1%95%E5%BC%80%E5%92%8C%E4%BD%8D%E5%8A%9B%E7%B3%BB%E6%95%B0/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="本节利用集团展开, 计算实际气体的位力方程">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-04-20T05:32:53.051Z">
-<meta property="article:modified_time" content="2024-04-20T05:32:53.051Z">
+<meta property="article:published_time" content="2024-11-25T14:39:28.000Z">
+<meta property="article:modified_time" content="2024-11-26T09:31:41.433Z">
 <meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="实际气体">
+<meta property="article:tag" content="Mayer 集团展开">
+<meta property="article:tag" content="位力展开">
+<meta property="article:tag" content="Van der Waals 方程">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -32,7 +41,7 @@
   
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
   
-  <title>Rain Chan&#39;s Notes</title>
+  <title>经典流体(03)：位力展开和位力系数 - Rain Chan&#39;s Notes</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -49,11 +58,11 @@
 <!-- 主题依赖的图标库，不要自行修改 -->
 <!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
 
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
 <link  rel="stylesheet" href="/css/main.css" />
@@ -74,7 +83,7 @@
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml","include_content_in_search":true};
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -87,7 +96,7 @@
 
 
   
-<meta name="generator" content="Hexo 7.0.0"></head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 
 
 <body>
@@ -130,7 +139,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives/" target="_self">
+              <a class="nav-link" href="/archives" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -142,19 +151,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/" target="_self">
-                <i class="iconfont icon-category-fill"></i>
-                <span>分类</span>
-              </a>
-            </li>
-          
-        
-          
-          
-          
-          
-            <li class="nav-item">
-              <a class="nav-link" href="/tags/" target="_self">
+              <a class="nav-link" href="/tags" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -166,7 +163,31 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/" target="_self">
+              <a class="nav-link" href="/categories" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/%E5%8F%82%E8%80%83%E4%B9%A6%E7%9B%AE" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>参考</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -202,7 +223,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text=""></span>
+            <span id="subtitle" data-typed-text="经典流体(03)：位力展开和位力系数"></span>
           
         </div>
 
@@ -213,8 +234,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-04-20 13:32" pubdate>
-          2024年4月20日 下午
+        <time datetime="2024-11-25 22:39" pubdate>
+          2024年11月25日 晚上
         </time>
       </span>
     
@@ -225,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          0 字
+          999 字
         
       </span>
     
@@ -236,7 +257,7 @@
         
         
         
-          1 分钟
+          9 分钟
         
       </span>
     
@@ -273,12 +294,136 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header"></h1>
+            <h1 id="seo-header">经典流体(03)：位力展开和位力系数</h1>
             
             
               <div class="markdown-body">
                 
-                
+                <h2 id="回顾">回顾</h2>
+<p>上节已经定义了<span class="math inline">\(l\)</span>-集团的集团积分
+<span class="math display">\[
+b_l:=\frac{1}{V}\int\prod_{i=1}^ld^3\vec{r}_i\sum_{c\in C_l}\prod_{p\in
+c}f_{p}
+\]</span> 以及位形积分 <span class="math display">\[
+Q_N=\sum_{\{m_l\}}&#39;\prod_l\frac{1}{m_l!}\left(\frac{Vb_l}{l!}\right)^{m_l}
+\]</span> 那么巨配分函数为 <span class="math display">\[
+\begin{aligned}
+\Xi&amp;=\sum_N\left(\frac{e^{-\alpha}}{\lambda_T^3}\right)^NQ_N
+\\&amp;=
+\sum_N\left(\frac{e^{-\alpha}}{\lambda_T^3}\right)^N\sum_{\{m_l\}}&#39;\prod_l\frac{1}{m_l!}\left(\frac{Vb_l}{l!}\right)^{m_l}
+\end{aligned}
+\]</span> 这里需要运用之前提及的技巧. 对所有满足<span
+class="math inline">\(\sum_lm_ll=N\)</span>的<span
+class="math inline">\(\{m_l\}\)</span>求和, 再对<span
+class="math inline">\(N\)</span>求和, 等价于对所有独立的<span
+class="math inline">\(m_l\)</span>在自然数上求和. 即 <span
+class="math display">\[
+\Xi=\sum_{\{m_l\}}\prod_l\frac{1}{m_l!}\left(\frac{e^{-\alpha
+l}Vb_l}{l!\lambda^{3l}_T}\right)^{m_l}
+\]</span> 由于各个<span class="math inline">\(m_l\)</span>独立,
+类似重积分化为累次积分, 可以拆成各个累次求和再连乘: <span
+class="math display">\[
+\begin{aligned}
+\Xi&amp;=\prod_l\sum_{m_l=0}^{+\infty}\frac{1}{m_l!}\left(\frac{e^{-\alpha
+l}Vb_l}{l!\lambda^{3l}_T}\right)^{m_l}
+\\&amp;=
+\prod_l\exp(\frac{e^{-\alpha l}Vb_l}{l!\lambda_T^{3l}})
+\end{aligned}
+\]</span> 根据巨势的定义, 立即得到 <span class="math display">\[
+pV=k_BT\sum_l\frac{e^{-\alpha l}Vb_l}{l!\lambda_T^{3l}}
+\]</span> 根据平均粒子数的定义, 立即得到 <span class="math display">\[
+N=\sum_l\frac{le^{-\alpha l}Vb_l}{l!\lambda_T^{3l}}
+\]</span> 引入<span
+class="math inline">\(x=\exp(-\alpha)/\lambda_T^3\)</span>, 有</p>
+<blockquote>
+<p>集团展开求状态方程的方法 <span class="math display">\[
+  p=k_BT\left(x+\sum_{l=2}\frac{b_l}{l!}x^l \right)
+  \]</span></p>
+<p><span class="math display">\[
+  n=x+\sum_{l=2}\frac{b_l}{(l-1)!}x^l
+  \]</span></p>
+</blockquote>
+<p>其中, 求和的上限实际上是<span class="math inline">\(N\)</span>,
+但是对于热力学极限直接取作<span
+class="math inline">\(+\infty\)</span>即可.</p>
+<h2 id="位力系数">位力系数</h2>
+<p>上述方程组的求解可以用如下示例. 例如, 设 <span
+class="math display">\[
+x=n+a_2n^2+a_3n^3
+\]</span> 代入<span class="math inline">\(n(x)\)</span>中, 得到 <span
+class="math display">\[
+n=n+(a_2+b_2)n^2+(a_3+2a_2b_2+\frac{b_3}{2})n^3+o(n^3)
+\]</span> 考虑低阶项左右一致, 得到 <span class="math display">\[
+a_2=-b_2, a_3=2b_2^2-\frac{b_3}{2}
+\]</span> 再把已经解得系数的<span
+class="math inline">\(x(n)\)</span>代回到状态方程, 有 <span
+class="math display">\[
+\frac{p}{k_BT}=n-\frac{b_2}{2}n^2+\left(b_2^2-\frac{b_3}{3}\right)n^3+o(n^3)
+\]</span> 由此, 得到了前几个位力系数 <span class="math display">\[
+\begin{aligned}
+B_2(T)&amp;=-\frac{b_2}{2}
+\\
+B_3(T)&amp;=b_2^2-\frac{b_3}{3}
+\end{aligned}
+\]</span> <span
+class="math inline">\(l=2,3\)</span>的集团积分还是比较容易写出的 <span
+class="math display">\[
+\begin{aligned}
+b_2&amp;=\frac{1}{V}\int d^3\vec{r}_1d^3\vec{r}_2 f_{12}
+\\
+b_3&amp;=\frac{1}{V}\int
+d^3\vec{r}_1d^3\vec{r}_2d^3\vec{r}_3\left(f_{12}f_{23}+f_{12}f_{13}+f_{13}f_{23}+f_{12}f_{23}f_{13}
+\right)
+\\&amp;=
+\frac{1}{V}\int
+d^3\vec{r}_1d^3\vec{r}_2d^3\vec{r}_3\left(3f_{12}f_{13}+f_{12}f_{23}f_{13}
+\right)
+\end{aligned}
+\]</span> 换元到相对坐标, 可得 <span class="math display">\[
+\begin{aligned}
+b_2&amp;=\int d^3\vec{r}_{12} f_{12}
+\\
+b_3&amp;=3\int d^3\vec{r}_{12}d^3\vec{r}_{13}
+f_{12}f_{13}+\frac{1}{V}\int
+d^3\vec{r}_1d^3\vec{r}_2d^3\vec{r}_3f_{12}f_{23}f_{13}
+\end{aligned}
+\]</span> <span
+class="math inline">\(b_3\)</span>的第一项积分刚好是<span
+class="math inline">\(b_2^2\)</span>, 因此 <span class="math display">\[
+\begin{aligned}
+B_2(T)&amp;=-\frac{1}{2}\int d^3\vec{r}_{12} f_{12}
+\\
+B_3(T)&amp;=-\frac{1}{3V}\int
+d^3\vec{r}_1d^3\vec{r}_2d^3\vec{r}_3f_{12}f_{23}f_{13}
+\end{aligned}
+\]</span> 这给出了前两阶的位力系数.</p>
+<h2 id="van-der-waals-方程">Van der Waals 方程</h2>
+<p>为得到非理想气体最常见的状态方程——Van der Waals 方程,
+只需要第二位力系数. 为了计算更简便, 可以把 Lennard-Jones 势简化处理:
+其中的<span class="math inline">\(12\)</span>次反比排斥势直接改成刚球势,
+吸引势能不变, 因此得到 <span class="math display">\[
+\phi(r)=\begin{aligned}\begin{cases}
+\displaystyle
++\infty\qquad\qquad&amp; r&lt;\sigma
+\\\displaystyle
+-4\varepsilon\left(\frac{\sigma}{r}\right)^6 &amp;r&gt;\sigma
+\end{cases}
+\end{aligned}
+\]</span> 从而 <span class="math display">\[
+\begin{aligned}
+B_2(T)&amp;=-\frac{1}{2}\left(-\frac{4\pi\sigma^3}{3}+\int_\sigma^{+\infty}4\pi
+r^2dr\left\{\exp\left[4\beta\varepsilon\left(\frac{\sigma}{r}\right)^6\right]-1\right\}
+\right)
+\\&amp;\approx\frac{2\pi\sigma^3}{3}-2\pi\int_\sigma^{+\infty}4\beta\varepsilon\frac{\sigma^6}{r^4}dr
+\\&amp;=\frac{2\pi\sigma^3}{3}-\frac{8\pi\beta\varepsilon\sigma^3}{3}
+\end{aligned}
+\]</span> 代入位力展开可得 <span class="math display">\[
+\frac{p}{k_BT}=n+\frac{2\pi\sigma^3}{3}n^2-\frac{8\pi\varepsilon\sigma^3}{3k_BT}n^2
+\]</span> 即 <span class="math display">\[
+(p+\frac{8\pi\varepsilon\sigma^3}{3}n^2)\cdot\frac{1}{1+\frac{2\pi\sigma^3}{3}n}=nk_BT
+\]</span> 对分式 Taylor 展开, 即得到 <span class="math display">\[
+\left(p+\frac{8\pi\varepsilon\sigma^3}{3}n^2\right)\left(1-\frac{2\pi\sigma^3}{3}n\right)=nk_BT
+\]</span> 这正是 Van der Waals 方程.</p>
 
                 
               </div>
@@ -287,6 +432,47 @@
             <div>
               <div class="post-metas my-3">
   
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/" class="category-chain-item">统计物理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/%E7%BB%8F%E5%85%B8%E6%B5%81%E4%BD%93/" class="category-chain-item">经典流体</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%AE%9E%E9%99%85%E6%B0%94%E4%BD%93/" class="print-no-link">#实际气体</a>
+      
+        <a href="/tags/Mayer-%E9%9B%86%E5%9B%A2%E5%B1%95%E5%BC%80/" class="print-no-link">#Mayer 集团展开</a>
+      
+        <a href="/tags/%E4%BD%8D%E5%8A%9B%E5%B1%95%E5%BC%80/" class="print-no-link">#位力展开</a>
+      
+        <a href="/tags/Van-der-Waals-%E6%96%B9%E7%A8%8B/" class="print-no-link">#Van der Waals 方程</a>
+      
+    </div>
   
 </div>
 
@@ -296,8 +482,8 @@
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div></div>
-      <div>https://notes.rainchan.me/posts/img/</div>
+      <div>经典流体(03)：位力展开和位力系数</div>
+      <div>https://notes.rainchan.me/posts/经典流体(03)：位力展开和位力系数/</div>
     </div>
     <div class="license-meta">
       
@@ -309,7 +495,7 @@
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年4月20日</div>
+          <div>2024年11月25日</div>
         </div>
       
       
@@ -322,7 +508,7 @@
               
                 <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
                   <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
+                    <i class="iconfont icon-cc-by"></i>
                   </span>
                 </a>
               
@@ -341,18 +527,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(01)%EF%BC%9ALU%20%E5%88%86%E8%A7%A3/" title="线性方程组与本征值问题(01)：LU 分解">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">线性方程组与本征值问题(01)：LU 分解</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/Fourier%20%E6%96%B9%E6%B3%95(02)%EF%BC%9AFFT%20%E5%8F%8A%E5%85%B6%20python%20%E5%AE%9E%E7%8E%B0/" title="Fourier 方法(02)：FFT 及其 python 实现">
-                        <span class="hidden-mobile">Fourier 方法(02)：FFT 及其 python 实现</span>
+                      <a href="/posts/%E7%BB%8F%E5%85%B8%E6%B5%81%E4%BD%93(02)%EF%BC%9A%E5%AE%9E%E9%99%85%E6%B0%94%E4%BD%93%E7%9A%84%E9%9B%86%E5%9B%A2%E5%B1%95%E5%BC%80/" title="经典流体(02)：实际气体的集团展开">
+                        <span class="hidden-mobile">经典流体(02)：实际气体的集团展开</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -529,10 +709,11 @@
       </span>
     
     
-  
-</div>
 
   
+
+</div>
+
   
   
 </div>
@@ -631,7 +812,7 @@
 
   
 <script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
     window.anchors.options = {
       placement: CONFIG.anchorjs.placement,
       visible  : CONFIG.anchorjs.visible
