@@ -119,9 +119,9 @@
       
       <tag>平衡态统计物理</tag>
       
-      <tag>正则系综</tag>
-      
       <tag>巨正则系综</tag>
+      
+      <tag>正则系综</tag>
       
       <tag>Boltzmann 分布</tag>
       
@@ -282,15 +282,15 @@
       
       <tag>本征值问题</tag>
       
-      <tag>Gershgorin 圆盘</tag>
-      
-      <tag>Krylov 子空间</tag>
-      
       <tag>Givens 变换</tag>
       
       <tag>Sturm 序列</tag>
       
+      <tag>Gershgorin 圆盘</tag>
+      
       <tag>Lanczos 迭代法</tag>
+      
+      <tag>Krylov 子空间</tag>
       
     </tags>
     
@@ -323,13 +323,13 @@
       
       <tag>本征值问题</tag>
       
-      <tag>正规矩阵</tag>
-      
-      <tag>Jordan 标准型</tag>
-      
       <tag>Gershgorin 圆盘</tag>
       
       <tag>Krylov 子空间</tag>
+      
+      <tag>正规矩阵</tag>
+      
+      <tag>Jordan 标准型</tag>
       
     </tags>
     
@@ -836,9 +836,9 @@
       
       <tag>数值计算</tag>
       
-      <tag>数值微积分</tag>
-      
       <tag>Newton-Cortes 方法</tag>
+      
+      <tag>数值微积分</tag>
       
     </tags>
     
