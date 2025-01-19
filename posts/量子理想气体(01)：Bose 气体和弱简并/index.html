@@ -19,22 +19,17 @@
   <meta name="author" content="Rain Chan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本节中, 我们将利用前面建立起来的统计系综理论来讨论最为简单的系统: 由几乎无相互作用的子系统构成的宏观系统, 这类系统又被称为近独立子系">
+    <meta name="description" content="这一节中我们利用 Bose 分布来讨论一般的理想 Bose 气体, 随后计算弱简并情形.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="系综理论(05)：近独立子系的分布">
-<meta property="og:url" content="https://notes.rainchan.me/posts/%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA(05)%EF%BC%9A%E8%BF%91%E7%8B%AC%E7%AB%8B%E5%AD%90%E7%B3%BB%E7%9A%84%E5%88%86%E5%B8%83/">
+<meta property="og:title" content="量子理想气体(01)：Bose 气体和弱简并">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(01)%EF%BC%9ABose%20%E6%B0%94%E4%BD%93%E5%92%8C%E5%BC%B1%E7%AE%80%E5%B9%B6/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
-<meta property="og:description" content="本节中, 我们将利用前面建立起来的统计系综理论来讨论最为简单的系统: 由几乎无相互作用的子系统构成的宏观系统, 这类系统又被称为近独立子系">
+<meta property="og:description" content="这一节中我们利用 Bose 分布来讨论一般的理想 Bose 气体, 随后计算弱简并情形.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-11-23T17:41:07.000Z">
-<meta property="article:modified_time" content="2024-11-24T13:25:59.342Z">
+<meta property="article:published_time" content="2025-01-07T11:43:48.000Z">
+<meta property="article:modified_time" content="2025-01-19T03:27:55.260Z">
 <meta property="article:author" content="Rain Chan">
-<meta property="article:tag" content="平衡态统计物理">
-<meta property="article:tag" content="正则系综">
-<meta property="article:tag" content="巨正则系综">
-<meta property="article:tag" content="Boltzmann 分布">
-<meta property="article:tag" content="Fermi 分布">
-<meta property="article:tag" content="Bose 分布">
+<meta property="article:tag" content="理想 Bose 气体">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -43,7 +38,7 @@
   
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
   
-  <title>系综理论(05)：近独立子系的分布 - Rain Chan&#39;s Notes</title>
+  <title>量子理想气体(01)：Bose 气体和弱简并 - Rain Chan&#39;s Notes</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -225,7 +220,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="系综理论(05)：近独立子系的分布"></span>
+            <span id="subtitle" data-typed-text="量子理想气体(01)：Bose 气体和弱简并"></span>
           
         </div>
 
@@ -236,8 +231,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-11-24 01:41" pubdate>
-          2024年11月24日 凌晨
+        <time datetime="2025-01-07 19:43" pubdate>
+          2025年1月7日 晚上
         </time>
       </span>
     
@@ -248,7 +243,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.2k 字
         
       </span>
     
@@ -259,7 +254,7 @@
         
         
         
-          12 分钟
+          10 分钟
         
       </span>
     
@@ -296,12 +291,13 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">系综理论(05)：近独立子系的分布</h1>
+            <h1 id="seo-header">量子理想气体(01)：Bose 气体和弱简并</h1>
             
             
               <div class="markdown-body">
                 
-                <p><span
+                <h2
+id="求解巨配分函数对数newcommandkmathbbknewcommandrmathbbrnewcommandcmathbbcnewcommandbmathbfnewcommandbiboldsymbolnewcommandrank1textrankleft1-rightnewcommanddim1textdimleft1-rightnewcommanddiag1textdiagleft1-rightnewcommanddet1textdetleft1-rightnewcommanddet1leftbeginmatrix-1-endmatrixrightnewcommandset1left-1-rightnewcommandabs1left-1-rightnewcommandnorm1leftleft1rightright">求解巨配分函数对数<span
 class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1
 \right)}\newcommand{\dim}[1]{\text{dim}\left(#1
 \right)}\newcommand{\diag}[1]{\text{diag}\left(#1
@@ -309,129 +305,105 @@ class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\new
 \right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1
 \end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1
 \right\}}\newcommand{\abs}[1]{\left| #1
-\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span>本节中,
-我们将利用前面建立起来的统计系综理论来讨论最为简单的系统:
-由几乎无相互作用的子系统构成的宏观系统, 这类系统又被称为
-<strong>近独立子系</strong>. 一个近独立子系的总能量<span
-class="math inline">\(E\)</span>可以表达为组成系统的各个子系统(我们姑且称之为粒子)的能量之和
+\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span></h2>
+<p>这一节中我们利用 Bose 分布来讨论一般的理想 Bose 气体,
+随后计算弱简并情形. 不失一般性, 只考虑 spinless boson, 因为无外场时,
+近独立自旋只会在简并度中引入常系数因子. 在这样的前提下, 巨配分函数为
 <span class="math display">\[
-E\approx\sum_{i=1}^N\varepsilon_i
-\]</span> 近独立子系, 一是要求相互作用很弱但不能完全没有,
-否则压根无法热化; 二是它仅要求子系之间的相互作用很弱,
-但和外界当然可以有(甚至可以是很强的)相互作用. 总而言之,
-近独立子系可以视为单粒子的广延情形, 不管有多少个粒子,
-可以认为每个粒子总处于单粒子的那些能级上.</p>
-<p>接下来就需要考虑粒子的全同性问题. 如果粒子可以分辨,
-那么可以按照编号<span
-class="math inline">\(i=1,2,\cdots,N\)</span>标记每个粒子的态<span
-class="math inline">\(s_i\)</span>, 并且<span
-class="math inline">\((s_i,s_j)\)</span>为<span
-class="math inline">\((\lambda,\mu)\)</span>和<span
-class="math inline">\((\mu,\lambda)\)</span>是不等价的两种分布,
-这样后续的任何针对<span
-class="math inline">\(s_i\)</span>的求和总是独立于<span
-class="math inline">\(s_j\)</span>. 如果粒子不可分辨,
-那么这两种分布是不等价的, 用<span
-class="math inline">\(s_i\)</span>研究问题非常不便,
-可以改用每个单粒子态<span
-class="math inline">\(s\)</span>上的粒子数<span
-class="math inline">\(a_s\)</span>来研究问题, 因为粒子具有全同性,
-所以同一套<span class="math inline">\(\{a_s\}\)</span>都是等价的.
-不同于很多热统/平统讲法, 我们总认为粒子是不可分辨的, 即便推导 Boltzmann
-分布.</p>
-<h2 id="巨正则系综和-fermibose-分布">巨正则系综和 Fermi/Bose 分布</h2>
-<p>在巨正则系综中, 近独立子系的巨配分函数为 <span
+\Xi(T,V,\mu)=\prod_{s}(1-e^{-\alpha-\beta\epsilon_s})^{-1}
+\]</span> 一般来讲, 色散关系的形式为 power law <span
 class="math display">\[
-\Xi=\sum_N\sum_{\{a_s\}}&#39;e^{-\beta \sum_sa_s\varepsilon_s-\alpha N}
-\]</span> 其中带 prime 的求和符号表示它受到约束——总粒子数为<span
-class="math inline">\(N\)</span>. 但最终需要对<span
-class="math inline">\(N\)</span>求和, 会消去这个约束,
-可以把两重求和代之以单重求和: <span class="math display">\[
-\sum_N\sum_{\{a_s\}}&#39;\Rightarrow\sum_{\{a_s\}}
-\]</span> 并且将求和式中剩下的<span
-class="math inline">\(N\)</span>全部用<span
-class="math inline">\(\sum_sa_s\)</span>代替, 因此有 <span
-class="math display">\[
-\Xi=\sum_{\{a_s\}}\prod_s\exp[-a_s(\beta\varepsilon_s+\alpha)]
-\]</span> 两重求和化为单重的原因很简单, 对具有粒子数<span
-class="math inline">\(N\)</span>的态求和, 再对<span
-class="math inline">\(N\)</span>求和,
-自然可以用一次性对所有态求和代替.</p>
-<p>另外, 无约束的对整个分布<span
-class="math inline">\(\{a_s\}\)</span>求和,
-可以分解为先后对每个单态分布<span
-class="math inline">\(a_s\)</span>求和(类似累次积分的概念), 于是 <span
-class="math display">\[
-\Xi=\sum_{a_1}\exp[-a_1(\beta\varepsilon_1+\alpha)]\cdot\sum_{a_2}\exp[-a_2(\beta\varepsilon_2+\alpha)]\cdots=\prod_s\sum_{a_s}\exp[-a_s(\beta\varepsilon_s+\alpha)]
-\]</span> 接下来就和粒子的统计性质有关了, 它们可以分为两大类:
-费米子和玻色子<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
-class="hint--top hint--rounded"
-aria-label="实际上, 有些准粒子无法归入费米子或者玻色子的一种, 可以更广泛地使用任意子统计.">[1]</span></a></sup>,
-前者受 Pauli 不相容原理控制, <span
-class="math inline">\(a_s=0或1\)</span>; 后者的<span
-class="math inline">\(a_s\)</span>可以取遍自然数. 于是 <span
-class="math display">\[
-\Xi=\prod_s(1\pm e^{-\alpha-\beta\varepsilon_s})^{\pm1}
-\]</span> 其中正负号分别对应费米子和玻色子. 相应地, 可以求出 <span
-class="math display">\[
-\bar{a}_s=\frac{1}{e^{\alpha+\beta\varepsilon_s}\pm1}
-\]</span> 即 <strong>Fermi 分布</strong> 与 <strong>Bose
-分布</strong>.</p>
-<h2 id="正则系综和-boltzmann-分布">正则系综和 Boltzmann 分布</h2>
-<p>近独立子系的正则系综可以直接用前述结果得到. 事实上,
-正则系综极少被用于研究"量子性"非常强的系统, 例如简并 Fermi 气体.
-所谓"量子性", 可以用简并性去判断, 即<span
-class="math inline">\(e^\alpha\)</span>这个值是大还是小. 如果<span
-class="math inline">\(e^\alpha\gg 1\)</span>, 那么总有<span
-class="math inline">\(\bar{a}_s\ll1\)</span>, 粒子数非常少,
-不太可能发生两个粒子占据或者争夺同一个单粒子态的情形,
-量子性的分布退回到经典分布.</p>
-<p>需要注意的是, 全同性和非简并条件<span
-class="math inline">\(e^\alpha\gg1\)</span>没有关系,
-尽管全同性是量子力学的一大特点, 但是大可将它借用到经典统计中, 以解决
-Gibbs 佯谬. 这样, 我们只需要取非简并近似即可, 全同性不需要改变. 因此
+\epsilon(k)=A_\nu\abs{k}^\nu
+\]</span> 并且是连续或准连续的能带, 这样就能将求和近似替代为积分. 即
 <span class="math display">\[
-\log\Xi\approx\sum_s e^{-\alpha-\beta\varepsilon_s}
-\]</span> 即 <span class="math display">\[
-\Xi=\exp(e^{-\alpha}\sum_se^{-\beta\varepsilon_s})=\sum_N\frac{e^{-\alpha
-N}}{N!}\left(\sum_se^{-\beta\varepsilon_s}\right)^N
-\]</span> 后一步是 Taylor 展开, 但它恰好和巨配分函数的定义相契合,
-比对后可以得到 <span class="math display">\[
+\sum_s\rightarrow\int\frac{Vd^n\vec{p}}{h^n}=\int\frac{2\pi^{\frac{n}{2}}
+V}{\Gamma(\frac{n}{2})h^n}p^{n-1}dp=\int\frac{(n/\nu)VA_\nu^{-n/\nu}}{\Gamma(\frac{n}{2}+1)(2\sqrt{\pi})^n}\epsilon^{n/\nu-1}d\epsilon
+\]</span> 其中<span class="math inline">\(n\)</span>是系统的几何维数,
+第一个等号表示动量空间的角坐标积分完毕, 第二个等号代入了色散关系.</p>
+<p>然而, 并不能简单地直接替换, 原因是一旦<span
+class="math inline">\(n&gt;\nu\)</span>, 积分便会筛去零能. 如果<span
+class="math inline">\(\epsilon=0\)</span>上粒子数很少或者在准连续分布的意义下为<span
+class="math inline">\(0\)</span>, 那筛去零能是无所谓的; 反之,
+如果基态粒子数和总粒子数能够比拟, 略去基态项是不正确的.
+我们事先并不知道是哪种情况, 先予以保留, 得到 <span
+class="math display">\[
+\log\Xi=-\log(1-e^{-\alpha})\eta(n-\nu)-\frac{(n/\nu)VA_\nu^{-n/\nu}}{\Gamma(\frac{n}{2}+1)(2\sqrt{\pi})^n}\int_0^{+\infty}\log(1-e^{-\alpha-\beta\epsilon})\epsilon^{n/\nu-1}d\epsilon
+\]</span></p>
+<p>其中, <span class="math inline">\(\eta\)</span>是 Heaviside 阶跃函数,
+对于正自变量取<span class="math inline">\(1\)</span>, 其余取<span
+class="math inline">\(0\)</span>.</p>
+<h3 id="bose-函数">Bose 函数</h3>
+<p>下面重点研究积分项. 引入活度<span
+class="math inline">\(z=e^{-\alpha}\)</span>, 无量纲能量<span
+class="math inline">\(x=\beta\epsilon\)</span>. 有 <span
+class="math display">\[
+Integral=\beta^{-n/\nu}\int_0^{+\infty}\log(1-ze^{-x})x^{n/\nu-1}dx
+\]</span> 如果不喜欢处理对数函数, 可以利用分部积分消去之, 给出 <span
+class="math display">\[
+\beta^{n/\nu}Integral=\frac{\nu}{n}\log(1-ze^{-x})x^{n/\nu}\Bigg|_0^{+\infty}-\frac{\nu}{n}\int_0^{+\infty}\frac{x^{n/\nu}dx}{z^{-1}e^x-1}
+\]</span> 第一项, <span class="math inline">\(x=0\)</span>时自然为<span
+class="math inline">\(0\)</span>; <span
+class="math inline">\(x\gg1\)</span>时, 近似为<span
+class="math inline">\(x^{n/\nu}e^{-x}\)</span>, 也收敛到<span
+class="math inline">\(0\)</span>.</p>
+<p>对于第二项, 引入所谓的 Bose 函数 <span class="math display">\[
+g_m(z):=\frac{1}{\Gamma(m)}\int_0^{+\infty}\frac{x^{m-1}dx}{z^{-1}e^x-1}
+\]</span> 则积分重写为 <span class="math display">\[
+Integral =
+-\frac{\nu\Gamma(\frac{n}{\nu}+1)}{n}\beta^{-n/\nu}g_{n/\nu+1}(z)
+\]</span> 很显然, <span class="math inline">\(g_m(1)=\zeta(m)\)</span>,
+给出 Riemann Zeta 函数; 另外, 它还具有如下性质 <span
+class="math display">\[
 \begin{aligned}
-Z(T,V,N)&amp;=\frac{z^N}{N!}
-\\
-z(T,V,N)&amp;=\sum_se^{-\beta\varepsilon_s}
+g_{m+1}&#39;(z)&amp;=\int_0^{+\infty}\frac{x^{m}e^xdx}{z^2\Gamma(m+1)(z^{-1}e^x-1)^2}
+\\&amp;=\int_0^{+\infty}\frac{x^{m}z^{-1}d(z^{-1}e^x-1)}{\Gamma(m+1)(z^{-1}e^x-1)^2}
+\\&amp;=-\frac{z^{-1}x^m}{\Gamma(m+1)(z^{-1}e^x-1)}\Bigg|_0^{+\infty}+\frac{1}{\Gamma(m+1)}\int_0^{+\infty}\frac{z^{-1}d(x^m)}{z^{-1}e^x-1}
 \end{aligned}
-\]</span> 它的物理意义是非常明确的. <span
-class="math inline">\(z\)</span>相当于单粒子的配分函数,
-总的配分函数是各个子系的连乘, 再除以全同性引入的交换数.</p>
-<p>至于分布的形式, 可以直接从量子分布近似过来: <span
+\]</span> 第一项仍为<span class="math inline">\(0\)</span>,
+第二项是<span class="math inline">\(z^{-1}g_m(z)\)</span>, 因此 <span
 class="math display">\[
-\bar{a}_s\approx e^{-\alpha-\beta\varepsilon_s}
-\]</span> 称为 <strong>Boltzmann 分布</strong>.</p>
-<h2 id="粒子数分布的涨落">粒子数分布的涨落</h2>
-<p>上述分布是每个态上的粒子数均值, 在热力学极限下也是最概然的值.
-可以求出每个态上的粒子数涨落为 <span class="math display">\[
-\text{Var}[a_s]=-\frac{\partial\bar{a}_s}{\partial\alpha}
-\]</span> 从而 <span class="math display">\[
-\text{Var}[a_s]=\bar{a}_s(1\pm\bar{a}_s)
-\]</span> 其中正负号分别对应费米子和玻色子. 取近似<span
-class="math inline">\(\bar{a}_s\ll1\)</span>, 有 <span
+g&#39;_{m+1}(z)=z^{-1}g_m(z)
+\]</span></p>
+<h3 id="热力学函数">热力学函数</h3>
+<p>回到巨配分函数对数, 用 Bose 函数可以重写为 <span
 class="math display">\[
-\text{Var}[a_s]\approx\bar{a}_s
-\]</span> 这是 Boltzmann 分布的粒子数涨落.</p>
-<section class="footnotes">
-<div class="footnote-list">
-<ol>
-<li>
-<span id="fn:1" class="footnote-text"><span>实际上,
-有些准粒子无法归入费米子或者玻色子的一种, 可以更广泛地使用任意子统计.
-<a href="#fnref:1" rev="footnote" class="footnote-backref">
-↩︎</a></span></span>
-</li>
-</ol>
-</div>
-</section>
+\begin{aligned}
+\log\Xi&amp;=-\log(1-e^{-\alpha})\eta(n-\nu)+\frac{(n/\nu)VA_\nu^{-n/\nu}}{\Gamma(\frac{n}{2}+1)(2\sqrt{\pi})^n}\frac{\nu\Gamma(\frac{n}{\nu}+1)}{n}\beta^{-n/\nu}g_{n/\nu+1}(z)
+\\&amp;=-\log(1-e^{-\alpha})\eta(n-\nu)+\frac{\Gamma(n/\nu+1)(\beta
+A_\nu)^{-n/\nu}V}{\Gamma(n/2+1)(2\sqrt{\pi})^n}g_{n/\nu+1}(z)
+\end{aligned}
+\]</span> 给出 <span class="math display">\[
+N=-\frac{\partial\log\Xi}{\partial\alpha}=\frac{z}{1-z}\eta(n-\nu)+\frac{\Gamma(n/\nu+1)(\beta
+A_\nu)^{-n/\nu}V}{\Gamma(n/2+1)(2\sqrt{\pi})^n}g_{n/\nu}(z)
+\]</span></p>
+<p><span class="math display">\[
+p=k_BT\frac{\partial\log\Xi}{\partial V}=\frac{\Gamma(n/\nu+1)(\beta
+A_\nu)^{-n/\nu}k_BT}{\Gamma(n/2+1)(2\sqrt{\pi})^n}g_{n/\nu+1}(z)
+\]</span></p>
+<p>首先看<span class="math inline">\(N\)</span>. 对于第二项, <span
+class="math inline">\(g_{n/\nu}(z)\)</span>在<span
+class="math inline">\(z&gt;1\)</span>时, 定义中的积分具有瑕点<span
+class="math inline">\(x=\log z\)</span>, 并且会让瑕积分发散, 因此<span
+class="math inline">\(z\)</span>总取<span class="math inline">\((0,
+1]\)</span>上的实数.</p>
+<p>所谓弱简并情形, 就是指热波长远小于系统尺寸(温度远大于特定值),
+并且在无限高温下, Bose 气体预期上和经典理想气体完全一致, 即<span
+class="math inline">\(\mu\rightarrow-\infty\)</span>, <span
+class="math inline">\(z=e^{\beta\mu}\rightarrow0^+\)</span>. 因此,
+弱简并下, <span class="math inline">\(z\)</span>应该会取一小量, 即<span
+class="math inline">\(z\ll1\)</span>. <span class="math display">\[
+\begin{aligned}
+\frac{z}{1-z}\approx g_m(z)\approx z\quad(z\ll 1)
+\\
+(\beta A_\nu)^{-n/\nu}V\gg1\quad(T\gg T_c)
+\end{aligned}
+\]</span> 这样, 我们总可以略去<span
+class="math inline">\(N\)</span>的第一项(特别注意到它不是广延的),
+最终给出状态方程 <span class="math display">\[
+\frac{pV}{Nk_BT}=\frac{g_{n/\nu+1}(z)}{g_{n/\nu}(z)}
+\]</span> 其中, 活度可以通过<span
+class="math inline">\(N\)</span>反解得到, 总之右侧的最低阶为<span
+class="math inline">\(1\)</span>, 正是经典理想气体.</p>
 
                 
               </div>
@@ -455,7 +427,7 @@ class="math display">\[
   
     <span>></span>
     
-  <a href="/categories/%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA/" class="category-chain-item">系综理论</a>
+  <a href="/categories/%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93/" class="category-chain-item">量子理想气体</a>
   
   
 
@@ -472,17 +444,7 @@ class="math display">\[
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%B9%B3%E8%A1%A1%E6%80%81%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/" class="print-no-link">#平衡态统计物理</a>
-      
-        <a href="/tags/%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/" class="print-no-link">#正则系综</a>
-      
-        <a href="/tags/%E5%B7%A8%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/" class="print-no-link">#巨正则系综</a>
-      
-        <a href="/tags/Boltzmann-%E5%88%86%E5%B8%83/" class="print-no-link">#Boltzmann 分布</a>
-      
-        <a href="/tags/Fermi-%E5%88%86%E5%B8%83/" class="print-no-link">#Fermi 分布</a>
-      
-        <a href="/tags/Bose-%E5%88%86%E5%B8%83/" class="print-no-link">#Bose 分布</a>
+        <a href="/tags/%E7%90%86%E6%83%B3-Bose-%E6%B0%94%E4%BD%93/" class="print-no-link">#理想 Bose 气体</a>
       
     </div>
   
@@ -494,8 +456,8 @@ class="math display">\[
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>系综理论(05)：近独立子系的分布</div>
-      <div>https://notes.rainchan.me/posts/系综理论(05)：近独立子系的分布/</div>
+      <div>量子理想气体(01)：Bose 气体和弱简并</div>
+      <div>https://notes.rainchan.me/posts/量子理想气体(01)：Bose 气体和弱简并/</div>
     </div>
     <div class="license-meta">
       
@@ -507,7 +469,7 @@ class="math display">\[
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年11月24日</div>
+          <div>2025年1月7日</div>
         </div>
       
       
@@ -539,9 +501,9 @@ class="math display">\[
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/%E7%BB%8F%E5%85%B8%E6%B5%81%E4%BD%93(01)%EF%BC%9A%E7%BB%8F%E5%85%B8%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93/" title="经典流体(01)：经典理想气体">
+                      <a href="/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(02)%EF%BC%9A%E5%BC%BA%E7%AE%80%E5%B9%B6%E5%92%8C%20Bose-Einstein%20%E5%87%9D%E8%81%9A/" title="量子理想气体(02)：强简并和 Bose-Einstein 凝聚">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">经典流体(01)：经典理想气体</span>
+                        <span class="hidden-mobile">量子理想气体(02)：强简并和 Bose-Einstein 凝聚</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -549,8 +511,8 @@ class="math display">\[
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA(04)%EF%BC%9A%E5%B7%A8%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/" title="系综理论(04)：巨正则系综">
-                        <span class="hidden-mobile">系综理论(04)：巨正则系综</span>
+                      <a href="/posts/%E7%BB%8F%E5%85%B8%E6%B5%81%E4%BD%93(03)%EF%BC%9A%E4%BD%8D%E5%8A%9B%E5%B1%95%E5%BC%80%E5%92%8C%E4%BD%8D%E5%8A%9B%E7%B3%BB%E6%95%B0/" title="经典流体(03)：位力展开和位力系数">
+                        <span class="hidden-mobile">经典流体(03)：位力展开和位力系数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

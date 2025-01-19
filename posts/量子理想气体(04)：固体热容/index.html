@@ -19,22 +19,18 @@
   <meta name="author" content="Rain Chan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本节中, 我们将利用前面建立起来的统计系综理论来讨论最为简单的系统: 由几乎无相互作用的子系统构成的宏观系统, 这类系统又被称为近独立子系">
+    <meta name="description" content="本节将声子近似为理想 Bose 气体来讨论晶格贡献的热容, 暂且忽略电子贡献的热容">
 <meta property="og:type" content="article">
-<meta property="og:title" content="系综理论(05)：近独立子系的分布">
-<meta property="og:url" content="https://notes.rainchan.me/posts/%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA(05)%EF%BC%9A%E8%BF%91%E7%8B%AC%E7%AB%8B%E5%AD%90%E7%B3%BB%E7%9A%84%E5%88%86%E5%B8%83/">
+<meta property="og:title" content="量子理想气体(04)：固体热容">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(04)%EF%BC%9A%E5%9B%BA%E4%BD%93%E7%83%AD%E5%AE%B9/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
-<meta property="og:description" content="本节中, 我们将利用前面建立起来的统计系综理论来讨论最为简单的系统: 由几乎无相互作用的子系统构成的宏观系统, 这类系统又被称为近独立子系">
+<meta property="og:description" content="本节将声子近似为理想 Bose 气体来讨论晶格贡献的热容, 暂且忽略电子贡献的热容">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2024-11-23T17:41:07.000Z">
-<meta property="article:modified_time" content="2024-11-24T13:25:59.342Z">
+<meta property="article:published_time" content="2025-01-18T12:17:32.000Z">
+<meta property="article:modified_time" content="2025-01-19T03:38:58.837Z">
 <meta property="article:author" content="Rain Chan">
-<meta property="article:tag" content="平衡态统计物理">
-<meta property="article:tag" content="正则系综">
-<meta property="article:tag" content="巨正则系综">
-<meta property="article:tag" content="Boltzmann 分布">
-<meta property="article:tag" content="Fermi 分布">
-<meta property="article:tag" content="Bose 分布">
+<meta property="article:tag" content="理想 Bose 气体">
+<meta property="article:tag" content="固体热容">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -43,7 +39,7 @@
   
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
   
-  <title>系综理论(05)：近独立子系的分布 - Rain Chan&#39;s Notes</title>
+  <title>量子理想气体(04)：固体热容 - Rain Chan&#39;s Notes</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -225,7 +221,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="系综理论(05)：近独立子系的分布"></span>
+            <span id="subtitle" data-typed-text="量子理想气体(04)：固体热容"></span>
           
         </div>
 
@@ -236,8 +232,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2024-11-24 01:41" pubdate>
-          2024年11月24日 凌晨
+        <time datetime="2025-01-18 20:17" pubdate>
+          2025年1月18日 晚上
         </time>
       </span>
     
@@ -248,7 +244,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.4k 字
+          1.3k 字
         
       </span>
     
@@ -259,7 +255,7 @@
         
         
         
-          12 分钟
+          11 分钟
         
       </span>
     
@@ -296,7 +292,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">系综理论(05)：近独立子系的分布</h1>
+            <h1 id="seo-header">量子理想气体(04)：固体热容</h1>
             
             
               <div class="markdown-body">
@@ -309,124 +305,127 @@ class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\new
 \right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1
 \end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1
 \right\}}\newcommand{\abs}[1]{\left| #1
-\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span>本节中,
-我们将利用前面建立起来的统计系综理论来讨论最为简单的系统:
-由几乎无相互作用的子系统构成的宏观系统, 这类系统又被称为
-<strong>近独立子系</strong>. 一个近独立子系的总能量<span
-class="math inline">\(E\)</span>可以表达为组成系统的各个子系统(我们姑且称之为粒子)的能量之和
-<span class="math display">\[
-E\approx\sum_{i=1}^N\varepsilon_i
-\]</span> 近独立子系, 一是要求相互作用很弱但不能完全没有,
-否则压根无法热化; 二是它仅要求子系之间的相互作用很弱,
-但和外界当然可以有(甚至可以是很强的)相互作用. 总而言之,
-近独立子系可以视为单粒子的广延情形, 不管有多少个粒子,
-可以认为每个粒子总处于单粒子的那些能级上.</p>
-<p>接下来就需要考虑粒子的全同性问题. 如果粒子可以分辨,
-那么可以按照编号<span
-class="math inline">\(i=1,2,\cdots,N\)</span>标记每个粒子的态<span
-class="math inline">\(s_i\)</span>, 并且<span
-class="math inline">\((s_i,s_j)\)</span>为<span
-class="math inline">\((\lambda,\mu)\)</span>和<span
-class="math inline">\((\mu,\lambda)\)</span>是不等价的两种分布,
-这样后续的任何针对<span
-class="math inline">\(s_i\)</span>的求和总是独立于<span
-class="math inline">\(s_j\)</span>. 如果粒子不可分辨,
-那么这两种分布是不等价的, 用<span
-class="math inline">\(s_i\)</span>研究问题非常不便,
-可以改用每个单粒子态<span
-class="math inline">\(s\)</span>上的粒子数<span
-class="math inline">\(a_s\)</span>来研究问题, 因为粒子具有全同性,
-所以同一套<span class="math inline">\(\{a_s\}\)</span>都是等价的.
-不同于很多热统/平统讲法, 我们总认为粒子是不可分辨的, 即便推导 Boltzmann
-分布.</p>
-<h2 id="巨正则系综和-fermibose-分布">巨正则系综和 Fermi/Bose 分布</h2>
-<p>在巨正则系综中, 近独立子系的巨配分函数为 <span
+\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span>在经典的
+Boltzmann 统计理论中, 一个重要的结果就是能均分定理.
+这个定理应用于固体热容量, 就得到了著名的 Dulong-Petit 定律:
+固体中若干原胞有<span class="math inline">\(N\)</span>个原子, 对应<span
+class="math inline">\(3N\)</span>个自由度, 每个振动自由度贡献能量<span
+class="math inline">\(k_BT\)</span>, 因此固体热容不随温度变化 <span
 class="math display">\[
-\Xi=\sum_N\sum_{\{a_s\}}&#39;e^{-\beta \sum_sa_s\varepsilon_s-\alpha N}
-\]</span> 其中带 prime 的求和符号表示它受到约束——总粒子数为<span
-class="math inline">\(N\)</span>. 但最终需要对<span
-class="math inline">\(N\)</span>求和, 会消去这个约束,
-可以把两重求和代之以单重求和: <span class="math display">\[
-\sum_N\sum_{\{a_s\}}&#39;\Rightarrow\sum_{\{a_s\}}
-\]</span> 并且将求和式中剩下的<span
-class="math inline">\(N\)</span>全部用<span
-class="math inline">\(\sum_sa_s\)</span>代替, 因此有 <span
-class="math display">\[
-\Xi=\sum_{\{a_s\}}\prod_s\exp[-a_s(\beta\varepsilon_s+\alpha)]
-\]</span> 两重求和化为单重的原因很简单, 对具有粒子数<span
-class="math inline">\(N\)</span>的态求和, 再对<span
-class="math inline">\(N\)</span>求和,
-自然可以用一次性对所有态求和代替.</p>
-<p>另外, 无约束的对整个分布<span
-class="math inline">\(\{a_s\}\)</span>求和,
-可以分解为先后对每个单态分布<span
-class="math inline">\(a_s\)</span>求和(类似累次积分的概念), 于是 <span
-class="math display">\[
-\Xi=\sum_{a_1}\exp[-a_1(\beta\varepsilon_1+\alpha)]\cdot\sum_{a_2}\exp[-a_2(\beta\varepsilon_2+\alpha)]\cdots=\prod_s\sum_{a_s}\exp[-a_s(\beta\varepsilon_s+\alpha)]
-\]</span> 接下来就和粒子的统计性质有关了, 它们可以分为两大类:
-费米子和玻色子<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
-class="hint--top hint--rounded"
-aria-label="实际上, 有些准粒子无法归入费米子或者玻色子的一种, 可以更广泛地使用任意子统计.">[1]</span></a></sup>,
-前者受 Pauli 不相容原理控制, <span
-class="math inline">\(a_s=0或1\)</span>; 后者的<span
-class="math inline">\(a_s\)</span>可以取遍自然数. 于是 <span
-class="math display">\[
-\Xi=\prod_s(1\pm e^{-\alpha-\beta\varepsilon_s})^{\pm1}
-\]</span> 其中正负号分别对应费米子和玻色子. 相应地, 可以求出 <span
-class="math display">\[
-\bar{a}_s=\frac{1}{e^{\alpha+\beta\varepsilon_s}\pm1}
-\]</span> 即 <strong>Fermi 分布</strong> 与 <strong>Bose
-分布</strong>.</p>
-<h2 id="正则系综和-boltzmann-分布">正则系综和 Boltzmann 分布</h2>
-<p>近独立子系的正则系综可以直接用前述结果得到. 事实上,
-正则系综极少被用于研究"量子性"非常强的系统, 例如简并 Fermi 气体.
-所谓"量子性", 可以用简并性去判断, 即<span
-class="math inline">\(e^\alpha\)</span>这个值是大还是小. 如果<span
-class="math inline">\(e^\alpha\gg 1\)</span>, 那么总有<span
-class="math inline">\(\bar{a}_s\ll1\)</span>, 粒子数非常少,
-不太可能发生两个粒子占据或者争夺同一个单粒子态的情形,
-量子性的分布退回到经典分布.</p>
-<p>需要注意的是, 全同性和非简并条件<span
-class="math inline">\(e^\alpha\gg1\)</span>没有关系,
-尽管全同性是量子力学的一大特点, 但是大可将它借用到经典统计中, 以解决
-Gibbs 佯谬. 这样, 我们只需要取非简并近似即可, 全同性不需要改变. 因此
-<span class="math display">\[
-\log\Xi\approx\sum_s e^{-\alpha-\beta\varepsilon_s}
-\]</span> 即 <span class="math display">\[
-\Xi=\exp(e^{-\alpha}\sum_se^{-\beta\varepsilon_s})=\sum_N\frac{e^{-\alpha
-N}}{N!}\left(\sum_se^{-\beta\varepsilon_s}\right)^N
-\]</span> 后一步是 Taylor 展开, 但它恰好和巨配分函数的定义相契合,
-比对后可以得到 <span class="math display">\[
+C_V=3Nk_B
+\]</span> 实际固体的热容在高温时都较好地满足这个定律, 但在低温时,
+所有固体几乎都不满足这个定律, 造成定律破坏的主要原因就是量子效应.</p>
+<h2 id="einstein-的固体热容理论">Einstein 的固体热容理论</h2>
+<p>Einstein 假设固体具有<span
+class="math inline">\(3N\)</span>个独立的振动简正模式, 并且频率都相等;
+晶格中的各个原子都是可分辨的. 因此可以使用正则配分函数计算.
+对于每个近独立子系, 有 <span class="math display">\[
 \begin{aligned}
-Z(T,V,N)&amp;=\frac{z^N}{N!}
-\\
-z(T,V,N)&amp;=\sum_se^{-\beta\varepsilon_s}
+z&amp;=\sum_{n=0}^{+\infty}\exp\left[-\left(n+\frac{1}{2}\right)\beta\hbar\omega\right]
+\\&amp;=\left[2\sinh\frac{\beta\hbar\omega}{2} \right]^{-1}
 \end{aligned}
-\]</span> 它的物理意义是非常明确的. <span
-class="math inline">\(z\)</span>相当于单粒子的配分函数,
-总的配分函数是各个子系的连乘, 再除以全同性引入的交换数.</p>
-<p>至于分布的形式, 可以直接从量子分布近似过来: <span
+\]</span> 求得内能 <span class="math display">\[
+\begin{aligned}
+U&amp;=-3N\frac{\partial\log
+z}{\partial\beta}=\frac{3N\hbar\omega}{2}\coth\frac{\beta\hbar\omega}{2}
+\\
+C_V&amp;=\frac{\partial U}{\partial
+T}=3Nk_B\left(\frac{\frac{\hbar\omega}{2k_BT}}{\sinh\frac{\hbar\omega}{2k_BT}}\right)^2
+\end{aligned}
+\]</span> 此即 Einstein 热容公式. 高温极限(<span
+class="math inline">\(T\rightarrow+\infty\)</span>), 回到了 Dulong-Petit
+定律.</p>
+<p>低温极限下, <span
+class="math inline">\(\sinh\hbar\omega/2k_BT\approx\frac{1}{2}\exp(\hbar\omega/2k_BT)\)</span>,
+得到 <span class="math display">\[
+C_V\approx3Nk_B\left(\frac{\hbar\omega}{k_BT}\right)^2\exp\left(-\frac{\hbar\omega}{k_BT}\right)
+\]</span> 这个低温热容会衰减得很快,
+实际固体的热容并不会指数地衰减下去.</p>
+<h2 id="debye-的固体热容理论">Debye 的固体热容理论</h2>
+<p>Einstein 理论的主要问题在于忽略了简正频率的分布.
+固体晶格振动对应的准粒子是声子, 固体中的声子可以分为两类:
+有两个独立偏振态的横波声子, 以及无偏振现象的纵波声子,
+它们与光子的部分特性很像,
+因此也可以把声子气体处理为零化学势、不存在凝聚和零能基态的理想 Bose
+气体.</p>
+<p>总而言之, 对于单个偏振态, 态密度为 <span class="math display">\[
+G(\omega)=\frac{V}{2\pi^2c^3}\omega^2
+\]</span> 其中<span class="math inline">\(c\)</span>是波速,
+考虑横波的两个偏振和纵波的一个偏振, 给出 <span class="math display">\[
+G(\omega)=\frac{V}{\pi^2}(\frac{1}{2c_l^3}+\frac{1}{c_t^3})\omega^2
+\]</span></p>
+<h3 id="debye-截止频率">Debye 截止频率</h3>
+<p>如果把上述态密度积分, 得到的全频带状态数是发散的.
+这个问题在黑体辐射中不算什么,
+没有任何物理限制认为电磁波振动自由度应当为多少. 但是在声子气中,
+简正模式数理应是<span
+class="math inline">\(3N\)</span><sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="固体物理教材对此应有论述, 这个状态数包括光学支和声学支">[1]</span></a></sup>个,
+为此, 必须限制频率的取值.</p>
+<p>可以考虑一维晶格的 Brillouin 区, 对于长度<span
+class="math inline">\(L=Na\)</span>的晶格, 波矢的取值为 <span
 class="math display">\[
-\bar{a}_s\approx e^{-\alpha-\beta\varepsilon_s}
-\]</span> 称为 <strong>Boltzmann 分布</strong>.</p>
-<h2 id="粒子数分布的涨落">粒子数分布的涨落</h2>
-<p>上述分布是每个态上的粒子数均值, 在热力学极限下也是最概然的值.
-可以求出每个态上的粒子数涨落为 <span class="math display">\[
-\text{Var}[a_s]=-\frac{\partial\bar{a}_s}{\partial\alpha}
-\]</span> 从而 <span class="math display">\[
-\text{Var}[a_s]=\bar{a}_s(1\pm\bar{a}_s)
-\]</span> 其中正负号分别对应费米子和玻色子. 取近似<span
-class="math inline">\(\bar{a}_s\ll1\)</span>, 有 <span
+k=\frac{2s\pi}{L}\ , \ s=-\frac{N}{2},
+-\frac{N}{2}+1,\cdots,\frac{N}{2}-1
+\]</span> 如果只考虑第一 Brillouin 区, 那么频率就被限制在了<span
+class="math inline">\(0\sim\pi c/a\)</span>的区域内, 因此, 对于三维晶格,
+可以仿照这个条件进行限制 <span class="math display">\[
+\int_0^{\omega_D}G(\omega)d\omega=3N
+\]</span> 其中, <span class="math inline">\(\omega_D\)</span>被称作
+<strong>Debye 截止频率</strong>. 在 Brillouin 区边界处,
+边界效应可能导致态密度偏离前面导出的形式, 但这里为了简便,
+直接理解为截断. 这样就可以利用<span
+class="math inline">\(\omega_D\)</span>简化态密度谱 <span
 class="math display">\[
-\text{Var}[a_s]\approx\bar{a}_s
-\]</span> 这是 Boltzmann 分布的粒子数涨落.</p>
+G(\omega)=9N\frac{\omega^2}{\omega_D^3}
+\]</span> 于是, 全频带能量为 <span class="math display">\[
+U=U_0+\int_0^{\omega_D}\frac{9N\hbar\omega^3}{\omega_D^3}\cdot\frac{d\omega}{\exp(\beta\hbar\omega)-1}
+\]</span> 引入变量<span
+class="math inline">\(x=\beta\hbar\omega\)</span>, 对应的 Debye
+变量为<span class="math inline">\(x_D=\beta\hbar\omega_D\)</span>,
+内能被充分简化为 <span class="math display">\[
+U=U_0+\frac{9Nk_BT}{x_D^3}\int_0^{x_D}\frac{x^3dx}{e^x-1}
+\]</span> 高温极限下, <span
+class="math inline">\(x_D\rightarrow0\)</span>, 积分核近似为<span
+class="math inline">\(x^2\)</span>, 给出 <span class="math display">\[
+U\approx U_0+\frac{9Nk_BT}{x_D^3}\cdot\frac{x_D^3}{3}
+\]</span> 整理后, 热容为<span class="math inline">\(3Nk_B\)</span>, 和
+Dulong-Petit 定律一致.</p>
+<p>低温极限下, <span
+class="math inline">\(x_D\rightarrow+\infty\)</span>, 积分值近似为<span
+class="math inline">\(\Gamma(4)\zeta(4)\)</span>, 即 <span
+class="math display">\[
+\begin{aligned}
+U&amp;\approx U_0 +
+\frac{9N(k_BT)^4}{\hbar^3\omega_D^3}\cdot\frac{\pi^4}{15}
+\\&amp;=U_0+\frac{3\pi^4}{5}N\hbar\omega_D\left(\frac{k_BT}{\hbar\omega_D}\right)^4
+\end{aligned}
+\]</span> 热容为 <span class="math display">\[
+C_V\approx\frac{12\pi^4}{5}Nk_B\cdot\left(\frac{k_BT}{\hbar\omega_D}\right)^3
+\]</span> 即固体热容在低温下近似服从的规律为<span
+class="math inline">\(C_V\sim T^3\)</span>. 这个规律和很多实际固体,
+特别是非金属非磁性的材料, 符合得相当好.
+对于非磁性的金属材料而言(后面将会涉及), 其中具有大量的巡游电子,
+电子贡献的热容为<span class="math inline">\(C_V\sim T\)</span>,
+在极低温下占主导.
+还有一些其它的材料会因为不同的效应出现其它的规律<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="例如, 一些绝缘的磁性材料中会产生自旋波, 极低温下的热容对温度的幂指数为3/2">[2]</span></a></sup>,
+此处不再详细推导.</p>
 <section class="footnotes">
 <div class="footnote-list">
 <ol>
 <li>
-<span id="fn:1" class="footnote-text"><span>实际上,
-有些准粒子无法归入费米子或者玻色子的一种, 可以更广泛地使用任意子统计.
+<span id="fn:1" class="footnote-text"><span>固体物理教材对此应有论述,
+这个状态数包括光学支和声学支
 <a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:2" class="footnote-text"><span>例如,
+一些绝缘的磁性材料中会产生自旋波, 极低温下的热容对温度的幂指数为3/2
+<a href="#fnref:2" rev="footnote" class="footnote-backref">
 ↩︎</a></span></span>
 </li>
 </ol>
@@ -455,7 +454,7 @@ class="math display">\[
   
     <span>></span>
     
-  <a href="/categories/%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA/" class="category-chain-item">系综理论</a>
+  <a href="/categories/%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93/" class="category-chain-item">量子理想气体</a>
   
   
 
@@ -472,17 +471,9 @@ class="math display">\[
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E5%B9%B3%E8%A1%A1%E6%80%81%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/" class="print-no-link">#平衡态统计物理</a>
+        <a href="/tags/%E7%90%86%E6%83%B3-Bose-%E6%B0%94%E4%BD%93/" class="print-no-link">#理想 Bose 气体</a>
       
-        <a href="/tags/%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/" class="print-no-link">#正则系综</a>
-      
-        <a href="/tags/%E5%B7%A8%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/" class="print-no-link">#巨正则系综</a>
-      
-        <a href="/tags/Boltzmann-%E5%88%86%E5%B8%83/" class="print-no-link">#Boltzmann 分布</a>
-      
-        <a href="/tags/Fermi-%E5%88%86%E5%B8%83/" class="print-no-link">#Fermi 分布</a>
-      
-        <a href="/tags/Bose-%E5%88%86%E5%B8%83/" class="print-no-link">#Bose 分布</a>
+        <a href="/tags/%E5%9B%BA%E4%BD%93%E7%83%AD%E5%AE%B9/" class="print-no-link">#固体热容</a>
       
     </div>
   
@@ -494,8 +485,8 @@ class="math display">\[
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>系综理论(05)：近独立子系的分布</div>
-      <div>https://notes.rainchan.me/posts/系综理论(05)：近独立子系的分布/</div>
+      <div>量子理想气体(04)：固体热容</div>
+      <div>https://notes.rainchan.me/posts/量子理想气体(04)：固体热容/</div>
     </div>
     <div class="license-meta">
       
@@ -507,7 +498,7 @@ class="math display">\[
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2024年11月24日</div>
+          <div>2025年1月18日</div>
         </div>
       
       
@@ -539,18 +530,12 @@ class="math display">\[
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/%E7%BB%8F%E5%85%B8%E6%B5%81%E4%BD%93(01)%EF%BC%9A%E7%BB%8F%E5%85%B8%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93/" title="经典流体(01)：经典理想气体">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">经典流体(01)：经典理想气体</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA(04)%EF%BC%9A%E5%B7%A8%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/" title="系综理论(04)：巨正则系综">
-                        <span class="hidden-mobile">系综理论(04)：巨正则系综</span>
+                      <a href="/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(03)%EF%BC%9A%E9%BB%91%E4%BD%93%E8%BE%90%E5%B0%84/" title="量子理想气体(03)：黑体辐射">
+                        <span class="hidden-mobile">量子理想气体(03)：黑体辐射</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

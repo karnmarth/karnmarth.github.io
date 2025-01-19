@@ -4,6 +4,120 @@
   
   
   <entry>
+    <title>量子理想气体(04)：固体热容</title>
+    <link href="/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(04)%EF%BC%9A%E5%9B%BA%E4%BD%93%E7%83%AD%E5%AE%B9/"/>
+    <url>/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(04)%EF%BC%9A%E5%9B%BA%E4%BD%93%E7%83%AD%E5%AE%B9/</url>
+    
+    <content type="html"><![CDATA[<p><spanclass="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1\right)}\newcommand{\dim}[1]{\text{dim}\left(#1\right)}\newcommand{\diag}[1]{\text{diag}\left(#1\right)}\newcommand{\det}[1]{\text{det}\left(#1\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1\right\}}\newcommand{\abs}[1]{\left| #1\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span>在经典的Boltzmann 统计理论中, 一个重要的结果就是能均分定理.这个定理应用于固体热容量, 就得到了著名的 Dulong-Petit 定律:固体中若干原胞有<span class="math inline">\(N\)</span>个原子, 对应<spanclass="math inline">\(3N\)</span>个自由度, 每个振动自由度贡献能量<spanclass="math inline">\(k_BT\)</span>, 因此固体热容不随温度变化 <spanclass="math display">\[C_V=3Nk_B\]</span> 实际固体的热容在高温时都较好地满足这个定律, 但在低温时,所有固体几乎都不满足这个定律, 造成定律破坏的主要原因就是量子效应.</p><h2 id="einstein-的固体热容理论">Einstein 的固体热容理论</h2><p>Einstein 假设固体具有<spanclass="math inline">\(3N\)</span>个独立的振动简正模式, 并且频率都相等;晶格中的各个原子都是可分辨的. 因此可以使用正则配分函数计算.对于每个近独立子系, 有 <span class="math display">\[\begin{aligned}z&amp;=\sum_{n=0}^{+\infty}\exp\left[-\left(n+\frac{1}{2}\right)\beta\hbar\omega\right]\\&amp;=\left[2\sinh\frac{\beta\hbar\omega}{2} \right]^{-1}\end{aligned}\]</span> 求得内能 <span class="math display">\[\begin{aligned}U&amp;=-3N\frac{\partial\logz}{\partial\beta}=\frac{3N\hbar\omega}{2}\coth\frac{\beta\hbar\omega}{2}\\C_V&amp;=\frac{\partial U}{\partialT}=3Nk_B\left(\frac{\frac{\hbar\omega}{2k_BT}}{\sinh\frac{\hbar\omega}{2k_BT}}\right)^2\end{aligned}\]</span> 此即 Einstein 热容公式. 高温极限(<spanclass="math inline">\(T\rightarrow+\infty\)</span>), 回到了 Dulong-Petit定律.</p><p>低温极限下, <spanclass="math inline">\(\sinh\hbar\omega/2k_BT\approx\frac{1}{2}\exp(\hbar\omega/2k_BT)\)</span>,得到 <span class="math display">\[C_V\approx3Nk_B\left(\frac{\hbar\omega}{k_BT}\right)^2\exp\left(-\frac{\hbar\omega}{k_BT}\right)\]</span> 这个低温热容会衰减得很快,实际固体的热容并不会指数地衰减下去.</p><h2 id="debye-的固体热容理论">Debye 的固体热容理论</h2><p>Einstein 理论的主要问题在于忽略了简正频率的分布.固体晶格振动对应的准粒子是声子, 固体中的声子可以分为两类:有两个独立偏振态的横波声子, 以及无偏振现象的纵波声子,它们与光子的部分特性很像,因此也可以把声子气体处理为零化学势、不存在凝聚和零能基态的理想 Bose气体.</p><p>总而言之, 对于单个偏振态, 态密度为 <span class="math display">\[G(\omega)=\frac{V}{2\pi^2c^3}\omega^2\]</span> 其中<span class="math inline">\(c\)</span>是波速,考虑横波的两个偏振和纵波的一个偏振, 给出 <span class="math display">\[G(\omega)=\frac{V}{\pi^2}(\frac{1}{2c_l^3}+\frac{1}{c_t^3})\omega^2\]</span></p><h3 id="debye-截止频率">Debye 截止频率</h3><p>如果把上述态密度积分, 得到的全频带状态数是发散的.这个问题在黑体辐射中不算什么,没有任何物理限制认为电磁波振动自由度应当为多少. 但是在声子气中,简正模式数理应是<spanclass="math inline">\(3N\)</span><sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><spanclass="hint--top hint--rounded"aria-label="固体物理教材对此应有论述, 这个状态数包括光学支和声学支">[1]</span></a></sup>个,为此, 必须限制频率的取值.</p><p>可以考虑一维晶格的 Brillouin 区, 对于长度<spanclass="math inline">\(L=Na\)</span>的晶格, 波矢的取值为 <spanclass="math display">\[k=\frac{2s\pi}{L}\ , \ s=-\frac{N}{2},-\frac{N}{2}+1,\cdots,\frac{N}{2}-1\]</span> 如果只考虑第一 Brillouin 区, 那么频率就被限制在了<spanclass="math inline">\(0\sim\pi c/a\)</span>的区域内, 因此, 对于三维晶格,可以仿照这个条件进行限制 <span class="math display">\[\int_0^{\omega_D}G(\omega)d\omega=3N\]</span> 其中, <span class="math inline">\(\omega_D\)</span>被称作<strong>Debye 截止频率</strong>. 在 Brillouin 区边界处,边界效应可能导致态密度偏离前面导出的形式, 但这里为了简便,直接理解为截断. 这样就可以利用<spanclass="math inline">\(\omega_D\)</span>简化态密度谱 <spanclass="math display">\[G(\omega)=9N\frac{\omega^2}{\omega_D^3}\]</span> 于是, 全频带能量为 <span class="math display">\[U=U_0+\int_0^{\omega_D}\frac{9N\hbar\omega^3}{\omega_D^3}\cdot\frac{d\omega}{\exp(\beta\hbar\omega)-1}\]</span> 引入变量<spanclass="math inline">\(x=\beta\hbar\omega\)</span>, 对应的 Debye变量为<span class="math inline">\(x_D=\beta\hbar\omega_D\)</span>,内能被充分简化为 <span class="math display">\[U=U_0+\frac{9Nk_BT}{x_D^3}\int_0^{x_D}\frac{x^3dx}{e^x-1}\]</span> 高温极限下, <spanclass="math inline">\(x_D\rightarrow0\)</span>, 积分核近似为<spanclass="math inline">\(x^2\)</span>, 给出 <span class="math display">\[U\approx U_0+\frac{9Nk_BT}{x_D^3}\cdot\frac{x_D^3}{3}\]</span> 整理后, 热容为<span class="math inline">\(3Nk_B\)</span>, 和Dulong-Petit 定律一致.</p><p>低温极限下, <spanclass="math inline">\(x_D\rightarrow+\infty\)</span>, 积分值近似为<spanclass="math inline">\(\Gamma(4)\zeta(4)\)</span>, 即 <spanclass="math display">\[\begin{aligned}U&amp;\approx U_0 +\frac{9N(k_BT)^4}{\hbar^3\omega_D^3}\cdot\frac{\pi^4}{15}\\&amp;=U_0+\frac{3\pi^4}{5}N\hbar\omega_D\left(\frac{k_BT}{\hbar\omega_D}\right)^4\end{aligned}\]</span> 热容为 <span class="math display">\[C_V\approx\frac{12\pi^4}{5}Nk_B\cdot\left(\frac{k_BT}{\hbar\omega_D}\right)^3\]</span> 即固体热容在低温下近似服从的规律为<spanclass="math inline">\(C_V\sim T^3\)</span>. 这个规律和很多实际固体,特别是非金属非磁性的材料, 符合得相当好.对于非磁性的金属材料而言(后面将会涉及), 其中具有大量的巡游电子,电子贡献的热容为<span class="math inline">\(C_V\sim T\)</span>,在极低温下占主导.还有一些其它的材料会因为不同的效应出现其它的规律<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><spanclass="hint--top hint--rounded"aria-label="例如, 一些绝缘的磁性材料中会产生自旋波, 极低温下的热容对温度的幂指数为3/2">[2]</span></a></sup>,此处不再详细推导.</p><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>固体物理教材对此应有论述,这个状态数包括光学支和声学支<a href="#fnref:1" rev="footnote" class="footnote-backref">↩︎</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>例如,一些绝缘的磁性材料中会产生自旋波, 极低温下的热容对温度的幂指数为3/2<a href="#fnref:2" rev="footnote" class="footnote-backref">↩︎</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>统计物理</category>
+      
+      <category>量子理想气体</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>理想 Bose 气体</tag>
+      
+      <tag>固体热容</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>量子理想气体(03)：黑体辐射</title>
+    <link href="/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(03)%EF%BC%9A%E9%BB%91%E4%BD%93%E8%BE%90%E5%B0%84/"/>
+    <url>/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(03)%EF%BC%9A%E9%BB%91%E4%BD%93%E8%BE%90%E5%B0%84/</url>
+    
+    <content type="html"><![CDATA[<h2id="newcommandkmathbbknewcommandrmathbbrnewcommandcmathbbcnewcommandbmathbfnewcommandbiboldsymbolnewcommandrank1textrankleft1-rightnewcommanddim1textdimleft1-rightnewcommanddiag1textdiagleft1-rightnewcommanddet1textdetleft1-rightnewcommanddet1leftbeginmatrix-1-endmatrixrightnewcommandset1left-1-rightnewcommandabs1left-1-rightnewcommandnorm1leftleft1rightright系综理论求解"><spanclass="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1\right)}\newcommand{\dim}[1]{\text{dim}\left(#1\right)}\newcommand{\diag}[1]{\text{diag}\left(#1\right)}\newcommand{\det}[1]{\text{det}\left(#1\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1\right\}}\newcommand{\abs}[1]{\left| #1\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span>系综理论求解</h2><p>考虑一个封闭的恒温空窖, 空窖内有辐射电磁场与空窖的壁达成平衡,称为黑体辐射系统, 实际上就是光子气系统. 只用热力学也能得到很多性质,包括所有热力学量之间的依赖, 但是系数因子无法确定.统计物理能够同时确认两者.</p><p>从光子气的角度出发, 只要知道光子的性质就能进行统计处理.</p><ol type="1"><li>光子是 spin-1 boson;</li><li>光子具有极端相对论形式的色散关系;</li></ol><ul><li><strong>腔壁在不停地吸收和发射光子, 因此光子气的粒子数不守恒,这种不守恒导致<span class="math inline">\(\mu=0\)</span></strong>;</li><li><strong>由于规范对称性, 光子自旋投影只能取<spanclass="math inline">\(\pm1\)</span>, 无法取<spanclass="math inline">\(0\)</span></strong>.</li></ul><p>由此, 可以对一般的巨配分函数形式进行简化: <spanclass="math display">\[\begin{aligned}\log\Xi&amp;=-\log(1-e^{-\alpha})\eta(n-\nu)+\frac{\Gamma(n/\nu+1)(\betaA_\nu)^{-n/\nu}V}{\Gamma(n/2+1)(2\sqrt{\pi})^n}g_{n/\nu+1}(z)\\&amp;\Downarrow \alpha\approx0,n=3,\nu=1\\&amp;=-\log(1-e^{-\alpha})+\frac{\Gamma(4)V}{\Gamma(5/2)(2\sqrt{\pi}\hbarc\beta)^3}\zeta(4)\end{aligned}\]</span> 第一项表示零能, 对于光子气可以直接舍去, 反正它没有变化,而且还会发散. 考虑自旋自由度为<span class="math inline">\(2\)</span>,得到 <span class="math display">\[\log\Xi=\frac{8\pi^5 V}{45}\left(\frac{k_BT}{hc}\right)^{3}\]</span> 可以计算内能 <span class="math display">\[U=k_BT^2\frac{\partial\log\Xi}{\partialT}=\frac{8\pi^5k_B^4}{15h^3c^3}T^4V\]</span> 相应地, 能流密度为 <span class="math display">\[J=\frac{c}{4}\frac{U}{V}=\frac{2\pi^5k_B^4}{15h^3c^2} T^4\]</span> 正是 Stefan-Boltzmann 公式. 压强和熵为 <spanclass="math display">\[\begin{aligned}p &amp;= \frac{k_BT}{V}\log\Xi=\frac{4\sigma}{3c}T^4\\S&amp;=k_BT(\log\Xi+\beta U)=\frac{16\sigma}{3c}T^4V\end{aligned}\]</span></p><h2 id="分布求解">分布求解</h2><p>根据 Bose 分布同样可以计算热力学量. 假设单位频率里存在的状态数为<spanclass="math inline">\(G(\omega)\)</span>, 则对应的实际粒子数为 <spanclass="math display">\[N(\omega) = \frac{G(\omega)}{\exp(\beta\hbar\omega)-1}\]</span> 其中简并度可以通过<spanclass="math inline">\(k\)</span>空间计算. 不失一般性,考虑位形空间为<spanclass="math inline">\(L^3\)</span>立方体<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><spanclass="hint--top hint--rounded"aria-label="结果应当是与具体形状无关的, 选用方形箱模型有利于计算">[1]</span></a></sup>,则 <span class="math display">\[k_{x,y,z}=\frac{2\pi n_{x,y,z}}{L}\ ,\ n_{x,y,z}\in\mathbb{Z}\]</span> 即<spanclass="math inline">\(k\)</span>空间的态密度(略去自旋)是均匀的, 为 <spanclass="math display">\[\bar{G}=\frac{V}{(2\pi)^3}\]</span> 因此可以求出用频率表示的态密度 <span class="math display">\[\begin{aligned}G(\omega)d\omega&amp;=2\bar{G}\cdot 4\pi k^2dk\\&amp;\Downarrow\\G(\omega)&amp;=\frac{8\pi\bar{G}}{c^3}\omega^2\end{aligned}\]</span> 对于实际粒子数分布, 改用<spanclass="math inline">\(x=\beta\hbar\omega\)</span>来衡量, 得到 <spanclass="math display">\[\begin{aligned}N(x)&amp;=\frac{8\pi\bar{G}}{\beta\hbar c^3}\omega^2\cdot\frac{1}{e^x-1}\\&amp;=\frac{8\pi V}{(\beta hc)^3}\cdot\frac{x^2}{e^x-1}\end{aligned}\]</span> 这种分布(或者其频率表示形式)对应的能量密度分布, 通常称为Planck 公式, 它是由 Planck 最早通过插值法凑出来的. 全频带的能量密度为<span class="math display">\[u=\frac{8\pi k_BT}{(\beta hc)^3}\int_0^{+\infty}\frac{x^3dx}{e^x-1}\]</span> 积分项恰好是<spanclass="math inline">\(\Gamma(4)\zeta(4)\)</span>, 具体计算表明,它和系综解一致.</p><h3 id="短波近似-wien-公式">短波近似, Wien 公式</h3><p>令<span class="math inline">\(x\rightarrow+\infty\)</span>, 能谱为<span class="math display">\[u(x)\approx\frac{8\pi k_BT}{(\beta hc)^3}x^3e^{-x}\]</span> 此即 Wien 公式, 它等价于把光子气看成 Boltzmann分布下的粒子.</p><h3 id="长波近似-rayleigh-jeans-公式">长波近似, Rayleigh-Jeans 公式</h3><p>令<span class="math inline">\(x\rightarrow0\)</span>, 能谱为 <spanclass="math display">\[u(x)\approx\frac{8\pi k_BT}{(\beta hc)^3}x^2\]</span> 此即 Rayleigh-Jeans公式<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><spanclass="hint--top hint--rounded"aria-label="Jeans 的主要贡献是引入了被 Rayleigh 忽略的电磁波的偏振(自旋)自由度.">[2]</span></a></sup>.它等价于把光子气看成经典的电磁波并运用能均分定理.它在短波区符合得非常差, 并且全频带积分发散, 史称"紫外灾难".</p><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>结果应当是与具体形状无关的,选用方形箱模型有利于计算<a href="#fnref:1" rev="footnote" class="footnote-backref">↩︎</a></span></span></li><li><span id="fn:2" class="footnote-text"><span>Jeans 的主要贡献是引入了被Rayleigh 忽略的电磁波的偏振(自旋)自由度.<a href="#fnref:2" rev="footnote" class="footnote-backref">↩︎</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>统计物理</category>
+      
+      <category>量子理想气体</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>理想 Bose 气体</tag>
+      
+      <tag>黑体辐射</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>量子理想气体(02)：强简并和 Bose-Einstein 凝聚</title>
+    <link href="/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(02)%EF%BC%9A%E5%BC%BA%E7%AE%80%E5%B9%B6%E5%92%8C%20Bose-Einstein%20%E5%87%9D%E8%81%9A/"/>
+    <url>/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(02)%EF%BC%9A%E5%BC%BA%E7%AE%80%E5%B9%B6%E5%92%8C%20Bose-Einstein%20%E5%87%9D%E8%81%9A/</url>
+    
+    <content type="html"><![CDATA[<p><spanclass="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1\right)}\newcommand{\dim}[1]{\text{dim}\left(#1\right)}\newcommand{\diag}[1]{\text{diag}\left(#1\right)}\newcommand{\det}[1]{\text{det}\left(#1\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1\right\}}\newcommand{\abs}[1]{\left| #1\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span>将上节公式抄录如下<span class="math display">\[\log\Xi=-\log(1-e^{-\alpha})\eta(n-\nu)+\frac{\Gamma(n/\nu+1)(\betaA_\nu)^{-n/\nu}V}{\Gamma(n/2+1)(2\sqrt{\pi})^n}g_{n/\nu+1}(z)\]</span></p><p><span class="math display">\[N=\frac{z}{1-z}\eta(n-\nu)+\frac{\Gamma(n/\nu+1)(\betaA_\nu)^{-n/\nu}V}{\Gamma(n/2+1)(2\sqrt{\pi})^n}g_{n/\nu}(z)\]</span></p><p><span class="math display">\[p=\frac{\Gamma(n/\nu+1)(\betaA_\nu)^{-n/\nu}k_BT}{\Gamma(n/2+1)(2\sqrt{\pi})^n}g_{n/\nu+1}(z)\]</span></p><p>本节我们主要考虑具有经典动能的体系, 即<spanclass="math inline">\(\nu=2,A_\nu=\frac{\hbar^2}{2m}\)</span>. 代入可得<span class="math display">\[\begin{aligned}\log\Xi&amp;=-\log(1-e^{-\alpha})\eta(n-2)+\frac{V}{\lambda_T^n}g_{n/2+1}(z)\\N&amp;=\frac{z}{1-z}\eta(n-2)+\frac{V}{\lambda_T^n}g_{n/2}(z)\\p&amp;=\frac{k_BT}{\lambda_T^n}g_{n/2+1}(z)\end{aligned}\]</span> 上节表明, <span class="math inline">\(z\in(0,1]\)</span>,趋于<span class="math inline">\(0\)</span>是弱简并区域.当温度慢慢下降时, 为了保证<span class="math inline">\(N\)</span>守恒,<span class="math inline">\(z\)</span>会逐渐增大. 直到零温下, <spanclass="math inline">\(z=1-N^{-1}\)</span>, 相当接近<spanclass="math inline">\(1\)</span>, 此时弱简并条件明显失效.</p><h2 id="nle2的情形"><spanclass="math inline">\(n\le2\)</span>的情形</h2><p><span class="math inline">\(n\le 2\)</span>时, 阶跃函数取<spanclass="math inline">\(0\)</span>, 因此 <span class="math display">\[N=\frac{V}{\lambda_T^n}g_{n/2}(z)\]</span> 当<span class="math inline">\(z\rightarrow 1^-\)</span>时,<spanclass="math inline">\(g_{n/2}(z)\rightarrow\zeta(\frac{n}{2})\)</span>,又<span class="math inline">\(n/2\le1\)</span>, 因此发散. 故<spanclass="math inline">\(g_{n/2}(z)\)</span>在<spanclass="math inline">\((0,1)\)</span>上能取遍正实数,粒子数自洽条件总能得到满足, 任何时候都不需要考虑基态,这与上一节的分析一致(只有<spanclass="math inline">\(n&gt;\nu\)</span>才需单独写出基态项).</p><h2 id="n3的情形"><span class="math inline">\(n=3\)</span>的情形</h2><p>此时阶跃函数取<span class="math inline">\(1\)</span>, 从而 <spanclass="math display">\[N=\frac{z}{1-z}+\frac{V}{\lambda^3_T}g_{3/2}(z)\]</span> 随着温度降低, <span class="math inline">\(z\)</span>缓慢增大,但第二项<span class="math inline">\(g_{3/2}(z)\)</span>必定不超过<spanclass="math inline">\(\zeta(\frac{3}{2})\approx2.61238\)</span>,单凭第二项无法满足粒子数的自洽条件, 这时候第一项就是必要的.</p><p>最终<span class="math inline">\(z\)</span>必然是取到<spanclass="math inline">\(1^-\)</span>的, <spanclass="math inline">\(g_{3/2}(z)\approx\zeta(\frac{3}{2})\)</span>, 因此<span class="math display">\[N_{\epsilon&gt;0}=\frac{V\zeta(\frac{3}{2})}{\lambda_T^3}=N(\frac{T}{T_c})^{\frac{3}{2}}\]</span> 其中, <span class="math inline">\(T_c\)</span>满足<spanclass="math inline">\(n\lambda_{T_c}^3=\zeta(\frac{3}{2})\)</span>,注意这里<span class="math inline">\(n\)</span>为粒子数密度. 相应地 <spanclass="math display">\[N_{\epsilon=0}=\frac{z}{1-z}=N\left[1-\left(\frac{T}{T_c}\right)^\frac{3}{2}\right]\]</span> 可见, <span class="math inline">\(T&gt;T_c\)</span>时,略去基态项是完全合理的, 只有<spanclass="math inline">\(T&lt;T_c\)</span>时, 基态粒子数才能和<spanclass="math inline">\(N\)</span>相比拟. 当<spanclass="math inline">\(T=0\)</span>时, 所有粒子在动量空间都处于基态,这种<strong>动量空间</strong>的凝聚现象, 称作 <strong>Bose-Einstein凝聚(B-E凝聚, BEC)</strong>. 总结下来, 只有<spanclass="math inline">\(n&gt;\nu\)</span>且<spanclass="math inline">\(T&lt;T_c\)</span>的 Bose 气体, 需要特地考虑基态项,并且系统出现 B-E 凝聚, 其它条件下都不会有凝聚发生.</p><h2 id="内能与热容">内能与热容</h2><p>可以基于巨配分函数计算能量 <span class="math display">\[U=-\frac{\partial\log\Xi}{\partial\beta}=-\frac{\partial}{\partial\beta}\frac{V}{\lambda_T^3}g_{5/2}(z)\]</span> 其中仅有<spanclass="math inline">\(\lambda_T\propto\beta^\frac{1}{2}\)</span>, 得到<span class="math display">\[U=\frac{3}{2}k_BT\frac{V}{\lambda_T^3}g_{5/2}(z)\]</span> 显然, 它在相变点<spanclass="math inline">\(T_c\)</span>是连续的.</p><h3 id="凝聚相热容">凝聚相热容</h3><p>热容就需要分开计算了. <spanclass="math inline">\(T&lt;T_c\)</span>是容易计算的, 因为可以直接取<span class="math display">\[U=\frac{3}{2}k_BT\frac{V}{\lambda_T^3}\zeta(\frac{5}{2})\]</span> 因此热容为 <span class="math display">\[C_V=\left(\frac{\partial U}{\partialT}\right)_V=\frac{15}{4}k_B\frac{V}{\lambda_T^3}\zeta(\frac{5}{2})\]</span> 或者把<span class="math inline">\(N\)</span>和<spanclass="math inline">\(T_c\)</span>代入, 得到 <spanclass="math display">\[C_V=\frac{15}{4}\frac{\zeta(\frac{5}{2})}{\zeta(\frac{3}{2})}Nk_B\left(\frac{T}{T_c}\right)^\frac{3}{2}\]</span></p><h3 id="正常相热容">正常相热容</h3><p>正常相热容, 求导时还要考虑到<spanclass="math inline">\(z\)</span>的变化. <span class="math display">\[C_V=\left(\frac{\partial U}{\partialT}\right)_V=\frac{15}{4}k_B\frac{V}{\lambda_T^3}g_{5/2}(z)+\frac{3}{2}k_BT\frac{V}{\lambda_T^3}\frac{g_{3/2}(z)}{z}\frac{\partialz}{\partial T}\]</span> <spanclass="math inline">\(z\)</span>对温度的偏导数可以通过粒子数自洽条件求解:<span class="math display">\[N=\frac{V}{\lambda_T^3}g_{3/2}(z)\Rightarrow\frac{g_{1/2}(z)}{z}\frac{\partial z}{\partialT}=-\frac{3}{2}\frac{N\lambda_T^3}{VT}\]</span> 消去<span class="math inline">\(V\)</span>和<spanclass="math inline">\(\partial z\)</span>项, 得到 <spanclass="math display">\[C_V=\frac{15}{4}Nk_B\frac{g_{5/2}(z)}{g_{3/2}(z)}-\frac{9}{4}Nk_B\frac{g_{3/2}(z)}{g_{1/2}(z)}\]</span></p><h3 id="相变类型">相变类型</h3><p>对于<span class="math inline">\(C_V(T&gt;T_c)\)</span>取<spanclass="math inline">\(T\rightarrow T_c^+, z\rightarrow1^-\)</span>极限,考虑到<span class="math inline">\(1/g_{1/2}(z)\)</span>为<spanclass="math inline">\(0\)</span>, 得到 <span class="math display">\[C_V=\frac{15}{4}\frac{\zeta(\frac{5}{2})}{\zeta(\frac{3}{2})}Nk_B\]</span> 和<span class="math inline">\(T&lt;T_c\)</span>结果一致,说明热容量仍然是连续的. 所以这个相变至少是三级相变. 事实上,它的确是三级相变, 热容量导数的非连续性证明从略.</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>统计物理</category>
+      
+      <category>量子理想气体</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>理想 Bose 气体</tag>
+      
+      <tag>Bose-Einstein 凝聚</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>量子理想气体(01)：Bose 气体和弱简并</title>
+    <link href="/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(01)%EF%BC%9ABose%20%E6%B0%94%E4%BD%93%E5%92%8C%E5%BC%B1%E7%AE%80%E5%B9%B6/"/>
+    <url>/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(01)%EF%BC%9ABose%20%E6%B0%94%E4%BD%93%E5%92%8C%E5%BC%B1%E7%AE%80%E5%B9%B6/</url>
+    
+    <content type="html"><![CDATA[<h2id="求解巨配分函数对数newcommandkmathbbknewcommandrmathbbrnewcommandcmathbbcnewcommandbmathbfnewcommandbiboldsymbolnewcommandrank1textrankleft1-rightnewcommanddim1textdimleft1-rightnewcommanddiag1textdiagleft1-rightnewcommanddet1textdetleft1-rightnewcommanddet1leftbeginmatrix-1-endmatrixrightnewcommandset1left-1-rightnewcommandabs1left-1-rightnewcommandnorm1leftleft1rightright">求解巨配分函数对数<spanclass="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1\right)}\newcommand{\dim}[1]{\text{dim}\left(#1\right)}\newcommand{\diag}[1]{\text{diag}\left(#1\right)}\newcommand{\det}[1]{\text{det}\left(#1\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1\right\}}\newcommand{\abs}[1]{\left| #1\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span></h2><p>这一节中我们利用 Bose 分布来讨论一般的理想 Bose 气体,随后计算弱简并情形. 不失一般性, 只考虑 spinless boson, 因为无外场时,近独立自旋只会在简并度中引入常系数因子. 在这样的前提下, 巨配分函数为<span class="math display">\[\Xi(T,V,\mu)=\prod_{s}(1-e^{-\alpha-\beta\epsilon_s})^{-1}\]</span> 一般来讲, 色散关系的形式为 power law <spanclass="math display">\[\epsilon(k)=A_\nu\abs{k}^\nu\]</span> 并且是连续或准连续的能带, 这样就能将求和近似替代为积分. 即<span class="math display">\[\sum_s\rightarrow\int\frac{Vd^n\vec{p}}{h^n}=\int\frac{2\pi^{\frac{n}{2}}V}{\Gamma(\frac{n}{2})h^n}p^{n-1}dp=\int\frac{(n/\nu)VA_\nu^{-n/\nu}}{\Gamma(\frac{n}{2}+1)(2\sqrt{\pi})^n}\epsilon^{n/\nu-1}d\epsilon\]</span> 其中<span class="math inline">\(n\)</span>是系统的几何维数,第一个等号表示动量空间的角坐标积分完毕, 第二个等号代入了色散关系.</p><p>然而, 并不能简单地直接替换, 原因是一旦<spanclass="math inline">\(n&gt;\nu\)</span>, 积分便会筛去零能. 如果<spanclass="math inline">\(\epsilon=0\)</span>上粒子数很少或者在准连续分布的意义下为<spanclass="math inline">\(0\)</span>, 那筛去零能是无所谓的; 反之,如果基态粒子数和总粒子数能够比拟, 略去基态项是不正确的.我们事先并不知道是哪种情况, 先予以保留, 得到 <spanclass="math display">\[\log\Xi=-\log(1-e^{-\alpha})\eta(n-\nu)-\frac{(n/\nu)VA_\nu^{-n/\nu}}{\Gamma(\frac{n}{2}+1)(2\sqrt{\pi})^n}\int_0^{+\infty}\log(1-e^{-\alpha-\beta\epsilon})\epsilon^{n/\nu-1}d\epsilon\]</span></p><p>其中, <span class="math inline">\(\eta\)</span>是 Heaviside 阶跃函数,对于正自变量取<span class="math inline">\(1\)</span>, 其余取<spanclass="math inline">\(0\)</span>.</p><h3 id="bose-函数">Bose 函数</h3><p>下面重点研究积分项. 引入活度<spanclass="math inline">\(z=e^{-\alpha}\)</span>, 无量纲能量<spanclass="math inline">\(x=\beta\epsilon\)</span>. 有 <spanclass="math display">\[Integral=\beta^{-n/\nu}\int_0^{+\infty}\log(1-ze^{-x})x^{n/\nu-1}dx\]</span> 如果不喜欢处理对数函数, 可以利用分部积分消去之, 给出 <spanclass="math display">\[\beta^{n/\nu}Integral=\frac{\nu}{n}\log(1-ze^{-x})x^{n/\nu}\Bigg|_0^{+\infty}-\frac{\nu}{n}\int_0^{+\infty}\frac{x^{n/\nu}dx}{z^{-1}e^x-1}\]</span> 第一项, <span class="math inline">\(x=0\)</span>时自然为<spanclass="math inline">\(0\)</span>; <spanclass="math inline">\(x\gg1\)</span>时, 近似为<spanclass="math inline">\(x^{n/\nu}e^{-x}\)</span>, 也收敛到<spanclass="math inline">\(0\)</span>.</p><p>对于第二项, 引入所谓的 Bose 函数 <span class="math display">\[g_m(z):=\frac{1}{\Gamma(m)}\int_0^{+\infty}\frac{x^{m-1}dx}{z^{-1}e^x-1}\]</span> 则积分重写为 <span class="math display">\[Integral =-\frac{\nu\Gamma(\frac{n}{\nu}+1)}{n}\beta^{-n/\nu}g_{n/\nu+1}(z)\]</span> 很显然, <span class="math inline">\(g_m(1)=\zeta(m)\)</span>,给出 Riemann Zeta 函数; 另外, 它还具有如下性质 <spanclass="math display">\[\begin{aligned}g_{m+1}&#39;(z)&amp;=\int_0^{+\infty}\frac{x^{m}e^xdx}{z^2\Gamma(m+1)(z^{-1}e^x-1)^2}\\&amp;=\int_0^{+\infty}\frac{x^{m}z^{-1}d(z^{-1}e^x-1)}{\Gamma(m+1)(z^{-1}e^x-1)^2}\\&amp;=-\frac{z^{-1}x^m}{\Gamma(m+1)(z^{-1}e^x-1)}\Bigg|_0^{+\infty}+\frac{1}{\Gamma(m+1)}\int_0^{+\infty}\frac{z^{-1}d(x^m)}{z^{-1}e^x-1}\end{aligned}\]</span> 第一项仍为<span class="math inline">\(0\)</span>,第二项是<span class="math inline">\(z^{-1}g_m(z)\)</span>, 因此 <spanclass="math display">\[g&#39;_{m+1}(z)=z^{-1}g_m(z)\]</span></p><h3 id="热力学函数">热力学函数</h3><p>回到巨配分函数对数, 用 Bose 函数可以重写为 <spanclass="math display">\[\begin{aligned}\log\Xi&amp;=-\log(1-e^{-\alpha})\eta(n-\nu)+\frac{(n/\nu)VA_\nu^{-n/\nu}}{\Gamma(\frac{n}{2}+1)(2\sqrt{\pi})^n}\frac{\nu\Gamma(\frac{n}{\nu}+1)}{n}\beta^{-n/\nu}g_{n/\nu+1}(z)\\&amp;=-\log(1-e^{-\alpha})\eta(n-\nu)+\frac{\Gamma(n/\nu+1)(\betaA_\nu)^{-n/\nu}V}{\Gamma(n/2+1)(2\sqrt{\pi})^n}g_{n/\nu+1}(z)\end{aligned}\]</span> 给出 <span class="math display">\[N=-\frac{\partial\log\Xi}{\partial\alpha}=\frac{z}{1-z}\eta(n-\nu)+\frac{\Gamma(n/\nu+1)(\betaA_\nu)^{-n/\nu}V}{\Gamma(n/2+1)(2\sqrt{\pi})^n}g_{n/\nu}(z)\]</span></p><p><span class="math display">\[p=k_BT\frac{\partial\log\Xi}{\partial V}=\frac{\Gamma(n/\nu+1)(\betaA_\nu)^{-n/\nu}k_BT}{\Gamma(n/2+1)(2\sqrt{\pi})^n}g_{n/\nu+1}(z)\]</span></p><p>首先看<span class="math inline">\(N\)</span>. 对于第二项, <spanclass="math inline">\(g_{n/\nu}(z)\)</span>在<spanclass="math inline">\(z&gt;1\)</span>时, 定义中的积分具有瑕点<spanclass="math inline">\(x=\log z\)</span>, 并且会让瑕积分发散, 因此<spanclass="math inline">\(z\)</span>总取<span class="math inline">\((0,1]\)</span>上的实数.</p><p>所谓弱简并情形, 就是指热波长远小于系统尺寸(温度远大于特定值),并且在无限高温下, Bose 气体预期上和经典理想气体完全一致, 即<spanclass="math inline">\(\mu\rightarrow-\infty\)</span>, <spanclass="math inline">\(z=e^{\beta\mu}\rightarrow0^+\)</span>. 因此,弱简并下, <span class="math inline">\(z\)</span>应该会取一小量, 即<spanclass="math inline">\(z\ll1\)</span>. <span class="math display">\[\begin{aligned}\frac{z}{1-z}\approx g_m(z)\approx z\quad(z\ll 1)\\(\beta A_\nu)^{-n/\nu}V\gg1\quad(T\gg T_c)\end{aligned}\]</span> 这样, 我们总可以略去<spanclass="math inline">\(N\)</span>的第一项(特别注意到它不是广延的),最终给出状态方程 <span class="math display">\[\frac{pV}{Nk_BT}=\frac{g_{n/\nu+1}(z)}{g_{n/\nu}(z)}\]</span> 其中, 活度可以通过<spanclass="math inline">\(N\)</span>反解得到, 总之右侧的最低阶为<spanclass="math inline">\(1\)</span>, 正是经典理想气体.</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>统计物理</category>
+      
+      <category>量子理想气体</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>理想 Bose 气体</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>经典流体(03)：位力展开和位力系数</title>
     <link href="/posts/%E7%BB%8F%E5%85%B8%E6%B5%81%E4%BD%93(03)%EF%BC%9A%E4%BD%8D%E5%8A%9B%E5%B1%95%E5%BC%80%E5%92%8C%E4%BD%8D%E5%8A%9B%E7%B3%BB%E6%95%B0/"/>
     <url>/posts/%E7%BB%8F%E5%85%B8%E6%B5%81%E4%BD%93(03)%EF%BC%9A%E4%BD%8D%E5%8A%9B%E5%B1%95%E5%BC%80%E5%92%8C%E4%BD%8D%E5%8A%9B%E7%B3%BB%E6%95%B0/</url>
@@ -119,9 +233,9 @@
       
       <tag>平衡态统计物理</tag>
       
-      <tag>巨正则系综</tag>
-      
       <tag>正则系综</tag>
+      
+      <tag>巨正则系综</tag>
       
       <tag>Boltzmann 分布</tag>
       
