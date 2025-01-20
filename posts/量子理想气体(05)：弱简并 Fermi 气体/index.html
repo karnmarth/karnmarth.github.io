@@ -19,18 +19,17 @@
   <meta name="author" content="Rain Chan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本节将声子近似为理想 Bose 气体来讨论晶格贡献的热容, 暂且忽略电子贡献的热容">
+    <meta name="description" content="本节计算理想 Fermi 气体的弱简并近似, 即基于经典理想气体的逐阶展开.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="量子理想气体(04)：固体热容">
-<meta property="og:url" content="https://notes.rainchan.me/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(04)%EF%BC%9A%E5%9B%BA%E4%BD%93%E7%83%AD%E5%AE%B9/">
+<meta property="og:title" content="量子理想气体(05)：弱简并 Fermi 气体">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(05)%EF%BC%9A%E5%BC%B1%E7%AE%80%E5%B9%B6%20Fermi%20%E6%B0%94%E4%BD%93/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
-<meta property="og:description" content="本节将声子近似为理想 Bose 气体来讨论晶格贡献的热容, 暂且忽略电子贡献的热容">
+<meta property="og:description" content="本节计算理想 Fermi 气体的弱简并近似, 即基于经典理想气体的逐阶展开.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-01-18T12:17:32.000Z">
-<meta property="article:modified_time" content="2025-01-19T03:38:58.837Z">
+<meta property="article:published_time" content="2025-01-19T09:11:17.000Z">
+<meta property="article:modified_time" content="2025-01-20T08:18:32.744Z">
 <meta property="article:author" content="Rain Chan">
-<meta property="article:tag" content="理想 Bose 气体">
-<meta property="article:tag" content="固体热容">
+<meta property="article:tag" content="理想 Fermi 气体">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -39,7 +38,7 @@
   
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
   
-  <title>量子理想气体(04)：固体热容 - Rain Chan&#39;s Notes</title>
+  <title>量子理想气体(05)：弱简并 Fermi 气体 - Rain Chan&#39;s Notes</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -221,7 +220,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="量子理想气体(04)：固体热容"></span>
+            <span id="subtitle" data-typed-text="量子理想气体(05)：弱简并 Fermi 气体"></span>
           
         </div>
 
@@ -232,8 +231,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-01-18 20:17" pubdate>
-          2025年1月18日 晚上
+        <time datetime="2025-01-19 17:11" pubdate>
+          2025年1月19日 下午
         </time>
       </span>
     
@@ -244,7 +243,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.3k 字
+          878 字
         
       </span>
     
@@ -255,7 +254,7 @@
         
         
         
-          11 分钟
+          8 分钟
         
       </span>
     
@@ -292,7 +291,7 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">量子理想气体(04)：固体热容</h1>
+            <h1 id="seo-header">量子理想气体(05)：弱简并 Fermi 气体</h1>
             
             
               <div class="markdown-body">
@@ -305,132 +304,83 @@ class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\new
 \right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1
 \end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1
 \right\}}\newcommand{\abs}[1]{\left| #1
-\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span>在经典的
-Boltzmann 统计理论中, 一个重要的结果就是能均分定理.
-这个定理应用于固体热容量, 就得到了著名的 Dulong-Petit 定律:
-固体中若干原胞有<span class="math inline">\(N\)</span>个原子, 对应<span
-class="math inline">\(3N\)</span>个自由度, 每个振动自由度贡献能量<span
-class="math inline">\(k_BT\)</span>, 因此固体热容不随温度变化 <span
-class="math display">\[
-C_V=3Nk_B
-\]</span> 实际固体的热容在高温时都较好地满足这个定律, 但在低温时,
-所有固体几乎都不满足这个定律, 造成定律破坏的主要原因就是量子效应.</p>
-<h2 id="einstein-的固体热容理论">Einstein 的固体热容理论</h2>
-<p>Einstein 假设固体具有<span
-class="math inline">\(3N\)</span>个独立的振动简正模式, 并且频率都相等;
-晶格中的各个原子都是可分辨的. 因此可以使用正则配分函数计算.
-对于每个近独立子系, 有 <span class="math display">\[
+\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span>与讨论
+Bose 气体的情形类似, 我们假定所研究的理想 Fermi 气体是非相对论性的.
+同时, 粒子的平动动能可以看成准连续的, 单粒子态的求和换成积分, <span
+class="math inline">\(\text{spin-}s\)</span> Fermion
+构成的理想气体的巨配分函数为 <span class="math display">\[
+\log\Xi=\frac{2(2s+1)V}{\sqrt{\pi}\lambda_T^3}\int_0^{+\infty}\log(1+e^{-\alpha-x})\sqrt{x}dx
+\]</span> 积分同样可以利用分部积分消去对数 <span class="math display">\[
+Integral=\frac{2}{3}x^{3/2}\log(1+e^{-\alpha-x})\Bigg|_{0}^{+\infty}+\int_0^{+\infty}\frac{2}{3}x^{3/2}\frac{dx}{e^{\alpha+x}+1}
+\]</span> 引入所谓的 Fermi 函数 <span class="math display">\[
+f_m(z):=\frac{1}{\Gamma(m)}\int\frac{x^{m-1}dx}{z^{-1}e^x+1}
+\]</span> 积分<span
+class="math inline">\(Integral=2/3\times\Gamma(5/2)f_{5/2}(z)\)</span>,
+代入得 <span class="math display">\[
 \begin{aligned}
-z&amp;=\sum_{n=0}^{+\infty}\exp\left[-\left(n+\frac{1}{2}\right)\beta\hbar\omega\right]
-\\&amp;=\left[2\sinh\frac{\beta\hbar\omega}{2} \right]^{-1}
+\log\Xi&amp;=\frac{4(2s+1)V}{3\sqrt{\pi}\lambda_T^3}\Gamma(\frac{5}{2})f_{5/2}(z)
+\\&amp;=
+\frac{(2s+1)V}{\lambda_T^3}f_{5/2}(z)
 \end{aligned}
-\]</span> 求得内能 <span class="math display">\[
+\]</span> 热力学量为</p>
+<p><span class="math display">\[
 \begin{aligned}
-U&amp;=-3N\frac{\partial\log
-z}{\partial\beta}=\frac{3N\hbar\omega}{2}\coth\frac{\beta\hbar\omega}{2}
+N&amp;=\frac{(2s+1)V}{\lambda_T^3}f_{3/2}(z)
 \\
-C_V&amp;=\frac{\partial U}{\partial
-T}=3Nk_B\left(\frac{\frac{\hbar\omega}{2k_BT}}{\sinh\frac{\hbar\omega}{2k_BT}}\right)^2
+p&amp;=\frac{(2s+1)k_BT}{\lambda_T^3}f_{5/2}(z)
 \end{aligned}
-\]</span> 此即 Einstein 热容公式. 高温极限(<span
-class="math inline">\(T\rightarrow+\infty\)</span>), 回到了 Dulong-Petit
-定律.</p>
-<p>低温极限下, <span
-class="math inline">\(\sinh\hbar\omega/2k_BT\approx\frac{1}{2}\exp(\hbar\omega/2k_BT)\)</span>,
-得到 <span class="math display">\[
-C_V\approx3Nk_B\left(\frac{\hbar\omega}{k_BT}\right)^2\exp\left(-\frac{\hbar\omega}{k_BT}\right)
-\]</span> 这个低温热容会衰减得很快,
-实际固体的热容并不会指数地衰减下去.</p>
-<h2 id="debye-的固体热容理论">Debye 的固体热容理论</h2>
-<p>Einstein 理论的主要问题在于忽略了简正频率的分布.
-固体晶格振动对应的准粒子是声子, 固体中的声子可以分为两类:
-有两个独立偏振态的横波声子, 以及无偏振现象的纵波声子,
-它们与光子的部分特性很像,
-因此也可以把声子气体处理为零化学势、不存在凝聚和零能基态的理想 Bose
-气体.</p>
-<p>总而言之, 对于单个偏振态, 态密度为 <span class="math display">\[
-G(\omega)=\frac{V}{2\pi^2c^3}\omega^2
-\]</span> 其中<span class="math inline">\(c\)</span>是波速,
-考虑横波的两个偏振和纵波的一个偏振, 给出 <span class="math display">\[
-G(\omega)=\frac{V}{\pi^2}(\frac{1}{2c_l^3}+\frac{1}{c_t^3})\omega^2
 \]</span></p>
-<h3 id="debye-截止频率">Debye 截止频率</h3>
-<p>如果把上述态密度积分, 得到的全频带状态数是发散的.
-这个问题在黑体辐射中不算什么,
-没有任何物理限制认为电磁波振动自由度应当为多少. 但是在声子气中,
-简正模式数理应是<span
-class="math inline">\(3N\)</span><sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
-class="hint--top hint--rounded"
-aria-label="固体物理教材对此应有论述, 这个状态数包括光学支和声学支">[1]</span></a></sup>个,
-为此, 必须限制频率的取值.</p>
-<p>可以考虑一维晶格的 Brillouin 区, 对于长度<span
-class="math inline">\(L=Na\)</span>的晶格, 波矢的取值为 <span
-class="math display">\[
-k=\frac{2s\pi}{L}\ , \ s=-\frac{N}{2},
--\frac{N}{2}+1,\cdots,\frac{N}{2}-1
-\]</span> 如果只考虑第一 Brillouin 区, 那么频率就被限制在了<span
-class="math inline">\(0\sim\pi c/a\)</span>的区域内, 因此, 对于三维晶格,
-可以仿照这个条件进行限制 <span class="math display">\[
-\int_0^{\omega_D}G(\omega)d\omega=3N
-\]</span> 其中, <span class="math inline">\(\omega_D\)</span>被称作
-<strong>Debye 截止频率</strong>. 在 Brillouin 区边界处,
-边界效应可能导致态密度偏离前面导出的形式, 但这里为了简便,
-直接理解为截断. 这样就可以利用<span
-class="math inline">\(\omega_D\)</span>简化态密度谱 <span
-class="math display">\[
-G(\omega)=9N\frac{\omega^2}{\omega_D^3}
-\]</span> 于是, 全频带能量为 <span class="math display">\[
-U=U_0+\int_0^{\omega_D}\frac{9N\hbar\omega^3}{\omega_D^3}\cdot\frac{d\omega}{\exp(\beta\hbar\omega)-1}
-\]</span> 引入变量<span
-class="math inline">\(x=\beta\hbar\omega\)</span>, 对应的 Debye
-变量为<span class="math inline">\(x_D=\beta\hbar\omega_D\)</span>,
-内能被充分简化为 <span class="math display">\[
-U=U_0+\frac{9Nk_BT}{x_D^3}\int_0^{x_D}\frac{x^3dx}{e^x-1}
-\]</span> 高温极限下, <span
-class="math inline">\(x_D\rightarrow0\)</span>, 积分核近似为<span
-class="math inline">\(x^2\)</span>, 给出 <span class="math display">\[
-U\approx U_0+\frac{9Nk_BT}{x_D^3}\cdot\frac{x_D^3}{3}
-\]</span> 整理后, 热容为<span class="math inline">\(3Nk_B\)</span>, 和
-Dulong-Petit 定律一致.</p>
-<p>低温极限下, <span
-class="math inline">\(x_D\rightarrow+\infty\)</span>, 积分值近似为<span
-class="math inline">\(\Gamma(4)\zeta(4)\)</span>, 即 <span
-class="math display">\[
+<h2 id="弱简并展开">弱简并展开</h2>
+<p>首先需要弄清<span
+class="math inline">\(f_m(z)\)</span>的单调性和取值范围. 显然,
+它是单调递增的, 并且总有 <span class="math display">\[
+\frac{1}{\Gamma(m)}\int_0^{+\infty}\frac{x^{m-1}dx}{z^{-1}e^x+1}&lt;\frac{1}{\Gamma(m)}\int_0^{+\infty}x^{m-1}ze^{-x}dx=z
+\]</span> 可见, 对任何有限的<span class="math inline">\(z\)</span>,
+<span class="math inline">\(f_m(z)\)</span>不会发散; 同时, <span
+class="math inline">\(f_m(z)\)</span>也没有上界(证明从略), 这样,
+对于如下粒子数自洽条件 <span class="math display">\[
+N=(2s+1)V\left(\frac{2\pi mk_BT}{h^2}\right)^{3/2}f_{3/2}(z)
+\]</span> 任意温度<span
+class="math inline">\(T\)</span>总能有对应的唯一解<span
+class="math inline">\(z\)</span>, 即不会产生类似 B-E 凝聚的现象; 同时,
+若温度取遍所有正实数, 则<span
+class="math inline">\(z\)</span>也取遍所有正实数.</p>
+<p>对于弱简并体系而言, 可以取高温近似, 则相应地<span
+class="math inline">\(z\ll1\)</span>, 可以考虑围绕<span
+class="math inline">\(z=0\)</span>作幂级数展开. 在积分式中, <span
+class="math inline">\(z^{-1}e^x&gt;1\)</span>在<span
+class="math inline">\(z&lt;1\)</span>时恒成立,
+可以对分式展开然后逐项积分, 得到 <span class="math display">\[
 \begin{aligned}
-U&amp;\approx U_0 +
-\frac{9N(k_BT)^4}{\hbar^3\omega_D^3}\cdot\frac{\pi^4}{15}
-\\&amp;=U_0+\frac{3\pi^4}{5}N\hbar\omega_D\left(\frac{k_BT}{\hbar\omega_D}\right)^4
+f_m(z)&amp;=\frac{z^1}{1^m}-\frac{z^2}{2^m}+\frac{z^3}{3^m}-\cdots
+\\&amp;=\sum_{j=1}^{+\infty}\frac{(-1)^{j+1}}{j^m}z^j
 \end{aligned}
-\]</span> 热容为 <span class="math display">\[
-C_V\approx\frac{12\pi^4}{5}Nk_B\cdot\left(\frac{k_BT}{\hbar\omega_D}\right)^3
-\]</span> 即固体热容在低温下近似服从的规律为<span
-class="math inline">\(C_V\sim T^3\)</span>. 这个规律和很多实际固体,
-特别是非金属非磁性的材料, 符合得相当好.
-对于非磁性的金属材料而言(后面将会涉及), 其中具有大量的巡游电子,
-电子贡献的热容为<span class="math inline">\(C_V\sim T\)</span>,
-在极低温下占主导.
-还有一些其它的材料会因为不同的效应出现其它的规律<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span
-class="hint--top hint--rounded"
-aria-label="例如, 一些绝缘的磁性材料中会产生自旋波, 极低温下的热容对温度的幂指数为3/2">[2]</span></a></sup>,
-此处不再详细推导.</p>
-<section class="footnotes">
-<div class="footnote-list">
-<ol>
-<li>
-<span id="fn:1" class="footnote-text"><span>固体物理教材对此应有论述,
-这个状态数包括光学支和声学支
-<a href="#fnref:1" rev="footnote" class="footnote-backref">
-↩︎</a></span></span>
-</li>
-<li>
-<span id="fn:2" class="footnote-text"><span>例如,
-一些绝缘的磁性材料中会产生自旋波, 极低温下的热容对温度的幂指数为3/2
-<a href="#fnref:2" rev="footnote" class="footnote-backref">
-↩︎</a></span></span>
-</li>
-</ol>
-</div>
-</section>
+\]</span> 这是 Fermi 函数的弱简并展开. 这样, 就有<span
+class="math inline">\(N\)</span>和<span
+class="math inline">\(p\)</span>随<span
+class="math inline">\(z\)</span>的变化关系, 可以反解出<span
+class="math inline">\(z\)</span>和<span
+class="math inline">\(N/V\)</span>的关系并代入<span
+class="math inline">\(p\)</span>. 为了方便, 可以引入新变量 <span
+class="math display">\[
+y:=\frac{N\lambda_T^3}{(2s+1)V}
+\]</span> 然后对粒子数自洽条件的 Fermi 函数保留一定数目的项, 比如到三阶:
+<span class="math display">\[
+y=z-\frac{z^2}{2^{3/2}}+\frac{z^3}{3^{3/2}}
+\]</span> 用待定系数法可以反设出<span
+class="math inline">\(z\)</span>关于<span
+class="math inline">\(y\)</span>的形式, 然后代入并略去高阶项, 抵消<span
+class="math inline">\(1\sim3\)</span>阶项的系数, 得到 <span
+class="math display">\[
+z=y +
+\frac{\sqrt{2}}{4}y^2+\left(\frac{1}{4}-\frac{\sqrt{3}}{9}\right)y^3
+\]</span> 代入<span class="math inline">\(p\)</span>, 得到<span
+class="math inline">\(p-y\)</span>关系 <span class="math display">\[
+\frac{pV}{Nk_BT}=1+\frac{1}{2^{5/2}}y-\left(\frac{2}{3^{5/2}}
+−\frac{1}{8}\right)y^2+\left(\frac{3}{32}+\frac{5}{2^{11/2}}+\frac{3}{6^{3/2}}\right)y^3
+\]</span> 第一项是弱简并极限(经典极限), 第二项是量子效应的领头阶, Fermi
+气体的量子修正等效为斥力, 这可以很好地被理解为 Pauli
+不相容原理的效应.</p>
 
                 
               </div>
@@ -471,9 +421,7 @@ aria-label="例如, 一些绝缘的磁性材料中会产生自旋波, 极低温�
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E7%90%86%E6%83%B3-Bose-%E6%B0%94%E4%BD%93/" class="print-no-link">#理想 Bose 气体</a>
-      
-        <a href="/tags/%E5%9B%BA%E4%BD%93%E7%83%AD%E5%AE%B9/" class="print-no-link">#固体热容</a>
+        <a href="/tags/%E7%90%86%E6%83%B3-Fermi-%E6%B0%94%E4%BD%93/" class="print-no-link">#理想 Fermi 气体</a>
       
     </div>
   
@@ -485,8 +433,8 @@ aria-label="例如, 一些绝缘的磁性材料中会产生自旋波, 极低温�
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>量子理想气体(04)：固体热容</div>
-      <div>https://notes.rainchan.me/posts/量子理想气体(04)：固体热容/</div>
+      <div>量子理想气体(05)：弱简并 Fermi 气体</div>
+      <div>https://notes.rainchan.me/posts/量子理想气体(05)：弱简并 Fermi 气体/</div>
     </div>
     <div class="license-meta">
       
@@ -498,7 +446,7 @@ aria-label="例如, 一些绝缘的磁性材料中会产生自旋波, 极低温�
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年1月18日</div>
+          <div>2025年1月19日</div>
         </div>
       
       
@@ -530,9 +478,9 @@ aria-label="例如, 一些绝缘的磁性材料中会产生自旋波, 极低温�
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(05)%EF%BC%9A%E5%BC%B1%E7%AE%80%E5%B9%B6%20Fermi%20%E6%B0%94%E4%BD%93/" title="量子理想气体(05)：弱简并 Fermi 气体">
+                      <a href="/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(06)%EF%BC%9A%E5%BC%BA%E7%AE%80%E5%B9%B6%20Fermi%20%E6%B0%94%E4%BD%93/" title="量子理想气体(06)：强简并 Fermi 气体">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">量子理想气体(05)：弱简并 Fermi 气体</span>
+                        <span class="hidden-mobile">量子理想气体(06)：强简并 Fermi 气体</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -540,8 +488,8 @@ aria-label="例如, 一些绝缘的磁性材料中会产生自旋波, 极低温�
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(03)%EF%BC%9A%E9%BB%91%E4%BD%93%E8%BE%90%E5%B0%84/" title="量子理想气体(03)：黑体辐射">
-                        <span class="hidden-mobile">量子理想气体(03)：黑体辐射</span>
+                      <a href="/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(04)%EF%BC%9A%E5%9B%BA%E4%BD%93%E7%83%AD%E5%AE%B9/" title="量子理想气体(04)：固体热容">
+                        <span class="hidden-mobile">量子理想气体(04)：固体热容</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

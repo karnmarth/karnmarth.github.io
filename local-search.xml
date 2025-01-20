@@ -4,6 +4,97 @@
   
   
   <entry>
+    <title>量子理想气体(07)：匀强磁场中的电子气</title>
+    <link href="/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(07)%EF%BC%9A%E5%8C%80%E5%BC%BA%E7%A3%81%E5%9C%BA%E4%B8%AD%E7%9A%84%E7%94%B5%E5%AD%90%E6%B0%94/"/>
+    <url>/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(07)%EF%BC%9A%E5%8C%80%E5%BC%BA%E7%A3%81%E5%9C%BA%E4%B8%AD%E7%9A%84%E7%94%B5%E5%AD%90%E6%B0%94/</url>
+    
+    <content type="html"><![CDATA[<p><spanclass="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1\right)}\newcommand{\dim}[1]{\text{dim}\left(#1\right)}\newcommand{\diag}[1]{\text{diag}\left(#1\right)}\newcommand{\det}[1]{\text{det}\left(#1\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1\right\}}\newcommand{\abs}[1]{\left| #1\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span>考虑沿着<spanclass="math inline">\(z\)</span>轴外加均匀磁场<spanclass="math inline">\(B\)</span>, 则电子的能级为 <spanclass="math display">\[\begin{aligned}E(p_z,n,s)=&amp;\frac{p_z^2}{2m^*}+(n+\frac{1}{2})\frac{eB\hbar}{m^*}+\frac{seB\hbar}{2m}\\p_z\in\mathbb{R}\qquad &amp;n=0,1,2,\cdots\qquad s=\pm1\end{aligned}\]</span> 第二项是 Landau 能级, 第三项考虑了自旋引入的能级劈裂,对于这样一个能级, 简并度为 <span class="math display">\[\bar{G}=\frac{eBA(z)}{h}\]</span> 其中, <span class="math inline">\(A(z)\)</span>为体系在<spanclass="math inline">\(z\)</span>处的横截面积.</p><p>巨配分函数对数为 <span class="math display">\[\begin{aligned}\log\Xi&amp;=\int_{-\infty}^{+\infty}\frac{dp_zdz}{h}\sum_{n=0}^{+\infty}\sum_{s=\pm1}\frac{eBA(z)}{h}\cdot\log{[1+\exp(-\alpha-\beta E)]}\\&amp;=\frac{eBV}{h^2}\sum_{n=0}^{+\infty}\sum_{s=\pm1}\int_{-\infty}^{+\infty}dp_z\log{[1+\exp(-\alpha-\betaE)]}\end{aligned}\]</span> 令<span class="math inline">\(x=\beta p_z^2/2m^*\)</span>, 则<span class="math display">\[\begin{aligned}\log\Xi&amp;=\frac{eBV}{h^2}\sum_{n=0}^{+\infty}\sum_{s=\pm1}\int_0^{+\infty}2\cdot\sqrt{\frac{m^*}{2\beta}}x^{-\frac{1}{2}}dx\log{[1+z^*e^{-x}]}\\&amp;=\sqrt{\frac{2\pim^*}{\beta}}\frac{eBV}{h^2}\sum_{n=0}^{+\infty}\sum_{s=\pm1}f_{3/2}(z^*)\end{aligned}\]</span> 其中, <span class="math inline">\(z^*=\exp(-\alpha-\betaE_L-\beta E_S)\)</span>, <span class="math inline">\(E_L,E_S\)</span>分别表示轨道和自旋磁矩的能量.</p><p>有必要对本节的近似和 notation 作出声明. 采用这样一种近似: 温度远小于Fermi 温度, 因此满足强简并; 而磁场能级间隙又远小于<spanclass="math inline">\(k_BT\)</span>, 以至于 Landau 能级也很接近准连续,但连续性不够强, 需要在积分之外补充几项, 下面很快就会看到.</p><p>由于强简并, 后文中的化学势不再采用字母<spanclass="math inline">\(\mu\)</span>, 而是需要时直接写成<spanclass="math inline">\(\varepsilon_F\)</span>; <spanclass="math inline">\(\mu\)</span>这个符号暂且拿来表示磁矩, 即 Bohr磁子; 加上标<spanclass="math inline">\(^*\)</span>表示质量为有效质量时对应的磁矩: <spanclass="math display">\[\mu=\frac{e\hbar}{2m}\qquad\mu^*=\frac{e\hbar}{2m^*}\]</span></p><h2 id="landau-能级求和-euler-maclaurin-公式">Landau 能级求和,Euler-Maclaurin 公式</h2><p>这里再次引用无穷级数求和的近似公式<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><spanclass="hint--top hint--rounded"aria-label="经典流体第1节中, 曾用该公式计算分子的转动配分函数">[1]</span></a></sup>,称为 <strong>Euler-Maclaurin 公式</strong>: <spanclass="math display">\[\sum_{n=0}^{+\infty}a(n)=\int_0^{+\infty}a(x)dx+\frac{a(0)}{2}-\frac{a&#39;(0)}{12}+\cdots\]</span> 待求项<span class="math inline">\(a(n)\)</span>在本问题中为<span class="math display">\[f_{3/2}(z^*)=f_{3/2}\left[z_L\exp(-\beta\mu^* B(2n+1))\right]\]</span></p><h3 id="零阶积分近似">零阶积分近似</h3><p>Fermi 函数的积分公式为 <span class="math display">\[\int f_m(z)d\log z=f_{m+1}(z)+C\]</span> 对于准连续的<span class="math inline">\(n\)</span>, 有 <spanclass="math display">\[\begin{aligned}dn&amp;=-\frac{1}{2\beta\mu^* B}d\log\left[\exp(-\beta \mu^*B(2n+1))\right]\\&amp;=-\frac{d\log z^*}{2\beta\mu^* B}\end{aligned}\]</span> 因此 <span class="math display">\[\int_0^{+\infty}f_{3/2}(z^*)dn=-\frac{f_{5/2}(z)}{2\beta\mu^*B}\Bigg|_{z^*=z_L\exp(-\beta\mu^* B)}^{z^*=0}=\frac{1}{2\beta\mu^*B}f_{5/2}\left[z_L\exp(-\beta\mu^*B)\right]\]</span></p><h3 id="一阶修正">一阶修正</h3><p><span class="math inline">\(a(0)/2\)</span>在本问题中相当于 <spanclass="math display">\[\frac{a(0)}{2}=\frac{1}{2}f_{3/2}(z_L\exp(-\beta\mu^* B))\]</span></p><h3 id="二阶修正">二阶修正</h3><p><span class="math inline">\(-a&#39;(0)/12\)</span>在本问题中相当于<span class="math display">\[-\frac{1}{12}\frac{d}{dn}f_{3/2}(z^*)\Bigg|_{n=0}=-\frac{1}{12}\frac{f_{1/2}(z^*)}{z^*}\frac{dz^*}{dn}\Bigg|_{n=0}=\frac{\beta\mu^*B}{6}f_{1/2}\left[z_L\exp(-\beta\mu^*B)\right]\]</span> 总结上述结果, <spanclass="math inline">\(n\)</span>的求和的近似计算式为 <spanclass="math display">\[\sum_{n=0}^{+\infty}f_{3/2}(z^*)=\frac{1}{2\beta\mu^*B}f_{5/2}(z^*)+\frac{1}{2}f_{3/2}(z^*)+\frac{\beta\mu^*B}{6}f_{1/2}(z^*)\Bigg|_{z^*=z_L\exp(-\beta\mu^*B)}\]</span></p><h2 id="自旋求和-两类磁化率">自旋求和, 两类磁化率</h2><p>现在的巨配分函数对数如下 <span class="math display">\[\begin{aligned}\log\Xi&amp;=\frac{V}{\lambda_T^3}\sum_{s=\pm1}f_{5/2}(z^*)+\beta\mu^*Bf_{3/2}(z^*)+\frac{(\beta\mu^*B)^2}{3}f_{1/2}(z^*)\Bigg|_{z^*=z_L\exp(-\beta\mu^*B)}\end{aligned}\]</span></p><p>其中, <span class="math inline">\(z_L=\exp(-\alpha-s\beta\muB)\)</span>. 再令<spanclass="math inline">\(z_S=\exp(-\alpha-\beta\mu^*B)\)</span>, 则 <spanclass="math display">\[\begin{aligned}\log\Xi&amp;=\frac{V}{\lambda_T^3}\sum_{s=\pm1}f_{5/2}(z^*)+\beta\mu^*Bf_{3/2}(z^*)+\frac{(\beta\mu^*B)^2}{3}f_{1/2}(z^*)\Bigg|_{z^*=z_S\exp(-s\beta\mu B)}\end{aligned}\]</span> 下面最好利用科学计算软件计算, 得到 <spanclass="math display">\[\log\Xi\approx\frac{2N\varepsilon_F}{5k_BT}+\frac{N(3\mu^2-\mu^*{^2})}{4\varepsilon_Fk_BT}B^2\]</span> 系统的磁化率为 <span class="math display">\[\chi=\frac{\partial^2}{\partial B^2}\frac{k_BT}{V}\log\Xi\]</span> 不难看到, 体系的磁性可以分为两类效应,它们来自不同的物理(以下两公式中的<spanclass="math inline">\(n\)</span>为电子数密度):</p><ul><li>Pauli 顺磁性: 来自电子自旋引发的能级劈裂, <spanclass="math inline">\(\chi_p=3n\mu^2/2\varepsilon_F\)</span></li><li>Landau 抗磁性: 来自电子轨道磁矩的能量, <spanclass="math inline">\(\chi_l=-n\mu{^*}^2/2\varepsilon_F\)</span></li></ul><p>前者是单纯自旋作用, 磁矩中的质量无需作有效修正;后者与几何空间中的运动有关, 磁矩中的质量应为有效质量. 对于自由电子,<span class="math inline">\(\mu^*=\mu\)</span>, 整体必然保持顺磁性;但是对于介质(例如半导体)中的电子, 有效质量<spanclass="math inline">\(m^*\)</span>有时可能下降到<spanclass="math inline">\(0.05m\)</span>左右, 这时整体磁性体现为抗磁性.</p><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>经典流体第1节中,曾用该公式计算分子的转动配分函数<a href="#fnref:1" rev="footnote" class="footnote-backref">↩︎</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>统计物理</category>
+      
+      <category>量子理想气体</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>理想 Fermi 气体</tag>
+      
+      <tag>Landau 能级</tag>
+      
+      <tag>Pauli 顺磁性</tag>
+      
+      <tag>Landau 抗磁性</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>量子理想气体(06)：强简并 Fermi 气体</title>
+    <link href="/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(06)%EF%BC%9A%E5%BC%BA%E7%AE%80%E5%B9%B6%20Fermi%20%E6%B0%94%E4%BD%93/"/>
+    <url>/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(06)%EF%BC%9A%E5%BC%BA%E7%AE%80%E5%B9%B6%20Fermi%20%E6%B0%94%E4%BD%93/</url>
+    
+    <content type="html"><![CDATA[<p><spanclass="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1\right)}\newcommand{\dim}[1]{\text{dim}\left(#1\right)}\newcommand{\diag}[1]{\text{diag}\left(#1\right)}\newcommand{\det}[1]{\text{det}\left(#1\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1\right\}}\newcommand{\abs}[1]{\left| #1\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span>公式回顾<span class="math display">\[\begin{aligned}\log\Xi&amp;=\frac{(2s+1)V}{\lambda_T^3}f_{5/2}(z)\\N&amp;=\frac{(2s+1)V}{\lambda_T^3}f_{3/2}(z)\\p&amp;=\frac{(2s+1)k_BT}{\lambda_T^3}f_{5/2}(z)\\U&amp;=\frac{3k_BT}{2}\frac{(2s+1)V}{\lambda_T^3}f_{5/2}(z)\end{aligned}\]</span></p><h2 id="sommerfeld-展开">Sommerfeld 展开</h2><p>Fermi 函数的定义如下 <span class="math display">\[f_m(z):=\frac{1}{\Gamma(m)}\int_0^{+\infty}\frac{x^{m-1}dx}{z^{-1}e^x+1}\]</span> 弱简并条件下, 可以直接把分式展开, 但强简并时, <spanclass="math inline">\(z^{-1}&lt;1\)</span>甚至<spanclass="math inline">\(z^{-1}\ll1\)</span>, <spanclass="math inline">\(z^{-1}e^x\)</span>会经历一个由小量增长到<spanclass="math inline">\(1\)</span>再无限增大的过程,幂级数展开并非对整个过程适用.</p><p>更一般地, 可以研究如下积分的近似计算公式 <spanclass="math display">\[I=\int_0^{+\infty}\frac{h(x)dx}{z^{-1}e^x+1}\]</span> 引入新参量<span class="math inline">\(x&#39;=x-\logz\)</span>, 并把<spanclass="math inline">\(I\)</span>的区间拆分为正负两部分 <spanclass="math display">\[I=\int_{-\log z}^0\frac{h(x&#39;+\logz)dx&#39;}{e^{x&#39;}+1}+\int_0^{+\infty}\frac{h(x&#39;+\logz)dx&#39;}{e^{x&#39;}+1}\]</span> 对于前一项, 令<spanclass="math inline">\(x&#39;\rightarrow-x&#39;\)</span>, 有 <spanclass="math display">\[I=\int_0^{\log z}h(\logz-x&#39;)\left(1-\frac{1}{e^{x&#39;}+1}\right)dx&#39;+\int_0^{+\infty}\frac{h(x&#39;+\logz)}{e^{x&#39;}+1}dx&#39;\]</span> 整理, 得 <span class="math display">\[I=\int_0^{\log z} h(x&#39;)dx&#39; + \int_0^{+\infty} \frac{h(\log z +x&#39;) - h(\log z - x&#39;)}{e^{x&#39;} + 1}dx&#39; + \int_{\logz}^{+\infty}\frac{h(\log z - x&#39;)}{e^{x&#39;} + 1}dx&#39;\]</span> 第三项是高阶项, 可以直接略去. 而第二项分子可以围绕<spanclass="math inline">\(\log z\)</span>展开: <span class="math display">\[h(\log z + x&#39;) - h(\log z -x&#39;)=\sum_{j=1}^{+\infty}\frac{2h^{(2j-1)}(\logz)}{(2j-1)!}x&#39;^{2j - 1}\]</span> 积分为 <span class="math display">\[I=\int_0^{\logz}h(x&#39;)dx&#39;+\sum_{j=1}^{+\infty}2f_{2j}(1)h^{(2j-1)}(\log z)\]</span> <spanclass="math inline">\(f_{2j}(1)\)</span>是可以用弱简并展开处理的 <spanclass="math display">\[\begin{aligned}f_{2j}(1)&amp;=\frac{1}{1^{2j}}-\frac{1}{2^{2j}}+\frac{1}{3^{2j}}-\frac{1}{4^{2j}}+\cdots\\&amp;=\left(\frac{1}{1^{2j}}+\frac{1}{2^{2j}}+\frac{1}{3^{2j}}+\frac{1}{4^{2j}}+\cdots\right) -2 \left(\frac{1}{2^{2j}}+\frac{1}{4^{2j}}+\cdots \right)\\&amp;=\zeta(2j)-\frac{2}{2^{2j}}\zeta(2j)\end{aligned}\]</span> 积分前几项为 <span class="math display">\[I=\int_0^{\log z}h(x&#39;)dx&#39;+\frac{\pi^2}{6}h&#39;(\log z) +\frac{7\pi^4}{360}h&#39;&#39;&#39;(\log z)+\cdots\]</span> 这就是所谓的 <strong>Sommerfeld 展开</strong>. 对于<spanclass="math inline">\(f_m(z)\)</span>, 零阶项为 <spanclass="math display">\[f_m(z)\approx\frac{(\log z)^m}{m!}\]</span></p><h2 id="强简并极限">强简并极限</h2><p>粒子数的自洽条件为 <span class="math display">\[\begin{aligned}N&amp;=(2s+1)V\left(\frac{2\pimk_BT}{h^2}\right)^{3/2}\frac{(\mu/k_BT)^{3/2}}{\Gamma(5/2)}\\&amp;=\frac{(2s+1)V}{6\pi^2}\left(\frac{2m\mu}{\hbar^2}\right)^{3/2}\end{aligned}\]</span> 即零温时的化学势(也常记作 <strong>Fermi 能</strong> <spanclass="math inline">\(\varepsilon_F\)</span>)为 <spanclass="math display">\[\varepsilon_F=\frac{\hbar^2}{2m}\left(\frac{6\pi^2N}{(2s+1)V}\right)^{2/3}\]</span> 零温下的 Fermion 并不会"冻结"运动或者凝聚, 而是具有显著的动能,<span class="math inline">\(0\sim\varepsilon_F\)</span>在<spanclass="math inline">\(k\)</span>空间中确定了一个 Fermi 球,单粒子态在球内外均匀分布, 而粒子实际占据的单粒子态是被 Fermi球包裹的那些态.</p><p>压强为 <span class="math display">\[\begin{aligned}p&amp;=\frac{Nk_BT}{V}\frac{f_{5/2}(\log z)}{f_{3/2}(\log z)}\\&amp;=\frac{Nk_BT}{V}\frac{2}{5}\frac{\mu}{k_BT}\\&amp;=\frac{2}{5}\frac{N}{V}\varepsilon_F\end{aligned}\]</span> 既然具有动能, 显然也具备显著的动理压强. 这个压强一般也叫 Fermi气体的 <strong>简并压</strong>.</p><p>内能为 <span class="math display">\[U=\frac{3}{2}pV=\frac{3}{5}N\varepsilon_F\]</span> 粒子的平均动能为<spanclass="math inline">\(3\varepsilon_F/5\)</span>.</p><h2 id="低温展开">低温展开</h2><p>利用低温展开可以类似地计算热力学量. 首先是粒子数自洽条件 <spanclass="math display">\[N=\frac{(2s+1)V}{6\pi^2}\left(\frac{2m\mu}{\hbar^2}\right)^{3/2}\left[1+\frac{\pi^2}{8}\left(\frac{k_BT}{\mu}\right)^2\right]\]</span> 这个式子确认近似的阶数, 以及相应精度下的化学势. 反解出化学势为<span class="math display">\[\mu=\varepsilon_F\left[1-\frac{\pi^2}{12}\left(\frac{k_BT}{\varepsilon_F}\right)^2\right]\]</span> 压强和内能为 <span class="math display">\[\begin{aligned}p&amp;=\frac{2N}{5V}\varepsilon_F\left[1+\frac{5\pi^2}{12}\left(\frac{k_BT}{\varepsilon_F}\right)^2\right]\\U&amp;=\frac{3}{2}pV\end{aligned}\]</span> 因此, 电子气热容的最低阶非零项为 <span class="math display">\[C_V\approx\frac{3}{2}\frac{\partial p}{\partialT}V=\frac{\pi^2}{2}\frac{Nk_B^2T}{\varepsilon_F}\]</span> 通常来说, 金属中的传导电子可以看成理想电子气, Fermi 能<spanclass="math inline">\(\varepsilon_F\sim 10^4\text{K}\cdot k_B\)</span>,比室温<span class="math inline">\(300\text{K}\)</span>高多了,因此金属中的传导电子可以当作强简并电子气处理,电子贡献的热容可以用上式计算, 再考虑晶格热容, 则固体低温热容为 <spanclass="math display">\[C_V\approxNk_B\left[\frac{\pi^2}{2}\frac{T}{\theta_F}+\frac{12\pi^4}{5}\left(\frac{T}{\theta_D}\right)^3\right]\]</span> 晶格热容的<spanclass="math inline">\(T^3\)</span>律在低温下就生效了,但电子热容要在极低温(通常<spanclass="math inline">\(\lesssim10\text{K}\)</span>)才会占主导.</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>统计物理</category>
+      
+      <category>量子理想气体</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>理想 Fermi 气体</tag>
+      
+      <tag>自由电子气</tag>
+      
+      <tag>Sommerfeld 展开</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>量子理想气体(05)：弱简并 Fermi 气体</title>
+    <link href="/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(05)%EF%BC%9A%E5%BC%B1%E7%AE%80%E5%B9%B6%20Fermi%20%E6%B0%94%E4%BD%93/"/>
+    <url>/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(05)%EF%BC%9A%E5%BC%B1%E7%AE%80%E5%B9%B6%20Fermi%20%E6%B0%94%E4%BD%93/</url>
+    
+    <content type="html"><![CDATA[<p><spanclass="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1\right)}\newcommand{\dim}[1]{\text{dim}\left(#1\right)}\newcommand{\diag}[1]{\text{diag}\left(#1\right)}\newcommand{\det}[1]{\text{det}\left(#1\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1\right\}}\newcommand{\abs}[1]{\left| #1\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span>与讨论Bose 气体的情形类似, 我们假定所研究的理想 Fermi 气体是非相对论性的.同时, 粒子的平动动能可以看成准连续的, 单粒子态的求和换成积分, <spanclass="math inline">\(\text{spin-}s\)</span> Fermion构成的理想气体的巨配分函数为 <span class="math display">\[\log\Xi=\frac{2(2s+1)V}{\sqrt{\pi}\lambda_T^3}\int_0^{+\infty}\log(1+e^{-\alpha-x})\sqrt{x}dx\]</span> 积分同样可以利用分部积分消去对数 <span class="math display">\[Integral=\frac{2}{3}x^{3/2}\log(1+e^{-\alpha-x})\Bigg|_{0}^{+\infty}+\int_0^{+\infty}\frac{2}{3}x^{3/2}\frac{dx}{e^{\alpha+x}+1}\]</span> 引入所谓的 Fermi 函数 <span class="math display">\[f_m(z):=\frac{1}{\Gamma(m)}\int\frac{x^{m-1}dx}{z^{-1}e^x+1}\]</span> 积分<spanclass="math inline">\(Integral=2/3\times\Gamma(5/2)f_{5/2}(z)\)</span>,代入得 <span class="math display">\[\begin{aligned}\log\Xi&amp;=\frac{4(2s+1)V}{3\sqrt{\pi}\lambda_T^3}\Gamma(\frac{5}{2})f_{5/2}(z)\\&amp;=\frac{(2s+1)V}{\lambda_T^3}f_{5/2}(z)\end{aligned}\]</span> 热力学量为</p><p><span class="math display">\[\begin{aligned}N&amp;=\frac{(2s+1)V}{\lambda_T^3}f_{3/2}(z)\\p&amp;=\frac{(2s+1)k_BT}{\lambda_T^3}f_{5/2}(z)\end{aligned}\]</span></p><h2 id="弱简并展开">弱简并展开</h2><p>首先需要弄清<spanclass="math inline">\(f_m(z)\)</span>的单调性和取值范围. 显然,它是单调递增的, 并且总有 <span class="math display">\[\frac{1}{\Gamma(m)}\int_0^{+\infty}\frac{x^{m-1}dx}{z^{-1}e^x+1}&lt;\frac{1}{\Gamma(m)}\int_0^{+\infty}x^{m-1}ze^{-x}dx=z\]</span> 可见, 对任何有限的<span class="math inline">\(z\)</span>,<span class="math inline">\(f_m(z)\)</span>不会发散; 同时, <spanclass="math inline">\(f_m(z)\)</span>也没有上界(证明从略), 这样,对于如下粒子数自洽条件 <span class="math display">\[N=(2s+1)V\left(\frac{2\pi mk_BT}{h^2}\right)^{3/2}f_{3/2}(z)\]</span> 任意温度<spanclass="math inline">\(T\)</span>总能有对应的唯一解<spanclass="math inline">\(z\)</span>, 即不会产生类似 B-E 凝聚的现象; 同时,若温度取遍所有正实数, 则<spanclass="math inline">\(z\)</span>也取遍所有正实数.</p><p>对于弱简并体系而言, 可以取高温近似, 则相应地<spanclass="math inline">\(z\ll1\)</span>, 可以考虑围绕<spanclass="math inline">\(z=0\)</span>作幂级数展开. 在积分式中, <spanclass="math inline">\(z^{-1}e^x&gt;1\)</span>在<spanclass="math inline">\(z&lt;1\)</span>时恒成立,可以对分式展开然后逐项积分, 得到 <span class="math display">\[\begin{aligned}f_m(z)&amp;=\frac{z^1}{1^m}-\frac{z^2}{2^m}+\frac{z^3}{3^m}-\cdots\\&amp;=\sum_{j=1}^{+\infty}\frac{(-1)^{j+1}}{j^m}z^j\end{aligned}\]</span> 这是 Fermi 函数的弱简并展开. 这样, 就有<spanclass="math inline">\(N\)</span>和<spanclass="math inline">\(p\)</span>随<spanclass="math inline">\(z\)</span>的变化关系, 可以反解出<spanclass="math inline">\(z\)</span>和<spanclass="math inline">\(N/V\)</span>的关系并代入<spanclass="math inline">\(p\)</span>. 为了方便, 可以引入新变量 <spanclass="math display">\[y:=\frac{N\lambda_T^3}{(2s+1)V}\]</span> 然后对粒子数自洽条件的 Fermi 函数保留一定数目的项, 比如到三阶:<span class="math display">\[y=z-\frac{z^2}{2^{3/2}}+\frac{z^3}{3^{3/2}}\]</span> 用待定系数法可以反设出<spanclass="math inline">\(z\)</span>关于<spanclass="math inline">\(y\)</span>的形式, 然后代入并略去高阶项, 抵消<spanclass="math inline">\(1\sim3\)</span>阶项的系数, 得到 <spanclass="math display">\[z=y +\frac{\sqrt{2}}{4}y^2+\left(\frac{1}{4}-\frac{\sqrt{3}}{9}\right)y^3\]</span> 代入<span class="math inline">\(p\)</span>, 得到<spanclass="math inline">\(p-y\)</span>关系 <span class="math display">\[\frac{pV}{Nk_BT}=1+\frac{1}{2^{5/2}}y-\left(\frac{2}{3^{5/2}}−\frac{1}{8}\right)y^2+\left(\frac{3}{32}+\frac{5}{2^{11/2}}+\frac{3}{6^{3/2}}\right)y^3\]</span> 第一项是弱简并极限(经典极限), 第二项是量子效应的领头阶, Fermi气体的量子修正等效为斥力, 这可以很好地被理解为 Pauli不相容原理的效应.</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>统计物理</category>
+      
+      <category>量子理想气体</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>理想 Fermi 气体</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>量子理想气体(04)：固体热容</title>
     <link href="/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(04)%EF%BC%9A%E5%9B%BA%E4%BD%93%E7%83%AD%E5%AE%B9/"/>
     <url>/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(04)%EF%BC%9A%E5%9B%BA%E4%BD%93%E7%83%AD%E5%AE%B9/</url>
@@ -233,9 +324,9 @@
       
       <tag>平衡态统计物理</tag>
       
-      <tag>正则系综</tag>
-      
       <tag>巨正则系综</tag>
+      
+      <tag>正则系综</tag>
       
       <tag>Boltzmann 分布</tag>
       
@@ -398,13 +489,13 @@
       
       <tag>Givens 变换</tag>
       
-      <tag>Gershgorin 圆盘</tag>
-      
-      <tag>Krylov 子空间</tag>
-      
       <tag>Sturm 序列</tag>
       
+      <tag>Gershgorin 圆盘</tag>
+      
       <tag>Lanczos 迭代法</tag>
+      
+      <tag>Krylov 子空间</tag>
       
     </tags>
     
@@ -437,13 +528,13 @@
       
       <tag>本征值问题</tag>
       
-      <tag>正规矩阵</tag>
-      
-      <tag>Jordan 标准型</tag>
-      
       <tag>Gershgorin 圆盘</tag>
       
       <tag>Krylov 子空间</tag>
+      
+      <tag>正规矩阵</tag>
+      
+      <tag>Jordan 标准型</tag>
       
     </tags>
     
@@ -950,9 +1041,9 @@
       
       <tag>数值计算</tag>
       
-      <tag>Newton-Cortes 方法</tag>
-      
       <tag>数值微积分</tag>
+      
+      <tag>Newton-Cortes 方法</tag>
       
     </tags>
     
