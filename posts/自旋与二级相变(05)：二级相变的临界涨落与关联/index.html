@@ -1,0 +1,1100 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rain Chan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="作为二级相变的最后一节, 本节基于 Landau-Ginzburg 自由能修正平均场近似, 求出了近似解以及一维 Ising 真实解的关联函数与关联长度, 揭示二级相变的长程关联性, 并介绍了各类临界指数满足的约束条件.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自旋与二级相变(05)：二级相变的临界涨落与关联">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E8%87%AA%E6%97%8B%E4%B8%8E%E4%BA%8C%E7%BA%A7%E7%9B%B8%E5%8F%98(05)%EF%BC%9A%E4%BA%8C%E7%BA%A7%E7%9B%B8%E5%8F%98%E7%9A%84%E4%B8%B4%E7%95%8C%E6%B6%A8%E8%90%BD%E4%B8%8E%E5%85%B3%E8%81%94/">
+<meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="作为二级相变的最后一节, 本节基于 Landau-Ginzburg 自由能修正平均场近似, 求出了近似解以及一维 Ising 真实解的关联函数与关联长度, 揭示二级相变的长程关联性, 并介绍了各类临界指数满足的约束条件.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-09T08:42:10.000Z">
+<meta property="article:modified_time" content="2025-04-09T12:16:19.767Z">
+<meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="平均场近似">
+<meta property="article:tag" content="临界指数">
+<meta property="article:tag" content="高温展开">
+<meta property="article:tag" content="Landau 理论">
+<meta property="article:tag" content="Landau-Ginzburg 自由能">
+<meta property="article:tag" content="关联函数">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  
+  <title>自旋与二级相变(05)：二级相变的临界涨落与关联 - Rain Chan&#39;s Notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rain Chan&#39;s Notes</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/img" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>参考</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="自旋与二级相变(05)：二级相变的临界涨落与关联"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-09 16:42" pubdate>
+          2025年4月9日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          19 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">自旋与二级相变(05)：二级相变的临界涨落与关联</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2 id="修正的平均场的涨落与关联">修正的平均场的涨落与关联</h2>
+<p>此前我们仅仅讨论了序参量在平衡态的取值, 从序参量实际的选取来看,
+无论是顺磁-铁磁相变的平均自旋, 还是气液相变的体积,
+都会围绕平衡态发生涨落, 并且在某些情况下, 涨落是不能忽略的.<span
+class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1
+\right)}\newcommand{\dim}[1]{\text{dim}\left(#1
+\right)}\newcommand{\diag}[1]{\text{diag}\left(#1
+\right)}\newcommand{\det}[1]{\text{det}\left(#1
+\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1
+\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1
+\right\}}\newcommand{\abs}[1]{\left| #1
+\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span></p>
+<p>为了讨论涨落, 需要让体系能够出现非均匀的序参量取值, 但平均场理论中,
+单一标量<span class="math inline">\(m\)</span>作为序参量总是一致的.
+因此, 有必要将<span class="math inline">\(m\)</span>推广为标量场 <span
+class="math display">\[
+F[m(\vec{r})]=\int
+d^D\vec{r}\left(f_0+\frac{a(T)}{2}m^2+\frac{d(T)}{2}(\nabla
+m)^2+\frac{b(T)}{4}m^4 \right)
+\]</span> 称为 <strong>Landau-Ginzburg 自由能</strong>. 显然,
+平移不变的极小值解会 cancel 梯度项, 与最普通的 Landau 理论没什么区别:
+<span class="math display">\[
+m_0(\vec{r})=\begin{aligned}
+\begin{cases}
+\sqrt{-a/b} &amp; T&lt;T_c
+\\
+0 \quad&amp;T&gt;T_c
+\end{cases}
+\end{aligned}
+\]</span></p>
+<h3 id="序参量的涨落">序参量的涨落</h3>
+<p>现在考虑涨落, 则 <span class="math display">\[
+m(\vec{r})=m_0(\vec{r})+m&#39;(\vec{r})
+\]</span> 代入自由能泛函, 得到 <span class="math display">\[
+F[m(\vec{r})]=\begin{aligned}
+\begin{cases}
+\displaystyle\int
+d^D\vec{r}\left(f_0+\frac{a(T)}{2}m&#39;^2+\frac{d(T)}{2}(\nabla
+m&#39;)^2\right) &amp; T&gt;T_c
+\\
+\displaystyle\int
+d^D\vec{r}\left(f_0-\frac{a^2}{4b}-a(T)m&#39;^2+\frac{d(T)}{2}(\nabla
+m&#39;)^2\right) &amp; T&lt;T_c
+\end{cases}
+\end{aligned}
+\]</span> 其中, <span
+class="math inline">\(m&#39;\)</span>高于二次的项都被认为是小量,
+从而略去. 引入涨落的 Fourier 变换: <span class="math display">\[
+m&#39;(\vec{r})=\sum_{\vec{k}}\mu_\vec{k} e^{i\vec{k}\cdot\vec{r}}\qquad
+\mu_\vec{k}=\int
+m&#39;(\vec{r})e^{-i\vec{k}\cdot\vec{r}}\frac{d^D\vec{r}}{(2\pi)^D}
+\]</span> 根据 Parseval 定理, 有 <span class="math display">\[
+\begin{aligned}
+\int
+m&#39;(\vec{r})^2d^D\vec{r}&amp;=(2\pi)^D\sum_\vec{k}|\mu_\vec{k}|^2
+\\
+\int(\nabla
+m&#39;)^2d^D\vec{r}&amp;=(2\pi)^D\sum_\vec{k}k^2|\mu_\vec{k}|^2
+\end{aligned}
+\]</span> 由此, 自由能泛函可以用频域的量表出(略去不重要的<span
+class="math inline">\((2\pi)^D\)</span>系数) <span
+class="math display">\[
+F(\mu_\vec{k})=\begin{aligned}
+\begin{cases}
+\displaystyle F_0 + \sum_{\vec{k}}\frac{a(T)+d(T)k^2}{2}|\mu_\vec{k}|^2
+&amp; T&gt;T_c
+\\
+\displaystyle F_0&#39; +
+\sum_{\vec{k}}\frac{-2a(T)+d(T)k^2}{2}|\mu_\vec{k}|^2 &amp; T&lt;T_c
+\end{cases}
+\end{aligned}
+\]</span> 由于配分函数与自由能的关系, 配分函数关于<span
+class="math inline">\(\mu\)</span>的表达式为(以对称相为例) <span
+class="math display">\[
+Z=\exp(-\frac{F}{k_BT})\sim\prod_{\vec{k}}\exp(-\frac{a+d
+k^2}{2k_BT}|\mu_{\vec{k}}|^2)
+\]</span> 表现出 Gauss 分布. 因此, 任意一个<span
+class="math inline">\(\vec{k}\)</span>模的<span
+class="math inline">\(\mu\)</span>的系综均方值可以计算: <span
+class="math display">\[
+\langle|\mu_{\vec{k}}|^2\rangle=\begin{aligned}
+\begin{cases}\displaystyle\frac{k_BT}{a(T)+d(T)k^2} &amp; T&gt;T_c
+\\
+\displaystyle\frac{k_BT}{-2a(T)+d(T)k^2} \quad &amp; T&lt;T_c
+\end{cases}\end{aligned}
+\]</span></p>
+<h3 id="关联函数-关联长度">关联函数, 关联长度</h3>
+<p>为了表现出系统中两个位置的关联性, 引入 <strong>关联函数(correlation
+function)</strong> <span class="math display">\[
+C(\vec{r}_1,\vec{r}_2):=\langle(m(\vec{r}_1)-m_0)(m(\vec{r}_2)-m_0)\rangle
+\]</span> 对于具有平移不变性的系统, 关联函数值应当只与相对位置有关,
+令<span class="math inline">\(\vec{r}_1=\vec{r},\vec{r}_2=0\)</span>, 有
+<span class="math display">\[
+C(\vec{r}):=C(\vec{r}_1=\vec{r},\vec{r}_2=0)=\sum_{\vec{k},\vec{p}}\langle\mu_\vec{k}\mu_{\vec{p}}\rangle
+e^{i\vec{k}\cdot\vec{r}}
+\]</span> 上面的系综平均是对两个复数随机变量的乘积平均,
+它们中的每一个模长都服从 Gauss 分布, 相位均匀分布. 不难验证,
+均值取非零当且仅当<span class="math inline">\(\vec{p}=-\vec{k}\)</span>,
+从而<span
+class="math inline">\(\mu_\vec{p}=\mu_{-\vec{k}}=\mu_\vec{k}^*\)</span>,
+则 <span class="math display">\[
+C(\vec{r})=\sum_{\vec{k}}\frac{k_BT e^{i\vec{k}\cdot\vec{r}}}{a(T)+d(T)
+k^2}
+\]</span> 当体积足够大时(热力学极限), 合法的波模式在动量空间中变得稠密,
+离散求和可以用连续的积分代替, 最终得到 <span class="math display">\[
+\boxed{C(\vec{r})=\frac{k_BT}{4\pi d(T)}\frac{e^{-\frac{r}{\xi}}}{r}}
+\]</span> 其中, <span class="math inline">\(\xi\)</span>被称作
+<strong>关联长度(correlation length)</strong> <span
+class="math display">\[
+\xi=\begin{aligned}
+\begin{cases}
+\displaystyle\sqrt{\frac{d(T)}{a_0(T-T_c)}}&amp;T&gt;T_c
+\\
+\displaystyle\sqrt{\frac{d(T)}{2a_0(T_c-T)}}\quad&amp;T&lt;T_c
+\end{cases}
+\end{aligned}
+\]</span> <span class="math inline">\(T\ne T_c\)</span>时, 关联函数<span
+class="math inline">\(C\sim e^{-r}/r\)</span>, 表现为短程关联; <span
+class="math inline">\(T\)</span>接近<span
+class="math inline">\(T_c\)</span>时, 关联长度<span
+class="math inline">\(\xi\sim|T-T_c|^{-1/2}\)</span>, 不断增大; 当<span
+class="math inline">\(T=T_c\)</span>时, <span
+class="math inline">\(\xi\)</span>发散, 关联函数<span
+class="math inline">\(C\sim1/r\)</span>, 表现为长程关联. 因此可以说,
+<strong>二级相变的本质就是涨落增大、关联长度发散、体系中出现长程关联.</strong>
+在二级相变点附近, 关联函数和临界温度具有关系 <span
+class="math display">\[
+\xi\sim |t|^{-\nu}
+\]</span> 这里<span
+class="math inline">\(\nu\)</span>是我们新引入的临界指数, 对于 L-G
+自由能, <span class="math inline">\(\nu=1/2\)</span>.</p>
+<h2 id="真实系统的关联-临界指数">真实系统的关联, 临界指数</h2>
+<h3 id="无外场-ising-链的关联">无外场 Ising 链的关联</h3>
+<p>考虑一维 Ising 模型的严格解, 并且外场为<span
+class="math inline">\(0\)</span>, 则 <span class="math display">\[
+\langle\sigma_1\sigma_{n+1}\rangle=\frac{2^N\cosh^NK}{Z}\sum_{\{\sigma_j\}}\sigma_1\sigma_{n+1}\prod_{&lt;ij&gt;}(1+\sigma_i\sigma_j\tanh
+K)
+\]</span> 这里我们仿照了二维 Ising 模型高温展开的形式, 因为我们知道,
+一维 Ising 模型<span class="math inline">\(T_c=0\)</span>,
+任何正温度都是"高温".</p>
+<p>现在同样可以讨论求和项中的贡献. 由于每一项都乘上<span
+class="math inline">\(\sigma_1\sigma_{n+1}\)</span>,
+第一项本来是常数<span class="math inline">\(1\)</span>, 但现在被 cancel;
+本来构成闭合回路的项, 现在引入了额外的一条边.
+因此原有的非零贡献全部取<span class="math inline">\(0\)</span>.
+要得到非零贡献, 只有两条本来不闭合的路径(注意到<span
+class="math inline">\(\sigma_1=\sigma_{N+1}\)</span>): <span
+class="math display">\[
+\sigma_1\sigma_2\cdot\sigma_2\sigma_3\cdots\sigma_{n}\sigma_{n+1}\quad\sigma_1\sigma_{N}\cdot\sigma_{N}\sigma_{N-1}\cdots\sigma_{n+2}\sigma_{n+1}
+\]</span> 它们本来都是不闭合的路径, 但是引入了<span
+class="math inline">\(\sigma_1\sigma_{n+1}\)</span>因子,
+相当于几何上强行添加了这一条边, 所以它们添加边后是闭合的,
+能够对结果有贡献.</p>
+<p>总而言之, 可以把结果写为 <span class="math display">\[
+\langle\sigma_1\sigma_{n+1}\rangle=\frac{\tanh^n
+K+\tanh^{N-n}K}{1+\tanh^N K}
+\]</span> 现在取热力学极限(<span
+class="math inline">\(N\rightarrow+\infty\)</span>), 考虑到<span
+class="math inline">\(\tanh K\)</span>在有限温下都是小于<span
+class="math inline">\(1\)</span>的, 得到 <span class="math display">\[
+\langle\sigma_1\sigma_{n+1}\rangle\approx\tanh^n K=e^{-\frac{n}{\xi}}
+\]</span> 其中关联长度为 <span class="math display">\[
+\xi=\frac{-1}{\log\tanh
+K}=\frac{-1}{\log\displaystyle\frac{1-e^{-\frac{2J}{k_BT}}}{1+e^{-\frac{2J}{k_BT}}}}
+\]</span> 低温极限下, <span
+class="math inline">\(e^{-\frac{2J}{k_BT}}\ll1\)</span>, 得到 <span
+class="math display">\[
+\xi=\frac{\exp(\frac{2J}{k_BT})}{2}
+\]</span> 此时无法定义临界指数<span class="math inline">\(\nu\)</span>,
+遑论<span class="math inline">\(\nu=1/2\)</span>.
+这也说明了平均场近似的临界指数值不适用于严格的、实际的系统.</p>
+<h3 id="连续相变的标度分析">连续相变的标度分析</h3>
+<p>此前, 我们已经定义了一系列临界指数, 例如<span
+class="math inline">\(\alpha,\beta,\gamma,\delta\)</span>.
+它们并不是相互独立的, 而是遵循一定的约束条件,
+通过对各种热力学量在相变点附近发散行为的 <strong>标度分析</strong> 得到,
+因此称为 <strong>标度关系</strong>. 此处省略标度分析过程,
+只给出最终结果: <span class="math display">\[
+\begin{aligned}
+\begin{cases}
+\displaystyle\text{Rushbrooke: }\quad&amp;\alpha +2\beta+\gamma=2
+\\\displaystyle
+\text{Widom:}&amp;\gamma=\beta(\delta-1)
+\end{cases}
+\end{aligned}
+\]</span> 对于一维 Ising 的平均场近似, <span
+class="math inline">\((\alpha,\beta,\gamma,\delta)=(0,1/2,1,3)\)</span>;
+对于二维 Ising 的严格解, 为<span
+class="math inline">\((0,1/8,7/4,15)\)</span>, 它们都满足这些结果.</p>
+<p>还有一些标度关系, 它们基于 <strong>超标度假设(hyperscaling
+hypothesis)</strong> 得到, 即 <span class="math display">\[
+f(t,\mathcal{H})=\left(\frac{L}{\xi}\right)^D
+g_1(t,\mathcal{H})+\left(\frac{L}{a}\right)^Dg_2(t,\mathcal{H})
+\]</span> 含义是: 无量纲化了的自由能函数, 可以利用广延性写成右侧形式,
+其中<span class="math inline">\(g_{1,2}\)</span>是强度量函数, <span
+class="math inline">\(L,\xi,a\)</span>分别是系统的尺度、关联长度和晶格常数,
+<span class="math inline">\(D\)</span>是维数. 满足超标度假设的标度关系,
+称为 <strong>超标度关系</strong>.</p>
+<p>值得注意的是, 平均场近似和 Landau 理论计算得到的临界温度<span
+class="math inline">\(T_c=qJ/k_B\)</span>, 与维度无关,
+各种临界指数也与维度无关,
+因此超标度关系<strong>不一定适用于</strong>平均场近似的结果,
+但它们适用于真实的、严格的系统.</p>
+<p>常用的超标度关系如下: <span class="math display">\[
+\begin{aligned}
+\begin{cases}
+\displaystyle\text{Fisher: }\quad&amp;\gamma=\nu(2-\eta)
+\\\displaystyle
+\text{Josephson:}&amp;\alpha=2-D\nu
+\end{cases}
+\end{aligned}
+\]</span> 其中, <span
+class="math inline">\(\eta\)</span>是新定义的临界指数,
+它描述了关联函数在临界温度处的标度: <span class="math display">\[
+C(r;T=T_c)\sim\frac{1}{r^{D-2+\eta}}
+\]</span></p>
+<p>下表列出了我们迄今为止使用的所有临界指数,
+以及它们在平均场近似和真实系统中的值.</p>
+<table>
+
+<thead>
+<tr>
+<th style="text-align: center;">临界指数</th>
+<th style="text-align: center;">定义</th>
+<th style="text-align: center;">MFA值</th>
+<th style="text-align: center;">二维 Ising 真实值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(\alpha\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(C_V\sim(-t)^{-\alpha}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(0\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(0\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(\beta\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(m(\mathcal{H}=0)\sim(-t)^\beta\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1/2\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1/8\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(\gamma\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\chi_T(\mathcal{H}=0)\sim|t|^{-\gamma}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(7/4\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(\delta\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\mathcal{H}(t=0)\sim |m|^\delta\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(3\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(15\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(\eta\)</span></td>
+<td style="text-align: center;"><span class="math inline">\(C(r;t=0)\sim
+r^{-D+2-\eta}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(0\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1/4\)</span></td>
+</tr>
+<tr>
+<td style="text-align: center;"><span
+class="math inline">\(\nu\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(\xi\sim|t|^{-\nu}\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1/2\)</span></td>
+<td style="text-align: center;"><span
+class="math inline">\(1\)</span></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>平均场近似值满足两种普通标度关系, 以及超标度关系中的 Fisher 关系,
+不满足 Josephson 关系;</li>
+<li>真实解满足所有普通标度关系和超标度关系.</li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/" class="category-chain-item">统计物理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/%E8%87%AA%E6%97%8B%E4%B8%8E%E4%BA%8C%E7%BA%A7%E7%9B%B8%E5%8F%98/" class="category-chain-item">自旋与二级相变</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%B9%B3%E5%9D%87%E5%9C%BA%E8%BF%91%E4%BC%BC/" class="print-no-link">#平均场近似</a>
+      
+        <a href="/tags/%E4%B8%B4%E7%95%8C%E6%8C%87%E6%95%B0/" class="print-no-link">#临界指数</a>
+      
+        <a href="/tags/%E9%AB%98%E6%B8%A9%E5%B1%95%E5%BC%80/" class="print-no-link">#高温展开</a>
+      
+        <a href="/tags/Landau-%E7%90%86%E8%AE%BA/" class="print-no-link">#Landau 理论</a>
+      
+        <a href="/tags/Landau-Ginzburg-%E8%87%AA%E7%94%B1%E8%83%BD/" class="print-no-link">#Landau-Ginzburg 自由能</a>
+      
+        <a href="/tags/%E5%85%B3%E8%81%94%E5%87%BD%E6%95%B0/" class="print-no-link">#关联函数</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>自旋与二级相变(05)：二级相变的临界涨落与关联</div>
+      <div>https://notes.rainchan.me/posts/自旋与二级相变(05)：二级相变的临界涨落与关联/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rain Chan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月9日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/%E8%87%AA%E6%97%8B%E4%B8%8E%E4%BA%8C%E7%BA%A7%E7%9B%B8%E5%8F%98(04)%EF%BC%9A%E7%9B%B8%E5%8F%98%E7%9A%84%20Landau%20%E7%90%86%E8%AE%BA/" title="自旋与二级相变(04)：相变的 Landau 理论">
+                        <span class="hidden-mobile">自旋与二级相变(04)：相变的 Landau 理论</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"karnmarth/blog-comments","repo-id":"R_kgDOMerUGQ","category":"Announcements","category-id":"DIC_kwDOMerUGc4ChX3n","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","theme":"preferred_color_scheme"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

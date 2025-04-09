@@ -1,0 +1,967 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rain Chan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="自旋模型特别适合作为二级相变和 Landau 理论的实际对应, 本节介绍最常见的 Ising 模型以及它在平均场近似下的解.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="自旋与二级相变(01)：Ising 模型与平均场近似">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E8%87%AA%E6%97%8B%E4%B8%8E%E4%BA%8C%E7%BA%A7%E7%9B%B8%E5%8F%98(01)%EF%BC%9AIsing%20%E6%A8%A1%E5%9E%8B%E4%B8%8E%E5%B9%B3%E5%9D%87%E5%9C%BA%E8%BF%91%E4%BC%BC/">
+<meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="自旋模型特别适合作为二级相变和 Landau 理论的实际对应, 本节介绍最常见的 Ising 模型以及它在平均场近似下的解.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-05T17:20:10.000Z">
+<meta property="article:modified_time" content="2025-04-09T12:06:50.768Z">
+<meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="Ising 模型">
+<meta property="article:tag" content="平均场近似">
+<meta property="article:tag" content="临界指数">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  
+  <title>自旋与二级相变(01)：Ising 模型与平均场近似 - Rain Chan&#39;s Notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rain Chan&#39;s Notes</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/img" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>参考</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="自旋与二级相变(01)：Ising 模型与平均场近似"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-06 01:20" pubdate>
+          2025年4月6日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">自旋与二级相变(01)：Ising 模型与平均场近似</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2
+id="自旋相互作用的微观机制与抽象描述newcommandkmathbbknewcommandrmathbbrnewcommandcmathbbcnewcommandbmathbfnewcommandbiboldsymbolnewcommandrank1textrankleft1-rightnewcommanddim1textdimleft1-rightnewcommanddiag1textdiagleft1-rightnewcommanddet1textdetleft1-rightnewcommanddet1leftbeginmatrix-1-endmatrixrightnewcommandset1left-1-rightnewcommandabs1left-1-rightnewcommandnorm1leftleft1rightrightnewcommandave1leftlangle-1-rightrangle">自旋相互作用的微观机制与抽象描述<span
+class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1
+\right)}\newcommand{\dim}[1]{\text{dim}\left(#1
+\right)}\newcommand{\diag}[1]{\text{diag}\left(#1
+\right)}\newcommand{\det}[1]{\text{det}\left(#1
+\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1
+\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1
+\right\}}\newcommand{\abs}[1]{\left| #1
+\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\newcommand{\ave}[1]{\left\langle
+#1 \right\rangle}\)</span></h2>
+<p>自旋模型的动力学自由度是定义在某个晶格的格点上的自旋变量(对于原子晶格,
+是原子的总磁矩或者总角动量), Hamiltonian 只包含这些自旋变量的相互作用.
+这种相互作用是一种与全同性有关的纯量子效应, 没有经典对应.
+交换相互作用在两体系统中可以简单地写为 <span class="math display">\[
+H_{exchange}=-J\vec{S}_1\cdot\vec{S}_2
+\]</span> 其中, <span class="math inline">\(\vec{S}\)</span>是自旋变量,
+<span class="math inline">\(J\)</span>叫做 <strong>交换积分</strong>,
+与两个原子的波函数交叠有关, 对于远离的两个原子, 可以认为<span
+class="math inline">\(J\)</span>迅速衰减为<span
+class="math inline">\(0\)</span>. 因此, 一种十分常见的假设是:
+交换相互作用是一种 <strong>最近邻相互作用(nearest neighboring
+interaction, NNI)</strong>.</p>
+<p>现在, 我们可以引入自旋-<span class="math inline">\(1/2\)</span> Ising
+模型了. 考虑一个关于自旋的多体 Hamiltonian, 只考虑 NNI 并且强度相等.
+由于自旋为<span class="math inline">\(1/2\)</span>, 所以可以用 Pauli
+变量描述, 并且同一个方向上只取<span class="math inline">\(\pm1\)</span>.
+如果系统还感受到匀强外场<span
+class="math inline">\(\mathcal{H}\)</span>, 则 <span
+class="math display">\[
+H=-J\sum_{&lt;ij&gt;}\sigma_i\sigma_j-\mathcal{H}\sum_j\sigma_j
+\]</span> 求和中的<span
+class="math inline">\(&lt;ij&gt;\)</span>表示只对最近邻的数对求和.
+如果我们希望无外场时, 系统在动力学上倾向于铁磁, 则<span
+class="math inline">\(J&gt;0\)</span>以使得自旋全部平行时能量最低.</p>
+<h2 id="平均场近似">平均场近似</h2>
+<p>对于单个自旋<span class="math inline">\(\sigma_j\)</span>而言,
+它感受到的等效场不止是<span class="math inline">\(\mathcal{H}\)</span>,
+还包括相邻自旋的效应 <span class="math display">\[
+\mathcal{H}_{eff}=\mathcal{H}+J\sum_{&lt;ij&gt;}\sigma_i
+\]</span> 主要的困难在于后一项, 它使得各个自旋变量高度耦合.
+平均场近似的思路是, 将实际的自旋变量<span
+class="math inline">\(\sigma_i\)</span>直接用系综平均<span
+class="math inline">\(\ave{\sigma_i}\)</span>表示,
+就可以把它当成常数处理了. 这样, 等效场为 <span class="math display">\[
+\mathcal{H}_{eff}\approx\mathcal{H}+qJ\ave{\sigma_i}
+\]</span> 其中<span class="math inline">\(q\)</span>是配位数,
+只和晶格的形状有关. <span
+class="math inline">\(\ave{\sigma_i}\)</span>根据晶格的平移对称性,
+与具体位置<span class="math inline">\(i\)</span>无关, 可以统一记作<span
+class="math inline">\(m\)</span>.</p>
+<p>还有一种方法是对能量项进行平均: <span class="math display">\[
+\begin{aligned}
+\sigma_i\sigma_j&amp;=(m+\sigma_i-m)(m+\sigma_j-m)
+\\&amp;=m^2+m(\sigma_i+\sigma_j-2m)+\cancel{(\sigma_i-m)(\sigma_j-m)}
+\end{aligned}
+\]</span> Hamiltonian 为 <span class="math display">\[
+\begin{aligned}
+H_{MF}&amp;=-J\sum_{&lt;ij&gt;}m(\sigma_i+\sigma_j-m)-\mathcal{H}\sum_j\sigma_j
+\\&amp;=\frac{qN}{2}Jm^2-(qJm+\mathcal{H})\sum_j\sigma_j
+\end{aligned}
+\]</span> 两种近似的区别就在于上式第一项是否存在, 我们采用带有<span
+class="math inline">\(m^2\)</span>项的平均场 Hamiltonian.</p>
+<h3 id="配分函数和热力学量">配分函数和热力学量</h3>
+<p>根据<span class="math inline">\(H_{MF}\)</span>求得的正则配分函数为
+<span class="math display">\[
+\begin{aligned}
+Z_{MF}&amp;=\exp(-\frac{qN}{2}\beta
+Jm^2)\sum_{\{\sigma_j\}}\exp(\beta(qJm+\mathcal{H})\sum_j\sigma_j)
+\\&amp;=\exp(-\frac{qN}{2}\beta
+Jm^2)\left[2\cosh(\beta(qJm+\mathcal{H})) \right]^N
+\end{aligned}
+\]</span> 对数正则配分函数为 <span class="math display">\[
+\log(Z_{MF})=N\log(2\cosh(\beta(qJm+\mathcal{H})))-\frac{qN}{2}\beta
+Jm^2
+\]</span> 考虑到<span
+class="math inline">\(m\)</span>是单个自旋变量的系综平均,
+它本身就可以用配分函数表示为 <span class="math display">\[
+m=\frac{1}{N}\frac{\partial}{\partial
+\mathcal{H}_{eff}}\log(Z_{MF})=\tanh(\beta(qJm+\mathcal{H}))
+\]</span> 这个方程称作 <strong>自洽方程</strong>, 它决定了<span
+class="math inline">\(m\)</span>的取值.</p>
+<h3 id="三种温度下的自旋取值">三种温度下的自旋取值</h3>
+<p>首先是任意外场、无穷高温, <span
+class="math inline">\(\beta\mathcal{H}_{eff}\approx0\)</span>,
+根据自洽方程可知: <span class="math inline">\(m=0\)</span>.</p>
+<p>然后是任意外场、零温, <span
+class="math inline">\(\beta\mathcal{H}_{eff}\)</span>发散到无穷,
+正负性取决于有效场, 则<span class="math inline">\(m=\pm1\)</span>.</p>
+<p>这两种情形完全可以通过定性分析得到.
+系统在动力学上倾向于能量最低(自旋全部平行),
+在热力学上倾向于完全随机排列, 因此在无穷高温下完全无序,
+在零温下完全有序.</p>
+<p>最后一种情形是无外场的自洽方程: <span class="math display">\[
+m=\tanh(\beta qJm)
+\]</span> 它在<span class="math inline">\(\beta qJ\le
+1\)</span>时只有零解, 在<span class="math inline">\(\beta
+qJ&gt;1\)</span>时存在非零解. 引入 <strong>临界温度</strong> <span
+class="math display">\[
+T_c=\frac{qJ}{k_B}
+\]</span> 当<span class="math inline">\(T&gt;T_c\)</span>时, <span
+class="math inline">\(m\)</span>只有零解, 系统在无外场时也不存在分子场,
+在外场驱动下产生同向磁场, 处在顺磁相; <span
+class="math inline">\(T&lt;T_c\)</span>时, <span
+class="math inline">\(m\)</span>既有零解也有非零解,
+系统在无外场时可以进行 <strong>自发磁化</strong>,
+从无序的状态自发变为相对有序的状态, 处于铁磁相. <span
+class="math inline">\(T_c\)</span>恰好是这个顺磁-铁磁相变的临界温度.
+这个值是完全无关于维度的, 仅有的几何量是配位数<span
+class="math inline">\(q\)</span>. 有必要指明的是,
+<strong>这完全是近似解, 不是真实解.</strong></p>
+<h2 id="近似解的临界指数">近似解的临界指数</h2>
+<p>在临界温度附近, 各个热力学量的依赖关系是重要的.
+考虑无外场、温度略低于<span class="math inline">\(T_c\)</span>的情况,
+<span class="math inline">\(m\)</span>本身是小量,
+自洽方程可以展开为幂级数 <span class="math display">\[
+m=\frac{T_c}{T}m-\frac{T_c^3}{3T^3}m^3
+\]</span> 得到 <span class="math display">\[
+m^2=\frac{3T^3}{T_c^3}(\frac{T_c}{T}-1)
+\]</span> 当<span class="math inline">\(T\)</span>在<span
+class="math inline">\(T_c\)</span>附近时, <span
+class="math inline">\(T^3\)</span>因子不重要, 可以直接近似为<span
+class="math inline">\(T_c\)</span>, 则 <span class="math display">\[
+m\sim\begin{aligned}
+\begin{cases}
+0\qquad&amp;T&gt;T_c
+\\
+(T_c-T)^{\frac{1}{2}}&amp;T&lt;T_c
+\end{cases}
+\end{aligned}
+\]</span> 这个幂指数的一般记号为<span
+class="math inline">\(\beta\)</span>, 称作
+<strong>序参量临界指数</strong>.</p>
+<p>还可以考虑磁化率 <span class="math display">\[
+\chi_T=\left(\frac{\partial m}{\partial\mathcal{H}}
+\right)_{\mathcal{H}=0}
+\]</span> 对自洽方程求偏导数, 得到 <span class="math display">\[
+1=\frac{\displaystyle\beta
+qJ+\beta\left(\frac{\partial\mathcal{H}}{\partial m}
+\right)}{\cosh^2(\beta
+(qJm+\mathcal{H}))}\Bigg|_{\mathcal{H}=0}=\frac{\beta}{\cosh^2(\beta
+qJm)}(qJ+1/\chi_T)
+\]</span> 在<span class="math inline">\(T_c\)</span>附近, <span
+class="math inline">\(\cosh(\beta qJm)\)</span>直接近似为<span
+class="math inline">\(1\)</span>, 则 <span class="math display">\[
+\chi_T=\frac{1}{qJ-k_BT}\sim(T_c-T)^{-1}
+\]</span> 这个幂指数一般记作<span
+class="math inline">\(-\gamma\)</span>, 称为
+<strong>磁化率临界指数</strong>.</p>
+<p>当温度恰好为<span class="math inline">\(T_c\)</span>时, 自洽方程为
+<span class="math display">\[
+m=\tanh(m+\frac{\mathcal{H}}{k_BT})
+\]</span> <span class="math inline">\(m\)</span>和<span
+class="math inline">\(\mathcal{H}\)</span>都是无穷小量时,
+它们的依赖关系为 <span class="math display">\[
+m=m+\frac{\mathcal{H}}{k_BT}-\frac{1}{3}\left(m+\frac{\mathcal{H}}{k_BT}\right)^3
+\]</span> 整理可得: <span class="math display">\[
+\mathcal{H}\sim m^3\qquad T=T_c
+\]</span> 这个指数一般记作<span class="math inline">\(\delta\)</span>,
+称为 <strong>序参量对磁场的临界指数</strong>. <span
+class="math inline">\(\beta,\gamma,\delta\)</span>完整描述了临界点附近<span
+class="math inline">\(T,m,\mathcal{H}\)</span>的关系.</p>
+<p>另一个重要的临界指数是热容和温度的关系: <span class="math display">\[
+C_\mathcal{H}\sim|T-T_c|^{-\alpha}
+\]</span> 平均场近似的 Ising 模型的热容不会发散, 只有间断点, 因此<span
+class="math inline">\(\alpha=0\)</span>.</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/" class="category-chain-item">统计物理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/%E8%87%AA%E6%97%8B%E4%B8%8E%E4%BA%8C%E7%BA%A7%E7%9B%B8%E5%8F%98/" class="category-chain-item">自旋与二级相变</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/Ising-%E6%A8%A1%E5%9E%8B/" class="print-no-link">#Ising 模型</a>
+      
+        <a href="/tags/%E5%B9%B3%E5%9D%87%E5%9C%BA%E8%BF%91%E4%BC%BC/" class="print-no-link">#平均场近似</a>
+      
+        <a href="/tags/%E4%B8%B4%E7%95%8C%E6%8C%87%E6%95%B0/" class="print-no-link">#临界指数</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>自旋与二级相变(01)：Ising 模型与平均场近似</div>
+      <div>https://notes.rainchan.me/posts/自旋与二级相变(01)：Ising 模型与平均场近似/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rain Chan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月6日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/%E8%87%AA%E6%97%8B%E4%B8%8E%E4%BA%8C%E7%BA%A7%E7%9B%B8%E5%8F%98(02)%EF%BC%9A%E4%B8%80%E7%BB%B4%20Ising%20%E6%A8%A1%E5%9E%8B%E7%9A%84%E4%B8%A5%E6%A0%BC%E8%A7%A3/" title="自旋与二级相变(02)：一维 Ising 模型的严格解">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">自旋与二级相变(02)：一维 Ising 模型的严格解</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/%E9%87%8F%E5%AD%90%E7%90%86%E6%83%B3%E6%B0%94%E4%BD%93(07)%EF%BC%9A%E5%8C%80%E5%BC%BA%E7%A3%81%E5%9C%BA%E4%B8%AD%E7%9A%84%E7%94%B5%E5%AD%90%E6%B0%94/" title="量子理想气体(07)：匀强磁场中的电子气">
+                        <span class="hidden-mobile">量子理想气体(07)：匀强磁场中的电子气</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"karnmarth/blog-comments","repo-id":"R_kgDOMerUGQ","category":"Announcements","category-id":"DIC_kwDOMerUGc4ChX3n","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","theme":"preferred_color_scheme"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
