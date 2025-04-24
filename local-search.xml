@@ -55,9 +55,9 @@
       
       <tag>角动量</tag>
       
-      <tag>不可约张量</tag>
-      
       <tag>球张量</tag>
+      
+      <tag>不可约张量</tag>
       
     </tags>
     
@@ -268,11 +268,11 @@
     
     <tags>
       
+      <tag>高温展开</tag>
+      
       <tag>平均场近似</tag>
       
       <tag>临界指数</tag>
-      
-      <tag>高温展开</tag>
       
       <tag>Landau 理论</tag>
       
@@ -894,11 +894,11 @@
       
       <tag>本征值问题</tag>
       
-      <tag>Givens 变换</tag>
-      
       <tag>Gershgorin 圆盘</tag>
       
       <tag>Krylov 子空间</tag>
+      
+      <tag>Givens 变换</tag>
       
       <tag>Sturm 序列</tag>
       
@@ -1151,9 +1151,9 @@
       
       <tag>线性方程组</tag>
       
-      <tag>自伴矩阵</tag>
-      
       <tag>三角矩阵</tag>
+      
+      <tag>自伴矩阵</tag>
       
     </tags>
     
