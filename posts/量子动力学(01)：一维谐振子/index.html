@@ -1,0 +1,963 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rain Chan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="简谐振子是量子力学中最重要的问题之一. 它不仅诠释了量子力学的许多基本概念和方法, 而且还具有许多实用价值, 本质上, 任何势阱都可以用一个简谐振子来近似, 因此它能描写从分子振动到核结构的各种现象, 而且, 因为哈密顿量基本上是两个正则共轭变量的平方和, 所以也是量子场论中许多问题的重要出发点.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="量子动力学(01)：一维谐振子">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E9%87%8F%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6(01)%EF%BC%9A%E4%B8%80%E7%BB%B4%E8%B0%90%E6%8C%AF%E5%AD%90/">
+<meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="简谐振子是量子力学中最重要的问题之一. 它不仅诠释了量子力学的许多基本概念和方法, 而且还具有许多实用价值, 本质上, 任何势阱都可以用一个简谐振子来近似, 因此它能描写从分子振动到核结构的各种现象, 而且, 因为哈密顿量基本上是两个正则共轭变量的平方和, 所以也是量子场论中许多问题的重要出发点.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-22T07:22:06.000Z">
+<meta property="article:modified_time" content="2025-04-22T16:31:35.980Z">
+<meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="简谐势">
+<meta property="article:tag" content="产生-湮灭算符">
+<meta property="article:tag" content="相干态">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  
+  <title>量子动力学(01)：一维谐振子 - Rain Chan&#39;s Notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rain Chan&#39;s Notes</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/img" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>参考</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="量子动力学(01)：一维谐振子"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-22 15:22" pubdate>
+          2025年4月22日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">量子动力学(01)：一维谐振子</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2
+id="newcommandkmathbbknewcommandrmathbbrnewcommandcmathbbcnewcommandbmathbfnewcommandbiboldsymbolnewcommandrank1textrankleft1-rightnewcommanddim1textdimleft1-rightnewcommanddiag1textdiagleft1-rightnewcommanddet1textdetleft1-rightnewcommanddet1leftbeginmatrix-1-endmatrixrightnewcommandset1left-1-rightnewcommandabs1left-1-rightnewcommandnorm1leftleft1rightright代数方法"><span
+class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1
+\right)}\newcommand{\dim}[1]{\text{dim}\left(#1
+\right)}\newcommand{\diag}[1]{\text{diag}\left(#1
+\right)}\newcommand{\det}[1]{\text{det}\left(#1
+\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1
+\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1
+\right\}}\newcommand{\abs}[1]{\left| #1
+\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span>代数方法</h2>
+<p>一维谐振子的 Hamiltonian 为 <span class="math display">\[
+H=\frac{p^2}{2m}+\frac{m\omega^2x^2}{2}
+\]</span> 其中, <span class="math inline">\(p,
+x\)</span>都不是三维情况的矢量算符, 而是单一方向的动量和位置算符.
+方便的做法是, 定义出两个非厄密的算符 <span class="math display">\[
+a^\dagger,a=\sqrt{\frac{m\omega}{2\hbar}}\left(x\mp\frac{ip}{m\omega}\right)
+\]</span> 称为 <strong>产生算符(creation operator)</strong> 和
+<strong>湮灭算符(annihilation operator)</strong>.
+利用正则对易关系以及上述表达式, 容易得到 <span class="math display">\[
+[a,a^\dagger]=1\quad H=\hbar\omega(a^\dagger a+\frac{1}{2})
+\]</span> <span class="math inline">\(a^\dagger
+a\)</span>整体的本征矢也是能量本征态, 可以用<span
+class="math inline">\(\ket{n}\)</span>来标记, 则 <span
+class="math display">\[
+a^\dagger a\ket{n}=n\ket{n}
+\]</span> 考虑<span class="math inline">\(a^\dagger a\)</span>和<span
+class="math inline">\(a\)</span>的对易子 <span class="math display">\[
+[a^\dagger a,a]=a^\dagger[a,a]+[a^\dagger,a]a=-a
+\]</span> 则 <span class="math display">\[
+[a^\dagger a, a]\ket{n}=a^\dagger aa\ket{n}-na\ket{n}=-a\ket{n}
+\]</span> 如果<span class="math inline">\(\ket{n}\)</span>是<span
+class="math inline">\(a^\dagger a\)</span>的本征矢, 那么<span
+class="math inline">\(a\ket{n}\)</span>也是它的本征矢(可能未归一化),
+本征值为<span class="math inline">\(n-1\)</span>.</p>
+<p>至此, 还没有找到对<span class="math inline">\(n\)</span>取值的要求,
+除了应当是实数. 但是对于态<span class="math inline">\(a\ket{n}\)</span>,
+应当有正定性要求, 即它与自身的内积非负: <span class="math display">\[
+\bra{n}a^\dagger a\ket{n}=n\ge 0
+\]</span> 这个式子否认了任何负的<span
+class="math inline">\(n\)</span>值存在. 它同时也给出 <span
+class="math display">\[
+a\ket{n}=\sqrt{n}\ket{n-1}
+\]</span> 这里实际上允许选取一个复数的相位, 但通常选取为<span
+class="math inline">\(0\)</span>使得系数为正实数. 现在,
+假定存在某个正本征值的整数部分是<span
+class="math inline">\(n&#39;\)</span>, 小数部分是<span
+class="math inline">\(\nu\)</span>, 总可以作用<span
+class="math inline">\(n&#39;\)</span>个<span
+class="math inline">\(a\)</span>得到本征值非常接近<span
+class="math inline">\(0\)</span>的态: <span class="math display">\[
+a^{n&#39;}\ket{n&#39;+\nu}=\sqrt{(n&#39;+\nu)(n&#39;+\nu-1)\cdots(\nu+1)}\ket{\nu}
+\]</span> 同时, 它并未拒绝负本征值的存在, 只需要再乘上一个<span
+class="math inline">\(a\)</span>: <span class="math display">\[
+a\ket{\nu}=\sqrt{\nu}\ket{\nu-1}\quad \nu-1&lt;0
+\]</span> 为了禁止<span
+class="math inline">\(\ket{\nu-1}\)</span>的存在, 必须令<span
+class="math inline">\(\nu=0\)</span>. 此时, <span
+class="math inline">\(n\)</span>的取值为全体自然数. 因此, 能量本征值为
+<span class="math display">\[
+\boxed{E_n=(n+\frac{1}{2})\hbar\omega\quad n=0,1,\cdots}
+\]</span></p>
+<h2 id="本征态的性质">本征态的性质</h2>
+<h3 id="坐标与动量">坐标与动量</h3>
+<p>基于产生-湮灭算符反解出<span class="math inline">\(x,p\)</span>:
+<span class="math display">\[
+x=\sqrt{\frac{\hbar}{2m\omega}}(a+a^\dagger)\quad
+p=i\sqrt{\frac{m\hbar\omega}{2}}(a^\dagger-a)
+\]</span> 由于<span class="math inline">\(a^{\
+,\dagger}\ket{n}\sim\ket{n\mp1}\)</span>, 所以 <span
+class="math display">\[
+\langle x\rangle=\bra{n}x\!\ket{n}\sim\braket{n}{n\mp1}=0
+\]</span> 同理, <span class="math inline">\(\langle p\rangle=0\)</span>.
+任何能量本征态的位置期望和动量期望均为<span
+class="math inline">\(0\)</span>.</p>
+<p>也可以关注它们的方均值: <span class="math display">\[
+x^2=\frac{\hbar}{2m\omega}(a^2+a^{\dagger2}+a^\dagger a+a a^\dagger)
+\]</span> 前两项同样不起作用, 后两项与 Hamiltonian 有关 <span
+class="math display">\[
+\langle x^2\rangle = \frac{\hbar}{2m\omega}\bra{n}2a^\dagger
+a+1\!\ket{n}=\frac{(2n+1)\hbar}{2m\omega}
+\]</span> 同理, <span class="math inline">\(\langle
+p^2\rangle=(2n+1)m\omega\hbar/2\)</span>. 则两个算符的标准差之积为 <span
+class="math display">\[
+\Delta x\cdot\Delta p=\frac{2n+1}{2}\hbar
+\]</span> 对于基态(<span class="math inline">\(n=0\)</span>), 上式取到
+Heisenberg 不确定关系的下确界.</p>
+<h3 id="heisenberg-绘景的谐振子">Heisenberg 绘景的谐振子</h3>
+<p>Heisenberg 绘景下演化的力学量更适合与经典谐振子类比. 对于一维谐振子,
+Heisenberg 运动方程和经典正则方程形式上一致 <span
+class="math display">\[
+\dot{p}=-m\omega^2 x\quad \dot{x}=p/m
+\]</span> 显然, 这一对耦合的一阶线性微分方程给出振动解 <span
+class="math display">\[
+\begin{cases}\displaystyle
+x(t)=x_0\cos\omega t+\frac{p_0}{m\omega}\sin\omega t
+\\\\\displaystyle
+p(t)=p_0\cos\omega t-m\omega x_0\sin\omega t
+\end{cases}
+\]</span> 同理, 产生-湮灭算符具有复振动解 <span class="math display">\[
+a^{\ ,\dagger}(t)=a^{\ ,\dagger}_0e^{\mp i\omega t}
+\]</span> 现在的问题在于, 量子系统的经典极限相当于波包的局域化极限,
+对于一个量子波包<span class="math inline">\(\psi(x)\)</span>,
+它的局域化位置为<span class="math inline">\(\langle x\rangle\)</span>,
+而能量本征态下<span class="math inline">\(x\)</span>的期望为<span
+class="math inline">\(0\)</span>, 不随绘景变化. 因此, 虽然 Heisenberg
+绘景的算符形式上和它们的经典对应一致,
+但是仍不能把能量本征态对应到经典简谐振动的状态上.</p>
+<h2 id="相干态">相干态</h2>
+<p>上述能量本征态是 Hamiltonian 的本征态, 也是<span
+class="math inline">\(a^\dagger a\)</span>的本征态.
+我们可以考虑一种新的态<span class="math inline">\(\ket{\alpha}\)</span>,
+它是<span class="math inline">\(a\)</span>的本征态: <span
+class="math display">\[
+a\ket{\alpha}=\alpha\ket{\alpha}
+\]</span> 称为 <strong>相干态</strong>, 可以把它表示为能量本征态的叠加
+<span class="math display">\[
+\ket{\alpha}=\sum_n c_n\ket{n}
+\]</span> 则<span class="math inline">\(c_n\)</span>的自洽关系为 <span
+class="math display">\[
+\sum_{n=0}^\infty\alpha c_n\ket{n}=\sum_{n=1}^\infty\sqrt{n}c_n\ket{n-1}
+\]</span> 逐个比对系数, 得到递推关系: <span class="math inline">\(\alpha
+c_n=\sqrt{n+1}c_{n+1}\)</span>, 即: <span class="math display">\[
+c_{n+1}\sqrt{(n+1)!}=\alpha c_n\sqrt{n!}
+\]</span> 由此可以求出 <span class="math display">\[
+c_n=\frac{\alpha^n
+c_0}{\sqrt{n!}}\quad\ket{\alpha}=c_0\sum_n\frac{\alpha^n}{\sqrt{n!}}\ket{n}
+\]</span> 现在考虑<span
+class="math inline">\(\ket{\alpha}\)</span>是个归一化的矢量, 则 <span
+class="math display">\[
+c_0^*c_0\sum_{n=0}^\infty\frac{(\alpha^*\alpha)^n}{n!}=c_0^*c_0\exp(|\alpha|^2)=1
+\]</span> <span
+class="math inline">\(c_0\)</span>最简单的取法也是正实数,
+因此相干态以能量本征态为基的表示为 <span class="math display">\[
+\boxed{\ket{\alpha}=\exp(-\frac{|\alpha|^2}{2})\sum_{n=0}^\infty\frac{\alpha^n}{\sqrt{n!}}\ket{n}}
+\]</span> 如果考虑时间演化, 每个能量本征态前面引入频率<span
+class="math inline">\((n+1/2)\omega\)</span>, 则 <span
+class="math display">\[
+\begin{aligned}\ket{\alpha;t}
+&amp;=\exp(-\frac{|\alpha|^2}{2})\sum_{n}\frac{\alpha^n}{\sqrt{n!}}\exp(-i(n+\frac{1}{2})\omega
+t) \ket{n}
+\\&amp;=
+\exp(-\frac{|\alpha|^2+i\omega t}{2})\sum_n\frac{(\alpha e^{-i\omega
+t})^n}{\sqrt{n!}}\ket{n}
+\end{aligned}
+\]</span> 我们仍可以将它视作相干态, 但本征值并不是<span
+class="math inline">\(\alpha\)</span>, 而是<span
+class="math inline">\(\alpha e^{-i\omega t}\)</span>.</p>
+<h3 id="位置期望">位置期望</h3>
+<p>对于相干态<span class="math inline">\(\ket{\alpha}\)</span>,
+位置期望为 <span class="math display">\[
+\bra{\alpha}x\!
+\ket{\alpha}=\sqrt{\frac{\hbar}{2m\omega}}\bra{\alpha}(a^\dagger+a)\!\ket{\alpha}=\sqrt{\frac{\hbar}{2m\omega}}(\alpha^*+\alpha)
+\]</span> 经过时间<span class="math inline">\(t\)</span>后, 相干态<span
+class="math inline">\(\ket{\alpha}\)</span>演化为<span
+class="math inline">\(\ket{\alpha;t}\)</span>, 本征值从<span
+class="math inline">\(\alpha\)</span>变为<span
+class="math inline">\(\alpha e^{-i\omega t}\)</span>, 即 <span
+class="math display">\[
+\bra{\alpha;t}x\!\ket{\alpha;t}=\sqrt{\frac{\hbar}{2m\omega}}(\alpha
+e^{-i\omega t}+\alpha^* e^{i\omega t})
+\]</span> 因此,
+<strong>随时间演化的相干态给出的位置期望才对应于经典简谐振动</strong>.</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/" class="category-chain-item">量子力学</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/%E9%87%8F%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6/" class="category-chain-item">量子动力学</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AE%80%E8%B0%90%E5%8A%BF/" class="print-no-link">#简谐势</a>
+      
+        <a href="/tags/%E4%BA%A7%E7%94%9F-%E6%B9%AE%E7%81%AD%E7%AE%97%E7%AC%A6/" class="print-no-link">#产生-湮灭算符</a>
+      
+        <a href="/tags/%E7%9B%B8%E5%B9%B2%E6%80%81/" class="print-no-link">#相干态</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>量子动力学(01)：一维谐振子</div>
+      <div>https://notes.rainchan.me/posts/量子动力学(01)：一维谐振子/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rain Chan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月22日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/%E9%87%8F%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6(02)%EF%BC%9A%E4%B8%80%E7%BB%B4%E7%BA%BF%E6%80%A7%E5%8A%BF%E4%B8%8E%20WKB%20%E8%BF%91%E4%BC%BC/" title="量子动力学(02)：一维线性势与 WKB 近似">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">量子动力学(02)：一维线性势与 WKB 近似</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/%E8%87%AA%E6%97%8B%E4%B8%8E%E4%BA%8C%E7%BA%A7%E7%9B%B8%E5%8F%98(05)%EF%BC%9A%E4%BA%8C%E7%BA%A7%E7%9B%B8%E5%8F%98%E7%9A%84%E4%B8%B4%E7%95%8C%E6%B6%A8%E8%90%BD%E4%B8%8E%E5%85%B3%E8%81%94/" title="自旋与二级相变(05)：二级相变的临界涨落与关联">
+                        <span class="hidden-mobile">自旋与二级相变(05)：二级相变的临界涨落与关联</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"karnmarth/blog-comments","repo-id":"R_kgDOMerUGQ","category":"Announcements","category-id":"DIC_kwDOMerUGc4ChX3n","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","theme":"preferred_color_scheme"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,860 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rain Chan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="上节已经提出了不可约张量的新表象, 这种形式被称为球张量. 本节将论述如何使用直角坐标系中的矢量构造出它的球张量形式, 以及如何基于两个球张量构造新的球张量; 最后, 给出关于球张量性质的重要定理—— Wigner-Eckart 定理, 以及它的一些简单变形.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="角动量理论(05)：Wigner-Eckart 定理">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E8%A7%92%E5%8A%A8%E9%87%8F%E7%90%86%E8%AE%BA(05)%EF%BC%9AWigner-Eckart%20%E5%AE%9A%E7%90%86/">
+<meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="上节已经提出了不可约张量的新表象, 这种形式被称为球张量. 本节将论述如何使用直角坐标系中的矢量构造出它的球张量形式, 以及如何基于两个球张量构造新的球张量; 最后, 给出关于球张量性质的重要定理—— Wigner-Eckart 定理, 以及它的一些简单变形.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-23T18:11:45.000Z">
+<meta property="article:modified_time" content="2025-04-24T13:02:17.655Z">
+<meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="角动量">
+<meta property="article:tag" content="球张量">
+<meta property="article:tag" content="Wigner-Eckart 定理">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  
+  <title>角动量理论(05)：Wigner-Eckart 定理 - Rain Chan&#39;s Notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rain Chan&#39;s Notes</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/img" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>参考</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="角动量理论(05)：Wigner-Eckart 定理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-24 02:11" pubdate>
+          2025年4月24日 凌晨
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">角动量理论(05)：Wigner-Eckart 定理</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2
+id="球张量的构造newcommandkmathbbknewcommandrmathbbrnewcommandcmathbbcnewcommandbmathbfnewcommandbiboldsymbolnewcommandrank1textrankleft1-rightnewcommanddim1textdimleft1-rightnewcommanddiag1textdiagleft1-rightnewcommanddet1textdetleft1-rightnewcommanddet1leftbeginmatrix-1-endmatrixrightnewcommandset1left-1-rightnewcommandabs1left-1-rightnewcommandnorm1leftleft1rightright">球张量的构造<span
+class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1
+\right)}\newcommand{\dim}[1]{\text{dim}\left(#1
+\right)}\newcommand{\diag}[1]{\text{diag}\left(#1
+\right)}\newcommand{\det}[1]{\text{det}\left(#1
+\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1
+\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1
+\right\}}\newcommand{\abs}[1]{\left| #1
+\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span></h2>
+<p>球张量算符的定义已经在上节末尾得到了充分证明. 但是,
+通常我们所看到的算符是基于不可约张量表象的(甚至是没有被约化的直角坐标张量),
+例如<span
+class="math inline">\(\vec{x},\vec{p},\vec{J}\)</span>这些矢量算符,
+如果在<span
+class="math inline">\(\hat{e}_x,\hat{e}_y,\hat{e}_z\)</span>的基底写出分量,
+就不是球张量表象. 实际上上节已经给出了类似的方法.</p>
+<div class="note note-info">
+            <h5 id="method-直角坐标矢量算符的球张量化手续">Method直角坐标矢量算符的球张量化手续</h5><p>给定一个矢量算符<span class="math inline">\(\vec{V}\)</span>,它的球张量化手续是 <span class="math display">\[V_1^0=V_z\quad V_{1}^{\pm1}=\frac{\mp V_x-iV_y}{\sqrt{2}}\]</span></p>
+          </div>
+<p>证明略, 实际上就是<span class="math inline">\(\hat{n}\)</span>和<span
+class="math inline">\(Y_1^m(\hat{n})\)</span>的换算.
+一个典型的例子是<span class="math inline">\((L_z,\mp
+L_{\pm}/\sqrt{2})\)</span>,
+它们也恰好满足一阶球张量和角动量算符之间的对易关系.</p>
+<p>还可以给出任意两个球张量构造新球张量的手续.</p>
+<div class="note note-info">
+            <h5 id="method-两个球张量构造新球张量的手续">Method两个球张量构造新球张量的手续</h5><p>给定球张量<span class="math inline">\(W_{k_1}^{q_1}\)</span>和<spanclass="math inline">\(Z_{k_2}^{q_2}\)</span>,它们可以按如下方法构造出新的球张量 <span class="math display">\[Y_k^q=\sum_{q_1,q_2}\begin{bmatrix}k_1&amp;k_2&amp;k\\q_1&amp;q_2&amp;q\end{bmatrix}W_{k_1}^{q_1}Z_{k_2}^{q_2}\]</span> 其中, 新的球张量阶数<spanclass="math inline">\(k\)</span>显然不大于<spanclass="math inline">\(k_1+k_2\)</span>且不小于<spanclass="math inline">\(|k_1-k_2|\)</span>, 否则构造得到平庸的零结果.</p>
+          </div>
+
+    <div class="fold">
+      <div class="fold-title fold-light collapsed" data-toggle="collapse" href="#collapse-90b43193" role="button" aria-expanded="false" aria-controls="collapse-90b43193">
+        <div class="fold-arrow">▶</div>Proof
+      </div>
+      <div class="fold-collapse collapse" id="collapse-90b43193">
+        <div class="fold-content">
+          <p>只需要证明<span class="math inline">\(Y\)</span>和<spanclass="math inline">\(J\)</span>满足球张量应有的对易关系.首先是最简单的<span class="math inline">\(J_z\)</span>: <spanclass="math display">\[\begin{aligned}\[J_z,Y_k^q]&amp;=\sum_{q_1,q_2}\begin{bmatrix}k_1&amp;k_2&amp;k\\q_1&amp;q_2&amp;q\end{bmatrix}([J_z,W_{k_1}^{q_1}]Z_{k_2}^{q_2}+W_{k_1}^{q_1}[J_z,Z_{k_2}^{q_2}])\\&amp;=\sum_{q_1,q_2}\begin{bmatrix}k_1&amp;k_2&amp;k\\q_1&amp;q_2&amp;q\end{bmatrix}(q_1W_{k_1}^{q_1}Z_{k_2}^{q_2}+q_2W_{k_1}^{q_1}Z_{k_2}^{q_2})\end{aligned}\]</span> 由于 C-G 系数仅在<spanclass="math inline">\(q=q_1+q_2\)</span>的情况下给出非零值,因此有效的求和项总有<span class="math inline">\(q_1+q_2=q\)</span>,把<span class="math inline">\(q\)</span>提出求和项, 即可证明<spanclass="math inline">\([J_z,Y_k^q]=qY_k^q\)</span>.</p><p>然后是更加复杂的<span class="math inline">\(J_{\pm}\)</span>, 记<spanclass="math inline">\(j_{\pm}(k,q)=\sqrt{(k\mp q)(k\pm q+1)}\)</span>,得 <span class="math display">\[\begin{aligned}\[J_\pm,Y_k^q]&amp;=\sum_{q_1,q_2}\begin{bmatrix}k_1&amp;k_2&amp;k\\q_1&amp;q_2&amp;q\end{bmatrix}\left(j_{\pm}(k_1,q_1)W_{k_1}^{q_1\pm1} Z_{k_2}^{q_2}+ j_{\pm}(k_2,q_2)W_{k_1}^{q_1}Z_{k_2}^{q_2\pm1}\right)\end{aligned}\]</span> 把右侧统一写为<spanclass="math inline">\(W^{m_1}Z^{m_2}\)</span>的形式, 有 <spanclass="math display">\[[J_\pm,Y_k^q]=\sum_{m_1,m_2}W_{k_1}^{m_1} Z_{k_2}^{m_2}\left(\begin{bmatrix}k_1&amp;k_2&amp;k\\m_1\mp1&amp;m_2&amp;q\end{bmatrix}j_{\pm}(k_1,m_1\mp1)+\begin{bmatrix}k_1&amp;k_2&amp;k\\m_1&amp;m_2\mp1&amp;q\end{bmatrix}j_{\pm}(k_2,m_2\mp1)\right)\]</span> 这时候必须证明 C-G 系数的递推式, 将升降算符作用于<spanclass="math inline">\(\ket{k,q}\)</span>, 记<spanclass="math inline">\(j_{\pm}(k,q)=\sqrt{(k\mp q)(k\pm q+1)}\)</span><span class="math display">\[\begin{aligned}J_{\pm}\ket{k,q}&amp;=\sum_{q_1,q_2}\begin{bmatrix}k_1&amp;k_2&amp;k\\q_1&amp;q_2&amp;q\end{bmatrix}J_{\pm}\ket{k_1,q_1;k_2,q_2}\\&amp;\ \!\Downarrow\\j_{\pm}(k,q)\ket{k,q\pm1}&amp;=\sum_{q_1,q_2}\begin{bmatrix}k_1&amp;k_2&amp;k\\q_1&amp;q_2&amp;q\end{bmatrix}\left(j_{\pm}(k_1,q_1)\ket{q_1\pm1;q_2}+j_{\pm}(k_2,q_2) \ket{q_1;q_2\pm1} \right)\end{aligned}\]</span> 左侧也可以在耦合态上展开 <span class="math display">\[j_{\pm}(k,q)\sum_{q_1&#39;,q_2&#39;}\begin{bmatrix}k_1&amp;k_2&amp;k\\q_1&#39;&amp;q_2&#39;&amp;q\pm1\end{bmatrix}\ket{q_1&#39;;q_2&#39;}=\sum_{q_1,q_2}\begin{bmatrix}k_1&amp;k_2&amp;k\\q_1&amp;q_2&amp;q\end{bmatrix}\left(j_{\pm}(k_1,q_1)\ket{q_1\pm1;q_2}+j_{\pm}(k_2,q_2) \ket{q_1;q_2\pm1} \right)\]</span> 左右分别挑选出指定<spanclass="math inline">\(\ket{m_1;m_2}\)</span>直积态上的系数, 得到 <spanclass="math display">\[j_{\pm}(k,q)\begin{bmatrix}k_1&amp;k_2&amp;k\\m_1&amp;m_2&amp;q\pm1\end{bmatrix}=j_{\pm}(k_1,m_1\mp1)\begin{bmatrix}k_1&amp;k_2&amp;k\\m_1\mp1&amp;m_2&amp;q\end{bmatrix}+j_{\pm}(k_2,m_2\mp1)\begin{bmatrix}k_1&amp;k_2&amp;k\\m_1&amp;m_2\mp1&amp;q\end{bmatrix}\]</span> 这样, 就可以反代回球张量中的式子 <span class="math display">\[[J_{\pm},Y_{k}^q]=\sum_{m_1,m_2}j_{\pm}(k,q)\begin{bmatrix}k_1&amp;k_2&amp;k\\m_1&amp;m_2&amp;q\pm1\end{bmatrix}W_{k_1}^{m_1}Z_{k_2}^{m_2}=j_{\pm}(k,q)Y_k^{q\pm1}\]</span> 至此, 已经证明<spanclass="math inline">\(Y\)</span>确实是一个<spanclass="math inline">\(k\)</span>阶球张量.</p>
+        </div>
+      </div>
+    </div>
+<p>有了这个方法, 就可以构造任意阶的球张量了. 很多时候,
+我们需要基于角动量本征态计算<span
+class="math inline">\(f(x,y,z)\)</span>的期望, 其中, <span
+class="math inline">\(f\)</span>是关于三个直角坐标的<span
+class="math inline">\(n\)</span>次多项式,
+它的每一项可能分属不同阶的球张量, 需要逐阶向上构造才能弄清它的结构.</p>
+<h2 id="wigner-eckart-定理及其应用">Wigner-Eckart 定理及其应用</h2>
+<p>下面将要介绍一个定理, 它会给出任何球张量的矩阵元满足的关系.</p>
+<div class="note note-info">
+            <h5 id="theorem-wigner-eckart-定理"><em>Theorem</em> Wigner-Eckart定理</h5><p>角动量本征态写为<spanclass="math inline">\(\ket{a,j,m}\)</span>(其中<spanclass="math inline">\(a\)</span>是其它自由度,例如三维问题的径向量子数<span class="math inline">\(n\)</span>),则球张量<span class="math inline">\(Y_k^q\)</span>的矩阵元为 <spanclass="math display">\[\bra{a&#39;,j&#39;,m&#39;}Y_k^q\ket{a,j,m}=\frac{\bra{a&#39;,j&#39;}|Y|\!\ket{a,j}}{\sqrt{2j+1}}\begin{bmatrix}k&amp;j&amp;j&#39;\\q&amp;m&amp;m&#39;\end{bmatrix}\]</span> 其中, <spanclass="math inline">\(\bra{a&#39;,j&#39;}|Y|\!\ket{a,j}\)</span>是只与球张量算符和左右矢内量子数有关的系数.通常我们选取特定的球张量算符, 并且固定<spanclass="math inline">\(a,j,a&#39;,j&#39;,k\)</span>等量,在全部磁量子数可变的子空间考虑问题, 此时只有磁量子数可变, <spanclass="math inline">\(c\)</span>维持为定值.</p>
+          </div>
+<p>证明从略, 思路是计算<span
+class="math inline">\([J_{\pm},Y_{k}^q]\)</span>的期望, 从而证明<span
+class="math inline">\(q\)</span>和<span
+class="math inline">\(q\pm1\)</span>项具有相同的比例系数.
+这个定理是非常有用的, 下边举出几个示例.</p>
+<div class="note note-primary">
+            <h5 id="example-1-0阶球张量的矩阵元"><em>Example</em> 1 <spanclass="math inline">\(0\)</span>阶球张量的矩阵元</h5><p>零阶球张量就是标量算符, 球张量形式不需要特地构造, 就是标量算符本身.则它的矩阵元为 <span class="math display">\[\bra{a&#39;,j&#39;,m&#39;}Y_0^0\ket{a,j,m}=\frac{\bra{a&#39;,j&#39;}|Y|\!\ket{a,j}}{\sqrt{2j+1}}\begin{bmatrix}0&amp;j&amp;j&#39;\\0&amp;m&amp;m&#39;\end{bmatrix}\]</span> 当且仅当<spanclass="math inline">\(j=j&#39;,m=m&#39;\)</span>时, 矩阵元取非零. 因此,标量算符作用于<span class="math inline">\(\ket{j,m}\)</span>,不会得到不同量子数的角动量本征态; 并且, 当<spanclass="math inline">\(m=m&#39;\)</span>一起变动时, <spanclass="math inline">\(Y_0^0\)</span>的矩阵元是不变的, 因为后面的 C-G系数总是为<span class="math inline">\(1\)</span>.</p><p>这里的标量算符<strong>显然不包括<spanclass="math inline">\(L_z\)</span>等矢量算符的分量</strong>, 尽管<spanclass="math inline">\(L_z\)</span>也有类似性质.标量算符的一个例子是宇称算符<spanclass="math inline">\(\mathcal{P}\)</span>, 它作用于<spanclass="math inline">\(\ket{j,m}\)</span>给出附加相因子<spanclass="math inline">\(\exp(ij\pi)\)</span>.</p>
+          </div>
+<div class="note note-primary">
+            <h5 id="example-2-1阶球张量的矩阵元"><em>Example</em> 2 <spanclass="math inline">\(1\)</span>阶球张量的矩阵元</h5><p><span class="math inline">\(1\)</span>阶球张量可以作类似讨论,最终非零矩阵元条件为 <span class="math display">\[\abs{j&#39;-j}=1\text{ or }0\quad m&#39;-m=\pm1\text{ or }0\]</span> 这正是偶极辐射跃迁的选择定则(禁戒<spanclass="math inline">\(0\to0\)</span>).</p>
+          </div>
+<div class="note note-primary">
+            <h5 id="example-3-投影定理"><em>Example</em> 3 投影定理</h5><p>一些地方(例如微扰论)涉及到<spanclass="math inline">\(\bra{j,m}\vec{J}\cdot\vec{V}\ket{j,m}\)</span>的计算,其中的<spanclass="math inline">\(\vec{J}\cdot\vec{V}\)</span>是矢量的点积,用球张量语言写为 <span class="math display">\[\langle\vec{J}\cdot\vec{V}\rangle_{j,m}=\bra{j,m}J^0V^0-J^{+1}V^{-1}-J^{-1}V^{+1}\ket{j,m}\]</span> 其中, <spanclass="math inline">\(J^q,V^q\)</span>都是球张量形式的<spanclass="math inline">\(q\)</span>分量. 注意到<spanclass="math inline">\(J^0=J_z\)</span>, <spanclass="math inline">\(J^{\pm1}=\mp J_{\pm}/\sqrt{2}\)</span>, 可得 <spanclass="math display">\[\langle\vec{J}\cdot\vec{V}\rangle_{j,m}=\bra{j,m}mV^0\ket{j,m}+\bra{j,m}\frac{j_{+}(j,m)}{\sqrt{2}}V^{-1}\ket{j,m+1}-\bra{j,m}\frac{j_{-}(j,m)}{\sqrt{2}}V^{+1}\ket{j,m-1}\]</span> 考虑到 W-E 定理, 所有期望值的比例系数都是<spanclass="math inline">\(\bra{a&#39;,j&#39;}|V|\!\ket{a,j}/\sqrt{2j+1}\)</span>,双线矩阵元前面总的乘数写作<span class="math inline">\(c_{jm}\)</span>,即<spanclass="math inline">\(\langle\vec{J}\cdot\vec{V}\rangle_{j,m}=c_{jm}\bra{a&#39;,j&#39;}|V|\!\ket{a,j}\)</span>,其中, <span class="math display">\[c_{jm}=\frac{1}{\sqrt{2j+1}}\left(m\begin{bmatrix}1&amp;j&amp;j\\0&amp;m&amp;m\end{bmatrix}+\frac{j_+(j,m)}{\sqrt{2}}\begin{bmatrix}1&amp;j&amp;j\\-1&amp;m+1&amp;m\end{bmatrix}-\frac{j_-(j,m)}{\sqrt{2}}\begin{bmatrix}1&amp;j&amp;j\\1&amp;m-1&amp;m \end{bmatrix} \right)\]</span> 同时, 考虑到<spanclass="math inline">\(\vec{J}\cdot\vec{V}\)</span>是个标量算符,它的矩阵元与磁量子数取值无关, 得到<spanclass="math inline">\(c_{jm}=c_j\)</span>, 只与<spanclass="math inline">\(j\)</span>有关; 另外<spanclass="math inline">\(c_j\)</span>和<spanclass="math inline">\(V\)</span>的选取也无关, 只需要检查<spanclass="math inline">\(c_{jm}\)</span>的具体形式就可以验证了.</p><p>基于上述结论, 可以作代换<spanclass="math inline">\(\vec{V}\rightarrow\vec{J}\)</span>, 一方面有:<spanclass="math inline">\(\langle\vec{J}^2\rangle_{j,m}=c_{j}\bra{a&#39;,j&#39;}|J|\!\ket{a,j}\)</span>;另一方面, 这个均值本身就很容易计算, 为<spanclass="math inline">\(j(j+1)\)</span>. 现在, 我们有 <spanclass="math display">\[\langle\vec{J}\cdot\vec{V}\rangle_{j,m}=j(j+1)\frac{\bra{a&#39;,j&#39;}|V|\!\ket{a,j}}{\bra{a&#39;,j&#39;}|J|\!\ket{a,j}}\]</span> 为了消去双线矩阵元, 再考虑一阶球张量<spanclass="math inline">\(J^q\)</span>和<spanclass="math inline">\(V^q\)</span>的 W-E 定理形式, 相除得到 <spanclass="math display">\[\frac{\bra{j,m&#39;}V^q\ket{j,m}}{\bra{j,m&#39;}J^q\ket{j,m}}=\frac{\bra{a&#39;,j&#39;}|V|\!\ket{a,j}}{\bra{a&#39;,j&#39;}|J|\!\ket{a,j}}\]</span> 由此, 得到投影定理的最终形式 <span class="math display">\[\boxed{\bra{j,m&#39;}V^q\ket{j,m}=\frac{\langle\vec{J}\cdot\vec{V}\rangle_{j,m}}{j(j+1)}\cdot\bra{j,m&#39;}J^q\ket{j,m}}\]</span></p>
+          </div>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/" class="category-chain-item">量子力学</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/%E8%A7%92%E5%8A%A8%E9%87%8F%E7%90%86%E8%AE%BA/" class="category-chain-item">角动量理论</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%A7%92%E5%8A%A8%E9%87%8F/" class="print-no-link">#角动量</a>
+      
+        <a href="/tags/%E7%90%83%E5%BC%A0%E9%87%8F/" class="print-no-link">#球张量</a>
+      
+        <a href="/tags/Wigner-Eckart-%E5%AE%9A%E7%90%86/" class="print-no-link">#Wigner-Eckart 定理</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>角动量理论(05)：Wigner-Eckart 定理</div>
+      <div>https://notes.rainchan.me/posts/角动量理论(05)：Wigner-Eckart 定理/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rain Chan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月24日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/%E8%A7%92%E5%8A%A8%E9%87%8F%E7%90%86%E8%AE%BA(04)%EF%BC%9A%E5%BC%A0%E9%87%8F%E7%AE%97%E7%AC%A6/" title="角动量理论(04)：张量算符">
+                        <span class="hidden-mobile">角动量理论(04)：张量算符</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"karnmarth/blog-comments","repo-id":"R_kgDOMerUGQ","category":"Announcements","category-id":"DIC_kwDOMerUGc4ChX3n","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","theme":"preferred_color_scheme"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

@@ -1,0 +1,953 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rain Chan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="角动量加法在现代物理的所有领域——从原子光谱学到原子核与粒子碰撞都有重要的应用. 此外, 角动量加法提供了基于有限维 Hilbert 空间的两套完备基, 给出了一个很好的阐明态矢在基上变换的机会.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="角动量理论(03)：角动量加法">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E8%A7%92%E5%8A%A8%E9%87%8F%E7%90%86%E8%AE%BA(03)%EF%BC%9A%E8%A7%92%E5%8A%A8%E9%87%8F%E5%8A%A0%E6%B3%95/">
+<meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="角动量加法在现代物理的所有领域——从原子光谱学到原子核与粒子碰撞都有重要的应用. 此外, 角动量加法提供了基于有限维 Hilbert 空间的两套完备基, 给出了一个很好的阐明态矢在基上变换的机会.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-23T12:52:50.000Z">
+<meta property="article:modified_time" content="2025-04-24T12:33:46.586Z">
+<meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="角动量">
+<meta property="article:tag" content="Clebsch-Gordan 系数">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  
+  <title>角动量理论(03)：角动量加法 - Rain Chan&#39;s Notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rain Chan&#39;s Notes</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/img" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>参考</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="角动量理论(03)：角动量加法"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-23 20:52" pubdate>
+          2025年4月23日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.8k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          16 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">角动量理论(03)：角动量加法</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>角动量加法在现代物理的所有领域——从原子光谱学到原子核与粒子碰撞都有重要的应用.
+此外, 角动量加法提供了基于有限维 Hilbert 空间的两套完备基,
+给出了一个很好的阐明态矢在基上变换的机会.</p>
+<h2
+id="直积态和耦合态newcommandkmathbbknewcommandrmathbbrnewcommandcmathbbcnewcommandbmathbfnewcommandbiboldsymbolnewcommandrank1textrankleft1-rightnewcommanddim1textdimleft1-rightnewcommanddiag1textdiagleft1-rightnewcommanddet1textdetleft1-rightnewcommanddet1leftbeginmatrix-1-endmatrixrightnewcommandset1left-1-rightnewcommandabs1left-1-rightnewcommandnorm1leftleft1rightrightnewcommanddmathcald">直积态和耦合态<span
+class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1
+\right)}\newcommand{\dim}[1]{\text{dim}\left(#1
+\right)}\newcommand{\diag}[1]{\text{diag}\left(#1
+\right)}\newcommand{\det}[1]{\text{det}\left(#1
+\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1
+\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1
+\right\}}\newcommand{\abs}[1]{\left| #1
+\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\newcommand{\D}{\mathcal{D}}\)</span></h2>
+<p>现在考虑具有两个角动量算符的量子系统, 例如, 一个电子既在空间中转动,
+又当然具有自旋; 再如, 两个无自旋粒子都在定轴转动的两体系统; 又如,
+晶格上两个粒子的自旋相互耦合, 构成一个两体系统. 现在的问题是,
+能否对于整个系统定义一整个"角动量"算符,
+它与两个角动量的关系又是什么?</p>
+<p>出于经典力学和矢量叠加的思想, 可以尝试如下定义: <span
+class="math display">\[
+\vec{J}:=\vec{J}_1+\vec{J}_2
+\]</span> 注意到<span class="math inline">\(J_1\)</span>和<span
+class="math inline">\(J_2\)</span>作用于不同的 Hilbert 空间, 两算符对易.
+实际上, 上式是一种对<span
+class="math inline">\(\vec{J}_1\otimes\mathbb{1}+\mathbb{1}\otimes\vec{J}_2\)</span>的简写.
+现在来验证<span class="math inline">\(\vec{J}\)</span>是否满足角动量代数
+<span class="math display">\[
+[J_x,J_y]=[J_{1x},J_{1y}]+[J_{2x},J_{2y}]=i(J_{1z}+J_{2z})=iJ_z
+\]</span> 显然是满足的. 非常有趣的一点是, 如果定义<span
+class="math inline">\(\vec{J}&#39;=\vec{J}_1-\vec{J}_2\)</span>, 那么
+<span class="math display">\[
+[J_x&#39;,J_y&#39;]=[J_{1x},J_{1y}]+[J_{2x},J_{2y}]\neq iJ&#39;_z
+\]</span> 即两个独立角动量的差并不是角动量! 这和<span
+class="math inline">\(\vec{J}\)</span>并不矛盾, 虽然<span
+class="math inline">\(\vec{J}-\vec{J}_2=\vec{J}_1\)</span>是角动量,
+但是这里作差的两个角动量并不是作用于完全独立的 Hilbert 空间的.</p>
+<p>现在, 我们有两种方法来表示这个系统的角动量, 一种是<span
+class="math inline">\(\ket{j_1,m_1}\otimes\ket{j_2,m_2}\)</span>,
+这个态矢表示系统处在<span
+class="math inline">\(\vec{J}_1\)</span>和<span
+class="math inline">\(\vec{J}_2\)</span>的共同本征态上, 称为
+<strong>直积态</strong>; 另一种是直接用<span
+class="math inline">\(\vec{J}\)</span>的本征态<span
+class="math inline">\(\ket{j,m}\)</span>来描述系统, 称为
+<strong>耦合态</strong>. 显然, <span
+class="math inline">\(\vec{J}_{1,2}\)</span>和<span
+class="math inline">\(\vec{J}\)</span>不是对易的,
+因此任何直积态在耦合态基上一定是叠加态, 反过来亦然. 但<span
+class="math inline">\(J_z=J_{1z}+J_{2z}\)</span>, 所以在上述对应中,
+总有<span class="math inline">\(m=m_1+m_2\)</span>.</p>
+<p>直积态非常直观, 如果<span
+class="math inline">\(\vec{J}_1,\vec{J}_2\)</span>能够完备地描述这个系统,
+则涉及到四个量子数: <span
+class="math inline">\(j_1,m_1,j_2,m_2\)</span>. 对于耦合的情况,
+当然仍需要相同数目的量子数, 否则对应的算符不足以构成力学量完全集.
+我们已经具备的量子数是<span class="math inline">\(j,m\)</span>,
+对应的<span class="math inline">\(J^2,J_z\)</span>显然具有共同本征态,
+仍需要引入两个算符, 可以从<span
+class="math inline">\(J^2_{1,2}\)</span>与<span
+class="math inline">\(J_{1z},J_{2z}\)</span>四个中挑选两个, 可以验证,
+<span class="math inline">\(J_1^2\)</span>和<span
+class="math inline">\(J_2^2\)</span>与已有的算符对易,
+所以完备的耦合态由<span class="math inline">\(j,m,j_1,j_2\)</span>给出,
+但后面为了方便, 仍简写为<span class="math inline">\(\ket{j,m}\)</span>,
+直积态也可以简写为<span
+class="math inline">\(\ket{j_1,m_1;j_2,m_2}\)</span>.</p>
+<p>现在需要找出两套态之间的变换关系, 对于给定的<span
+class="math inline">\(j_1,j_2\)</span>, 磁量子数<span
+class="math inline">\(m_1,m_2\)</span>允许各自独立的取全部可能的值,
+这样, 直积态基的维度为<span
+class="math inline">\((2j_1+1)(2j_2+1)\)</span>;
+而耦合态已经被证明是完备的, 也应该具有这么多维度. 可以证明如下求和:
+<span class="math display">\[
+\sum_{j=|j_1-j_2|}^{j_1+j_2}2j+1=(2j_1+1)(2j_2+1)
+\]</span> 耦合态的取值条件是: <span
+class="math inline">\(j\)</span>和<span
+class="math inline">\(j_{1,2}\)</span>满足三角形法则, 而<span
+class="math inline">\(m\)</span>对每个固定的<span
+class="math inline">\(j\)</span>也取全部可能的值.</p>
+<h2 id="两个自旋12粒子相加-单态与三重态">两个自旋1/2粒子相加,
+单态与三重态</h2>
+<p>作为一个非常简单的例子, 考虑两个<span
+class="math inline">\(s=\frac{1}{2}\)</span>自旋相加,
+直积态可以写为形如<span
+class="math inline">\(\ket{\uparrow\uparrow}\)</span>的形式. <span
+class="math inline">\(j,m\)</span>最大的情形就是该直积态: <span
+class="math display">\[
+\ket{1,1}=\ket{\uparrow\uparrow}
+\]</span> 其它直积态的总磁性<span
+class="math inline">\(m\)</span>均小于<span
+class="math inline">\(1\)</span>, 想构造这个耦合态,
+只能取自旋均向上的直积态. 接下来, 作用降算符<span
+class="math inline">\(J_-\)</span>: <span class="math display">\[
+J_-\ket{1,1}=\sqrt{(1+1)(1-1+1)}\ket{1,0}=\sqrt{2}\ket{1,0}
+\]</span> 另一方面, <span
+class="math inline">\(J_-=J_{1-}+J_{2-}\)</span>, 作用于直积态的结果为
+<span class="math display">\[
+(J_{1-}+J_{2-})\ket{\uparrow\uparrow}=\ket{\uparrow\downarrow}+\ket{\downarrow\uparrow}
+\]</span> 同理, 再作用一次降算符, 得到 <span class="math display">\[
+2\ket{1,-1}=2\ket{\downarrow\downarrow}
+\]</span> 这个耦合态也可以作为构造出发点,
+因为其它任何直积态的总磁性都大于<span
+class="math inline">\(-1\)</span>.</p>
+<p>接下来, 更低的<span class="math inline">\(j\)</span>就需要考虑了,
+但是并没有针对<span class="math inline">\(j\)</span>的升降算符.
+应该这样考虑: 两个耦合态的<span class="math inline">\(m\)</span>相同,
+则它们选用的直积态基矢都满足<span
+class="math inline">\(m_1+m_2=m\)</span>, 所以一定处于这个直积态子空间.
+即: <span class="math inline">\(\ket{0,0}\)</span>和<span
+class="math inline">\(\ket{1,0}\)</span>选用的直积态基矢, 一定都是<span
+class="math inline">\(\ket{\uparrow\downarrow}\)</span>和<span
+class="math inline">\(\ket{\downarrow\uparrow}\)</span>, 并且<span
+class="math inline">\(\ket{0,0}\)</span>和<span
+class="math inline">\(\ket{1,0}\)</span>一定正交,
+所以未知的系数可以通过已知系数推断. <span class="math display">\[
+\ket{1,0}=\frac{\ket{\uparrow\downarrow}+\ket{\downarrow\uparrow}}{\sqrt{2}}\Rightarrow\ket{0,0}=\frac{\ket{\uparrow\downarrow}-\ket{\downarrow\uparrow}}{\sqrt{2}}
+\]</span> 这里仍然允许相差一个总相位, 但为了方便, 选取为<span
+class="math inline">\(0\)</span>.
+这样就解出了所有的耦合态在直积表象下的表示. 其中, <span
+class="math inline">\(\ket{\uparrow\uparrow},\ket{\downarrow\downarrow},\frac{\ket{\uparrow\downarrow}+\ket{\downarrow\uparrow}}{\sqrt{2}}\)</span>都是<span
+class="math inline">\(j=1\)</span>的态, 称为
+<strong>三重态(triplet)</strong>; <span
+class="math inline">\(\frac{\ket{\uparrow\downarrow}-\ket{\downarrow\uparrow}}{\sqrt{2}}\)</span>是<span
+class="math inline">\(j=0\)</span>的态, 称为
+<strong>单态(singlet)</strong>.</p>
+<h2 id="c-g-系数">C-G 系数</h2>
+<p><span
+class="math inline">\(j_{1,2}\)</span>更大的角动量加法就没有这么简单了,
+对于一般的情况, 可以写为 <span class="math display">\[
+\ket{j,m}=\sum_{m_1,m_2}\begin{bmatrix}
+j_1&amp;j_2&amp;j\\m_1&amp;m_2&amp;m
+\end{bmatrix}\ket{j_1,m_1;j_2,m_2}
+\]</span> 其中的方括号是一个标量系数, 称为 <strong>Clebsch-Gordan
+系数</strong>, 简称 C-G 系数. 这种表示 C-G 系数的方法, 叫做
+<strong>Wigner 3j 记号</strong>.</p>
+<p>C-G 系数的作用不仅仅是在两个表象下变换态矢, 也可以变换转动算符的表示.
+对于任意转动操作<span
+class="math inline">\(\D_\hat{n}(\epsilon)\)</span>,
+可以基于角动量本征态写出矩阵元 <span class="math display">\[
+\D_{mm&#39;}^{(j)}(R)=\bra{j,m}\D_{\hat{n}}(\epsilon)\ket{j,m&#39;}
+\]</span> 则 <span class="math display">\[
+\D^{(j_1)}_{m_1m_1&#39;}(R)\D^{(j_2)}_{m_2m_2&#39;}(R)=\sum_{j,m,m&#39;}\begin{bmatrix}j_1&amp;j_2&amp;j\\m_1&amp;m_2&amp;m\end{bmatrix}\begin{bmatrix}j_1&amp;j_2&amp;j\\m_1&#39;&amp;m_2&#39;&amp;m&#39;\end{bmatrix}\D^{(j)}_{mm&#39;}(R)
+\]</span> 这个公式实际上来自直积分解. <span
+class="math inline">\(\D^{(j)}\)</span>是<span
+class="math inline">\(\text{SU}(2)\)</span>群的不可约表示,
+对于两个作用空间不同的表示<span
+class="math inline">\(\D^{(j_1)}\)</span>和<span
+class="math inline">\(\D^{(j_2)}\)</span>, 直积为<span
+class="math inline">\(\D^{(j_1)}\otimes\D^{(j_2)}\)</span>,
+这个直积是可约的, 能够分解为一系列不可约表示的直和: <span
+class="math display">\[
+\D^{(j_1)}\otimes\D^{(j_2)}=\bigoplus_{j=|j_1-j_2|}^{j_1+j_2}\D^{(j)}
+\]</span> 具体挑出群元来写, 左边应该是张量积,
+即矩阵元指标之间没有任何缩并;
+右边是各个直和项的元的矩阵元乘以适当的系数.</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/" class="category-chain-item">量子力学</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/%E8%A7%92%E5%8A%A8%E9%87%8F%E7%90%86%E8%AE%BA/" class="category-chain-item">角动量理论</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E8%A7%92%E5%8A%A8%E9%87%8F/" class="print-no-link">#角动量</a>
+      
+        <a href="/tags/Clebsch-Gordan-%E7%B3%BB%E6%95%B0/" class="print-no-link">#Clebsch-Gordan 系数</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>角动量理论(03)：角动量加法</div>
+      <div>https://notes.rainchan.me/posts/角动量理论(03)：角动量加法/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rain Chan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月23日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/%E8%A7%92%E5%8A%A8%E9%87%8F%E7%90%86%E8%AE%BA(04)%EF%BC%9A%E5%BC%A0%E9%87%8F%E7%AE%97%E7%AC%A6/" title="角动量理论(04)：张量算符">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">角动量理论(04)：张量算符</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/%E8%A7%92%E5%8A%A8%E9%87%8F%E7%90%86%E8%AE%BA(02)%EF%BC%9A%E8%87%AA%E6%97%8B%E8%A7%92%E5%8A%A8%E9%87%8F/" title="角动量理论(02)：自旋角动量">
+                        <span class="hidden-mobile">角动量理论(02)：自旋角动量</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"karnmarth/blog-comments","repo-id":"R_kgDOMerUGQ","category":"Announcements","category-id":"DIC_kwDOMerUGc4ChX3n","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","theme":"preferred_color_scheme"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
