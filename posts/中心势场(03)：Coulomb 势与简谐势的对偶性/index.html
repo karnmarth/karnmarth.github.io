@@ -1,0 +1,988 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rain Chan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="本节讨论已经解析求解的 Coulomb 势和简谐势的对称性. 下面将看到, Coulomb 势基于束缚态中具有特定能量 E 的简并子空间, 可以构造 SO(4) 的 Lie 代数; 而三维各向同性谐振子, 利用其阶梯算符可以构造 SU(3) 的 Lie 代数. 它们都具备超出角动量守恒引入的 SO(3) 对称性. 最后的对偶性基于映射, 把两者的径向方程和能级公式联系起来.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="中心势场(03)：Coulomb 势与简谐势的对偶性">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E4%B8%AD%E5%BF%83%E5%8A%BF%E5%9C%BA(03)%EF%BC%9ACoulomb%20%E5%8A%BF%E4%B8%8E%E7%AE%80%E8%B0%90%E5%8A%BF%E7%9A%84%E5%AF%B9%E5%81%B6%E6%80%A7/">
+<meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="本节讨论已经解析求解的 Coulomb 势和简谐势的对称性. 下面将看到, Coulomb 势基于束缚态中具有特定能量 E 的简并子空间, 可以构造 SO(4) 的 Lie 代数; 而三维各向同性谐振子, 利用其阶梯算符可以构造 SU(3) 的 Lie 代数. 它们都具备超出角动量守恒引入的 SO(3) 对称性. 最后的对偶性基于映射, 把两者的径向方程和能级公式联系起来.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-25T08:20:18.000Z">
+<meta property="article:modified_time" content="2025-04-26T08:45:06.348Z">
+<meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="简谐势">
+<meta property="article:tag" content="Coulomb 势">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  
+  <title>中心势场(03)：Coulomb 势与简谐势的对偶性 - Rain Chan&#39;s Notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rain Chan&#39;s Notes</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/ref" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>参考</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="中心势场(03)：Coulomb 势与简谐势的对偶性"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-25 16:20" pubdate>
+          2025年4月25日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.1k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          18 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">中心势场(03)：Coulomb 势与简谐势的对偶性</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>本节讨论已经解析求解的 Coulomb 势和简谐势的对称性. 下面将看到,
+Coulomb 势基于束缚态中具有特定能量 E 的简并子空间, 可以构造 SO(4) 的 Lie
+代数; 而三维各向同性谐振子, 利用其阶梯算符可以构造 SU(3) 的 Lie 代数.
+它们都具备超出角动量守恒引入的 SO(3) 对称性. 最后的对偶性基于映射,
+把两者的径向方程和能级公式联系起来.</p>
+<h2
+id="三维氢原子的对称性newcommandkmathbbknewcommandrmathbbrnewcommandcmathbbcnewcommandbmathbfnewcommandbiboldsymbolnewcommandrank1textrankleft1-rightnewcommanddim1textdimleft1-rightnewcommanddiag1textdiagleft1-rightnewcommanddet1textdetleft1-rightnewcommanddet1leftbeginmatrix-1-endmatrixrightnewcommandset1left-1-rightnewcommandabs1left-1-rightnewcommandnorm1leftleft1rightright">三维氢原子的对称性<span
+class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1
+\right)}\newcommand{\dim}[1]{\text{dim}\left(#1
+\right)}\newcommand{\diag}[1]{\text{diag}\left(#1
+\right)}\newcommand{\det}[1]{\text{det}\left(#1
+\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1
+\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1
+\right\}}\newcommand{\abs}[1]{\left| #1
+\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span></h2>
+<p>由于上节同时讲了三种氢原子能级解法, 过于冗长,
+所以关于氢原子对称性的评述留待本节讨论, 空间点群的操作是包含反演的,
+这里不予考虑, 只研究特殊群.</p>
+<p>众所周知, 对于一般的中心势场<span
+class="math inline">\(V(r)\)</span>, 它只能带来轨道角动量守恒.
+而轨道角动量<span
+class="math inline">\(\vec{L}\)</span>对应的对称性是<span
+class="math inline">\(\text{SO}(3)\)</span>群; 而特别地, 如果取为
+Coulomb 势, 则不仅有角动量守恒, 还有 Runge-Lenz 矢量守恒.
+两个算符的对易关系上节已经给出: <span class="math display">\[
+[L_a,L_b]=i\hbar\epsilon_{abc}L_c\quad[L_a,N_b]=i\hbar\epsilon_{abc}N_c\quad[N_a,N_b]=i\hbar\epsilon_{abc}L_c
+\]</span> 当我们考虑一个<span
+class="math inline">\(n\)</span>维空间的转动时,
+可以把有限转动表述为<span class="math inline">\(n\times
+n\)</span>的实正交矩阵, 而无穷小转动的生成元对应一系列无迹反对称矩阵.
+<span class="math inline">\(n\times n\)</span>无迹反对称矩阵具有<span
+class="math inline">\(n(n-1)/2\)</span>个独立分量, 这也正是<span
+class="math inline">\(n\)</span>维空间独立的转动生成元的个数. 上述<span
+class="math inline">\(L,N\)</span>数目上恰好是<span
+class="math inline">\(4\)</span>维空间的生成元.
+如果把它们重新整理为<span
+class="math inline">\(4\times4\)</span>无迹反对称的矩阵元 <span
+class="math display">\[
+T_{0,1\sim3}=N_{1\sim3}\quad T_{12}=L_3\quad T_{13}=-L_2\quad T_{23}=L_1
+\]</span> 并且<span class="math inline">\(T_{ab}=-T_{ba}\)</span>.
+应当注意到这个张量的符号约定与电磁场张量极其类似. 现在,
+所有的对易关系都可以统一用四维语言描述了: <span class="math display">\[
+[T_{ab}, T_{cd}] = i\hbar(\delta_{ac} T_{bd} - \delta_{ad} T_{bc} -
+\delta_{bc} T_{ad} + \delta_{bd} T_{ac})
+\]</span> 计算结果无可争议地表明: 这是一个<span
+class="math inline">\(\text{SO}(4)\)</span>群的 Lie 代数.</p>
+<p>实际上, 为了解出能级, 还引入了两个辅助的"类角动量": <span
+class="math display">\[
+\begin{cases}
+\displaystyle\vec{F}=\frac{\vec{L}+\vec{N}}{2}
+\\\displaystyle
+\vec{G}=\frac{\vec{L}-\vec{N}}{2}
+\end{cases}\Rightarrow
+[F_a,F_b]=i\hbar\epsilon_{abc}F_c\quad
+[G_a,G_b]=i\hbar\epsilon_{abc}G_c\quad[F_a,G_b]=0
+\]</span> <span class="math inline">\(\vec{F}\)</span>和<span
+class="math inline">\(\vec{G}\)</span>都允许半整数量子数, 并且相互独立,
+因此从<span class="math inline">\(\vec{F}\)</span>和<span
+class="math inline">\(\vec{G}\)</span>来看, 这是一个<span
+class="math inline">\(\text{SU}(2)\times\text{SU}(2)\)</span>群的 Lie
+代数. 这里再次体现出同构的 Lie 代数不意味着同构的 Lie 群. 实际上, <span
+class="math inline">\(\text{SU}(2)\times\text{SU}(2)\)</span>群同构于<span
+class="math inline">\(\text{Spin}(4)\)</span>, 而后者是<span
+class="math inline">\(\text{SO}(4)\)</span>的覆盖群.</p>
+<h3 id="二维氢原子的对称性">二维氢原子的对称性</h3>
+<p>这里对二维氢原子稍加讨论, 假设实空间只有<span
+class="math inline">\(x,y\)</span>轴,
+但仍把这个物理空间嵌入三维空间以便讨论. 现在, 角动量的方向是唯一的, 而
+R-L 矢量一定处在平面内: <span class="math display">\[
+\vec{L}=L_z\hat{e}_z\quad\vec{N}=N_x\hat{e}_x+N_y\hat{e}_y
+\]</span> 如果<span
+class="math inline">\(\vec{L},\vec{N}\)</span>的对易关系仍满足,
+只是需要退化到上述方向, 那么有 <span class="math display">\[
+[L_z,N_x]=i\hbar N_y\quad [L_z,N_y]=-i\hbar N_x\quad [N_x,N_y]=i\hbar
+L_z
+\]</span> 可见, <span
+class="math inline">\(N_x,N_y\)</span>与三维空间本该存在的<span
+class="math inline">\(L_x,L_y\)</span>从代数上讲无甚差别, 它们和<span
+class="math inline">\(L_z\)</span>的关系同样满足<span
+class="math inline">\(\text{SO}(3)\)</span>群的 Lie 代数,
+二维氢原子具备<span class="math inline">\(\text{SO}(3)\)</span>对称性.
+实际上, 可以证明更高维的氢原子具有<span
+class="math inline">\(\text{SO}(n+1)\)</span>对称性, <span
+class="math inline">\(n\)</span>是维数.</p>
+<h2 id="三维各向同性谐振子的对称性">三维各向同性谐振子的对称性</h2>
+<p>平方正比的势场也具有特殊性. 如果对突然提到简谐势感到疑惑,
+不妨回忆经典力学的 Bertrand 定理, 它指出,
+服从幂律的力场的有界轨道未必闭合, 除非力场是平方反比的或者一次正比的.
+两种势场都具有某种更高的对称性, 这促使我们研究三维各向同性谐振子,
+以期找到高于<span
+class="math inline">\(\text{SO}(3)\)</span>的对称性.</p>
+<p>在直角坐标上写出 Hamiltonian <span class="math display">\[
+H=\hbar\omega(\frac{3}{2}+a^\dagger_xa_x+a_y^\dagger a_y+a^\dagger_za_z)
+\]</span> 其中, 产生-湮灭算符的对易关系类似 boson: <span
+class="math display">\[
+[a_j,a_k^\dagger]=\delta_{jk}\quad[a_j,a_k]=[a_j^\dagger,a_k^\dagger]=0
+\]</span> 在直角坐标下, 我们曾经选用量子数<span
+class="math inline">\(n_x,n_y,n_z\)</span>, 从数学物理方程上,
+是分离变量的结果; 从算符的角度讲, 说明三个方向的粒子数算符<span
+class="math inline">\(a^\dagger_ja_j\)</span>都与<span
+class="math inline">\(H\)</span>对易,
+这已经给出了不同于角动量的三个守恒的标量算符.</p>
+<p>进一步, 取不同下标的产生算符和湮灭算符<span
+class="math inline">\(a_{j}^\dagger a_k\)</span>, 可得 <span
+class="math display">\[
+[a_j^\dagger a_k,\frac{H}{\hbar\omega}]=\sum_{l}[a_j^\dagger
+a_k,a_l^\dagger a_l]=\sum_l
+a_j^\dagger\delta_{kl}(-a_k)+\delta_{jl}a_{j}^\dagger a_k=0
+\]</span> <span class="math inline">\(a_j^\dagger
+a_k\)</span>相当于<span
+class="math inline">\(3\times3\)</span>的守恒量矩阵,
+但它们并不是和角动量独立的, 可以考察如下算符 <span
+class="math display">\[
+a_x^\dagger
+a_y=\frac{\mu\omega}{2\hbar}\left(x-\frac{ip_x}{\mu\omega}\right)\left(y+\frac{ip_y}{\mu\omega}\right)=\frac{\mu\omega
+xy}{2\hbar}+\frac{p_xp_y}{2\hbar\mu\omega}+\frac{ixp_y-iyp_x}{2\hbar}
+\]</span> 如果把<span class="math inline">\(a_x^\dagger
+a_y\)</span>和<span class="math inline">\(a_xa^\dagger_y\)</span>作差,
+就能得到纯粹的角动量部分: <span class="math display">\[
+\hbar(a_x^\dagger a_y-a_xa_y^\dagger)=iL_z
+\]</span> 因此, 角动量并不独立, 会归入<span
+class="math inline">\(3\times3\)</span>矩阵.</p>
+<p>此外, 这个守恒量矩阵的迹为<span
+class="math inline">\(\sum_{l}a^\dagger_la_l\)</span>, 实际上就是<span
+class="math inline">\(H\)</span>. 如果算入能量, 那么守恒量矩阵有<span
+class="math inline">\(9\)</span>个独立分量, <span
+class="math inline">\(9\)</span>个生成元构成<span
+class="math inline">\(\text{U}(3)\)</span>对称性.
+但这个迹的自由度通常会被拿掉, 得到<span
+class="math inline">\(8\)</span>个生成元, 此时的代数结构恰好是<span
+class="math inline">\(\text{SU}(3)\)</span>群的 Lie 代数.</p>
+<h3 id="二维各向同性谐振子的对称性">二维各向同性谐振子的对称性</h3>
+<p>此时, 存在的升降算符有<span class="math inline">\(4\)</span>个, 定义
+<span class="math display">\[
+S_1=\frac{\hat{a}_x^\dagger\hat{a}_y+\hat{a}_y^\dagger\hat{a}_x}2\quad
+S_2=\frac{i(\hat{a}^\dagger_y\hat{a}_x-\hat{a}^\dagger_x\hat{a}_y)}2\quad
+S_3=\frac{\hat{a}_x^\dagger\hat{a}_x-\hat{a}_y^\dagger\hat{a}_y}2
+\]</span> 可以求得 <span class="math display">\[
+[S_3,S_1]=iS_2\quad [S_2,S_3]=iS_1\quad [S_1,S_2]=iS_3
+\]</span> 正是<span class="math inline">\(\text{SU}(2)\)</span>的 Lie
+代数生成元.</p>
+<h2 id="氢原子和谐振子的对偶性">氢原子和谐振子的对偶性</h2>
+<p>前面我们发现, 三维的氢原子和各向同性谐振子都具有高于<span
+class="math inline">\(\text{SO}(3)\)</span>的对称性(<span
+class="math inline">\(\text{SO}(4)\)</span>和<span
+class="math inline">\(\text{SU}(3)\)</span>).
+是否存在某种映射将两个特殊的中心势联系起来?</p>
+<p>先将两者的径向方程写出 <span class="math display">\[
+\begin{aligned}
+\begin{cases}\displaystyle
+\frac{d^2
+u(\rho)}{d\rho^2}+\left(\varepsilon-K^2\rho^2-\frac{l(l+1)}{\rho^2}\right)u(\rho)=0
+\\\\\displaystyle
+\frac{d^2
+u(\rho)}{d\rho^2}+\left(\varepsilon+\frac{2Z}{\rho}-\frac{l(l+1)}{\rho^2}
+\right) u(\rho)=0
+\end{cases}\end{aligned}
+\]</span> 这里<span
+class="math inline">\(K^2\)</span>是标记势能强度的参量,
+可以想象特征长度固定为某个值, 但势能被放缩为<span
+class="math inline">\(\mu K^2\omega^2r^2/2\)</span>.</p>
+<p>现在针对 Coulomb 势的径向方程, 取这样的变换: <span
+class="math display">\[
+\rho=\xi^2\quad u(\rho)=\xi^\nu v(\xi)
+\]</span> 把关于<span
+class="math inline">\((\rho,u(\rho))\)</span>的方程用<span
+class="math inline">\((\xi,v(\xi))\)</span>来表示. 得到 <span
+class="math display">\[
+\frac{d^2
+v(\xi)}{d\xi^2}+\frac{2\nu-1}{\xi}\frac{dv(\xi)}{d\xi}+\left(8Z+4\varepsilon
+\xi^2 -\frac{4l^2+4l+2\nu-\nu^2}{\xi^2} \right) v(\xi)=0
+\]</span> 为了消去一阶导, 待定的幂系数<span
+class="math inline">\(\nu=1/2\)</span>: <span class="math display">\[
+\frac{d^2 v(\xi)}{d\xi^2}+\left(8Z+4\varepsilon \xi^2
+-\frac{(2l+\frac{1}{2})(2l+\frac{3}{2})}{\xi^2} \right) v(\xi)=0
+\]</span> <span
+class="math inline">\(v(\xi)\)</span>满足的方程与简谐势径向方程结构完全一致.
+用<span class="math inline">\(h\)</span>标记简谐量, <span
+class="math inline">\(c\)</span>标记 Coulomb 量. 那么对应关系为 <span
+class="math display">\[
+\varepsilon_h\rightarrow8Z\quad {K_{h}}^2\rightarrow-4\varepsilon_c\quad
+l_h\rightarrow 2l_c+\frac{1}{2}
+\]</span> 假设人们已经知道, 简谐势径向方程的截断条件为<span
+class="math inline">\(\varepsilon_h=(4q+2l_h+3)K_h\)</span>, 全部代换成
+Coulomb 参量: <span class="math display">\[
+8Z=(4q+4l_c+4)\sqrt{-4\varepsilon_c}\Rightarrow\varepsilon_c=-\frac{Z^2}{(q+l_c+1)^2}
+\]</span> 其中, <span class="math inline">\(q\)</span>允许取遍自然数,
+因此<span class="math inline">\(q+l_c+1\)</span>允许取遍正整数.</p>
+<p>基于径向方程的对偶性, 知道简谐势的能级, 就可以推断出 Coulomb
+势的能级, 反过来亦然.</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/" class="category-chain-item">量子力学</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/%E4%B8%AD%E5%BF%83%E5%8A%BF%E5%9C%BA/" class="category-chain-item">中心势场</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E7%AE%80%E8%B0%90%E5%8A%BF/" class="print-no-link">#简谐势</a>
+      
+        <a href="/tags/Coulomb-%E5%8A%BF/" class="print-no-link">#Coulomb 势</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>中心势场(03)：Coulomb 势与简谐势的对偶性</div>
+      <div>https://notes.rainchan.me/posts/中心势场(03)：Coulomb 势与简谐势的对偶性/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rain Chan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/%E4%B8%AD%E5%BF%83%E5%8A%BF%E5%9C%BA(04)%EF%BC%9A%E6%97%B6%E9%97%B4%E5%8F%8D%E6%BC%94%E7%AE%97%E7%AC%A6/" title="中心势场(04)：时间反演算符">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">中心势场(04)：时间反演算符</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/%E4%B8%AD%E5%BF%83%E5%8A%BF%E5%9C%BA(02)%EF%BC%9A%E4%B8%89%E7%BB%B4%E6%B0%A2%E5%8E%9F%E5%AD%90/" title="中心势场(02)：三维氢原子">
+                        <span class="hidden-mobile">中心势场(02)：三维氢原子</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"karnmarth/blog-comments","repo-id":"R_kgDOMerUGQ","category":"Announcements","category-id":"DIC_kwDOMerUGc4ChX3n","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","theme":"preferred_color_scheme"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
