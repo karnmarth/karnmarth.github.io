@@ -1,0 +1,928 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rain Chan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="当零阶 Hamiltonian 不存在简并时, 只要微扰项足够小使得微扰贡献远小于未受微扰时两能级间距, 从而保证微扰展开的序列收敛就可以了. 但当体系存在简并时, 首先我们也无法确定微扰初态处于哪一个简并态上; 其次使用非简并微扰来处理简并态之间的微扰贡献会得到无穷大修正的怪异结论. 为了解决这个问题, 需要一套不同的微扰方案.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微扰论(02)：一阶简并微扰">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(02)%EF%BC%9A%E4%B8%80%E9%98%B6%E7%AE%80%E5%B9%B6%E5%BE%AE%E6%89%B0/">
+<meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="当零阶 Hamiltonian 不存在简并时, 只要微扰项足够小使得微扰贡献远小于未受微扰时两能级间距, 从而保证微扰展开的序列收敛就可以了. 但当体系存在简并时, 首先我们也无法确定微扰初态处于哪一个简并态上; 其次使用非简并微扰来处理简并态之间的微扰贡献会得到无穷大修正的怪异结论. 为了解决这个问题, 需要一套不同的微扰方案.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-04-26T13:09:55.000Z">
+<meta property="article:modified_time" content="2025-05-03T18:17:22.639Z">
+<meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="微扰论">
+<meta property="article:tag" content="简并微扰">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  
+  <title>微扰论(02)：一阶简并微扰 - Rain Chan&#39;s Notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rain Chan&#39;s Notes</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/ref" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>参考</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="微扰论(02)：一阶简并微扰"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2025-04-26 21:09" pubdate>
+          2025年4月26日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">微扰论(02)：一阶简并微扰</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>当零阶 Hamiltonian 不存在简并时,
+只要微扰项足够小使得微扰贡献远小于未受微扰时两能级间距,
+从而保证微扰展开的序列收敛就可以了. 但当体系存在简并时,
+首先我们也无法确定微扰初态处于哪一个简并态上;
+其次使用非简并微扰方法来处理简并态之间的微扰贡献会得到无穷大修正的怪异结论.
+为了解决这个问题, 需要一套不同的微扰方案.<span
+class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1
+\right)}\newcommand{\dim}[1]{\text{dim}\left(#1
+\right)}\newcommand{\diag}[1]{\text{diag}\left(#1
+\right)}\newcommand{\det}[1]{\text{det}\left(#1
+\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1
+\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1
+\right\}}\newcommand{\abs}[1]{\left| #1
+\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\newcommand{\braket}[2]{\langle{
+#1} | { #2}\rangle}\)</span></p>
+<h2 id="非简并微扰的困顿">非简并微扰的困顿</h2>
+<p>以二维各向同性谐振子为例来说明这个问题. 零阶 Hamiltonian 为 <span
+class="math display">\[
+H_0=\frac{p^2}{2\mu}+\frac{\mu\omega^2}{2}(x^2+y^2)
+\]</span> 它的本征矢可以用<span
+class="math inline">\(\ket{n_x,n_y}\)</span>表示, 但这里将其写作<span
+class="math inline">\(\ket{n,m}\)</span>, 其中<span
+class="math inline">\(n=n_x+n_y\)</span>是能量量子数, <span
+class="math inline">\(m=n_x-n_y\)</span>是两个方向的量子数的差.
+对应的能量为<span class="math inline">\((n+1)\hbar\omega\)</span>, <span
+class="math inline">\(m\)</span>可以从<span
+class="math inline">\(-n,-n+2,\cdots,n-2,n\)</span>中取值,
+因而简并度为<span class="math inline">\(n+1\)</span>.</p>
+<p>总之, 基态为<span class="math inline">\(\ket{0,0}\)</span>, 没有简并;
+第一激发态为<span class="math inline">\(\ket{1,-1}\)</span>和<span
+class="math inline">\(\ket{1,1}\)</span>, 为二重简并.</p>
+<p>现在引入微扰函数<span class="math inline">\(W=\alpha\mu\omega^2
+xy\)</span>, <span class="math inline">\(\alpha\)</span>是小量.
+如果基于一阶非简并微扰能量公式 <span class="math display">\[
+E_{n;1}=W_{nn}
+\]</span> 并且把<span
+class="math inline">\(n\)</span>从能级的记号直接推广为量子态记号,
+那么每个能量修正都直接用<span
+class="math inline">\(W\)</span>计算相应态上的期望: <span
+class="math display">\[
+\bra{0,0}W\ket{0,0}=\bra{1,-1}W\ket{1,-1}=\bra{1,1}W\ket{1,1}=0
+\]</span> 一阶修正为<span class="math inline">\(0\)</span>.
+根据二阶非简并微扰能量公式 <span class="math display">\[
+E_{n;2}=-\sum_{m&#39;\neq
+n}\frac{|\bra{n;0}W\ket{m&#39;;0}|^2}{E_{m&#39;;0}-E_{n;0}}
+\]</span> 现在取<span class="math inline">\(n\)</span>是<span
+class="math inline">\(1,1\)</span>态, <span
+class="math inline">\(m&#39;\)</span>是<span
+class="math inline">\(1,-1\)</span>态, 那么可以求得<span
+class="math inline">\(\bra{1,1}W\ket{1,-1}\)</span>非零, 但<span
+class="math inline">\(E_{1,-1;0}-E_{1,1;0}\)</span>为零, 这样,
+就给出了极其荒谬的无穷大修正. 如何解释这种佯谬呢?</p>
+<p>采用非简并微扰有一个前提, 就是<span
+class="math inline">\(\lambda\rightarrow0\)</span>时, 态矢回到零阶态矢:
+<span class="math display">\[
+\lim_{\lambda\rightarrow0} \ket{\psi_\lambda}=\ket{n;0}
+\]</span> 然而, 对于简并微扰, 具有能量本征态<span
+class="math inline">\(E_n\)</span>的态矢<span
+class="math inline">\(\ket{\psi_\lambda}\)</span>会退回一个子空间 <span
+class="math display">\[
+\lim_{\lambda\rightarrow0}\ket{\psi_\lambda}\in\text{span}(\ket{n,1;0},\ket{n,2;0},\cdots,\ket{n,g;0})
+\]</span> 其中, <span
+class="math inline">\(\ket{n,k;0}\)</span>表示<span
+class="math inline">\(H_0\)</span>的能级<span
+class="math inline">\(n\)</span>上的第<span
+class="math inline">\(k\)</span>个简并态. 基于非简并微扰的思路,
+对每个基态单独进行微扰, 都会得到无穷大佯谬,
+但如果在简并子空间选一套新的基矢, 保证把<span
+class="math inline">\(\bra{n,k_1;0}W\ket{n,k_2;0}\)</span>(其中<span
+class="math inline">\(k_1\neq k_2\)</span>)全部取为<span
+class="math inline">\(0\)</span>, 即: 对角化<span
+class="math inline">\(W\)</span>, 那么<span
+class="math inline">\(E_{n;2}\)</span>就会构成一个<span
+class="math inline">\(0/0\)</span>未定式, 是有可能解决这个佯谬的.</p>
+<h2 id="一阶简并微扰">一阶简并微扰</h2>
+<p>总而言之, 对角化的思路值得一试. 仍旧回到前面的振子模型, 总
+Hamiltonian 为 <span class="math display">\[
+H=\frac{p^2}{2\mu}+\frac{\mu\omega^2}{2}(x^2+y^2+2\alpha xy)
+\]</span> 在简并子空间对角化时, 新的本征态仍旧是能量的本征态,
+却不再是<span class="math inline">\(N_x,N_y\)</span>的本征态,
+除非对<span class="math inline">\(H\)</span>也进行对角化: <span
+class="math display">\[
+H=\frac{p^2}{2m}+\frac{\mu\omega^2}{2}\left[\frac{1+\alpha}{2}(x+y)^2+\frac{1-\alpha}{2}(x-y)^2
+\right]
+\]</span> 相当于新坐标<span class="math inline">\(z_{\pm}=\frac{x\pm
+y}{\sqrt{2}}\)</span>, 并且在<span
+class="math inline">\(z_{\pm}\)</span>两个方向上的力常量不同.
+这其实已经是可以严格求解的模型了, 给出 <span class="math display">\[
+\frac{E}{\hbar\omega}=1,1+\sqrt{1-\alpha},1+\sqrt{1+\alpha},\cdots
+\]</span> 其中<span
+class="math inline">\(1+\sqrt{1\pm\alpha}\)</span>相当于<span
+class="math inline">\(2\hbar\omega\)</span>的二重简并劈裂出的两个能级.
+如果从微扰函数对角化的角度看, 有 <span class="math display">\[
+\bra{1,\pm1;0}W\ket{1,\pm1;0}=0\quad
+\bra{1,1;0}W\ket{1,-1;0}=\alpha\mu\omega^2
+\bra{1}x\ket{0}\bra{0}y\ket{1}
+\]</span> 其中单量子数的态矢相当于一维谐振子的能量本征态,
+可以求得最终结果为 <span class="math display">\[
+\bra{1,1;0}W\ket{1,-1;0}=\frac{\alpha\hbar\omega}{2}
+\]</span> 于是基于<span class="math inline">\(m=\pm1\)</span>的矩阵为
+<span class="math display">\[
+W=\begin{pmatrix}W_{++}&amp;W_{+-}\\W_{-+}&amp;W_{--}
+\end{pmatrix}=\begin{pmatrix}0&amp;\frac{\alpha\hbar\omega}{2}\\\frac{\alpha\hbar\omega}{2}&amp;0
+\end{pmatrix}
+\]</span> 它的本征值为<span
+class="math inline">\(\pm\alpha\hbar\omega/2\)</span>, 不难发现,
+它恰好是<span
+class="math inline">\(\sqrt{1\pm\alpha}-1\)</span>的近似结果.</p>
+<h3 id="严格论证">严格论证</h3>
+<p>上面的结果当然不是普遍的, 现在来详细论证一阶简并微扰的公式.
+同样考虑如下模型 <span class="math display">\[
+H=H_0+\lambda W
+\]</span> 现在, 假定能级<span class="math inline">\(n\)</span>具有简并,
+运动方程的<span class="math inline">\(\lambda^1\)</span>部分仍为如下
+<span class="math display">\[
+(H_0-E_{n;0})\ket{n,k;1}=(E_{n,k;1}-W)\ket{n,k;0}
+\]</span> 从左边乘上<span
+class="math inline">\(\bra{n,k&#39;;0}\)</span>, 则 <span
+class="math display">\[
+E_{n,k;1}\delta_{k&#39;k}=\bra{n,k&#39;;0}W\ket{n,k;0}
+\]</span> 这里体现出<span
+class="math inline">\(\ket{n,k;0}\)</span>选取不具备任意性,
+我们必须在简并子空间取一组让<span
+class="math inline">\(W\)</span>对角化的基矢, 此时<span
+class="math inline">\(E_{n,k;1}\)</span>恰好是<span
+class="math inline">\(W_{kk}\)</span>, 即一般的<span
+class="math inline">\(W\)</span>矩阵的本征值.</p>
+<div class="note note-info">
+            <h5 id="method-一阶简并微扰的能量修正手续"><em>Method</em>一阶简并微扰的能量修正手续</h5><p>系统的 Hamiltonian 为<span class="math inline">\(H=H_0+\lambdaW\)</span>, <span class="math inline">\(H_0\)</span>的能级<spanclass="math inline">\(n\)</span>上具有简并态<spanclass="math inline">\(\ket{n,l;0}\)</span>(<spanclass="math inline">\(l=1,2,\cdots,g\)</span>). 记<spanclass="math inline">\(W_{l&#39;l}=\bra{n,l&#39;;0}W\ket{n,l;0}\)</span>,则可以经过对角化手续让基矢改变为<spanclass="math inline">\(\ket{n,k;0}\)</span>, 此时<spanclass="math inline">\(W\)</span>对角化为<spanclass="math inline">\(W_{kk}\)</span>, 则 <span class="math display">\[E_{n,k;1}=\bra{n,k;0}W\ket{n,k;0}\]</span></p>
+          </div>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/" class="category-chain-item">量子力学</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/%E5%BE%AE%E6%89%B0%E8%AE%BA/" class="category-chain-item">微扰论</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%BE%AE%E6%89%B0%E8%AE%BA/" class="print-no-link">#微扰论</a>
+      
+        <a href="/tags/%E7%AE%80%E5%B9%B6%E5%BE%AE%E6%89%B0/" class="print-no-link">#简并微扰</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>微扰论(02)：一阶简并微扰</div>
+      <div>https://notes.rainchan.me/posts/微扰论(02)：一阶简并微扰/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rain Chan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2025年4月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(03)%EF%BC%9A%E9%AB%98%E9%98%B6%E7%AE%80%E5%B9%B6%E5%BE%AE%E6%89%B0/" title="微扰论(03)：高阶简并微扰">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">微扰论(03)：高阶简并微扰</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(01)%EF%BC%9A%E9%9D%9E%E7%AE%80%E5%B9%B6%E5%BE%AE%E6%89%B0/" title="微扰论(01)：非简并微扰">
+                        <span class="hidden-mobile">微扰论(01)：非简并微扰</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"karnmarth/blog-comments","repo-id":"R_kgDOMerUGQ","category":"Announcements","category-id":"DIC_kwDOMerUGc4ChX3n","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","theme":"preferred_color_scheme"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

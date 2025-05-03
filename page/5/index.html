@@ -247,6 +247,384 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h2 class="index-header">
         
+        <a href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(06)%EF%BC%9AHouseholder%20%E5%8F%98%E6%8D%A2%E5%92%8C%20Hessenberg%20%E7%BA%A6%E5%8C%96/" target="_self">
+          线性方程组与本征值问题(06)：Householder 变换和 Hessenberg 约化
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(06)%EF%BC%9AHouseholder%20%E5%8F%98%E6%8D%A2%E5%92%8C%20Hessenberg%20%E7%BA%A6%E5%8C%96/" target="_self">
+        <div>
+          Householder 变换 \(\newcommand{\R}{\mathbb{R}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\mdl}[1]{\left|\!\left|#1\right|\!\right|}\)考虑一个矢量\(\bi{v}\in\R\), 构造一个反射矩阵 \[ \b{P}_{\bo
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-07-03 16:57" pubdate>
+              2024-07-03
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/" class="category-chain-item">计算物理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98/" class="category-chain-item">线性方程组与本征值问题</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">#数值计算</a>
+            
+              <a href="/tags/%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98/">#本征值问题</a>
+            
+              <a href="/tags/QR-%E7%AE%97%E6%B3%95/">#QR 算法</a>
+            
+              <a href="/tags/QR-%E5%88%86%E8%A7%A3/">#QR 分解</a>
+            
+              <a href="/tags/%E9%9D%9E%E6%A0%87%E5%87%86%E7%9A%84-QR-%E7%AE%97%E6%B3%95/">#非标准的 QR 算法</a>
+            
+              <a href="/tags/Householder-%E5%8F%98%E6%8D%A2/">#Householder 变换</a>
+            
+              <a href="/tags/Hessenberg-Householder-%E7%BA%A6%E5%8C%96/">#Hessenberg-Householder 约化</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(05)%EF%BC%9A%E5%8E%9F%E5%A7%8B%E7%9A%84%20QR%20%E7%AE%97%E6%B3%95/" target="_self">
+          线性方程组与本征值问题(05)：原始的 QR 算法
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(05)%EF%BC%9A%E5%8E%9F%E5%A7%8B%E7%9A%84%20QR%20%E7%AE%97%E6%B3%95/" target="_self">
+        <div>
+          对于矩阵的谱, 有几种求法:  解特征多项式 任何一本线代教材都会讲到的对角化手续 ...  第一种方法求方程的数值解, 原则上需要迭代; 第二种不一定适用, 因为矩阵未必能够对角化. 是否可以找到一个求一般矩阵的本征值的"直接解法"呢? 很不幸的是, 这一点原则上是不可能的. 假设存在一个有限步骤的所谓"直接算法", 即通过有限多次的初等代数运算就可以获得一般矩阵的本征值,
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-05-09 18:29" pubdate>
+              2024-05-09
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/" class="category-chain-item">计算物理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98/" class="category-chain-item">线性方程组与本征值问题</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">#数值计算</a>
+            
+              <a href="/tags/%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98/">#本征值问题</a>
+            
+              <a href="/tags/QR-%E7%AE%97%E6%B3%95/">#QR 算法</a>
+            
+              <a href="/tags/QR-%E5%88%86%E8%A7%A3/">#QR 分解</a>
+            
+              <a href="/tags/%E6%A0%87%E5%87%86%E7%9A%84-QR-%E7%AE%97%E6%B3%95/">#标准的 QR 算法</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(04)%EF%BC%9A%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E6%8F%8F%E8%BF%B0/" target="_self">
+          线性方程组与本征值问题(04)：本征值问题的一般描述
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(04)%EF%BC%9A%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98%E7%9A%84%E4%B8%80%E8%88%AC%E6%8F%8F%E8%BF%B0/" target="_self">
+        <div>
+          \(\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\R}{\mathbb{R}}\newcommand{\rank}[1]{\text{rank}\left(#1 \right)}\newcommand{\
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-05-08 16:41" pubdate>
+              2024-05-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/" class="category-chain-item">计算物理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98/" class="category-chain-item">线性方程组与本征值问题</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">#数值计算</a>
+            
+              <a href="/tags/%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98/">#本征值问题</a>
+            
+              <a href="/tags/%E7%9B%B8%E4%BC%BC%E5%8F%98%E6%8D%A2/">#相似变换</a>
+            
+              <a href="/tags/%E5%AF%B9%E8%A7%92%E5%8C%96/">#对角化</a>
+            
+              <a href="/tags/Schur-%E5%BD%A2%E5%BC%8F/">#Schur 形式</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(03)%EF%BC%9A%E4%B8%89%E5%AF%B9%E8%A7%92%E7%9F%A9%E9%98%B5/" target="_self">
+          线性方程组与本征值问题(03)：三对角矩阵
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(03)%EF%BC%9A%E4%B8%89%E5%AF%B9%E8%A7%92%E7%9F%A9%E9%98%B5/" target="_self">
+        <div>
+          所谓 三对角矩阵, 是指形如 \[ \mathbf{A}=\begin{pmatrix} a_1 &amp; c_1 \\ b_2 &amp; a_2 &amp; c_2 \\ &amp; \ddots &amp; \ddots &amp; \ddots \\ &amp; &amp; b_{n-1} &amp; a_{n-1} &amp; c_{n-1} \\ &amp; &a
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-05-08 15:58" pubdate>
+              2024-05-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/" class="category-chain-item">计算物理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98/" class="category-chain-item">线性方程组与本征值问题</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">#数值计算</a>
+            
+              <a href="/tags/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84/">#线性方程组</a>
+            
+              <a href="/tags/%E4%B8%89%E5%AF%B9%E8%A7%92%E7%9F%A9%E9%98%B5/">#三对角矩阵</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(02)%EF%BC%9ACholesky%20%E5%88%86%E8%A7%A3/" target="_self">
+          线性方程组与本征值问题(02)：Cholesky 分解
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(02)%EF%BC%9ACholesky%20%E5%88%86%E8%A7%A3/" target="_self">
+        <div>
+          Cholesky 分解基于这样一个事实: 对于一个正定自伴矩阵\(\mathbf{A}\in \mathbb{C}^{n\times n}\), 可以找到一个矩阵\(\mathbf{H}\)使得\(\mathbf{A}=\mathbf{H}^\dagger\mathbf{H}\). 事实上, 可以要求\(\mathbf{H}\)是一个上三角矩阵, 则这个分解称为 Cholesky 分解. C
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-05-07 19:00" pubdate>
+              2024-05-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/" class="category-chain-item">计算物理</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98/" class="category-chain-item">线性方程组与本征值问题</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">#数值计算</a>
+            
+              <a href="/tags/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84/">#线性方程组</a>
+            
+              <a href="/tags/%E4%B8%89%E8%A7%92%E7%9F%A9%E9%98%B5/">#三角矩阵</a>
+            
+              <a href="/tags/%E8%87%AA%E4%BC%B4%E7%9F%A9%E9%98%B5/">#自伴矩阵</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
         <a href="/posts/%E7%BA%BF%E6%80%A7%E6%96%B9%E7%A8%8B%E7%BB%84%E4%B8%8E%E6%9C%AC%E5%BE%81%E5%80%BC%E9%97%AE%E9%A2%98(01)%EF%BC%9ALU%20%E5%88%86%E8%A7%A3/" target="_self">
           线性方程组与本征值问题(01)：LU 分解
         </a>
@@ -604,374 +982,6 @@
               <a href="/tags/%E9%BB%84%E9%87%91%E5%88%86%E5%89%B2%E6%90%9C%E5%AF%BB%E6%B3%95/">#黄金分割搜寻法</a>
             
               <a href="/tags/%E5%8D%95%E7%BA%AF%E5%BD%A2%E6%96%B9%E6%B3%95/">#单纯形方法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/%E6%95%B0%E5%80%BC%E8%A7%A3%E5%92%8C%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98(02)%EF%BC%9AAitken%20%E7%AE%97%E6%B3%95,%20Steffensen%20%E7%AE%97%E6%B3%95/" target="_self">
-          数值解和优化问题(02)：Aitken 算法, Steffensen 算法
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/%E6%95%B0%E5%80%BC%E8%A7%A3%E5%92%8C%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98(02)%EF%BC%9AAitken%20%E7%AE%97%E6%B3%95,%20Steffensen%20%E7%AE%97%E6%B3%95/" target="_self">
-        <div>
-          本节介绍两种能够加速迭代序列收敛的算法, 即 Aitken-Δ² 加速算法和 Steffensen 算法.
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-04-17 16:10" pubdate>
-              2024-04-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/" class="category-chain-item">计算物理</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/%E6%95%B0%E5%80%BC%E8%A7%A3%E5%92%8C%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98/" class="category-chain-item">数值解和优化问题</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">#数值计算</a>
-            
-              <a href="/tags/%E6%95%B0%E5%80%BC%E6%B1%82%E8%A7%A3/">#数值求解</a>
-            
-              <a href="/tags/Aitken-%E7%AE%97%E6%B3%95/">#Aitken 算法</a>
-            
-              <a href="/tags/Steffensen-%E7%AE%97%E6%B3%95/">#Steffensen 算法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/%E6%95%B0%E5%80%BC%E8%A7%A3%E5%92%8C%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98(01)%EF%BC%9A%E5%AF%B9%E5%88%86%E6%B3%95,%20%E5%88%87%E7%BA%BF%E6%B3%95%E5%92%8C%E5%89%B2%E7%BA%BF%E6%B3%95/" target="_self">
-          数值解和优化问题(01)：对分法, 切线法和割线法
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/%E6%95%B0%E5%80%BC%E8%A7%A3%E5%92%8C%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98(01)%EF%BC%9A%E5%AF%B9%E5%88%86%E6%B3%95,%20%E5%88%87%E7%BA%BF%E6%B3%95%E5%92%8C%E5%89%B2%E7%BA%BF%E6%B3%95/" target="_self">
-        <div>
-          作为数值解和优化问题的开篇, 介绍三类简单的数值求解方程的办法.
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-04-17 15:05" pubdate>
-              2024-04-17
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/" class="category-chain-item">计算物理</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/%E6%95%B0%E5%80%BC%E8%A7%A3%E5%92%8C%E4%BC%98%E5%8C%96%E9%97%AE%E9%A2%98/" class="category-chain-item">数值解和优化问题</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">#数值计算</a>
-            
-              <a href="/tags/%E6%95%B0%E5%80%BC%E6%B1%82%E8%A7%A3/">#数值求解</a>
-            
-              <a href="/tags/%E5%AF%B9%E5%88%86%E6%B3%95/">#对分法</a>
-            
-              <a href="/tags/Newton-Raphson-%E6%B3%95/">#Newton-Raphson 法</a>
-            
-              <a href="/tags/%E5%89%B2%E7%BA%BF%E6%B3%95/">#割线法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/%E5%BE%AE%E7%A7%AF%E5%88%86%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(02)%EF%BC%9A%E5%A4%96%E6%8E%A8%E7%A7%AF%E5%88%86%E6%B3%95,%20Gauss%20%E7%A7%AF%E5%88%86%E6%B3%95/" target="_self">
-          微积分数值计算(02)：外推积分法, Gauss 积分法
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/%E5%BE%AE%E7%A7%AF%E5%88%86%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(02)%EF%BC%9A%E5%A4%96%E6%8E%A8%E7%A7%AF%E5%88%86%E6%B3%95,%20Gauss%20%E7%A7%AF%E5%88%86%E6%B3%95/" target="_self">
-        <div>
-          本节介绍两种积分方法: 外推法和 Gauss 法, 其中后者比较重要.
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-03-16 18:42" pubdate>
-              2024-03-16
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/" class="category-chain-item">计算物理</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/%E5%BE%AE%E7%A7%AF%E5%88%86%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="category-chain-item">微积分数值计算</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">#数值计算</a>
-            
-              <a href="/tags/%E6%95%B0%E5%80%BC%E5%BE%AE%E7%A7%AF%E5%88%86/">#数值微积分</a>
-            
-              <a href="/tags/%E5%A4%96%E6%8E%A8%E7%A7%AF%E5%88%86%E6%B3%95/">#外推积分法</a>
-            
-              <a href="/tags/Gauss-%E7%A7%AF%E5%88%86%E6%B3%95/">#Gauss 积分法</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/%E5%BE%AE%E7%A7%AF%E5%88%86%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(01)%EF%BC%9A%E7%AE%80%E5%8D%95%E7%9A%84%E5%BE%AE%E7%A7%AF%E5%88%86%E6%96%B9%E6%B3%95/" target="_self">
-          微积分数值计算(01)：简单的微积分方法
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/%E5%BE%AE%E7%A7%AF%E5%88%86%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(01)%EF%BC%9A%E7%AE%80%E5%8D%95%E7%9A%84%E5%BE%AE%E7%A7%AF%E5%88%86%E6%96%B9%E6%B3%95/" target="_self">
-        <div>
-          本节给出一些相当trivial的微积分的数值计算方法.
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-03-15 22:46" pubdate>
-              2024-03-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/" class="category-chain-item">计算物理</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/%E5%BE%AE%E7%A7%AF%E5%88%86%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="category-chain-item">微积分数值计算</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">#数值计算</a>
-            
-              <a href="/tags/Newton-Cortes-%E6%96%B9%E6%B3%95/">#Newton-Cortes 方法</a>
-            
-              <a href="/tags/%E6%95%B0%E5%80%BC%E5%BE%AE%E7%A7%AF%E5%88%86/">#数值微积分</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h2 class="index-header">
-        
-        <a href="/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(04)%EF%BC%9AClenshaw%20%E9%80%86%E5%90%91%E8%BF%AD%E4%BB%A3,%20Pad%C3%A9%20%E8%BF%91%E4%BC%BC/" target="_self">
-          函数数值计算(04)：Clenshaw 逆向迭代, Padé 近似
-        </a>
-      </h2>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/posts/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97(04)%EF%BC%9AClenshaw%20%E9%80%86%E5%90%91%E8%BF%AD%E4%BB%A3,%20Pad%C3%A9%20%E8%BF%91%E4%BC%BC/" target="_self">
-        <div>
-          本节简略带过 Clenshaw 逆向迭代和 Padé 近似这两种方法, 它们都不是单独使用的, 而是通常作为多项式展开的补充
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-03-15 20:55" pubdate>
-              2024-03-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/" class="category-chain-item">计算物理</a>
-  
-  
-    <span>></span>
-    
-  <a href="/categories/%E8%AE%A1%E7%AE%97%E7%89%A9%E7%90%86/%E5%87%BD%E6%95%B0%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/" class="category-chain-item">函数数值计算</a>
-  
-  
-
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E6%95%B0%E5%80%BC%E8%AE%A1%E7%AE%97/">#数值计算</a>
-            
-              <a href="/tags/Clenshaw-%E9%80%86%E5%90%91%E8%BF%AD%E4%BB%A3/">#Clenshaw 逆向迭代</a>
-            
-              <a href="/tags/Pade%E8%BF%91%E4%BC%BC/">#Padé近似</a>
             
           </div>
         
