@@ -4,6 +4,76 @@
   
   
   <entry>
+    <title>微扰论(07)：两种时间尺度近似与 Berry 相位</title>
+    <link href="/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(07)%EF%BC%9A%E4%B8%A4%E7%A7%8D%E6%97%B6%E9%97%B4%E5%B0%BA%E5%BA%A6%E8%BF%91%E4%BC%BC%E4%B8%8E%20Berry%20%E7%9B%B8%E4%BD%8D/"/>
+    <url>/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(07)%EF%BC%9A%E4%B8%A4%E7%A7%8D%E6%97%B6%E9%97%B4%E5%B0%BA%E5%BA%A6%E8%BF%91%E4%BC%BC%E4%B8%8E%20Berry%20%E7%9B%B8%E4%BD%8D/</url>
+    
+    <content type="html"><![CDATA[<h2id="两种对时间尺度的极端近似newcommandkmathbbknewcommandrmathbbrnewcommandcmathbbcnewcommandbmathbfnewcommandbiboldsymbolnewcommandrank1textrankleft1-rightnewcommanddim1textdimleft1-rightnewcommanddiag1textdiagleft1-rightnewcommanddet1textdetleft1-rightnewcommanddet1leftbeginmatrix-1-endmatrixrightnewcommandset1left-1-rightnewcommandabs1left-1-rightnewcommandnorm1leftleft1rightright">两种对时间尺度的极端近似<spanclass="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1\right)}\newcommand{\dim}[1]{\text{dim}\left(#1\right)}\newcommand{\diag}[1]{\text{diag}\left(#1\right)}\newcommand{\det}[1]{\text{det}\left(#1\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1\right\}}\newcommand{\abs}[1]{\left| #1\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span></h2><p>上一节我们引入了含时微扰, 它和定态微扰的区别在于微扰是否含时. 然而,所有的微扰都可以认为是含时的——实验中,制备完成一个量子态和施加定态微扰不可能严格同时发生,那么全过程的微扰就是含时的: 施加微扰之前为<spanclass="math inline">\(0\)</span>, 施加微扰时具有一定的上升沿,随即稳定下来. 在这种时候, 定态微扰的全部结论是否还有意义?严格使用含时微扰的结果能否回到定态微扰的结论?</p><p>考虑这样的微扰<span class="math inline">\(W(t)\)</span>, 满足 <spanclass="math display">\[\bra{m}W(t)\ket{n}=\begin{aligned}\begin{cases}\displaystyleW_{mn}e^{\eta t}&amp;t&lt;0\\\\\displaystyleW_{mn}\quad&amp;t&gt;0\end{cases}\end{aligned}\]</span> 其中<span class="math inline">\(\eta&gt;0\)</span>.这个微扰函数在时间负半轴的作用是从零开始增大它的值, <spanclass="math inline">\(\eta\)</span>的两种极限代表微扰施加上去的速度不同.<span class="math inline">\(\eta\ll\omega_{mn}\)</span>时,微扰极其缓慢地施加到系统上; <spanclass="math inline">\(\eta\gg\omega_{mn}\)</span>时, 微扰在<spanclass="math inline">\(t=0\)</span>附近从<spanclass="math inline">\(0\)</span>迅速增大到稳定值.</p><p>振幅的一阶修正项为 <span class="math display">\[\begin{aligned}c_{n}^{(1)}(t)&amp;=-iW_{ni}(\int_{-\infty}^0 e^{\etat&#39;}e^{i\omega_{ni}t&#39;}dt&#39;+\int_{0}^te^{i\omega_{ni}t&#39;}dt&#39;)\\&amp;=\begin{aligned}\begin{cases}\displaystyle\frac{-iW_{ni}}{\eta+i\omega_{ni}}e^{\eta t+i\omega_{ni}t}&amp;t&lt;0\\\\\displaystyle-iW_{ni}(\frac{1}{\eta+i\omega_{ni}}+\frac{e^{i\omega_{ni}t}-1}{i\omega_{ni}})\quad&amp;t&gt;0\end{cases}\end{aligned}\end{aligned}\]</span> 二阶修正项满足方程: <span class="math display">\[i\dot{c}_m^{(2)}(t)=\sum_{n}e^{i\omega_{mn}t} W_{mn}(t) c_n^{(1)}(t)\]</span> <span class="math inline">\(t&lt;0\)</span>时, 有 <spanclass="math display">\[c_m^{(2)}(t)=(-i)\sum_{n}\int_{-\infty}^t\frac{-i W_{ni}W_{mn}}{\eta+i\omega_{ni}} e^{2\eta t+i\omega_{mi}t}=-\sum_{n}\frac{W_{ni}W_{mn}e^{2\eta t+i\omega_{mi}t}}{(\eta+i\omega_{ni})(2\eta+i\omega_{mi})}\]</span> <span class="math inline">\(t&gt;0\)</span>时, 有 <spanclass="math display">\[\begin{aligned}c_{m}^{(2)}(t)&amp;=-\sum_{n}\frac{W_{ni}W_{mn}}{(\eta+i\omega_{ni})(2\eta+i\omega_{mi})}-\sum_{n}\int_0^tW_{mn}W_{ni}e^{i\omega_{mn}t}(\frac{1}{\eta+i\omega_{ni}}+\frac{e^{i\omega_{ni}t}-1}{i\omega_{ni}})dt\\&amp;=-\sum_{n}\frac{W_{ni}W_{mn}}{(\eta+i\omega_{ni})(2\eta+i\omega_{mi})}-\sum_{n}W_{mn}W_{ni} (\frac{\eta(e^{i\omega_{mn}t}-1)}{(\eta+i\omega_{ni})\omega_{ni}\omega_{mn}}-\frac{e^{i\omega_{mi}t}-1}{\omega_{ni}\omega_{mi}})\end{aligned}\]</span> ### 冲量近似</p><p>令<span class="math inline">\(\eta\gg \omega_{mi}\)</span>, 则 <spanclass="math display">\[c_m(t)\approx\delta_{mi}-\frac{W_{mi}}{\omega_{mi}}(e^{i\omega_{mi}t}-1)\]</span> <span class="math inline">\(t=0\)</span>时, <spanclass="math inline">\(c_n(t)=\delta_{ni}\)</span>, 即态矢仍为<spanclass="math inline">\(t=-\infty\)</span>时的<spanclass="math inline">\(\ket{i}\)</span>, 这相当符合直觉, <spanclass="math inline">\(\eta\rightarrow+\infty\)</span>(或<spanclass="math inline">\(\eta\gg\omega_{ni}\)</span>) 是冲量近似,微扰在<span class="math inline">\(t=0\)</span>时被瞬间加到体系上,态矢来不及改变.</p><h3 id="绝热近似">绝热近似</h3><p>令<span class="math inline">\(\eta\ll\omega_{mi}\)</span>, 则 <spanclass="math display">\[\begin{aligned}c_m(t)&amp;\approx\delta_{mi}-\frac{W_{mi}}{\omega_{mi}}e^{i\omega_{mi}t}+\sum_{n}W_{mn}W_{ni}\frac{e^{i\omega_{mi}t}}{\omega_{ni}\omega_{mi}}\\\dot{c}_m(t)&amp;\approx-iW_{mi}e^{i\omega_{mi}t}+i\sum_{n}W_{mn}W_{ni}\frac{e^{i\omega_{mi}t}}{\omega_{ni}}\end{aligned}\]</span> <span class="math inline">\(m=i\)</span>时, 有 <spanclass="math display">\[\frac{\dot{c}_i}{c_i}\approx\left(-iW_{ii}+i\sum_{n}\frac{|W_{ni}|^2}{\omega_{ni}}\right)(1+\frac{W_{ii}}{\omega_{ii}})\approx-iW_{ii}+i\sum_{n\nei}\frac{|W_{ni}|^2}{\omega_{ni}}\]</span> 我们会发现, 如果令<spanclass="math inline">\(\dot{c}_i=-i\Delta E c_i\)</span>,根据上式求得的<span class="math inline">\(\Delta E\)</span>,恰好包含非简并微扰的一阶项和二阶项.</p><p>在绝热近似下, 初态将系统制备成能量本征态<spanclass="math inline">\(\ket{i}\)</span>, 然后缓慢增大微扰,微扰值稳定后<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><spanclass="hint--top hint--rounded"aria-label="实际上, 稳定前也能给出定态微扰的结果, 具体计算从略">[1]</span></a></sup>,系统就绝热地演化到了新的能量本征态<spanclass="math inline">\(\ket{i&#39;}=\ket{i;0}+\ket{i;1}+\cdots\)</span>上,此时, 我们可以使用非简并微扰处理问题. 或者说,当微扰的变化速率远远慢于系统固有的响应速率,可以使用定态微扰处理每时每刻的系统.</p><h2 id="berry-相位">Berry 相位</h2><p>上面对于绝热近似的讨论认为, 含时微扰如果变化极其缓慢, 系统会从<spanclass="math inline">\(E_i\)</span>本征态逐渐被"拖拽"到<spanclass="math inline">\(E_{i&#39;}\)</span>本征态.这提示我们追踪每时每刻的本征值变化. 即: 考虑态<spanclass="math inline">\(\ket{n,t}\)</span>, 它对每个<spanclass="math inline">\(t\)</span>时刻给出<spanclass="math inline">\(H\)</span>的本征值 <span class="math display">\[H(t)\ket{n,t}=E_n(t)\ket{n,t}\]</span> 一个任意的受<spanclass="math inline">\(H(t)\)</span>控制演化的态<spanclass="math inline">\(\ket{\psi(t)}\)</span>可以写成如下形式 <spanclass="math display">\[\ket{\psi(t)}=\sum_{n}u_n(t)\exp(i\theta_n(t))\ket{n,t}\]</span> 其中, <spanclass="math inline">\(\theta_n=-\int_0^tE_n(t&#39;)dt&#39;\)</span>.基于<span class="math inline">\(\ket{\psi(t)}\)</span>的动力学方程, 有<span class="math display">\[\begin{aligned}i\frac{\partial}{\partial t}\left(\sum_nu_n(t)e^{i\theta_n(t)}\ket{n,t}\right)-\sum_nu_n e^{i\theta_n(t)}E_n(t)\ket{n,t}&amp;=0\\i\sum_nu_n(t)e^{i\theta_n(t)}\left(\frac{\partial}{\partial t}\ket{n,t}\right)+i\sum_n\dot{u}_n(t)e^{i\theta_n(t)}\ket{n,t}&amp;=0\end{aligned}\]</span> 从左边作用<span class="math inline">\(\ket{m,t}\)</span>, 有<span class="math display">\[\dot{u}_m=-e^{i\theta_m(t)}\sum_nu_n(t)e^{i\theta_n(t)}\bra{m,t}\frac{\partial}{\partial t}\ket{n,t}\]</span> 为了解释各项的作用, 需要对<spanclass="math inline">\(H\ket{n,t}=E_n\ket{n,t}\)</span>取时间导数 <spanclass="math display">\[\dot{H}\ket{n,t}=(E_n-H)\frac{\partial}{\partialt}\ket{n,t}+\dot{E}_n\ket{n,t}\]</span> 然后从左边作用<span class="math inline">\(\ket{m,t}\)</span>,得到 <span class="math display">\[(E_n-E_m)\bra{m,t}\frac{\partial}{\partialt}\ket{n,t}=\bra{m,t}\dot{H}\ket{n,t}+\dot{E}_n\delta_{mn}\]</span> 它允许代换掉所有<span class="math inline">\(m\nen\)</span>的<spanclass="math inline">\(\bra{m,t}\partial_t\ket{n,t}\)</span>项,振幅的演化整理为 <span class="math display">\[\dot{u}_m=-u_m\bra{m,t}\frac{\partial}{\partial t}\ket{m,t}+\sum_{n\nem}\frac{\bra{m,t}\dot{H}\ket{n,t}}{E_n-E_m}u_ne^{i(\theta_n-\theta_m)}\]</span> 到这里, 还是严格的结果. 但如果考虑绝热近似,求和中振幅前的系数相当于<spanclass="math inline">\(H\)</span>的相对变化率,它远远慢于系统中态的自然变化率(即<spanclass="math inline">\(\omega_m=E_m/\hbar\)</span>), 因而可以忽略不计.那么得到 <span class="math display">\[\dot{u}_m=-u_m\bra{m,t}\frac{\partial}{\partial t}\ket{m,t}\]</span> 如果定义 <strong>Berry 相位</strong>: <spanclass="math display">\[\gamma_m(\tau):=i\int_0^\tau \bra{m,t}\frac{\partial}{\partialt}\ket{m,t}dt\]</span> 那么系统中每个含时本征态都独立演化: <spanclass="math display">\[u_m(t)=e^{i\gamma_m(t)}u_m(0)\]</span> 这种方法把单个本征态的绝热演化推广为任意态.</p><h2 id="berry-联络">Berry 联络</h2><p>引入一个中间参数矢量<spanclass="math inline">\(\vec{R}\)</span>描述<spanclass="math inline">\(H\)</span>的含时演化,那么上述相位可以以更加令人熟悉的形式写出 <span class="math display">\[\gamma_m=\int_{\vec{R}(0)}^{\vec{R}(\tau)}i\bra{m,t}\nabla_R\ket{m,t}\cdot d\vec{R}\]</span> 如果参数矢量呈现周期性, 可以定义出更常见的 Berry 相位:</p><div class="note note-success">            <h5 id="def-berry-相位"><em>Def</em> Berry 相位</h5><p><span class="math display">\[\gamma_m:=\oint i\bra{m,t}\nabla_R\ket{m,t}\cdot d\vec{R}\]</span></p><p>其中<span class="math inline">\(\vec{R}\)</span>是 Hamiltonian中的参数矢量, 则<span class="math inline">\(\gamma_m\)</span>称之为<strong>Berry 相位</strong>.</p>          </div><p>可以把积分核取出定义成一个矢量:</p><div class="note note-success">            <h5 id="def-berry-联络"><em>Def</em> Berry 联络</h5><p><span class="math display">\[\vec{A}_m:=i\bra{m,t}\nabla_R\ket{m,t}\]</span></p><p>则<span class="math inline">\(\gamma_m\)</span>可以定义成<spanclass="math inline">\(\vec{A}_m\)</span>的环路积分, <spanclass="math inline">\(\vec{A}_m\)</span>称为 Berry 联络.</p>          </div><p>很容易看出<spanclass="math inline">\(\vec{A}_m\)</span>和矢势的相似之处:它们都具有规范不变性: <span class="math display">\[\vec{A}_m\rightarrow\vec{A}_m+\nabla\phi\quad\gamma_m\rightarrow\gamma_m\]</span> 并且旋度可以定义出一个场. 不同的是, 矢势一般基于三维,它的旋度可以轻易地简化为赝矢量, 即磁场; 而 Berry 联络基于任意维度,旋度应该得到一个反对称张量: <span class="math display">\[\mathcal{F}_{jk}:=\partial_j A_k-\partial_k A_j\]</span> 这里的<span class="math inline">\(\mathcal{F}\)</span>一般叫做Berry 曲率. 它在测度<span class="math inline">\(dR_j\wedgedR_k\)</span>上积分(特殊地, 在三维空间得到面积分)仍回到 Berry相位的值.</p><p>如果<span class="math inline">\(\vec{R}\)</span>选取为实空间矢量,那么合适的例子就是磁场和 A-B 效应; 如果<spanclass="math inline">\(\vec{R}\)</span>选取为动量空间矢量,合适的例子是拓扑能带与陈数. 对这些例子的详细叙述从略.</p><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span>实际上,稳定前也能给出定态微扰的结果, 具体计算从略<a href="#fnref:1" rev="footnote" class="footnote-backref">↩︎</a></span></span></li></ol></div></section>]]></content>
+    
+    
+    <categories>
+      
+      <category>量子力学</category>
+      
+      <category>微扰论</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>微扰论</tag>
+      
+      <tag>含时微扰</tag>
+      
+      <tag>冲量近似</tag>
+      
+      <tag>绝热近似</tag>
+      
+      <tag>Berry 相位</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>微扰论(06)：含时微扰</title>
+    <link href="/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(06)%EF%BC%9A%E5%90%AB%E6%97%B6%E5%BE%AE%E6%89%B0/"/>
+    <url>/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(06)%EF%BC%9A%E5%90%AB%E6%97%B6%E5%BE%AE%E6%89%B0/</url>
+    
+    <content type="html"><![CDATA[<p><spanclass="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1\right)}\newcommand{\dim}[1]{\text{dim}\left(#1\right)}\newcommand{\diag}[1]{\text{diag}\left(#1\right)}\newcommand{\det}[1]{\text{det}\left(#1\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1\right\}}\newcommand{\abs}[1]{\left| #1\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span>至此己经考虑了不显含时间的Hamiltonian. 然而, 实际上有相多重要的与时间相关的系统. 在本章的剩余部分,将展示如何处理含有时间相关势的情况.</p><h2 id="相互作用绘景">相互作用绘景</h2><p>对于<span class="math inline">\(t\)</span>时刻的力学量<spanclass="math inline">\(A\)</span>进行测量, 期待值是 <spanclass="math display">\[\bra{\psi(t)}A_t\ket{\psi(t)}=\bra{\psi(0)}e^{iHt}Ae^{-iHt}\ket{\psi(0)}\]</span> 常见的两种绘景里, Schrodinger 绘景把演化完全交给态矢, 而Heisenberg 绘景完全交给算符. 但含时微扰论中, <spanclass="math inline">\(H\)</span>被拆分为<spanclass="math inline">\(H_0\)</span>和<spanclass="math inline">\(W(t)\)</span>两部分, 这时候就可以考虑一种新的绘景.在这个绘景中, <span class="math inline">\(H_0\)</span>指导算符的演化:<span class="math display">\[A_t=e^{iH_0t}Ae^{-iH_0t}\]</span> 因而态矢的演化为 <span class="math display">\[\begin{aligned}\ket{\psi(t)}&amp;=e^{iH_0t}e^{-iHt}\ket{\psi(0)}\\i\frac{\partial}{\partialt}\ket{\psi(t)}&amp;=e^{iH_0t}(H-H_0)e^{-iHt}\ket{\psi(0)}\\&amp;=e^{iH_0t}We^{-iH_0t}\ket{\psi(t)}\end{aligned}\]</span> 即<spanclass="math inline">\(V(t)=e^{iH_0t}W(t)e^{-iH_0t}\)</span>指导态矢的演化.这样, 时间演化算符不会完全由态矢或算符其中之一承担, 而是共同承担.</p><p>从初态<span class="math inline">\(t_i\)</span>到末态<spanclass="math inline">\(t\)</span>的态矢的时间演化算符为 <spanclass="math display">\[U(t,t_i)=\exp(-i\int_{t_i}^t V(t&#39;)dt&#39;)\]</span> 它完全等价于一个严格的积分方程 <span class="math display">\[U(t,t_i)=1-i\int_{t_i}^t V(t&#39;)U(t&#39;,t_i)dt&#39;\]</span> 对于严格的积分方程, 可以计算有限项的迭代解: <spanclass="math display">\[\begin{aligned}U(t,t_i)&amp;=1+U^{(1)}(t,t_i)+\cdots+U^{(n)}(t,t_i)\\U^{(1)}(t,t_i)&amp;=-i\int_{t_i}^tV(t&#39;)\cdot 1dt&#39;\\U^{(2)}(t,t_i)&amp;=-i\int_{t_i}^tV(t&#39;)\cdotU^{(1)}(t&#39;,t_i)dt&#39;\\&amp;=(-i)^2\int_{t_i}^t dt&#39;V(t&#39;)\int_{t_i}^{t&#39;}dt&#39;&#39; V(t&#39;&#39;)\\U^{(n)}(t,t_i)&amp;=(-i)^n\int_{t_i}^tdt_{n}V(t_n)\int_{t_i}^{t_n}dt_{n-1}V(t_{n-1})\cdots\int_{t_i}^{t_2}dt_1V(t_1)\end{aligned}\]</span> 这就是著名的 <strong>Dyson 级数</strong>.</p><h2 id="含时微扰的一般形式">含时微扰的一般形式</h2><p>上述结果过于抽象, 可以基于<spanclass="math inline">\(H_0\)</span>的本征态更具体地讨论.假设态矢具有如下展开 <span class="math display">\[\ket{\psi(t)}=\sum_n C_n\ket{n}\]</span> 其中<span class="math inline">\(\ket{n}\)</span>不随时间变化.在相互作用表象中, 立即得到 <span class="math display">\[\sum_n i\dot{C}_n\ket{n}=\sum_n V(t)C_n\ket{n}\]</span> 用<span class="math inline">\(\bra{m}\)</span>从左边内积, 有<span class="math display">\[i\dot{C}_m=\sum_n C_n\bra{m}e^{iH_0t}W(t)e^{-iH_0t}\ket{n}=\sum_ne^{i\omega_{mn}t}W_{mn}C_n\]</span> 其中, <spanclass="math inline">\(W_{mn}=\bra{m}W(t)\ket{n}\)</span>, <spanclass="math inline">\(\omega_{mn}=E_m-E_n\)</span>. 这里仍是严格解,但多数情况下求解这组方程是非常困难的. 含时微扰的思路是基于<spanclass="math inline">\(W_{mn}\ll E_{m},E_{n}\)</span>, 进行逐级展开.这里仍用无量纲数<span class="math inline">\(\lambda\)</span>标记级次,<span class="math inline">\(H=H_0+\lambda W\)</span>, 则严格方程为 <spanclass="math display">\[i\dot{C}_m=\lambda \sum_{n}e^{i\omega_{mn}t}W_{mn}C_n\]</span> 近似地, 可以把<spanclass="math inline">\(C_n\)</span>展开为<spanclass="math inline">\(C_n^{(0)}+\lambda C_{n}^{(1)}+\lambda^2C_{n}^{(2)}+\cdots\)</span>, 则 <span class="math display">\[\begin{aligned}i\dot{C}_m^{(0)}&amp;=0\\i\dot{C}_m^{(j+1)}&amp;=\sum_{n}e^{i\omega_{mn}t} W_{mn}C_n^{(j)}\end{aligned}\]</span></p><h3 id="从单一定态开始的跃迁">从单一定态开始的跃迁</h3><p>作为例子, 可以考虑初态为单一的能量本征态<spanclass="math inline">\(\ket{i}\)</span>. 则 <span class="math display">\[C_{f}^{(0)}=\delta_{fi}\]</span> 一阶微扰项: <span class="math display">\[i\dot{C}_f^{(1)}=\sum_ne^{i\omega_{fn}t}W_{fn}C_n^{(0)}=e^{i\omega_{fi}t}W_{fi}\]</span> 解得 <span class="math display">\[C_f^{(1)}=(-i)\int_0 ^{t} e^{i\omega_{fi}t&#39;}W_{fi}(t&#39;)dt&#39;\]</span> 系数的各阶微扰项形式上非常类似 Dyson 级数. 如果<spanclass="math inline">\(f\neq i\)</span>, 则<spanclass="math inline">\(|C_{f}|^2\)</span>表示初态<spanclass="math inline">\(i\)</span>跃迁到某个不同末态<spanclass="math inline">\(f\)</span>的概率; 如果<spanclass="math inline">\(f=i\)</span>, 则<spanclass="math inline">\(|C_f|^2\)</span>表示滞留在初态<spanclass="math inline">\(i\)</span>的概率 <span class="math display">\[\begin{aligned}P_f&amp;\approx |C_f^{(0)}+\lambdaC_f^{(1)}|^2=|C_f^{(1)}|^2+O(\lambda^3)\\P_i&amp;\approx|C_i^{(0)}+\lambda C_i^{(1)}|^2=1-\sum_{f\neqi}|C_f^{(1)}|^2 +O(\lambda^3)\end{aligned}\]</span> ## 常微扰</p><p>最简单的微扰模型是常微扰: <span class="math display">\[W(t)=W\cdot\theta(t)\]</span> 其中, <span class="math inline">\(\theta\)</span>是 Heaviside阶跃函数. 这样的微扰在<spanclass="math inline">\(t&lt;0\)</span>时尚未加在系统上, <spanclass="math inline">\(t&gt;0\)</span>之后是一个非零常量. 则 <spanclass="math display">\[C_f^{(1)}=(-iW)\int_0^te^{i\omega_{fi}t&#39;}dt&#39;=\frac{W}{\omega_{fi}}(1-e^{i\omega_{fi}t})\]</span> 跃迁概率为 <span class="math display">\[P_f\approx |C_f^{(1)}|^2=\left[\frac{2W}{\omega_{fi}}\sin(\frac{\omega_{fi}t}{2})\right]^2\]</span> 在给定的时间<span class="math inline">\(t\)</span>内, <spanclass="math inline">\(\omega_{fi}\)</span>越大, 跃迁概率越小.相当于一个不确定关系 <span class="math display">\[\omega_{fi}=\Delta E_{fi}\sim\frac{2\pi}{t}\]</span> 只有在这个范围内的能量差才具有足够有效的跃迁概率.这个不确定关系也可以从能量守恒的角度表述: 常微扰在阶跃处表现为驱动,因此<span class="math inline">\(t\)</span>比较小时, 驱动离此时较近,允许较大程度的能量不守恒; <span class="math inline">\(t\)</span>很大时,微扰表现为常数而非驱动, 系统能量应该守恒, <spanclass="math inline">\(\Delta E\approx0\)</span>.</p><p>如果<spanclass="math inline">\(\omega_{fi}\)</span>发生在能量简并态之间会如何?此时把<span class="math inline">\(f\)</span>改写为<spanclass="math inline">\(n\)</span>, 有 <span class="math display">\[P_n\approx W^2 t^2\]</span> 看起来概率会随着时间发散, 从而让微扰论失效. 如何规避这个难题?考虑连续的简并态, 有 <span class="math display">\[P_{[n]}=\lim_{\epsilon\rightarrow0} \int_{E_n-\epsilon}^{E_n+\epsilon}\rho(E_n)dE\cdot\left[\frac{2W}{\omega_{ni}}\sin(\frac{\omega_{ni}t}{2})\right]^2\]</span> 其中, <span class="math inline">\([n]\)</span>表示从初态<spanclass="math inline">\(i\)</span>跃迁到具有<spanclass="math inline">\(E_n\)</span>能量的一系列简并态.通常我们更喜欢讨论跃迁率, 即单位时间转移的概率, 同时取长时间极限, 有<span class="math display">\[w_{[n]}=\lim_{t\rightarrow+\infty}\frac{dP_{[n]}}{dt}=\lim_{t\rightarrow+\infty}\lim_{\epsilon\rightarrow0}\int_{\omega_{ni}t-\epsilon t}^{\omega_{ni}t+\epsilon t}\rho(E_n)d(\omega t)\cdot\frac{2W^2}{\omega t} \sin\omega t\]</span> 很明显, <span class="math inline">\(\epsilont\)</span>是个未定式, 如果不严谨地交换极限序, 那么<spanclass="math inline">\(\pm\epsilon t\)</span>能够覆盖全实轴, 则 <spanclass="math display">\[w_{[n]}\approx\lim_{\epsilon\rightarrow0}2W^2\rho(E_n)\int_{-\infty}^{+\infty}\frac{\sin\omega t}{\omegat}d(\omega t)=2\pi W^2\rho(E_n)\]</span> 在更普遍的框架下, 上式表为 <span class="math display">\[\boxed{w_{i\rightarrow[n]}=2\pi\overline{|W_{ni}|^2}\rho(E_n)}\]</span> 称为 <strong>Fermi 黄金规则(Fermi golden rule)</strong>.</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>量子力学</category>
+      
+      <category>微扰论</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>微扰论</tag>
+      
+      <tag>含时微扰</tag>
+      
+      <tag>相互作用绘景</tag>
+      
+      <tag>Dyson 级数</tag>
+      
+      <tag>Fermi 黄金规则</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>微扰论(05)：精细结构与 Zeeman 效应</title>
     <link href="/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(05)%EF%BC%9A%E7%B2%BE%E7%BB%86%E7%BB%93%E6%9E%84%E4%B8%8E%20Zeeman%20%E6%95%88%E5%BA%94/"/>
     <url>/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(05)%EF%BC%9A%E7%B2%BE%E7%BB%86%E7%BB%93%E6%9E%84%E4%B8%8E%20Zeeman%20%E6%95%88%E5%BA%94/</url>
@@ -24,9 +94,9 @@
       
       <tag>微扰论</tag>
       
-      <tag>简并微扰</tag>
-      
       <tag>非简并微扰</tag>
+      
+      <tag>简并微扰</tag>
       
       <tag>精细结构</tag>
       
@@ -61,9 +131,9 @@
       
       <tag>微扰论</tag>
       
-      <tag>简并微扰</tag>
-      
       <tag>非简并微扰</tag>
+      
+      <tag>简并微扰</tag>
       
       <tag>Stark 效应</tag>
       
@@ -332,9 +402,9 @@
       
       <tag>角动量</tag>
       
-      <tag>球张量</tag>
-      
       <tag>不可约张量</tag>
+      
+      <tag>球张量</tag>
       
     </tags>
     
@@ -582,11 +652,11 @@
     
     <tags>
       
-      <tag>van der Waals 方程</tag>
-      
       <tag>平均场近似</tag>
       
       <tag>临界指数</tag>
+      
+      <tag>van der Waals 方程</tag>
       
       <tag>Landau 理论</tag>
       

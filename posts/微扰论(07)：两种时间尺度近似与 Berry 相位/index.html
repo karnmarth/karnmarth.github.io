@@ -19,19 +19,21 @@
   <meta name="author" content="Rain Chan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="到现在为止, 标量、矢量等经典语言被不言而喻地拿来形容量子力学算符的性质. 本节将论述标量算符、矢量算符和推广的张量算符在转动下的不同性质, 它们常常基于直角坐标基矢写出矩阵元, 这样的表象与转动操作的实正交矩阵表象配合得很好; 但在量子力学中, 转动操作的表象常常取作 SU(2) 群的 spin-j 不可约表示, 在这样的表象下, 不可约张量不再适宜使用直角坐标表象, 而应该引入所谓的球张量语言">
+    <meta name="description" content="本节从一个逐渐打开的微扰出发, 引入冲量近似和绝热近似两种近似方法, 证明定态微扰的合理性; 接着, 基于绝热近似简要说明 Berry 相位等物理量.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="角动量理论(04)：张量算符">
-<meta property="og:url" content="https://notes.rainchan.me/posts/%E8%A7%92%E5%8A%A8%E9%87%8F%E7%90%86%E8%AE%BA(04)%EF%BC%9A%E5%BC%A0%E9%87%8F%E7%AE%97%E7%AC%A6/">
+<meta property="og:title" content="微扰论(07)：两种时间尺度近似与 Berry 相位">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(07)%EF%BC%9A%E4%B8%A4%E7%A7%8D%E6%97%B6%E9%97%B4%E5%B0%BA%E5%BA%A6%E8%BF%91%E4%BC%BC%E4%B8%8E%20Berry%20%E7%9B%B8%E4%BD%8D/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
-<meta property="og:description" content="到现在为止, 标量、矢量等经典语言被不言而喻地拿来形容量子力学算符的性质. 本节将论述标量算符、矢量算符和推广的张量算符在转动下的不同性质, 它们常常基于直角坐标基矢写出矩阵元, 这样的表象与转动操作的实正交矩阵表象配合得很好; 但在量子力学中, 转动操作的表象常常取作 SU(2) 群的 spin-j 不可约表示, 在这样的表象下, 不可约张量不再适宜使用直角坐标表象, 而应该引入所谓的球张量语言">
+<meta property="og:description" content="本节从一个逐渐打开的微扰出发, 引入冲量近似和绝热近似两种近似方法, 证明定态微扰的合理性; 接着, 基于绝热近似简要说明 Berry 相位等物理量.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-04-23T14:15:19.000Z">
-<meta property="article:modified_time" content="2025-04-24T12:59:46.088Z">
+<meta property="article:published_time" content="2025-05-13T17:21:36.000Z">
+<meta property="article:modified_time" content="2025-05-23T16:21:20.538Z">
 <meta property="article:author" content="Rain Chan">
-<meta property="article:tag" content="角动量">
-<meta property="article:tag" content="不可约张量">
-<meta property="article:tag" content="球张量">
+<meta property="article:tag" content="微扰论">
+<meta property="article:tag" content="含时微扰">
+<meta property="article:tag" content="冲量近似">
+<meta property="article:tag" content="绝热近似">
+<meta property="article:tag" content="Berry 相位">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -40,7 +42,7 @@
   
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
   
-  <title>角动量理论(04)：张量算符 - Rain Chan&#39;s Notes</title>
+  <title>微扰论(07)：两种时间尺度近似与 Berry 相位 - Rain Chan&#39;s Notes</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -222,7 +224,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="角动量理论(04)：张量算符"></span>
+            <span id="subtitle" data-typed-text="微扰论(07)：两种时间尺度近似与 Berry 相位"></span>
           
         </div>
 
@@ -233,8 +235,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-04-23 22:15" pubdate>
-          2025年4月23日 晚上
+        <time datetime="2025-05-14 01:21" pubdate>
+          2025年5月14日 凌晨
         </time>
       </span>
     
@@ -245,7 +247,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.8k 字
+          2k 字
         
       </span>
     
@@ -256,7 +258,7 @@
         
         
         
-          16 分钟
+          17 分钟
         
       </span>
     
@@ -293,14 +295,13 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">角动量理论(04)：张量算符</h1>
+            <h1 id="seo-header">微扰论(07)：两种时间尺度近似与 Berry 相位</h1>
             
             
               <div class="markdown-body">
                 
                 <h2
-id="矢量算符-newcommandkmathbbknewcommandrmathbbrnewcommandcmathbbcnewcommandbmathbfnewcommandbiboldsymbolnewcommandrank1textrankleft1-rightnewcommanddim1textdimleft1-rightnewcommanddiag1textdiagleft1-rightnewcommanddet1textdetleft1-rightnewcommanddet1leftbeginmatrix-1-endmatrixrightnewcommandset1left-1-rightnewcommandabs1left-1-rightnewcommandnorm1leftleft1rightrightnewcommanddmathcald">矢量算符
-<span
+id="两种对时间尺度的极端近似newcommandkmathbbknewcommandrmathbbrnewcommandcmathbbcnewcommandbmathbfnewcommandbiboldsymbolnewcommandrank1textrankleft1-rightnewcommanddim1textdimleft1-rightnewcommanddiag1textdiagleft1-rightnewcommanddet1textdetleft1-rightnewcommanddet1leftbeginmatrix-1-endmatrixrightnewcommandset1left-1-rightnewcommandabs1left-1-rightnewcommandnorm1leftleft1rightright">两种对时间尺度的极端近似<span
 class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1
 \right)}\newcommand{\dim}[1]{\text{dim}\left(#1
 \right)}\newcommand{\diag}[1]{\text{diag}\left(#1
@@ -308,142 +309,196 @@ class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\new
 \right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1
 \end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1
 \right\}}\newcommand{\abs}[1]{\left| #1
-\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\newcommand{\D}{\mathcal{D}}\)</span></h2>
-<p>到目前为止, 已知的矢量算符有: <span
-class="math inline">\(\vec{x},\vec{p},\vec{J}\)</span>(角动量包含<span
-class="math inline">\(\vec{L}\)</span>和<span
-class="math inline">\(\vec{S}\)</span>).
-它们的矢量性都来自实空间坐标轴的基矢, 每个分量都是一个标量算符. 当然,
-仅有这个性质还不够. 此处定义的矢量算符,
-需要在转动这一对称操作下表现出特定的转动行为; 基于无穷小转动,
-便可推导矢量算符与转动生成元应当满足的关系: <span
+\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span></h2>
+<p>上一节我们引入了含时微扰, 它和定态微扰的区别在于微扰是否含时. 然而,
+所有的微扰都可以认为是含时的——实验中,
+制备完成一个量子态和施加定态微扰不可能严格同时发生,
+那么全过程的微扰就是含时的: 施加微扰之前为<span
+class="math inline">\(0\)</span>, 施加微扰时具有一定的上升沿,
+随即稳定下来. 在这种时候, 定态微扰的全部结论是否还有意义?
+严格使用含时微扰的结果能否回到定态微扰的结论?</p>
+<p>考虑这样的微扰<span class="math inline">\(W(t)\)</span>, 满足 <span
 class="math display">\[
-[V_j,J_k]=i\epsilon_{jkl}V_l
-\]</span> 或者对于有限转动, 表示矩阵为<span
-class="math inline">\(R\)</span>, 则矢量算符的变换为 <span
-class="math display">\[
-V_j&#39;=R_j^kV_k
-\]</span> 这里的上下标更加符合非欧情况的习惯.</p>
-<div class="note note-warning">
-            <h5 id="remark"><em>Remark</em></h5><p>需要注意的是, 不同的文献、教材和学科对矢量的定义不同. 在电磁学教材中,人们基于宇称的奇偶性,将满足上述转动行为的物理量分为极矢量和轴矢量(也叫赝矢量),但统一归为矢量; 在更严苛的语境下,由于三维轴矢量实际上是根据同维度下的二阶反对称张量经过 Hodge 对偶得到,因此宇称和极矢量不同, 只有极矢量被当作矢量. 用更加群论的语言说,两种定义其实都基于转动行为, 但一个基于<spanclass="math inline">\(\text{SO}(3)\)</span>群,另一个基于包含反演操作的<spanclass="math inline">\(\text{O}(3)\)</span>群.</p>
-          </div>
-<h2 id="球张量">球张量</h2>
-<h3 id="张量的不可约表示">张量的不可约表示</h3>
-<p>物理量远不止标量和矢量两类.
-有的物理量在转动操作下需要多个转动矩阵来变换, 例如 <span
-class="math display">\[
-\tilde{T}_{jk}=\sum_{j&#39;,k&#39;}R_j^{j&#39;}R_{k}^{k&#39;}T_{j&#39;k&#39;}
-\]</span> 以及指标更多的情况. 这些物理量统称为 <strong>张量</strong>,
-指标的数目叫做张量的 <strong>秩</strong>(也有文献叫作阶).
-标量和矢量可以看作秩为<span class="math inline">\(0\)</span>和<span
-class="math inline">\(1\)</span>的张量.</p>
-<p>构造高阶张量的常用方法是张量积, 两个矢量的张量积就是常见的并矢.
-但是张量积的结果不是一个特定秩的张量, 以并矢为例, 它可以分解为三项 <span
-class="math display">\[
-u_jv_k=\frac{\vec{u}\cdot\vec{v}}{3}\delta_{jk}+\frac{u_jv_k-u_kv_j}{2}+\left(\frac{u_jv_k+u_kv_j}{2}-\frac{\vec{u}\cdot\vec{v}}{3}\delta_{jk}
-\right)
-\]</span>
-分别是迹部分、反对称部分和对称无迹部分<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
-class="hint--top hint--rounded"
-aria-label="学习过弹性力学和流体力学应当对此熟悉, 对于原始定义的位移张量, 也进行了类似操作">[1]</span></a></sup>.
-转动保迹, 第一项行为上是标量; 第二项可以用 Hodge 对偶构造成<span
-class="math inline">\(\vec{u}\times\vec{v}\)</span>, 因此行为上是矢量;
-第三项行为上只是二阶张量.</p>
-<div class="note note-warning">
-            <h5 id="remark"><em>Remark</em></h5><p>这里仍可以看作两个不可约表示的直积分解为若干项的直和: <spanclass="math display">\[\D^{(3)}\otimes\D^{(3)}=\bigoplus_{l=0}^{2}\D^{(2l+1)}\]</span> 三个直和项按照上标中的维数, 分别具有<spanclass="math inline">\(1,3,5\)</span>个独立分量.</p>
-          </div>
-<p>可以看出, 原始的各秩张量自由度为<span
-class="math inline">\(3^0,3^1,3^2,\cdots\)</span>, 但经过约化,
-构成了不可约的<span class="math inline">\(1,3,5,\cdots\)</span>,
-自由度恰好是<span class="math inline">\(2l+1\)</span>, 与<span
-class="math inline">\(L^2=l(l+1)\)</span>子空间的维数一致,
-也和同阶球谐函数的分量数目一致.</p>
-<h3 id="不可约张量与球谐函数">不可约张量与球谐函数</h3>
-<p>下面以<span class="math inline">\(l=1\)</span>阶为例,
-对应的不可约张量为矢量, 而球谐函数为<span
-class="math inline">\(Y_1^m\)</span>.
-把转动算符作用到方向本征态以及角动量本征态上 <span
-class="math display">\[
-\ket{\hat{n}&#39;}=\D(R)\ket{\hat{n}}\quad
-\D(R^{-1})\ket{l,m}=\sum_{m&#39;}\D_{m&#39;m}^{(l)}(R^{-1})\ket{l,m&#39;}
-\]</span></p>
-<p>角动量一式中用<span class="math inline">\(\bra{\hat{n}}\)</span>内积,
-得到 <span class="math display">\[
-Y_l^m(\hat{n}&#39;)=\sum_{m&#39;}\bra{l,m&#39;}\D(R^{-1}) \ket{l,m}
-Y_{l}^{m&#39;}(\hat{n})
-\]</span> 一个比较简单的例子是, <span
-class="math inline">\(\D(R)\)</span>是绕<span
-class="math inline">\(z\)</span>轴转动<span
-class="math inline">\(\epsilon\)</span>角,
-那么球谐函数各自仅仅附加相因子<span
-class="math inline">\(e^{-im\epsilon}\)</span>. 而矢量<span
-class="math inline">\(\hat{n}\)</span>在这种情况下的变换并非如此;
-它的<span class="math inline">\(x,y\)</span>分量之间有耦合. 究其原因,
-是<span class="math inline">\(Y_l^m\)</span>对位矢进行了线性组合:</p>
-<p><span class="math display">\[
-Y_1^0=\sqrt{\frac{3}{4\pi}} n_z\quad
-Y_1^{\pm1}=\sqrt{\frac{3}{8\pi}}(\mp n_x-in_y)
-\]</span> <span
-class="math inline">\(\hat{n}\)</span>本身固然具有矢量性,
-但矢量形式只对于用正交矩阵<span
-class="math inline">\(R\)</span>描述的转动是方便的, 对于转动算符的 <span
-class="math inline">\(\text{spin}-j\)</span> 不可约表示<span
-class="math inline">\(\D_{m&#39;m}^{(j)}\)</span>描述的转动不甚方便.
-为了让态和力学量算符的转动形式更加紧凑, 都能用转动算符的矩阵元统一表述,
-可以针对矢量算符定义一个 <strong>球面表象</strong>: <span
-class="math display">\[
-\vec{v}=(v_x,v_y,v_z)\rightarrow|\vec{v}|Y_1^m(\hat{v})\quad m=-1,0,1
-\]</span> 这样就十分方便了. 不仅如此, 如果针对高阶球谐函数定义球面表象,
-也能构造出<span class="math inline">\(2\)</span>阶不可约张量的表象,
-例如<span class="math inline">\(|\vec{v}|^2Y_2^m(\hat{v})\)</span>,
-它具有<span class="math inline">\(5\)</span>个分量, 相当于<span
-class="math inline">\(2\)</span>阶不可约张量<span
-class="math inline">\(3\vec{v}\vec{v}-v^2\)</span>的球面表象,
-并且按照<span
-class="math inline">\(\D^{(2)}\)</span>的不可约表示进行转动变换.</p>
-<h3 id="球张量与生成元的对易关系">球张量与生成元的对易关系</h3>
-<p>现在定义球张量算符就是一件十分自然的事情了,
-但仍可以基于转动算符在无穷小转动的结果下定义, 因为稍后将看到,
-用生成元(角动量)定义的球张量形式十分美观.</p>
-<p>从转动算符进行定义, 球张量算符<span
-class="math inline">\(Y_l\)</span>具有<span
-class="math inline">\(2l+1\)</span>个分量, 并且变换时服从 <span
-class="math display">\[
-\tilde{Y}_l^m=\sum_{m&#39;}\bra{l,m&#39;}\D(R^{-1}) \ket{l,m}
-Y_{l}^{m&#39;}
-\]</span> 现在取无穷小转动, <span
-class="math inline">\(\D(R)\approx\mathbb{1}-i\vec{J}\cdot\hat{n}\epsilon\)</span>,
-按照生成元的三个分量, 写为 <span class="math display">\[
-\begin{aligned}\
-[\D^\dagger
-Y\D]^{m分量}&amp;=\sum_{m&#39;}\bra{l,m&#39;}\mathbb{1}+i\vec{J}\cdot\hat{n}\epsilon\ket{l,m}Y_l^{m&#39;}
-\\&amp;\!\ \Downarrow\\
-[\vec{J}\cdot\hat{n},Y_l^m]&amp;=\sum_{m&#39;}\bra{l,m&#39;}\vec{J}\cdot\hat{n}\ket{l,m}Y_l^{m&#39;}
+\bra{m}W(t)\ket{n}=
+\begin{aligned}\begin{cases}\displaystyle
+W_{mn}e^{\eta t}&amp;t&lt;0
+\\\\\displaystyle
+W_{mn}\quad&amp;t&gt;0
+\end{cases}\end{aligned}
+\]</span> 其中<span class="math inline">\(\eta&gt;0\)</span>.
+这个微扰函数在时间负半轴的作用是从零开始增大它的值, <span
+class="math inline">\(\eta\)</span>的两种极限代表微扰施加上去的速度不同.
+<span class="math inline">\(\eta\ll\omega_{mn}\)</span>时,
+微扰极其缓慢地施加到系统上; <span
+class="math inline">\(\eta\gg\omega_{mn}\)</span>时, 微扰在<span
+class="math inline">\(t=0\)</span>附近从<span
+class="math inline">\(0\)</span>迅速增大到稳定值.</p>
+<p>振幅的一阶修正项为 <span class="math display">\[
+\begin{aligned}
+c_{n}^{(1)}(t)&amp;=-iW_{ni}(\int_{-\infty}^0 e^{\eta
+t&#39;}e^{i\omega_{ni}t&#39;}dt&#39;+\int_{0}^t
+e^{i\omega_{ni}t&#39;}dt&#39;)
+\\&amp;=
+\begin{aligned}\begin{cases}\displaystyle
+\frac{-iW_{ni}}{\eta+i\omega_{ni}}e^{\eta t+i\omega_{ni}t}&amp;t&lt;0
+\\\\\displaystyle-iW_{ni}(\frac{1}{\eta+i\omega_{ni}}+\frac{e^{i\omega_{ni}t}-1}{i\omega_{ni}})\quad&amp;t&gt;0
+\end{cases}\end{aligned}
 \end{aligned}
-\]</span> 分别取<span
-class="math inline">\(\hat{n}\)</span>为三个方向基矢, 稍加整理,
-得到基于对易关系的如下定义</p>
+\]</span> 二阶修正项满足方程: <span class="math display">\[
+i\dot{c}_m^{(2)}(t)=\sum_{n}e^{i\omega_{mn}t} W_{mn}(t) c_n^{(1)}(t)
+\]</span> <span class="math inline">\(t&lt;0\)</span>时, 有 <span
+class="math display">\[
+c_m^{(2)}(t)=(-i)\sum_{n}\int_{-\infty}^t\frac{-i W_{ni}W_{mn}}{\eta+i
+\omega_{ni}} e^{2\eta t+i\omega_{mi}t}=-\sum_{n}
+\frac{W_{ni}W_{mn}e^{2\eta t+i\omega_{mi}t}
+}{(\eta+i\omega_{ni})(2\eta+i\omega_{mi})}
+\]</span> <span class="math inline">\(t&gt;0\)</span>时, 有 <span
+class="math display">\[
+\begin{aligned}
+c_{m}^{(2)}(t)&amp;=-\sum_{n}
+\frac{W_{ni}W_{mn}}{(\eta+i\omega_{ni})(2\eta+i\omega_{mi})}-\sum_{n}\int_0^t
+W_{mn}W_{ni}e^{i\omega_{mn}t}
+(\frac{1}{\eta+i\omega_{ni}}+\frac{e^{i\omega_{ni}t}-1}{i\omega_{ni}})dt
+\\&amp;=-\sum_{n}
+\frac{W_{ni}W_{mn}}{(\eta+i\omega_{ni})(2\eta+i\omega_{mi})}-\sum_{n}
+W_{mn}W_{ni} (\frac{\eta
+(e^{i\omega_{mn}t}-1)}{(\eta+i\omega_{ni})\omega_{ni}\omega_{mn}}-\frac{e^{i\omega_{mi}t}-1}{\omega_{ni}\omega_{mi}})
+\end{aligned}
+\]</span> ### 冲量近似</p>
+<p>令<span class="math inline">\(\eta\gg \omega_{mi}\)</span>, 则 <span
+class="math display">\[
+c_m(t)\approx\delta_{mi}-\frac{W_{mi}}{\omega_{mi}}(e^{i\omega_{mi}t}-1)
+\]</span> <span class="math inline">\(t=0\)</span>时, <span
+class="math inline">\(c_n(t)=\delta_{ni}\)</span>, 即态矢仍为<span
+class="math inline">\(t=-\infty\)</span>时的<span
+class="math inline">\(\ket{i}\)</span>, 这相当符合直觉, <span
+class="math inline">\(\eta\rightarrow+\infty\)</span>(或<span
+class="math inline">\(\eta\gg\omega_{ni}\)</span>) 是冲量近似,
+微扰在<span class="math inline">\(t=0\)</span>时被瞬间加到体系上,
+态矢来不及改变.</p>
+<h3 id="绝热近似">绝热近似</h3>
+<p>令<span class="math inline">\(\eta\ll\omega_{mi}\)</span>, 则 <span
+class="math display">\[
+\begin{aligned}
+c_m(t)&amp;\approx\delta_{mi}-\frac{W_{mi}}{\omega_{mi}}e^{i\omega_{mi}t}+\sum_{n}
+W_{mn}W_{ni}\frac{e^{i\omega_{mi}t}}{\omega_{ni}\omega_{mi}}
+\\\dot{c}_m(t)&amp;\approx-iW_{mi}e^{i\omega_{mi}t}
++i\sum_{n}W_{mn}W_{ni}\frac{e^{i\omega_{mi}t}}{\omega_{ni}}
+\end{aligned}
+\]</span> <span class="math inline">\(m=i\)</span>时, 有 <span
+class="math display">\[
+\frac{\dot{c}_i}{c_i}\approx\left(-iW_{ii}+i\sum_{n}\frac{|W_{ni}|^2}{\omega_{ni}}\right)(1+\frac{W_{ii}}{\omega_{ii}})\approx-iW_{ii}+i\sum_{n\ne
+i}\frac{|W_{ni}|^2}{\omega_{ni}}
+\]</span> 我们会发现, 如果令<span
+class="math inline">\(\dot{c}_i=-i\Delta E c_i\)</span>,
+根据上式求得的<span class="math inline">\(\Delta E\)</span>,
+恰好包含非简并微扰的一阶项和二阶项.</p>
+<p>在绝热近似下, 初态将系统制备成能量本征态<span
+class="math inline">\(\ket{i}\)</span>, 然后缓慢增大微扰,
+微扰值稳定后<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
+class="hint--top hint--rounded"
+aria-label="实际上, 稳定前也能给出定态微扰的结果, 具体计算从略">[1]</span></a></sup>,
+系统就绝热地演化到了新的能量本征态<span
+class="math inline">\(\ket{i&#39;}=\ket{i;0}+\ket{i;1}+\cdots\)</span>上,
+此时, 我们可以使用非简并微扰处理问题. 或者说,
+当微扰的变化速率远远慢于系统固有的响应速率,
+可以使用定态微扰处理每时每刻的系统.</p>
+<h2 id="berry-相位">Berry 相位</h2>
+<p>上面对于绝热近似的讨论认为, 含时微扰如果变化极其缓慢, 系统会从<span
+class="math inline">\(E_i\)</span>本征态逐渐被"拖拽"到<span
+class="math inline">\(E_{i&#39;}\)</span>本征态.
+这提示我们追踪每时每刻的本征值变化. 即: 考虑态<span
+class="math inline">\(\ket{n,t}\)</span>, 它对每个<span
+class="math inline">\(t\)</span>时刻给出<span
+class="math inline">\(H\)</span>的本征值 <span class="math display">\[
+H(t)\ket{n,t}=E_n(t)\ket{n,t}
+\]</span> 一个任意的受<span
+class="math inline">\(H(t)\)</span>控制演化的态<span
+class="math inline">\(\ket{\psi(t)}\)</span>可以写成如下形式 <span
+class="math display">\[
+\ket{\psi(t)}=\sum_{n}u_n(t)\exp(i\theta_n(t))\ket{n,t}
+\]</span> 其中, <span
+class="math inline">\(\theta_n=-\int_0^tE_n(t&#39;)dt&#39;\)</span>.
+基于<span class="math inline">\(\ket{\psi(t)}\)</span>的动力学方程, 有
+<span class="math display">\[
+\begin{aligned}
+i\frac{\partial}{\partial t}\left(\sum_nu_n(t)e^{i\theta_n(t)}\ket{n,t}
+\right)-\sum_nu_n e^{i\theta_n(t)}E_n(t)\ket{n,t}&amp;=0
+\\
+i\sum_nu_n(t)e^{i\theta_n(t)}\left(\frac{\partial}{\partial t}\ket{n,t}
+\right)+i\sum_n\dot{u}_n(t)e^{i\theta_n(t)}\ket{n,t}&amp;=0
+\end{aligned}
+\]</span> 从左边作用<span class="math inline">\(\ket{m,t}\)</span>, 有
+<span class="math display">\[
+\dot{u}_m=-e^{i\theta_m(t)}\sum_n
+u_n(t)e^{i\theta_n(t)}\bra{m,t}\frac{\partial}{\partial t}\ket{n,t}
+\]</span> 为了解释各项的作用, 需要对<span
+class="math inline">\(H\ket{n,t}=E_n\ket{n,t}\)</span>取时间导数 <span
+class="math display">\[
+\dot{H}\ket{n,t}=(E_n-H)\frac{\partial}{\partial
+t}\ket{n,t}+\dot{E}_n\ket{n,t}
+\]</span> 然后从左边作用<span class="math inline">\(\ket{m,t}\)</span>,
+得到 <span class="math display">\[
+(E_n-E_m)\bra{m,t}\frac{\partial}{\partial
+t}\ket{n,t}=\bra{m,t}\dot{H}\ket{n,t}+\dot{E}_n\delta_{mn}
+\]</span> 它允许代换掉所有<span class="math inline">\(m\ne
+n\)</span>的<span
+class="math inline">\(\bra{m,t}\partial_t\ket{n,t}\)</span>项,
+振幅的演化整理为 <span class="math display">\[
+\dot{u}_m=-u_m\bra{m,t}\frac{\partial}{\partial t}\ket{m,t}+\sum_{n\ne
+m}\frac{\bra{m,t}\dot{H}\ket{n,t}}{E_n-E_m}u_ne^{i(\theta_n-\theta_m)}
+\]</span> 到这里, 还是严格的结果. 但如果考虑绝热近似,
+求和中振幅前的系数相当于<span
+class="math inline">\(H\)</span>的相对变化率,
+它远远慢于系统中态的自然变化率(即<span
+class="math inline">\(\omega_m=E_m/\hbar\)</span>), 因而可以忽略不计.
+那么得到 <span class="math display">\[
+\dot{u}_m=-u_m\bra{m,t}\frac{\partial}{\partial t}\ket{m,t}
+\]</span> 如果定义 <strong>Berry 相位</strong>: <span
+class="math display">\[
+\gamma_m(\tau):=i\int_0^\tau \bra{m,t}\frac{\partial}{\partial
+t}\ket{m,t}dt
+\]</span> 那么系统中每个含时本征态都独立演化: <span
+class="math display">\[
+u_m(t)=e^{i\gamma_m(t)}u_m(0)
+\]</span> 这种方法把单个本征态的绝热演化推广为任意态.</p>
+<h2 id="berry-联络">Berry 联络</h2>
+<p>引入一个中间参数矢量<span
+class="math inline">\(\vec{R}\)</span>描述<span
+class="math inline">\(H\)</span>的含时演化,
+那么上述相位可以以更加令人熟悉的形式写出 <span class="math display">\[
+\gamma_m=\int_{\vec{R}(0)}^{\vec{R}(\tau)}
+i\bra{m,t}\nabla_R\ket{m,t}\cdot d\vec{R}
+\]</span> 如果参数矢量呈现周期性, 可以定义出更常见的 Berry 相位:</p>
 <div class="note note-success">
-            <h5 id="def-球张量算符"><em>Def</em> 球张量算符</h5><p>一个不可约张量算符具有<spanclass="math inline">\(2k+1\)</span>个独立分量, 并且被整理为<spanclass="math inline">\(Y_k^{q}(q=-l,-l+1,\cdots,l)\)</span>的形式,且与角动量算符满足如下对易关系 <span class="math display">\[[J_z,Y_k^q]=kY_k^q\quad [J_{\pm},Y_k^q]=\sqrt{(k\mp q)(k\pmq+1)}Y_k^{q\pm1}\]</span> 则<span class="math inline">\(Y\)</span>称作 <strong><spanclass="math inline">\(k\)</span>阶球张量</strong>.</p>
+            <h5 id="def-berry-相位"><em>Def</em> Berry 相位</h5><p><span class="math display">\[\gamma_m:=\oint i\bra{m,t}\nabla_R\ket{m,t}\cdot d\vec{R}\]</span></p><p>其中<span class="math inline">\(\vec{R}\)</span>是 Hamiltonian中的参数矢量, 则<span class="math inline">\(\gamma_m\)</span>称之为<strong>Berry 相位</strong>.</p>
           </div>
-<p>对于<span class="math inline">\(k=1\)</span>的情形, 可以把<span
-class="math inline">\(Y\)</span>取作<span
-class="math inline">\(J_z,J_{\pm}\)</span>, 对应于九个对易子,
-不难验证它们全部满足定义中的对易关系. 此外,
-定义中的对易关系出现的系数与<span
-class="math inline">\(J_{z,\pm}\)</span>这些算符作用到<span
-class="math inline">\(\ket{k,q}\)</span>上得到的系数高度一致,
-但是不应认为<span
-class="math inline">\([J^2,Y_k^q]\)</span>也会得到类似<span
-class="math inline">\(k(k+1)Y_k^q\)</span>的结果; 相反,
-这个对易子不存在类似的简洁表达式.</p>
+<p>可以把积分核取出定义成一个矢量:</p>
+<div class="note note-success">
+            <h5 id="def-berry-联络"><em>Def</em> Berry 联络</h5><p><span class="math display">\[\vec{A}_m:=i\bra{m,t}\nabla_R\ket{m,t}\]</span></p><p>则<span class="math inline">\(\gamma_m\)</span>可以定义成<spanclass="math inline">\(\vec{A}_m\)</span>的环路积分, <spanclass="math inline">\(\vec{A}_m\)</span>称为 Berry 联络.</p>
+          </div>
+<p>很容易看出<span
+class="math inline">\(\vec{A}_m\)</span>和矢势的相似之处:
+它们都具有规范不变性: <span class="math display">\[
+\vec{A}_m\rightarrow\vec{A}_m+\nabla\phi\quad\gamma_m\rightarrow\gamma_m
+\]</span> 并且旋度可以定义出一个场. 不同的是, 矢势一般基于三维,
+它的旋度可以轻易地简化为赝矢量, 即磁场; 而 Berry 联络基于任意维度,
+旋度应该得到一个反对称张量: <span class="math display">\[
+\mathcal{F}_{jk}:=\partial_j A_k-\partial_k A_j
+\]</span> 这里的<span class="math inline">\(\mathcal{F}\)</span>一般叫做
+Berry 曲率. 它在测度<span class="math inline">\(dR_j\wedge
+dR_k\)</span>上积分(特殊地, 在三维空间得到面积分)仍回到 Berry
+相位的值.</p>
+<p>如果<span class="math inline">\(\vec{R}\)</span>选取为实空间矢量,
+那么合适的例子就是磁场和 A-B 效应; 如果<span
+class="math inline">\(\vec{R}\)</span>选取为动量空间矢量,
+合适的例子是拓扑能带与陈数. 对这些例子的详细叙述从略.</p>
 <section class="footnotes">
 <div class="footnote-list">
 <ol>
 <li>
-<span id="fn:1"
-class="footnote-text"><span>学习过弹性力学和流体力学应当对此熟悉,
-对于原始定义的位移张量, 也进行了类似操作
+<span id="fn:1" class="footnote-text"><span>实际上,
+稳定前也能给出定态微扰的结果, 具体计算从略
 <a href="#fnref:1" rev="footnote" class="footnote-backref">
 ↩︎</a></span></span>
 </li>
@@ -473,7 +528,7 @@ class="footnote-text"><span>学习过弹性力学和流体力学应当对此熟�
   
     <span>></span>
     
-  <a href="/categories/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/%E8%A7%92%E5%8A%A8%E9%87%8F%E7%90%86%E8%AE%BA/" class="category-chain-item">角动量理论</a>
+  <a href="/categories/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/%E5%BE%AE%E6%89%B0%E8%AE%BA/" class="category-chain-item">微扰论</a>
   
   
 
@@ -490,11 +545,15 @@ class="footnote-text"><span>学习过弹性力学和流体力学应当对此熟�
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E8%A7%92%E5%8A%A8%E9%87%8F/" class="print-no-link">#角动量</a>
+        <a href="/tags/%E5%BE%AE%E6%89%B0%E8%AE%BA/" class="print-no-link">#微扰论</a>
       
-        <a href="/tags/%E4%B8%8D%E5%8F%AF%E7%BA%A6%E5%BC%A0%E9%87%8F/" class="print-no-link">#不可约张量</a>
+        <a href="/tags/%E5%90%AB%E6%97%B6%E5%BE%AE%E6%89%B0/" class="print-no-link">#含时微扰</a>
       
-        <a href="/tags/%E7%90%83%E5%BC%A0%E9%87%8F/" class="print-no-link">#球张量</a>
+        <a href="/tags/%E5%86%B2%E9%87%8F%E8%BF%91%E4%BC%BC/" class="print-no-link">#冲量近似</a>
+      
+        <a href="/tags/%E7%BB%9D%E7%83%AD%E8%BF%91%E4%BC%BC/" class="print-no-link">#绝热近似</a>
+      
+        <a href="/tags/Berry-%E7%9B%B8%E4%BD%8D/" class="print-no-link">#Berry 相位</a>
       
     </div>
   
@@ -506,8 +565,8 @@ class="footnote-text"><span>学习过弹性力学和流体力学应当对此熟�
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>角动量理论(04)：张量算符</div>
-      <div>https://notes.rainchan.me/posts/角动量理论(04)：张量算符/</div>
+      <div>微扰论(07)：两种时间尺度近似与 Berry 相位</div>
+      <div>https://notes.rainchan.me/posts/微扰论(07)：两种时间尺度近似与 Berry 相位/</div>
     </div>
     <div class="license-meta">
       
@@ -519,7 +578,7 @@ class="footnote-text"><span>学习过弹性力学和流体力学应当对此熟�
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年4月23日</div>
+          <div>2025年5月14日</div>
         </div>
       
       
@@ -551,18 +610,12 @@ class="footnote-text"><span>学习过弹性力学和流体力学应当对此熟�
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/%E8%A7%92%E5%8A%A8%E9%87%8F%E7%90%86%E8%AE%BA(05)%EF%BC%9AWigner-Eckart%20%E5%AE%9A%E7%90%86/" title="角动量理论(05)：Wigner-Eckart 定理">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">角动量理论(05)：Wigner-Eckart 定理</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/%E8%A7%92%E5%8A%A8%E9%87%8F%E7%90%86%E8%AE%BA(03)%EF%BC%9A%E8%A7%92%E5%8A%A8%E9%87%8F%E5%8A%A0%E6%B3%95/" title="角动量理论(03)：角动量加法">
-                        <span class="hidden-mobile">角动量理论(03)：角动量加法</span>
+                      <a href="/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(06)%EF%BC%9A%E5%90%AB%E6%97%B6%E5%BE%AE%E6%89%B0/" title="微扰论(06)：含时微扰">
+                        <span class="hidden-mobile">微扰论(06)：含时微扰</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
