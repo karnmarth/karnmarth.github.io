@@ -4,6 +4,39 @@
   
   
   <entry>
+    <title>微扰论(08)：Rabi 振荡和 AC Stark 效应</title>
+    <link href="/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(08)%EF%BC%9ARabi%20%E6%8C%AF%E8%8D%A1%E5%92%8C%20AC%20Stark%20%E6%95%88%E5%BA%94/"/>
+    <url>/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(08)%EF%BC%9ARabi%20%E6%8C%AF%E8%8D%A1%E5%92%8C%20AC%20Stark%20%E6%95%88%E5%BA%94/</url>
+    
+    <content type="html"><![CDATA[<p><spanclass="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1\right)}\newcommand{\dim}[1]{\text{dim}\left(#1\right)}\newcommand{\diag}[1]{\text{diag}\left(#1\right)}\newcommand{\det}[1]{\text{det}\left(#1\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1\right\}}\newcommand{\abs}[1]{\left| #1\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span>含时微扰论中,未作近似的动力学方程为(Dirac 表象) <span class="math display">\[i\dot{C}_m=\sum_n e^{i\omega_{mn} t} W_{mn}(t)C_n\]</span> 现在, 微扰函数取作单色电磁波. 基于光子视角,光子频率对绝大部分能级差都是远失谐, 跃迁几乎是禁戒的. 如果光子频率<spanclass="math inline">\(\omega\)</span>相当接近基态和某个激发态构成的固有频率<spanclass="math inline">\(\omega_{eg}\)</span>,那么可以近似在两个态矢张成的子空间下求解, 系统极大简化为二能级系统.</p><h2 id="场的经典近似与跃迁的偶极近似">场的经典近似与跃迁的偶极近似</h2><p>具体计算时, 对于光子又回到经典电磁波的图景, 回避量子电动力学. 这样,微扰函数为 <span class="math display">\[W(t)=\frac{e\vec{A}}{\mu}\cdot\vec{p}+\frac{e^2\vec{A}^2}{2\mu}\approx\frac{e\vec{A}}{\mu}\cdot\vec{p}\]</span> 其中已经选择横场规范(<spanclass="math inline">\(\varphi\equiv0\)</span>), 矢势是简谐波, 即 <spanclass="math display">\[W(t)=\frac{eA_0p_x}{\mu}\cos(\frac{\omega}{c}z-\omega t+\theta_0)\]</span> 可以定义一个算符<spanclass="math inline">\(V\)</span>(不一定幺正), 让上式简写为 <spanclass="math display">\[W(t)=V\exp\left[i\omega\left(\frac{z}{c}-t\right)\right]+h.c.\]</span> 其中<spanclass="math inline">\(V=eA_0p_x\frac{\exp(i\theta)}{2\mu}\)</span>,下面计算<span class="math inline">\(W(t)\)</span>在态上的期待. 首先,取如下近似: <span class="math display">\[\exp(\frac{i\omega z}{c})\approx1+\frac{i\omega z}{c}+\cdots\approx1\]</span> 因为<span class="math inline">\(z\)</span>是原子尺度,如果电磁波的频率能大致让原子能级之间共振跃迁,那么原子尺度远小于电磁波波长. 这样, 就有 <span class="math display">\[\bra{m}W(t)\ket{n}=e^{-i\omega t}V_{mn}+e^{i\omega t}(V_{nm})^*\]</span> 同时, 注意到<spanclass="math inline">\(p_x=-i\mu[x,H_0]\)</span>, 因而 <spanclass="math display">\[\bra{m}V\ket{n}=\frac{iA_0\exp(i\theta)}{2}(E_n-E_m)\bra{m}-ex\ket{n}\]</span> 只剩下偶极算符的矩阵元. 因此上述<spanclass="math inline">\(\exp(i\omega z/c)\approx1\)</span>的近似又称偶极近似. 跃迁最常用的近似就是偶极近似,人们常说的跃迁选择定则, 就是基于偶极矩这个一阶球张量给出的 W-E 定理结果.同时, 很容易知道<span class="math inline">\(V_{nn}=0\)</span>,微扰函数一定只含非对角项.</p><h2 id="近似解">近似解</h2><p>现在, 严格的动力学方程整理为 <span class="math display">\[\begin{aligned}i\dot{C}_g&amp;=(V_{ge}e^{-i(\omega_{eg}+\omega)t}+(V_{eg})^*e^{i(\omega-\omega_{eg})t})C_e\\i\dot{C}_e&amp;=(V_{eg}e^{i(\omega_{eg}-\omega)t}+(V_{ge})^*e^{i(\omega+\omega_{eg})t})C_g\end{aligned}\]</span> 应该注意, 此前将原子能级抽象为二能级系统时, 已经舍去远失谐项,这里同样舍去远失谐项: <span class="math display">\[i\dot{C}_g=(V_{eg})^*e^{i(\omega-\omega_{eg})t}C_e\quadi\dot{C}_e=V_{eg}e^{i(\omega_{eg}-\omega)t}C_g\]</span> 引入失谐<spanclass="math inline">\(\Delta:=\omega-\omega_{eg}\)</span>,以及新的因变量 <span class="math display">\[D_g=C_g\exp(-\frac{\Delta}{2}t)\quad D_e=C_e\exp(\frac{\Delta}{2}t)\]</span> 终于将动力学方程整理成线性常系数形式: <spanclass="math display">\[\begin{aligned}i \dot{D}_g  - \frac{\Delta}{2} D_g &amp;=(V_{eg})^*D_e\\i\dot{D}_e +\frac{\Delta}{2} D_e &amp;=V_{eg}D_g\end{aligned}\]</span> 如果试探解为<span class="math inline">\(D\propto\exp(i\Omegat)\)</span>, 得到 <span class="math display">\[\begin{vmatrix}-\Omega-\frac{\Delta}{2} &amp; -V_{eg}^*\\-V_{eg} &amp; -\Omega +\frac{\Delta}{2}\end{vmatrix}=0\Rightarrow\boxed{\Omega=\pm\sqrt{|V_{eg}|^2+\frac{\Delta^2}{4}}}\]</span> <span class="math inline">\(\Omega\)</span>就是所谓的 Rabi频率. 如果<span class="math inline">\(t=0\)</span>时系统处在基态,则<span class="math inline">\(t\)</span>之后被激发的概率为 <spanclass="math display">\[P_e(t)=\frac{|V_{eg}|^2}{\Omega^2}\sin^2(\Omega t)\]</span></p><h3 id="极弱失谐">极弱失谐</h3><p>如果失谐<spanclass="math inline">\(\Delta\)</span>非常非常小(远小于<spanclass="math inline">\(|V_{eg}|\)</span>), 可以料想到<spanclass="math inline">\(\Delta=0\)</span>时的情形——发生共振.非对角项占据主导, 能级的移动远大于本身, 失去了"微扰"的意义. 经过<spanclass="math inline">\(t\)</span>时间从基态被激发的概率为 <spanclass="math display">\[P_e(t)\approx\sin^2|V_{eg}| t\]</span> 两个能级发生极其强烈的耦合, 概率会在<spanclass="math inline">\(0\)</span>和<spanclass="math inline">\(1\)</span>之间剧烈跳动. 这种现象被称为<strong>Rabi 振荡</strong>.</p><h3 id="强失谐">强失谐</h3><p>如果失谐<span class="math inline">\(\Delta\gg|V_{eg}|\)</span>,则能级之间的耦合非常弱, 对角项仍占主导, 系统跃迁概率极小,主要表现为能级移动. 静态 Hamiltonian 为 <span class="math display">\[H=\begin{pmatrix}-\frac{\Delta}{2} &amp; -V_{eg}^*\\-V_{eg} &amp; \frac{\Delta}{2}\end{pmatrix}\]</span> 选取的基是原子未微扰能级的本征态, 为了更好地反映能级移动,需要将其对角化, 物理上就是把基底重新选为原子与光子耦合的态矢. 得到 <spanclass="math display">\[E_{e,g}&#39;=\pm\sqrt{|V_{eg}|^2+\frac{\Delta^2}{4}}\approx\pm\frac{\Delta}{2}(1+\frac{2|V_{eg}|^2}{\Delta^2})\]</span> 能级排斥造成的间隔增加为<spanclass="math inline">\(2|V_{eg}|^2/\Delta\)</span>, 这个结果被称为<strong>AC Stark 效应</strong>, 其中"AC"就是表示电场是交流而非直流,因而需要二阶含时微扰论, 和直流电场下的 Stark效应(定态微扰论)区别开来.</p>]]></content>
+    
+    
+    <categories>
+      
+      <category>量子力学</category>
+      
+      <category>微扰论</category>
+      
+    </categories>
+    
+    
+    <tags>
+      
+      <tag>微扰论</tag>
+      
+      <tag>含时微扰</tag>
+      
+      <tag>Rabi 振荡</tag>
+      
+      <tag>AC Stark 效应</tag>
+      
+    </tags>
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title>微扰论(07)：两种时间尺度近似与 Berry 相位</title>
     <link href="/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(07)%EF%BC%9A%E4%B8%A4%E7%A7%8D%E6%97%B6%E9%97%B4%E5%B0%BA%E5%BA%A6%E8%BF%91%E4%BC%BC%E4%B8%8E%20Berry%20%E7%9B%B8%E4%BD%8D/"/>
     <url>/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(07)%EF%BC%9A%E4%B8%A4%E7%A7%8D%E6%97%B6%E9%97%B4%E5%B0%BA%E5%BA%A6%E8%BF%91%E4%BC%BC%E4%B8%8E%20Berry%20%E7%9B%B8%E4%BD%8D/</url>
@@ -652,11 +685,11 @@
     
     <tags>
       
+      <tag>van der Waals 方程</tag>
+      
       <tag>平均场近似</tag>
       
       <tag>临界指数</tag>
-      
-      <tag>van der Waals 方程</tag>
       
       <tag>Landau 理论</tag>
       
@@ -1498,9 +1531,9 @@
       
       <tag>线性方程组</tag>
       
-      <tag>三角矩阵</tag>
-      
       <tag>自伴矩阵</tag>
+      
+      <tag>三角矩阵</tag>
       
     </tags>
     

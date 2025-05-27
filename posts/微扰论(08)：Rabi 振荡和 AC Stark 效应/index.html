@@ -19,21 +19,20 @@
   <meta name="author" content="Rain Chan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="本节从一个逐渐打开的微扰出发, 引入冲量近似和绝热近似两种近似方法, 证明定态微扰的合理性; 接着, 基于绝热近似简要说明 Berry 相位等物理量.">
+    <meta name="description" content="作为微扰论的最后一节, 用相对微扰论而言较为严格的解法给出原子-电子二能级系统在单色电磁波驱动下的运动形式, 特别是共振和远失谐两种极限, 它们清楚地说明了 Rabi 振荡和 AC Stark 效应的物理图景.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="微扰论(07)：两种时间尺度近似与 Berry 相位">
-<meta property="og:url" content="https://notes.rainchan.me/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(07)%EF%BC%9A%E4%B8%A4%E7%A7%8D%E6%97%B6%E9%97%B4%E5%B0%BA%E5%BA%A6%E8%BF%91%E4%BC%BC%E4%B8%8E%20Berry%20%E7%9B%B8%E4%BD%8D/">
+<meta property="og:title" content="微扰论(08)：Rabi 振荡和 AC Stark 效应">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(08)%EF%BC%9ARabi%20%E6%8C%AF%E8%8D%A1%E5%92%8C%20AC%20Stark%20%E6%95%88%E5%BA%94/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
-<meta property="og:description" content="本节从一个逐渐打开的微扰出发, 引入冲量近似和绝热近似两种近似方法, 证明定态微扰的合理性; 接着, 基于绝热近似简要说明 Berry 相位等物理量.">
+<meta property="og:description" content="作为微扰论的最后一节, 用相对微扰论而言较为严格的解法给出原子-电子二能级系统在单色电磁波驱动下的运动形式, 特别是共振和远失谐两种极限, 它们清楚地说明了 Rabi 振荡和 AC Stark 效应的物理图景.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-05-13T17:21:36.000Z">
-<meta property="article:modified_time" content="2025-05-23T16:22:33.788Z">
+<meta property="article:published_time" content="2025-05-26T12:27:38.000Z">
+<meta property="article:modified_time" content="2025-05-26T17:21:16.718Z">
 <meta property="article:author" content="Rain Chan">
 <meta property="article:tag" content="微扰论">
 <meta property="article:tag" content="含时微扰">
-<meta property="article:tag" content="冲量近似">
-<meta property="article:tag" content="绝热近似">
-<meta property="article:tag" content="Berry 相位">
+<meta property="article:tag" content="Rabi 振荡">
+<meta property="article:tag" content="AC Stark 效应">
 <meta name="twitter:card" content="summary_large_image">
   
   
@@ -42,7 +41,7 @@
   
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
   
-  <title>微扰论(07)：两种时间尺度近似与 Berry 相位 - Rain Chan&#39;s Notes</title>
+  <title>微扰论(08)：Rabi 振荡和 AC Stark 效应 - Rain Chan&#39;s Notes</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -224,7 +223,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="微扰论(07)：两种时间尺度近似与 Berry 相位"></span>
+            <span id="subtitle" data-typed-text="微扰论(08)：Rabi 振荡和 AC Stark 效应"></span>
           
         </div>
 
@@ -235,8 +234,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-05-14 01:21" pubdate>
-          2025年5月14日 凌晨
+        <time datetime="2025-05-26 20:27" pubdate>
+          2025年5月26日 晚上
         </time>
       </span>
     
@@ -247,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2k 字
+          1.2k 字
         
       </span>
     
@@ -258,7 +257,7 @@
         
         
         
-          17 分钟
+          11 分钟
         
       </span>
     
@@ -295,13 +294,12 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">微扰论(07)：两种时间尺度近似与 Berry 相位</h1>
+            <h1 id="seo-header">微扰论(08)：Rabi 振荡和 AC Stark 效应</h1>
             
             
               <div class="markdown-body">
                 
-                <h2
-id="两种对时间尺度的极端近似newcommandkmathbbknewcommandrmathbbrnewcommandcmathbbcnewcommandbmathbfnewcommandbiboldsymbolnewcommandrank1textrankleft1-rightnewcommanddim1textdimleft1-rightnewcommanddiag1textdiagleft1-rightnewcommanddet1textdetleft1-rightnewcommanddet1leftbeginmatrix-1-endmatrixrightnewcommandset1left-1-rightnewcommandabs1left-1-rightnewcommandnorm1leftleft1rightright">两种对时间尺度的极端近似<span
+                <p><span
 class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1
 \right)}\newcommand{\dim}[1]{\text{dim}\left(#1
 \right)}\newcommand{\diag}[1]{\text{diag}\left(#1
@@ -309,202 +307,114 @@ class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\new
 \right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1
 \end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1
 \right\}}\newcommand{\abs}[1]{\left| #1
-\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span></h2>
-<p>上一节我们引入了含时微扰, 它和定态微扰的区别在于微扰是否含时. 然而,
-所有的微扰都可以认为是含时的——实验中,
-制备完成一个量子态和施加定态微扰不可能严格同时发生,
-那么全过程的微扰就是含时的: 施加微扰之前为<span
-class="math inline">\(0\)</span>, 施加微扰时具有一定的上升沿,
-随即稳定下来. 在这种时候, 定态微扰的全部结论是否还有意义?
-严格使用含时微扰的结果能否回到定态微扰的结论?</p>
-<p>考虑这样的微扰<span class="math inline">\(W(t)\)</span>, 满足 <span
+\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span>含时微扰论中,
+未作近似的动力学方程为(Dirac 表象) <span class="math display">\[
+i\dot{C}_m=\sum_n e^{i\omega_{mn} t} W_{mn}(t)C_n
+\]</span> 现在, 微扰函数取作单色电磁波. 基于光子视角,
+光子频率对绝大部分能级差都是远失谐, 跃迁几乎是禁戒的. 如果光子频率<span
+class="math inline">\(\omega\)</span>相当接近基态和某个激发态构成的固有频率<span
+class="math inline">\(\omega_{eg}\)</span>,
+那么可以近似在两个态矢张成的子空间下求解, 系统极大简化为二能级系统.</p>
+<h2 id="场的经典近似与跃迁的偶极近似">场的经典近似与跃迁的偶极近似</h2>
+<p>具体计算时, 对于光子又回到经典电磁波的图景, 回避量子电动力学. 这样,
+微扰函数为 <span class="math display">\[
+W(t)=\frac{e\vec{A}}{\mu}\cdot\vec{p}+\frac{e^2\vec{A}^2}{2\mu}\approx\frac{e\vec{A}}{\mu}\cdot\vec{p}
+\]</span> 其中已经选择横场规范(<span
+class="math inline">\(\varphi\equiv0\)</span>), 矢势是简谐波, 即 <span
 class="math display">\[
-\bra{m}W(t)\ket{n}=
-\begin{aligned}\begin{cases}\displaystyle
-W_{mn}e^{\eta t}&amp;t&lt;0
-\\\\\displaystyle
-W_{mn}\quad&amp;t&gt;0
-\end{cases}\end{aligned}
-\]</span> 其中<span class="math inline">\(\eta&gt;0\)</span>.
-这个微扰函数在时间负半轴的作用是从零开始增大它的值, <span
-class="math inline">\(\eta\)</span>的两种极限代表微扰施加上去的速度不同.
-<span class="math inline">\(\eta\ll\omega_{mn}\)</span>时,
-微扰极其缓慢地施加到系统上; <span
-class="math inline">\(\eta\gg\omega_{mn}\)</span>时, 微扰在<span
-class="math inline">\(t=0\)</span>附近从<span
-class="math inline">\(0\)</span>迅速增大到稳定值.</p>
-<p>振幅的一阶修正项为 <span class="math display">\[
+W(t)=\frac{eA_0p_x}{\mu}\cos(\frac{\omega}{c}z-\omega t+\theta_0)
+\]</span> 可以定义一个算符<span
+class="math inline">\(V\)</span>(不一定幺正), 让上式简写为 <span
+class="math display">\[
+W(t)=V\exp\left[i\omega\left(\frac{z}{c}-t\right)\right]+h.c.
+\]</span> 其中<span
+class="math inline">\(V=eA_0p_x\frac{\exp(i\theta)}{2\mu}\)</span>,
+下面计算<span class="math inline">\(W(t)\)</span>在态上的期待. 首先,
+取如下近似: <span class="math display">\[
+\exp(\frac{i\omega z}{c})\approx1+\frac{i\omega z}{c}+\cdots\approx1
+\]</span> 因为<span class="math inline">\(z\)</span>是原子尺度,
+如果电磁波的频率能大致让原子能级之间共振跃迁,
+那么原子尺度远小于电磁波波长. 这样, 就有 <span class="math display">\[
+\bra{m}W(t)\ket{n}=e^{-i\omega t}V_{mn}+e^{i\omega t}(V_{nm})^*
+\]</span> 同时, 注意到<span
+class="math inline">\(p_x=-i\mu[x,H_0]\)</span>, 因而 <span
+class="math display">\[
+\bra{m}V\ket{n}=\frac{iA_0\exp(i\theta)}{2}(E_n-E_m)\bra{m}-ex\ket{n}
+\]</span> 只剩下偶极算符的矩阵元. 因此上述<span
+class="math inline">\(\exp(i\omega z/c)\approx
+1\)</span>的近似又称偶极近似. 跃迁最常用的近似就是偶极近似,
+人们常说的跃迁选择定则, 就是基于偶极矩这个一阶球张量给出的 W-E 定理结果.
+同时, 很容易知道<span class="math inline">\(V_{nn}=0\)</span>,
+微扰函数一定只含非对角项.</p>
+<h2 id="近似解">近似解</h2>
+<p>现在, 严格的动力学方程整理为 <span class="math display">\[
 \begin{aligned}
-c_{n}^{(1)}(t)&amp;=-iW_{ni}(\int_{-\infty}^0 e^{\eta
-t&#39;}e^{i\omega_{ni}t&#39;}dt&#39;+\int_{0}^t
-e^{i\omega_{ni}t&#39;}dt&#39;)
-\\&amp;=
-\begin{aligned}\begin{cases}\displaystyle
-\frac{-iW_{ni}}{\eta+i\omega_{ni}}e^{\eta t+i\omega_{ni}t}&amp;t&lt;0
-\\\\\displaystyle-iW_{ni}(\frac{1}{\eta+i\omega_{ni}}+\frac{e^{i\omega_{ni}t}-1}{i\omega_{ni}})\quad&amp;t&gt;0
-\end{cases}\end{aligned}
-\end{aligned}
-\]</span> 二阶修正项满足方程: <span class="math display">\[
-i\dot{c}_m^{(2)}(t)=\sum_{n}e^{i\omega_{mn}t} W_{mn}(t) c_n^{(1)}(t)
-\]</span> <span class="math inline">\(t&lt;0\)</span>时, 有 <span
-class="math display">\[
-c_m^{(2)}(t)=(-i)\sum_{n}\int_{-\infty}^t\frac{-i W_{ni}W_{mn}}{\eta+i
-\omega_{ni}} e^{2\eta t+i\omega_{mi}t}=-\sum_{n}
-\frac{W_{ni}W_{mn}e^{2\eta t+i\omega_{mi}t}
-}{(\eta+i\omega_{ni})(2\eta+i\omega_{mi})}
-\]</span> <span class="math inline">\(t&gt;0\)</span>时, 有 <span
-class="math display">\[
-\begin{aligned}
-c_{m}^{(2)}(t)&amp;=-\sum_{n}
-\frac{W_{ni}W_{mn}}{(\eta+i\omega_{ni})(2\eta+i\omega_{mi})}-\sum_{n}\int_0^t
-W_{mn}W_{ni}e^{i\omega_{mn}t}
-(\frac{1}{\eta+i\omega_{ni}}+\frac{e^{i\omega_{ni}t}-1}{i\omega_{ni}})dt
-\\&amp;=-\sum_{n}
-\frac{W_{ni}W_{mn}}{(\eta+i\omega_{ni})(2\eta+i\omega_{mi})}-\sum_{n}
-W_{mn}W_{ni} (\frac{\eta
-(e^{i\omega_{mn}t}-1)}{(\eta+i\omega_{ni})\omega_{ni}\omega_{mn}}-\frac{e^{i\omega_{mi}t}-1}{\omega_{ni}\omega_{mi}})
-\end{aligned}
-\]</span> ### 冲量近似</p>
-<p>令<span class="math inline">\(\eta\gg \omega_{mi}\)</span>, 则 <span
-class="math display">\[
-c_m(t)\approx\delta_{mi}-\frac{W_{mi}}{\omega_{mi}}(e^{i\omega_{mi}t}-1)
-\]</span> <span class="math inline">\(t=0\)</span>时, <span
-class="math inline">\(c_n(t)=\delta_{ni}\)</span>, 即态矢仍为<span
-class="math inline">\(t=-\infty\)</span>时的<span
-class="math inline">\(\ket{i}\)</span>, 这相当符合直觉, <span
-class="math inline">\(\eta\rightarrow+\infty\)</span>(或<span
-class="math inline">\(\eta\gg\omega_{ni}\)</span>) 是冲量近似,
-微扰在<span class="math inline">\(t=0\)</span>时被瞬间加到体系上,
-态矢来不及改变.</p>
-<h3 id="绝热近似">绝热近似</h3>
-<p>令<span class="math inline">\(\eta\ll\omega_{mi}\)</span>, 则 <span
-class="math display">\[
-\begin{aligned}
-c_m(t)&amp;\approx\delta_{mi}-\frac{W_{mi}}{\omega_{mi}}e^{i\omega_{mi}t}+\sum_{n}
-W_{mn}W_{ni}\frac{e^{i\omega_{mi}t}}{\omega_{ni}\omega_{mi}}
-\\\dot{c}_m(t)&amp;\approx-iW_{mi}e^{i\omega_{mi}t}
-+i\sum_{n}W_{mn}W_{ni}\frac{e^{i\omega_{mi}t}}{\omega_{ni}}
-\end{aligned}
-\]</span> <span class="math inline">\(m=i\)</span>时, 有 <span
-class="math display">\[
-\frac{\dot{c}_i}{c_i}\approx\left(-iW_{ii}+i\sum_{n}\frac{|W_{ni}|^2}{\omega_{ni}}\right)(1+\frac{W_{ii}}{\omega_{ii}})\approx-iW_{ii}+i\sum_{n\ne
-i}\frac{|W_{ni}|^2}{\omega_{ni}}
-\]</span> 我们会发现, 如果令<span
-class="math inline">\(\dot{c}_i=-i\Delta E c_i\)</span>,
-根据上式求得的<span class="math inline">\(\Delta E\)</span>,
-恰好包含非简并微扰的一阶项和二阶项.</p>
-<p>在绝热近似下, 初态将系统制备成能量本征态<span
-class="math inline">\(\ket{i}\)</span>, 然后缓慢增大微扰,
-微扰值稳定后<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span
-class="hint--top hint--rounded"
-aria-label="实际上, 稳定前也能给出定态微扰的结果, 具体计算从略">[1]</span></a></sup>,
-系统就绝热地演化到了新的能量本征态<span
-class="math inline">\(\ket{i&#39;}=\ket{i;0}+\ket{i;1}+\cdots\)</span>上,
-此时, 我们可以使用非简并微扰处理问题. 或者说,
-当微扰的变化速率远远慢于系统固有的响应速率,
-可以使用定态微扰处理每时每刻的系统.</p>
-<h2 id="berry-相位">Berry 相位</h2>
-<p>上面对于绝热近似的讨论认为, 含时微扰如果变化极其缓慢, 系统会从<span
-class="math inline">\(E_i\)</span>本征态逐渐被"拖拽"到<span
-class="math inline">\(E_{i&#39;}\)</span>本征态.
-这提示我们追踪每时每刻的本征值变化. 即: 考虑态<span
-class="math inline">\(\ket{n,t}\)</span>, 它对每个<span
-class="math inline">\(t\)</span>时刻给出<span
-class="math inline">\(H\)</span>的本征值 <span class="math display">\[
-H(t)\ket{n,t}=E_n(t)\ket{n,t}
-\]</span> 一个任意的受<span
-class="math inline">\(H(t)\)</span>控制演化的态<span
-class="math inline">\(\ket{\psi(t)}\)</span>可以写成如下形式 <span
-class="math display">\[
-\ket{\psi(t)}=\sum_{n}u_n(t)\exp(i\theta_n(t))\ket{n,t}
-\]</span> 其中, <span
-class="math inline">\(\theta_n=-\int_0^tE_n(t&#39;)dt&#39;\)</span>.
-基于<span class="math inline">\(\ket{\psi(t)}\)</span>的动力学方程, 有
-<span class="math display">\[
-\begin{aligned}
-i\frac{\partial}{\partial t}\left(\sum_nu_n(t)e^{i\theta_n(t)}\ket{n,t}
-\right)-\sum_nu_n e^{i\theta_n(t)}E_n(t)\ket{n,t}&amp;=0
+i\dot{C}_g&amp;=(V_{ge}e^{-i(\omega_{eg}+\omega)
+t}+(V_{eg})^*e^{i(\omega-\omega_{eg})t})C_e
 \\
-i\sum_nu_n(t)e^{i\theta_n(t)}\left(\frac{\partial}{\partial t}\ket{n,t}
-\right)+i\sum_n\dot{u}_n(t)e^{i\theta_n(t)}\ket{n,t}&amp;=0
+i\dot{C}_e&amp;=(V_{eg}e^{i(\omega_{eg}-\omega)
+t}+(V_{ge})^*e^{i(\omega+\omega_{eg})t})C_g
 \end{aligned}
-\]</span> 从左边作用<span class="math inline">\(\ket{m,t}\)</span>, 有
-<span class="math display">\[
-\dot{u}_m=-e^{i\theta_m(t)}\sum_n
-u_n(t)e^{i\theta_n(t)}\bra{m,t}\frac{\partial}{\partial t}\ket{n,t}
-\]</span> 为了解释各项的作用, 需要对<span
-class="math inline">\(H\ket{n,t}=E_n\ket{n,t}\)</span>取时间导数 <span
+\]</span> 应该注意, 此前将原子能级抽象为二能级系统时, 已经舍去远失谐项,
+这里同样舍去远失谐项: <span class="math display">\[
+i\dot{C}_g=(V_{eg})^*e^{i(\omega-\omega_{eg})t}C_e\quad
+i\dot{C}_e=V_{eg}e^{i(\omega_{eg}-\omega)t}C_g
+\]</span> 引入失谐<span
+class="math inline">\(\Delta:=\omega-\omega_{eg}\)</span>,
+以及新的因变量 <span class="math display">\[
+D_g=C_g\exp(-\frac{\Delta}{2}t)\quad D_e=C_e\exp(\frac{\Delta}{2}t)
+\]</span> 终于将动力学方程整理成线性常系数形式: <span
 class="math display">\[
-\dot{H}\ket{n,t}=(E_n-H)\frac{\partial}{\partial
-t}\ket{n,t}+\dot{E}_n\ket{n,t}
-\]</span> 然后从左边作用<span class="math inline">\(\ket{m,t}\)</span>,
-得到 <span class="math display">\[
-(E_n-E_m)\bra{m,t}\frac{\partial}{\partial
-t}\ket{n,t}=\bra{m,t}\dot{H}\ket{n,t}+\dot{E}_n\delta_{mn}
-\]</span> 它允许代换掉所有<span class="math inline">\(m\ne
-n\)</span>的<span
-class="math inline">\(\bra{m,t}\partial_t\ket{n,t}\)</span>项,
-振幅的演化整理为 <span class="math display">\[
-\dot{u}_m=-u_m\bra{m,t}\frac{\partial}{\partial t}\ket{m,t}+\sum_{n\ne
-m}\frac{\bra{m,t}\dot{H}\ket{n,t}}{E_n-E_m}u_ne^{i(\theta_n-\theta_m)}
-\]</span> 到这里, 还是严格的结果. 但如果考虑绝热近似,
-求和中振幅前的系数相当于<span
-class="math inline">\(H\)</span>的相对变化率,
-它远远慢于系统中态的自然变化率(即<span
-class="math inline">\(\omega_m=E_m/\hbar\)</span>), 因而可以忽略不计.
-那么得到 <span class="math display">\[
-\dot{u}_m=-u_m\bra{m,t}\frac{\partial}{\partial t}\ket{m,t}
-\]</span> 如果定义 <strong>Berry 相位</strong>: <span
+\begin{aligned}
+i \dot{D}_g  - \frac{\Delta}{2} D_g &amp;=(V_{eg})^*D_e
+\\
+i\dot{D}_e +\frac{\Delta}{2} D_e &amp;=V_{eg}D_g
+\end{aligned}
+\]</span> 如果试探解为<span class="math inline">\(D\propto\exp(i\Omega
+t)\)</span>, 得到 <span class="math display">\[
+\begin{vmatrix}
+-\Omega-\frac{\Delta}{2} &amp; -V_{eg}^*
+\\
+-V_{eg} &amp; -\Omega +\frac{\Delta}{2}
+\end{vmatrix}=0\Rightarrow
+\boxed{\Omega=\pm\sqrt{|V_{eg}|^2+\frac{\Delta^2}{4}}}
+\]</span> <span class="math inline">\(\Omega\)</span>就是所谓的 Rabi
+频率. 如果<span class="math inline">\(t=0\)</span>时系统处在基态,
+则<span class="math inline">\(t\)</span>之后被激发的概率为 <span
 class="math display">\[
-\gamma_m(\tau):=i\int_0^\tau \bra{m,t}\frac{\partial}{\partial
-t}\ket{m,t}dt
-\]</span> 那么系统中每个含时本征态都独立演化: <span
+P_e(t)=\frac{|V_{eg}|^2}{\Omega^2}\sin^2(\Omega t)
+\]</span></p>
+<h3 id="极弱失谐">极弱失谐</h3>
+<p>如果失谐<span
+class="math inline">\(\Delta\)</span>非常非常小(远小于<span
+class="math inline">\(|V_{eg}|\)</span>), 可以料想到<span
+class="math inline">\(\Delta=0\)</span>时的情形——发生共振.
+非对角项占据主导, 能级的移动远大于本身, 失去了"微扰"的意义. 经过<span
+class="math inline">\(t\)</span>时间从基态被激发的概率为 <span
 class="math display">\[
-u_m(t)=e^{i\gamma_m(t)}u_m(0)
-\]</span> 这种方法把单个本征态的绝热演化推广为任意态.</p>
-<h2 id="berry-联络">Berry 联络</h2>
-<p>引入一个中间参数矢量<span
-class="math inline">\(\vec{R}\)</span>描述<span
-class="math inline">\(H\)</span>的含时演化,
-那么上述相位可以以更加令人熟悉的形式写出 <span class="math display">\[
-\gamma_m=\int_{\vec{R}(0)}^{\vec{R}(\tau)}
-i\bra{m,t}\nabla_R\ket{m,t}\cdot d\vec{R}
-\]</span> 如果参数矢量呈现周期性, 可以定义出更常见的 Berry 相位:</p>
-<div class="note note-success">
-            <h5 id="def-berry-相位"><em>Def</em> Berry 相位</h5><p><span class="math display">\[\gamma_m:=\oint i\bra{m,t}\nabla_R\ket{m,t}\cdot d\vec{R}\]</span></p><p>其中<span class="math inline">\(\vec{R}\)</span>是 Hamiltonian中的参数矢量, 则<span class="math inline">\(\gamma_m\)</span>称之为<strong>Berry 相位</strong>.</p>
-          </div>
-<p>可以把积分核取出定义成一个矢量:</p>
-<div class="note note-success">
-            <h5 id="def-berry-联络"><em>Def</em> Berry 联络</h5><p><span class="math display">\[\vec{A}_m:=i\bra{m,t}\nabla_R\ket{m,t}\]</span></p><p>则<span class="math inline">\(\gamma_m\)</span>可以定义成<spanclass="math inline">\(\vec{A}_m\)</span>的环路积分, <spanclass="math inline">\(\vec{A}_m\)</span>称为 Berry 联络.</p>
-          </div>
-<p>很容易看出<span
-class="math inline">\(\vec{A}_m\)</span>和矢势的相似之处:
-它们都具有规范不变性: <span class="math display">\[
-\vec{A}_m\rightarrow\vec{A}_m+\nabla\phi\quad\gamma_m\rightarrow\gamma_m
-\]</span> 并且旋度可以定义出一个场. 不同的是, 矢势一般基于三维,
-它的旋度可以轻易地简化为赝矢量, 即磁场; 而 Berry 联络基于任意维度,
-旋度应该得到一个反对称张量: <span class="math display">\[
-\mathcal{F}_{jk}:=\partial_j A_k-\partial_k A_j
-\]</span> 这里的<span class="math inline">\(\mathcal{F}\)</span>一般叫做
-Berry 曲率. 它在测度<span class="math inline">\(dR_j\wedge
-dR_k\)</span>上积分(特殊地, 在三维空间得到面积分)仍回到 Berry
-相位的值.</p>
-<p>如果<span class="math inline">\(\vec{R}\)</span>选取为实空间矢量,
-那么合适的例子就是磁场和 A-B 效应; 如果<span
-class="math inline">\(\vec{R}\)</span>选取为动量空间矢量,
-合适的例子是拓扑能带与陈数. 对这些例子的详细叙述从略.</p>
-<section class="footnotes">
-<div class="footnote-list">
-<ol>
-<li>
-<span id="fn:1" class="footnote-text"><span>实际上,
-稳定前也能给出定态微扰的结果, 具体计算从略
-<a href="#fnref:1" rev="footnote" class="footnote-backref">
-↩︎</a></span></span>
-</li>
-</ol>
-</div>
-</section>
+P_e(t)\approx\sin^2|V_{eg}| t
+\]</span> 两个能级发生极其强烈的耦合, 概率会在<span
+class="math inline">\(0\)</span>和<span
+class="math inline">\(1\)</span>之间剧烈跳动. 这种现象被称为
+<strong>Rabi 振荡</strong>.</p>
+<h3 id="强失谐">强失谐</h3>
+<p>如果失谐<span class="math inline">\(\Delta\gg|V_{eg}|\)</span>,
+则能级之间的耦合非常弱, 对角项仍占主导, 系统跃迁概率极小,
+主要表现为能级移动. 静态 Hamiltonian 为 <span class="math display">\[
+H=\begin{pmatrix}
+-\frac{\Delta}{2} &amp; -V_{eg}^*
+\\
+-V_{eg} &amp; \frac{\Delta}{2}
+\end{pmatrix}
+\]</span> 选取的基是原子未微扰能级的本征态, 为了更好地反映能级移动,
+需要将其对角化, 物理上就是把基底重新选为原子与光子耦合的态矢. 得到 <span
+class="math display">\[
+E_{e,g}&#39;=\pm\sqrt{|V_{eg}|^2+\frac{\Delta^2}{4}}\approx\pm\frac{\Delta}{2}(1+\frac{2|V_{eg}|^2}{\Delta^2})
+\]</span> 能级排斥造成的间隔增加为<span
+class="math inline">\(2|V_{eg}|^2/\Delta\)</span>, 这个结果被称为
+<strong>AC Stark 效应</strong>, 其中"AC"就是表示电场是交流而非直流,
+因而需要二阶含时微扰论, 和直流电场下的 Stark
+效应(定态微扰论)区别开来.</p>
 
                 
               </div>
@@ -549,11 +459,9 @@ class="math inline">\(\vec{R}\)</span>选取为动量空间矢量,
       
         <a href="/tags/%E5%90%AB%E6%97%B6%E5%BE%AE%E6%89%B0/" class="print-no-link">#含时微扰</a>
       
-        <a href="/tags/%E5%86%B2%E9%87%8F%E8%BF%91%E4%BC%BC/" class="print-no-link">#冲量近似</a>
+        <a href="/tags/Rabi-%E6%8C%AF%E8%8D%A1/" class="print-no-link">#Rabi 振荡</a>
       
-        <a href="/tags/%E7%BB%9D%E7%83%AD%E8%BF%91%E4%BC%BC/" class="print-no-link">#绝热近似</a>
-      
-        <a href="/tags/Berry-%E7%9B%B8%E4%BD%8D/" class="print-no-link">#Berry 相位</a>
+        <a href="/tags/AC-Stark-%E6%95%88%E5%BA%94/" class="print-no-link">#AC Stark 效应</a>
       
     </div>
   
@@ -565,8 +473,8 @@ class="math inline">\(\vec{R}\)</span>选取为动量空间矢量,
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>微扰论(07)：两种时间尺度近似与 Berry 相位</div>
-      <div>https://notes.rainchan.me/posts/微扰论(07)：两种时间尺度近似与 Berry 相位/</div>
+      <div>微扰论(08)：Rabi 振荡和 AC Stark 效应</div>
+      <div>https://notes.rainchan.me/posts/微扰论(08)：Rabi 振荡和 AC Stark 效应/</div>
     </div>
     <div class="license-meta">
       
@@ -578,7 +486,7 @@ class="math inline">\(\vec{R}\)</span>选取为动量空间矢量,
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年5月14日</div>
+          <div>2025年5月26日</div>
         </div>
       
       
@@ -610,18 +518,12 @@ class="math inline">\(\vec{R}\)</span>选取为动量空间矢量,
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(08)%EF%BC%9ARabi%20%E6%8C%AF%E8%8D%A1%E5%92%8C%20AC%20Stark%20%E6%95%88%E5%BA%94/" title="微扰论(08)：Rabi 振荡和 AC Stark 效应">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">微扰论(08)：Rabi 振荡和 AC Stark 效应</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(06)%EF%BC%9A%E5%90%AB%E6%97%B6%E5%BE%AE%E6%89%B0/" title="微扰论(06)：含时微扰">
-                        <span class="hidden-mobile">微扰论(06)：含时微扰</span>
+                      <a href="/posts/%E5%BE%AE%E6%89%B0%E8%AE%BA(07)%EF%BC%9A%E4%B8%A4%E7%A7%8D%E6%97%B6%E9%97%B4%E5%B0%BA%E5%BA%A6%E8%BF%91%E4%BC%BC%E4%B8%8E%20Berry%20%E7%9B%B8%E4%BD%8D/" title="微扰论(07)：两种时间尺度近似与 Berry 相位">
+                        <span class="hidden-mobile">微扰论(07)：两种时间尺度近似与 Berry 相位</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
