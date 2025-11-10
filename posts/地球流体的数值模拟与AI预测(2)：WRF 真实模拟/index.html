@@ -19,20 +19,21 @@
   <meta name="author" content="Rain Chan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="这一章关注角动量理论和相关论题的系统处理, 在现代物理中角动量理论的重要性怎么强调也不过分. 在分子、原子及核谱学中, 彻底理解角动量是极为重要的; 角动量的考虑不仅在散射和碰撞问题中, 也在柬缚态问题中起着重要的作用.">
+    <meta name="description" content="使用已经安装好的WRF和WPS软件, 在超算上模拟台风桦加沙.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="角动量理论(01)：转动与角动量">
-<meta property="og:url" content="https://notes.rainchan.me/posts/%E8%A7%92%E5%8A%A8%E9%87%8F%E7%90%86%E8%AE%BA(01)%EF%BC%9A%E8%BD%AC%E5%8A%A8%E4%B8%8E%E8%A7%92%E5%8A%A8%E9%87%8F/">
+<meta property="og:title" content="地球流体的数值模拟与AI预测(2)：WRF 真实模拟">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E5%9C%B0%E7%90%83%E6%B5%81%E4%BD%93%E7%9A%84%E6%95%B0%E5%80%BC%E6%A8%A1%E6%8B%9F%E4%B8%8EAI%E9%A2%84%E6%B5%8B(2)%EF%BC%9AWRF%20%E7%9C%9F%E5%AE%9E%E6%A8%A1%E6%8B%9F/">
 <meta property="og:site_name" content="Rain Chan&#39;s Notes">
-<meta property="og:description" content="这一章关注角动量理论和相关论题的系统处理, 在现代物理中角动量理论的重要性怎么强调也不过分. 在分子、原子及核谱学中, 彻底理解角动量是极为重要的; 角动量的考虑不仅在散射和碰撞问题中, 也在柬缚态问题中起着重要的作用.">
+<meta property="og:description" content="使用已经安装好的WRF和WPS软件, 在超算上模拟台风桦加沙.">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2025-04-23T08:01:18.000Z">
-<meta property="article:modified_time" content="2025-11-10T10:32:58.348Z">
+<meta property="og:image" content="https://notes.rainchan.me/posts/ref/real%20WRF%20framework.png">
+<meta property="article:published_time" content="2025-10-26T09:36:54.000Z">
+<meta property="article:modified_time" content="2025-11-10T11:20:59.374Z">
 <meta property="article:author" content="Rain Chan">
-<meta property="article:tag" content="阶梯算符">
-<meta property="article:tag" content="角动量">
-<meta property="article:tag" content="轨道角动量">
+<meta property="article:tag" content="大气物理">
+<meta property="article:tag" content="WRF">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://notes.rainchan.me/posts/ref/real%20WRF%20framework.png">
   
   
     <meta name="referrer" content="no-referrer-when-downgrade">
@@ -40,7 +41,7 @@
   
     <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
   
-  <title>角动量理论(01)：转动与角动量 - Rain Chan&#39;s Notes</title>
+  <title>地球流体的数值模拟与AI预测(2)：WRF 真实模拟 - Rain Chan&#39;s Notes</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -222,7 +223,7 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="角动量理论(01)：转动与角动量"></span>
+            <span id="subtitle" data-typed-text="地球流体的数值模拟与AI预测(2)：WRF 真实模拟"></span>
           
         </div>
 
@@ -233,8 +234,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2025-04-23 16:01" pubdate>
-          2025年4月23日 下午
+        <time datetime="2025-10-26 17:36" pubdate>
+          2025年10月26日 下午
         </time>
       </span>
     
@@ -245,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.9k 字
+          1.3k 字
         
       </span>
     
@@ -256,7 +257,7 @@
         
         
         
-          17 分钟
+          11 分钟
         
       </span>
     
@@ -293,17 +294,18 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <h1 id="seo-header">角动量理论(01)：转动与角动量</h1>
+            <h1 id="seo-header">地球流体的数值模拟与AI预测(2)：WRF 真实模拟</h1>
             
             
               <div class="markdown-body">
                 
-                <p>这一章关注角动量理论和相关论题的系统处理,
-在现代物理中角动量理论的重要性怎么强调也不过分. 在分子、原子及核谱学中,
-彻底理解角动量是极为重要的; 角动量的考虑不仅在散射和碰撞问题中,
-也在柬缚态问题中起着重要的作用.</p>
-<h2
-id="角动量的无穷小转动定义newcommandkmathbbknewcommandrmathbbrnewcommandcmathbbcnewcommandbmathbfnewcommandbiboldsymbolnewcommandrank1textrankleft1-rightnewcommanddim1textdimleft1-rightnewcommanddiag1textdiagleft1-rightnewcommanddet1textdetleft1-rightnewcommanddet1leftbeginmatrix-1-endmatrixrightnewcommandset1left-1-rightnewcommandabs1left-1-rightnewcommandnorm1leftleft1rightrightnewcommanddmathcaldnewcommandso1textso-1-newcommandbraket2langle-1-2-rangle">角动量的无穷小转动定义<span
+                <figure>
+<img src="..\ref\real%20WRF%20framework.png" srcset="/img/loading.gif" lazyload alt="真实实验框架" />
+<figcaption aria-hidden="true">真实实验框架</figcaption>
+</figure>
+<h2 id="构建real.exe文件">构建<code>real.exe</code>文件</h2>
+<p>由于此前已经进行过理想模拟, 所以登陆后, 首先要清除编译文件,
+再改用<code>em_real</code>重新编译.<span
 class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1
 \right)}\newcommand{\dim}[1]{\text{dim}\left(#1
 \right)}\newcommand{\diag}[1]{\text{diag}\left(#1
@@ -311,172 +313,72 @@ class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\new
 \right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1
 \end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1
 \right\}}\newcommand{\abs}[1]{\left| #1
-\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\newcommand{\D}{\mathcal{D}}\newcommand{\SO}[1]{\text{SO}({
-#1 })}\newcommand{\braket}[2]{\langle{ #1 }|{ #2 }\rangle}\)</span></h2>
-<p>经典系统和纯几何中, 转动已经被大量研究过.
-我们采用<strong>物理系统转动、坐标轴不动</strong>的约定,
-并且本章中总有<span class="math inline">\(\boxed{\hbar=1}\)</span>.
-为了方便, 再次取位置本征态来说明这个操作,
-尽管位置的转动事实上不能囊括量子力学所有的转动操作,
-但这种特殊情况更易懂.</p>
-<p>很明显, 单次定轴转动有两个要素: 转轴和转角. 一个绕着<span
-class="math inline">\(x\)</span>轴转动<span
-class="math inline">\(\epsilon\)</span>角的操作可以这么表示: <span
-class="math display">\[
-\D_x(\epsilon)\ket{x,y,z}=\ket{x,y\cos\epsilon-z\sin\epsilon,z\cos\epsilon+y\sin\epsilon}
-\]</span> 不难用三角函数的性质证明, 在同一根轴上的两次转动操作是对易的,
-但不同轴上的两次转动一般不对易. 考虑两个无穷小转动的对易子 <span
-class="math display">\[
-[\D_x(\epsilon_1),\D_y(\epsilon_2)]\ket{x,y,z}\approx\D_x(\epsilon_1)\ket{x+z\epsilon_2,y,z-x\epsilon_2}-\D_y(\epsilon_2)\ket{x,y-z\epsilon_1,z+y\epsilon_1}
-\\\approx
-\ket{x+z\epsilon_2,y-z\epsilon_1+x\epsilon_1\epsilon_2,z-x\epsilon_2+y\epsilon_1}-\ket{x+z\epsilon_2+y\epsilon_1\epsilon_2,y-z\epsilon_1,z+y\epsilon_1-x\epsilon_2}
-\]</span> 如果忽略二阶小量, 那么结果可以消去, 两个转动显然是对易的;
-从二阶开始, 出现了非对易效应, 两个位置本征态的<span
-class="math inline">\(x,y\)</span>坐标不同, 相当于两者相差一个<span
-class="math inline">\(z\)</span>轴的转动, 转角为<span
-class="math inline">\(\epsilon_1\epsilon_2\)</span>. 于是得到 <span
-class="math display">\[
-[\D_x(\epsilon_1),\D_y(\epsilon_2)]=\D_z(\epsilon_1\epsilon_2)-\mathbb{1}
-\]</span> 无穷小转动下, 用生成元考虑问题更加方便,
-为此可以给转动生成元取名</p>
-<div class="note note-success">
-            <h5 id="def-角动量"><em>Def</em> 角动量</h5><p>系统在无穷小转动下的生成元, 叫做系统的 <strong>角动量</strong>,用<span class="math inline">\(J\)</span>表示. 三维空间中,它有三个线性独立的转轴取向, 即 <span class="math display">\[\D_{x,y,z}(\epsilon):=\exp(-iJ_{x,y,z}\epsilon)\]</span></p>
-          </div>
-<p>代入<span
-class="math inline">\(\D_x(\epsilon)\approx\mathbb{1}-iJ_x\epsilon\)</span>,
-有 <span class="math display">\[
-\boxed{[J_x,J_y]=iJ_z}
-\]</span> 这是角动量理论中最基本的对易关系, 下标关于<span
-class="math inline">\(x,y,z\)</span>轮换对称. 另外,
-还可以基于角动量的基本对易关系得到 <span class="math display">\[
-\begin{aligned}
-\ [J^2,J_z]&amp;=[J_x^2,J_z]+[J_y^2,J_z]
-\\&amp;=J_x(-iJ_y)+(-iJ_y)J_x+J_y(iJ_x)+(iJ_x)J_y
-\\&amp;=0
-\end{aligned}
-\]</span> 可见, <span class="math inline">\(J^2\)</span>和<span
-class="math inline">\(J_z\)</span>两个标量算符具有共同本征态.</p>
-<h2 id="轨道角动量">轨道角动量</h2>
-<p>事实上, 可以直接利用已知的算符构造一种满足上述代数结构的新算符.
-经典力学中, 角动量是这么定义的: <span class="math display">\[
-\vec{L}=\vec{x}\times\vec{p}
-\]</span> 它是否具有量子对应? 同样用矢量的叉积定义出矢量的角动量算符,
-现在考虑它分量的对易子 <span class="math display">\[
-\begin{aligned}\
-[L_x,L_y]&amp;=[yp_z-zp_y,zp_x-xp_z]
-\\&amp;=[yp_z,zp_x]+[zp_y,xp_z]
-\\&amp;=yp_x\cdot(-i)+xp_y\cdot i
-\\&amp;=iL_z
-\end{aligned}
-\]</span> 并且也可以用<span
-class="math inline">\(\vec{L}\)</span>定义出位形空间的无穷小转动.
-用位矢和动量叉积定义的角动量算符, 称为 <strong>轨道角动量</strong>,
-因为还有一类角动量不需要位形空间中发生定轴或者定点转动而产生,
-这种角动量被称作自旋.</p>
-<h3 id="阶梯算符">阶梯算符</h3>
-<p>为了代数上求解角动量的本征态, 可以定义如下 <strong>阶梯算符</strong>
-<span class="math display">\[
-J_{\pm}=J_x\pm iJ_y
-\]</span> 容易证明下列对易关系 <span class="math display">\[
-[J_+,J_-]=2J_z\quad [J^2,J_{\pm}]=0\quad [J_z,J_{\pm}]=\pm J_{\pm}
-\]</span> 现在考虑角动量的本征态. 首先, 已知<span
-class="math inline">\(J^2\)</span>和<span
-class="math inline">\(J_z\)</span>具有共同本征态, 可以用<span
-class="math inline">\(\ket{j,m}\)</span>来标记这个本征态, 其中<span
-class="math inline">\(j\)</span>和<span
-class="math inline">\(J^2\)</span>的本征值一一对应, 但<span
-class="math inline">\(j\)</span>本身不一定是<span
-class="math inline">\(J^2\)</span>的本征值或者本征值的算术平方根,
-只是一个标记; <span
-class="math inline">\(m\)</span>既是标记也确实是<span
-class="math inline">\(L_z\)</span>的本征值.</p>
-<p>现在可以考察<span class="math inline">\(L_{\pm}\)</span>作用到<span
-class="math inline">\(\ket{j,m}\)</span>上的效应. 由于<span
-class="math inline">\([J_z,J_-]=-J_-\)</span>, 可得 <span
-class="math display">\[
-J_z J_-\ket{j,m}=J_-(J_z-1)\ket{j,m}=(m-1)J_-\ket{j,m}
-\]</span> 此外, 由于<span class="math inline">\([J^2,J_-]=0\)</span>,
-<span class="math inline">\(J_-\ket{j,m}\)</span>和<span
-class="math inline">\(\ket{j,m}\)</span>对于<span
-class="math inline">\(J^2\)</span>取相同本征值. 因而<span
-class="math inline">\(J_{-}\ket{j,m}\)</span>恰好对应于<span
-class="math inline">\(\ket{j,m-1}\)</span>, 只是可能未归一化.
-可以计算它的归一化系数: <span class="math display">\[
-\bra{j,m}J_+J_-\ket{j,m}=\bra{j,m} J^2-J_z^2+J_z\ket{j,m}=|c|^2
-\]</span> 即<span class="math inline">\(|c|^2=\lambda_j-m^2+m\)</span>,
-其中<span class="math inline">\(\lambda_j\)</span>是序号<span
-class="math inline">\(j\)</span>对应的<span
-class="math inline">\(J^2\)</span>的本征值(容易证明<span
-class="math inline">\(\lambda_j\ge0\)</span>). 同样选取<span
-class="math inline">\(c\)</span>为正实数, 立即得到 <span
-class="math display">\[
-J_-\ket{j,m}=\sqrt{\lambda_j-m^2+m}\ket{j,m-1}\quad m^2-m\le\lambda_j
-\]</span> 后面的不等式是<span
-class="math inline">\(|c|^2\)</span>非负给出的条件. 类似谐振子的讨论,
-如果<span
-class="math inline">\(J_-\)</span>生成的系数无法截断这个态矢序列,
-那么可以通过不断作用<span class="math inline">\(J_-\)</span>生成到<span
-class="math inline">\(\ket{j,-\infty}\)</span>序列,
-这样的态矢必定不满足<span
-class="math inline">\(m^2-m\le\lambda_j\)</span>. 因此, <span
-class="math inline">\(m\)</span>具有一个下确界<span
-class="math inline">\(m_{min}\)</span>, 使得<span
-class="math inline">\(m_{min}^2-m_{min}=\lambda_j\)</span>.</p>
-<p>同理, <span class="math inline">\(J_+\)</span>可以维持<span
-class="math inline">\(j\)</span>不变并增加<span
-class="math inline">\(z\)</span>方向的磁性 <span class="math display">\[
-J_+\ket{j,m}=\sqrt{\lambda_j-m^2-m}\ket{j,m+1}
-\]</span> 这个算符同样给<span
-class="math inline">\(m\)</span>引入一个上确界<span
-class="math inline">\(m_{max}\)</span>, 且<span
-class="math inline">\(m_{max}^2+m_{max}=\lambda_j\)</span>.
-解两个方程(注意到<span class="math inline">\(\lambda_j\ge0\)</span>),
-可得 <span class="math display">\[
-m_{min}=\frac{1\pm\sqrt{1+4\lambda_j}}{2}\quad
-m_{max}=\frac{-1\pm\sqrt{1+4\lambda_j}}{2}
-\]</span> 很容易得到其中物理的解, 为 <span class="math display">\[
-m_{min}=-\frac{\sqrt{1+4\lambda_j}-1}{2}\quad
-m_{max}=\frac{\sqrt{1+4\lambda_j}-1}{2}
-\]</span> 即<span class="math inline">\(m_{min}\)</span>和<span
-class="math inline">\(m_{max}\)</span>互为相反数. 由于<span
-class="math inline">\(j\)</span>标记具有一定的任意性, 现在让<span
-class="math inline">\(j=m_{max}\)</span>, 则<span
-class="math inline">\(\lambda_j=j(j+1)\)</span>. 此外, <span
-class="math inline">\(m_{max}\)</span>和<span
-class="math inline">\(m_{min}\)</span>的间隔必定是整数, 因此<span
-class="math inline">\(2j\)</span>需要取整数, <span
-class="math inline">\(j\)</span>本身可以取整数或者半整数.</p>
-<h3 id="角动量本征态总结">角动量本征态总结</h3>
-<p><span class="math inline">\(J^2,J_z\)</span>由于对易,
-具有共同本征态<span class="math inline">\(\ket{j,m}\)</span>, 其中,
-<span class="math inline">\(j\)</span>可以取自然数(<span
-class="math inline">\(0,1,\cdots\)</span>)或者正的半整数(<span
-class="math inline">\(\frac{1}{2},\frac{3}{2},\cdots\)</span>);
-对于同一个<span class="math inline">\(j\)</span>, <span
-class="math inline">\(m\)</span>可以取<span
-class="math inline">\(-j,-j+1,\cdots,j-1,j\)</span>.
-这些记号与本征值的关系为 <span class="math display">\[
-J^2\ket{j,m}=j(j+1)\ket{j,m}\quad J_z\ket{j,m}=m\ket{j,m}
-\]</span> 另外, 需要指出的是, 轨道角动量的<span
-class="math inline">\(j\)</span>(通常特别地写作<span
-class="math inline">\(l\)</span>)应该只能取自然数.
-这是因为轨道角动量对应的态矢总可以和位置本征态作内积并得到所谓的波函数(坐标表象):
-<span class="math display">\[
-\braket{\hat{n}}{l,m}=Y_l^m(\hat{n})
-\]</span> 这里实际上已经揭示了<span
-class="math inline">\(\ket{l,m}\)</span>在坐标表象下就是大家熟知的球谐函数,
-球谐函数的<span class="math inline">\(l\)</span>当然是自然数,
-但是也可以暂且忽略这一点, 考虑绕着<span
-class="math inline">\(z\)</span>轴转动<span
-class="math inline">\(2\pi\)</span>: <span class="math display">\[
-\bra{\hat{n}}\exp(-iL_z2\pi)\ket{l,m}=e^{-i2m\pi }\braket{\hat{n}}{l,m}
-\]</span> 从物理上讲, 一个只包含位形自由度的系统自转<span
-class="math inline">\(2\pi\)</span>应当完全回到自身,
-否则波函数不是单值的. 此处<span
-class="math inline">\(m\)</span>如果取半整数, 会引入一个负号,
-不满足条件, 因此, 轨道角动量的本征态<span
-class="math inline">\(\ket{l,m}\)</span>中, <span
-class="math inline">\(l\)</span>总是自然数.</p>
+\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\)</span></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">[user@loginnode ~]$ <span class="hljs-built_in">cd</span> ~/WRF<br>[user@loginnode WRF]$ <span class="hljs-built_in">cp</span> -r run run_backup  <span class="hljs-comment"># 备份步骤, 可以改备份后文件夹名, 也可以不备份</span><br>[user@loginnode WRF]$ ./clean -a  <span class="hljs-comment"># 清除已构建的文件. 需要重新编译时使用这个功能</span><br>[user@loginnode WRF]$ ./configure  <span class="hljs-comment"># 生成.wrf配置文件, 先选15, 再选1</span><br>[user@loginnode WRF]$ vi configure.wrf  <span class="hljs-comment"># 用编辑器打开配置文件</span><br></code></pre></td></tr></table></figure>
+<p>打开文件后, 需要修改第168~169行的内容为如下:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs vim">DM_FC           =       mpiifort<br>DM_CC           =       mpiicc<br></code></pre></td></tr></table></figure>
+<p>修改完成后, 可以开始编译, 使用<code>sbatch</code>提交任务,
+例如提交脚本叫<code>compile.sh</code>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">[user@loginnode WRF]$ vi compile.sh  <span class="hljs-comment"># 以下为创建或修改后的内容</span><br><span class="hljs-comment">#!/bin/bash</span><br><span class="hljs-comment">#SBATCH -J WRF_configure</span><br><span class="hljs-comment">#SBATCH -p xahcnormal</span><br><span class="hljs-comment">#SBATCH -N 1</span><br><span class="hljs-comment">#SBATCH --ntasks-per-node=8</span><br><br>./compile -j 8 em_real &gt;&amp; log.compile  <span class="hljs-comment"># 写完后保存文件, 退出vim</span><br>[user@loginnode WRF]$ sbatch compile.sh  <span class="hljs-comment"># 讲义说约5min, 实测约30min</span><br></code></pre></td></tr></table></figure>
+<p>检查正确编译的方法: 在<code>WRF/main</code>目录下, 观察是否有
+<code>ndown.exe, tc.exe, real.exe, wrf.exe</code>文件.</p>
+<h2 id="编译wps">编译WPS</h2>
+<p>现在WRF的编译任务全部完成, 为了得到运行所需的条件, 就需要编译WPS.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">[user@loginnode WRF]$ <span class="hljs-built_in">cd</span> ../WPS &amp;&amp; ./configure  <span class="hljs-comment"># 选21</span><br>[user@loginnode WPS]$ vi configure.wps<br></code></pre></td></tr></table></figure>
+<p>打开文件后, 需要修改第62,63,67和68行的内容为如下:</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs vim">COMPRESSION_LIBS    = -L/public/software/mathlib/jasper/<span class="hljs-number">1.900</span>.<span class="hljs-number">1</span>/intel/lib -ljasper -lpng -lz<br>COMPRESSION_INC     = -I/public/software/mathlib/jasper/<span class="hljs-number">1.900</span>.<span class="hljs-number">1</span>/intel/include<br>DM_FC               = mpiifort<br>DM_CC               = mpiicc<br></code></pre></td></tr></table></figure>
+<p>修改完成后, 可以开始编译WPS:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">[user@loginnode WPS]$ ./compile  <span class="hljs-comment"># 如果不想看到编译过程的输出, 可以使用./compile &amp;&gt; log.compile</span><br></code></pre></td></tr></table></figure>
+<p>检查正确编译的方法: 在<code>WPS</code>目录下,
+观察是否有<code>geogrid.exe, ungrib.exe, metgrid.exe</code>等可执行文件的软链接.</p>
+<h2 id="geogrid">Geogrid</h2>
+<p>Geogrid的作用是, 设定模拟区域,
+并将各类地面数据集插值到模型网格中.</p>
+<h3 id="获取陆地输入数据">获取陆地输入数据</h3>
+<p>UCAR的可以在网上<a
+target="_blank" rel="noopener" href="https://www2.mmm.ucar.edu/wrf/users/download/get_sources_wps_geog.html">下载</a>,
+但是过程极其缓慢. 建议直接使用曙光超算上的公共路径.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">[user@loginnode WPS]$ vi namelist.wps  <br>&amp;geogrid<br> ...<br> geog_data_path = <span class="hljs-string">&#x27;/public/software/meteorology/WPS_GEOG&#x27;</span>  <span class="hljs-comment"># 打开后, 在&amp;geogrid增加行内容如下</span><br>/<br></code></pre></td></tr></table></figure>
+<p>另一种方案是, 使用<a
+target="_blank" rel="noopener" href="https://cds.climate.copernicus.eu/">哥白尼数据空间生态系统气候数据库</a>的数据(推荐).</p>
+<h3
+id="进一步编辑namelist.wps并运行geogrid.exe">进一步编辑<code>namelist.wps</code>并运行<code>geogrid.exe</code></h3>
+<p>在geogrid环节,
+只需要编辑<code>&amp;share</code>和<code>&amp;geogrid</code>部分.</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs vim">&amp;share<br> ...<br> max_dom = <span class="hljs-number">1</span> ! <span class="hljs-number">2</span>,<br> start_date = <span class="hljs-string">&#x27;2025-09-18_18:00:00&#x27;</span>,<span class="hljs-string">&#x27;2019-09-04_12:00:00&#x27;</span>, # 桦加沙起始时间约<span class="hljs-number">18</span>日晚<span class="hljs-number">8</span>时<br> end_date   = <span class="hljs-string">&#x27;2025-09-20_18:00:00&#x27;</span>,<span class="hljs-string">&#x27;2019-09-04_12:00:00&#x27;</span>,<br> ...<br>&amp;geogrid<br> ...<br> # 桦加沙起点经纬度<br> ref_lat   =  <span class="hljs-number">15.80</span>,<br> ref_lon   =  <span class="hljs-number">133.20</span>,<br> ...<br># 保存退出<br>[user@loginnode WPS]$ ./geogrid.<span class="hljs-keyword">exe</span><br></code></pre></td></tr></table></figure>
+<p>如果运行成功,
+<code>WPS</code>目录下应该出现文件<code>geo_em.d01.nc</code>.</p>
+<h2 id="ungrib">Ungrib</h2>
+<p>Ungrib的作用是解包GRIB气象数据, 并将其打包为中间文件格式.
+GRIB是世界气象组织的标准文件格式.</p>
+<p>输入数据可以从<a
+target="_blank" rel="noopener" href="https://osdf-data.gdex.ucar.edu/ncar/gdex/d090000/pgb.f00/2025/A27239-202509.pgb.f00">UCAR官网</a>下载.
+建议直接用链接下载到PC, 再从PC上传到HPC(假设上传到<code>~/NNRP/</code>),
+然后如下操作</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">[user@loginnode WPS]$ <span class="hljs-built_in">ln</span> -sf ungrib/Variable_Tables/Vtable.NNRP Vtable  <span class="hljs-comment"># 创建Vtable软链接</span><br>[user@loginnode WPS]$ ./link_grib.csh ~/NNRP/  <span class="hljs-comment"># 创建GRIB文件的软链接</span><br>[user@loginnode WPS]$ ./ungrib.exe  <span class="hljs-comment"># 进行ungrib过程</span><br></code></pre></td></tr></table></figure>
+<p>如果最后显示<code>Successful completion of ungrib</code>,
+并且只剩下<code>FILE:$&#123;timestamp&#125;</code>格式命名的文件,
+临时文件<code>PFILE</code>被全部删除, 说明ungrib步骤成功.</p>
+<h2 id="metgrid">Metgrid</h2>
+<p>Metgrid的作用是将气象数据(ungrib输出的<code>FILE:$&#123;timestamp&#125;</code>)水平插值到模型区域(<code>geo_em.d01.nc</code>)中.
+如果检查确定<code>namelist.wps</code>中,
+<code>&amp;metgrid.fg_name</code>和<code>&amp;ungrib.prefix</code>的值相同,
+就可以直接运行<code>metgrid.exe</code>了.</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">[user@loginnode WPS]$ ./metgrid.exe<br></code></pre></td></tr></table></figure>
+<p>处理成功的标志一方面见输出, 另一方面,
+<code>FILE:$&#123;timestamp&#125;</code>的步长原来是6h,
+如果在处理后变成了自定义步长(此处是10800s=3h, 更多时刻的FILE被插值得到),
+并且出现了<code>met_em.d01.$&#123;timestamp&#125;.nc</code>文件, 说明处理成功.</p>
+<p>最后, 要创建这些<code>met_em.d01.$&#123;timestamp&#125;.nc</code>文件的软链接,
+以便WRF访问:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">[user@loginnode WPS]$ <span class="hljs-built_in">cd</span> ../WRF/run &amp;&amp; <span class="hljs-built_in">ln</span> -sf ../../WPS/met_em.d01.* .<br></code></pre></td></tr></table></figure>
+<h2 id="运行wrf实现模拟">运行WRF实现模拟</h2>
+<p>首先修改<code>namelist.input</code>文件,
+确保与<code>WPS/namelist.wps</code>一致:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs bash">[user@loginnode run]$ vi namelist.input<br> &amp;time_control<br> ...  <span class="hljs-comment"># run_hours从36改为48</span><br> run_hours                           = 48,<br> ...  <span class="hljs-comment"># 起止时间的第一列需要改, 第二列是给domain 2设置的, max_dom = 1时没有作用</span><br> start_year                          = 2025, 2019,<br> start_month                         = 09,   09, <br> start_day                           = 18,   04,<br> start_hour                          = 18,   12,<br> end_year                            = 2025, 2019,<br> end_month                           = 09,   09,<br> end_day                             = 20,   06,<br> end_hour                            = 18,   00,<br> ...<br> /<br><br> &amp;domains<br> ...  <span class="hljs-comment"># max_dom从2改为1</span><br> max_dom                             = 1,<br> ...  <span class="hljs-comment"># 从34, 4改为38, 0</span><br> num_metgrid_levels                  = 38,<br> num_metgrid_soil_levels             = 0,<br> ...<br> /<br> <br> &amp;physics<br> ...  <span class="hljs-comment"># 第一列从-1改为1</span><br> sf_surface_physics                  = 1,    -1,<br> ...  <span class="hljs-comment"># 从1改为0</span><br> fractional_seaice                   = 0,<br> /<br></code></pre></td></tr></table></figure>
+<p>然后运行<code>real.exe</code>, 确定成功后,
+再提交<code>wrf.exe</code>的任务</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">[user@loginnode run]$ ./real.exe  <span class="hljs-comment"># 如果出现wrfinput_d01, wrfbdy_d01, 说明运行成功</span><br>[user@loginnode run]$ vi runwrf.sh  <span class="hljs-comment"># 创建或修改任务脚本, 可以叫其它名字</span><br><span class="hljs-comment">#!/bin/bash</span><br><span class="hljs-comment">#SBATCH -J WRF_Ragasa</span><br><span class="hljs-comment">#SBATCH -p xahcnormal  # 西安超算普通, 超算具体分区名请咨询管理员</span><br><span class="hljs-comment">#SBATCH -N 1</span><br><span class="hljs-comment">#SBATCH --ntasks-per-node=64</span><br><br>srun --mpi=pmi2 wrf.exe<br><span class="hljs-comment"># 保存退出</span><br>[user@loginnode run]$ sbatch runwrf.sh  <span class="hljs-comment"># 与上面创建或修改的文件名一致</span><br></code></pre></td></tr></table></figure>
 
                 
               </div>
@@ -495,12 +397,12 @@ class="math inline">\(l\)</span>总是自然数.</p>
     
       <span class="category-chain">
         
-  <a href="/categories/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/" class="category-chain-item">量子力学</a>
+  <a href="/categories/%E8%AF%BE%E7%A8%8B%E9%9A%8F%E7%AC%94/" class="category-chain-item">课程随笔</a>
   
   
     <span>></span>
     
-  <a href="/categories/%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%A6/%E8%A7%92%E5%8A%A8%E9%87%8F%E7%90%86%E8%AE%BA/" class="category-chain-item">角动量理论</a>
+  <a href="/categories/%E8%AF%BE%E7%A8%8B%E9%9A%8F%E7%AC%94/%E5%9C%B0%E7%90%83%E6%B5%81%E4%BD%93%E7%9A%84%E6%95%B0%E5%80%BC%E6%A8%A1%E6%8B%9F%E4%B8%8EAI%E9%A2%84%E6%B5%8B/" class="category-chain-item">地球流体的数值模拟与AI预测</a>
   
   
 
@@ -517,11 +419,9 @@ class="math inline">\(l\)</span>总是自然数.</p>
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/%E9%98%B6%E6%A2%AF%E7%AE%97%E7%AC%A6/" class="print-no-link">#阶梯算符</a>
+        <a href="/tags/%E5%A4%A7%E6%B0%94%E7%89%A9%E7%90%86/" class="print-no-link">#大气物理</a>
       
-        <a href="/tags/%E8%A7%92%E5%8A%A8%E9%87%8F/" class="print-no-link">#角动量</a>
-      
-        <a href="/tags/%E8%BD%A8%E9%81%93%E8%A7%92%E5%8A%A8%E9%87%8F/" class="print-no-link">#轨道角动量</a>
+        <a href="/tags/WRF/" class="print-no-link">#WRF</a>
       
     </div>
   
@@ -533,8 +433,8 @@ class="math inline">\(l\)</span>总是自然数.</p>
 
   <div class="license-box my-3">
     <div class="license-title">
-      <div>角动量理论(01)：转动与角动量</div>
-      <div>https://notes.rainchan.me/posts/角动量理论(01)：转动与角动量/</div>
+      <div>地球流体的数值模拟与AI预测(2)：WRF 真实模拟</div>
+      <div>https://notes.rainchan.me/posts/地球流体的数值模拟与AI预测(2)：WRF 真实模拟/</div>
     </div>
     <div class="license-meta">
       
@@ -546,7 +446,7 @@ class="math inline">\(l\)</span>总是自然数.</p>
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2025年4月23日</div>
+          <div>2025年10月26日</div>
         </div>
       
       
@@ -578,18 +478,12 @@ class="math inline">\(l\)</span>总是自然数.</p>
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/posts/%E8%A7%92%E5%8A%A8%E9%87%8F%E7%90%86%E8%AE%BA(02)%EF%BC%9A%E8%87%AA%E6%97%8B%E8%A7%92%E5%8A%A8%E9%87%8F/" title="角动量理论(02)：自旋角动量">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">角动量理论(02)：自旋角动量</span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/posts/%E9%87%8F%E5%AD%90%E5%8A%A8%E5%8A%9B%E5%AD%A6(03)%EF%BC%9A%E5%B9%B3%E7%A7%BB%E5%92%8C%E7%A9%BA%E9%97%B4%E5%8F%8D%E6%BC%94/" title="量子动力学(03)：平移和空间反演">
-                        <span class="hidden-mobile">量子动力学(03)：平移和空间反演</span>
+                      <a href="/posts/%E5%9C%B0%E7%90%83%E6%B5%81%E4%BD%93%E7%9A%84%E6%95%B0%E5%80%BC%E6%A8%A1%E6%8B%9F%E4%B8%8EAI%E9%A2%84%E6%B5%8B(1)%EF%BC%9AWRF%20%E7%90%86%E6%83%B3%E6%A8%A1%E6%8B%9F/" title="地球流体的数值模拟与AI预测(1)：WRF 理想模拟">
+                        <span class="hidden-mobile">地球流体的数值模拟与AI预测(1)：WRF 理想模拟</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
