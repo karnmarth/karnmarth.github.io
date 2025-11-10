@@ -185,9 +185,9 @@
       
       <tag>微扰论</tag>
       
-      <tag>简并微扰</tag>
-      
       <tag>非简并微扰</tag>
+      
+      <tag>简并微扰</tag>
       
       <tag>精细结构</tag>
       
@@ -222,9 +222,9 @@
       
       <tag>微扰论</tag>
       
-      <tag>简并微扰</tag>
-      
       <tag>非简并微扰</tag>
+      
+      <tag>简并微扰</tag>
       
       <tag>Stark 效应</tag>
       
@@ -493,9 +493,9 @@
       
       <tag>角动量</tag>
       
-      <tag>球张量</tag>
-      
       <tag>不可约张量</tag>
+      
+      <tag>球张量</tag>
       
     </tags>
     
@@ -710,9 +710,9 @@
       
       <tag>临界指数</tag>
       
-      <tag>高温展开</tag>
-      
       <tag>Landau 理论</tag>
+      
+      <tag>高温展开</tag>
       
       <tag>Landau-Ginzburg 自由能</tag>
       
@@ -743,11 +743,11 @@
     
     <tags>
       
+      <tag>van der Waals 方程</tag>
+      
       <tag>平均场近似</tag>
       
       <tag>临界指数</tag>
-      
-      <tag>van der Waals 方程</tag>
       
       <tag>Landau 理论</tag>
       
