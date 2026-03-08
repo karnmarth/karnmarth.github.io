@@ -1,0 +1,907 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rain Chan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="有了形式逻辑的语法, 我们现在需要数学概念. 本文通过 Russell 悖论说明朴素集合论的崩塌，并探讨 ZF 公理系统如何在废墟上重建现代的集合论, 最后讨论集合运算的基本性质.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="逻辑与公理化集合论(02)：从朴素集合论到 ZF 公理系统下的集合论">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E9%80%BB%E8%BE%91%E4%B8%8E%E5%85%AC%E7%90%86%E5%8C%96%E9%9B%86%E5%90%88%E8%AE%BA(02)%EF%BC%9A%E4%BB%8E%E6%9C%B4%E7%B4%A0%E9%9B%86%E5%90%88%E8%AE%BA%E5%88%B0%20ZF%20%E5%85%AC%E7%90%86%E7%B3%BB%E7%BB%9F%E4%B8%8B%E7%9A%84%E9%9B%86%E5%90%88%E8%AE%BA/">
+<meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="有了形式逻辑的语法, 我们现在需要数学概念. 本文通过 Russell 悖论说明朴素集合论的崩塌，并探讨 ZF 公理系统如何在废墟上重建现代的集合论, 最后讨论集合运算的基本性质.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-07T09:26:06.000Z">
+<meta property="article:modified_time" content="2026-03-08T13:35:48.383Z">
+<meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="集合论">
+<meta property="article:tag" content="Russell 悖论">
+<meta property="article:tag" content="ZF 公理系统">
+<meta property="article:tag" content="集合运算">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  
+  <title>逻辑与公理化集合论(02)：从朴素集合论到 ZF 公理系统下的集合论 - Rain Chan&#39;s Notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rain Chan&#39;s Notes</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/ref" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>参考</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="逻辑与公理化集合论(02)：从朴素集合论到 ZF 公理系统下的集合论"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-07 17:26" pubdate>
+          2026年3月7日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          13 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">逻辑与公理化集合论(02)：从朴素集合论到 ZF 公理系统下的集合论</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>在上一篇文章中, 我们建立了精确的逻辑语法, 然而, 为了辅助说明一些概念,
+实数集和属于关系在未定义的情况下被使用, 现在是时候偿还这笔逻辑债务了.
+<span class="math inline">\(\newcommand{\set}[1]{\left\{ #1
+\right\}}\newcommand{\abs}[1]{\left| #1
+\right|}\newcommand{\tr}[1]{\text{tr}\left( #1
+\right)}\renewcommand{\R}{\mathbb{R}}\renewcommand{\K}{\mathbb{K}}\renewcommand{\exist}{\exists}\renewcommand{\and}{\land}\renewcommand{\or}{\lor}\renewcommand{\empty}{\varnothing}\renewcommand{\subset}{\subseteq}\renewcommand{\supset}{\supseteq}\)</span></p>
+<h2 id="朴素集合论与-russell-悖论">朴素集合论与 Russell 悖论</h2>
+<p>朴素的集合定义非常自由, 任何可以通过语言或性质描述的对象的全体,
+都可以构成一个集合. 对于任意性质<span
+class="math inline">\(P(x)\)</span>, 都存在一个集合<span
+class="math inline">\(A\)</span>, <span
+class="math inline">\(A\)</span>囊括了所有满足性质<span
+class="math inline">\(P(x)\)</span>的<span
+class="math inline">\(x\)</span>. 即 <span class="math display">\[
+\forall x(x\in A\Leftrightarrow P(x))
+\]</span> 这里的<span class="math inline">\(x\)</span>通常称为
+<strong>元素</strong>, 元素本身也可以是另一些元素的集合,
+这有点类似于编程领域的嵌套列表, 区别是列表是有序结构,
+并且允许重复枚举已出现的元素.</p>
+<h3 id="russell-悖论">Russell 悖论</h3>
+<p>1901年, Russell 提出了一个性质<span
+class="math inline">\(R(x)\)</span>, 其指代"对任意<span
+class="math inline">\(x\)</span>, <span
+class="math inline">\(x\)</span>不属于<span
+class="math inline">\(x\)</span>"的性质 <span class="math display">\[
+R(x): x\notin x
+\]</span> 下面我们证明, 这条性质与朴素集合论冲突.</p>
+
+    <div class="fold">
+      <div class="fold-title fold-light collapsed" data-toggle="collapse" href="#collapse-ddab775b" role="button" aria-expanded="false" aria-controls="collapse-ddab775b">
+        <div class="fold-arrow">▶</div>Proof
+      </div>
+      <div class="fold-collapse collapse" id="collapse-ddab775b">
+        <div class="fold-content">
+          <p>按照朴素集合论的精神, 必然存在一个集合<spanclass="math inline">\(R\)</span>对应于性质<spanclass="math inline">\(R(x)\)</span>. 根据排中律, <spanclass="math inline">\(R\in R\)</span>要么是真命题, 要么是假命题(即<spanclass="math inline">\(R\notin R\)</span>).</p><ol type="1"><li><p>若<span class="math inline">\(R\in R\)</span></p><p>既然<span class="math inline">\(R\)</span>也是<spanclass="math inline">\(R\)</span>中的元素, 其必然满足性质<spanclass="math inline">\(R(x)\)</span>, 即<spanclass="math inline">\(R(R):R\notin R\)</span>, 与<spanclass="math inline">\(R\in R\)</span>矛盾.</p></li><li><p>若<span class="math inline">\(R\notin R\)</span></p><p>这个情形的条件刚好符合性质<span class="math inline">\(R(x)\)</span>,由集合<span class="math inline">\(R\)</span>的构造性质, 直接导出<spanclass="math inline">\(R\in R\)</span>, 矛盾.</p><p>综上所述, 该性质<spanclass="math inline">\(R(x)\)</span>不存在(朴素意义上的)集合与之对应.</p></li></ol>
+        </div>
+      </div>
+    </div>
+<div class="note note-warning">
+            <h5 id="remark"><em>Remark</em></h5><p>Russell 悖论的一个通俗诠释是所谓的"理发师悖论": 一个村子里有位理发师,他宣称自己"给且只给所有不自己理发的人理发",那么无论他给自己理发还是不理发, 都与宣称相矛盾.</p>
+          </div>
+<h2 id="zfc-公理系统">ZFC 公理系统</h2>
+<p>为了解决 Russell 悖论, 需要节制构造集合的方法. 为此, Zermelo 和
+Fraenkel 提出了 ZF 公理系统. 这里介绍其前3条公理.</p>
+<h3 id="集合的构造-并集与交集运算">集合的构造, 并集与交集运算</h3>
+<div class="note note-info">
+            <h5 id="axiomatic-system-zf公理系统的13条"><em>Axiomatic System</em>ZF公理系统的1~3条</h5><ol type="1"><li><p><strong>外延公理:</strong> 集合<spanclass="math inline">\(A\)</span>和集合<spanclass="math inline">\(B\)</span>相等当且仅当元素相同 <spanclass="math display">\[\forall A\forall B(A=B\Leftrightarrow\forall x(x\in A\Leftrightarrowx\in B))\]</span></p></li><li><p><strong>分离公理:</strong> 任何集合<spanclass="math inline">\(A\)</span>和性质<spanclass="math inline">\(P(x)\)</span>都对应一个集合<spanclass="math inline">\(B\)</span>, 其中元素是且仅是<spanclass="math inline">\(A\)</span>中具有性质<spanclass="math inline">\(P(x)\)</span>的元素 <span class="math display">\[\forall A\forall P\exist B(\forall x (x\in B\Leftrightarrow(x\in A\andP(x))))\]</span></p></li><li><p><strong>并集公理:</strong> 对于任何"集合之集合"<spanclass="math inline">\(\mathcal{M}\)</span>, 存在集合被称作"<spanclass="math inline">\(\mathcal{M}\)</span>的并集", 记作<spanclass="math inline">\(\cup\mathcal{M}\)</span>, 其元素是且仅是<spanclass="math inline">\(\mathcal{M}\)</span>中所有元素的元素 <spanclass="math display">\[\forall\mathcal{M}\exist\cup\mathcal{M}(\forallx(x\in\cup\mathcal{M}\Rightarrow\exist X(x\in X\and X\in\mathcal{M})))\]</span></p></li></ol>
+          </div>
+<p>外延公理的作用是定义集合的相等. 分离公理取代了朴素集合论的构造方法,
+要求不能根据任意性质<span class="math inline">\(P\)</span>就构造新集合,
+而是只能从已有集合<span
+class="math inline">\(A\)</span>中挑选出符合性质<span
+class="math inline">\(P\)</span>的全体元素组成新集合.
+并集公理主要是定义了并集运算的存在性.</p>
+<p>利用分离公理可以定义交集. 考虑原集合为<span
+class="math inline">\(\cup\mathcal{M}\)</span>, 性质<span
+class="math inline">\(P(x)\)</span>是<span
+class="math inline">\(x\)</span>属于<span
+class="math inline">\(\mathcal{M}\)</span>的每个元素即可.</p>
+<div class="note note-success">
+            <h5 id="def-交集"><em>Def</em> 交集</h5><p>集合族<span class="math inline">\(\mathcal{M}\)</span>的<strong>交集</strong> 是如下记作<spanclass="math inline">\(\cap\mathcal{M}\)</span>的集合 <spanclass="math display">\[\cap\mathcal{M}:=\set{x\in \cup\mathcal{M}|\forallX(X\in\mathcal{M}\Rightarrow x\in X)}\]</span></p>
+          </div>
+<h3 id="空集-子集-差集运算">空集, 子集, 差集运算</h3>
+<p>利用分离公理可以定义空集, 外延公理可以证明空集的唯一性(略).</p>
+<div class="note note-success">
+            <h5 id="def-空集"><em>Def</em> 空集</h5><p>基于任意集合<span class="math inline">\(A\)</span>和性质<spanclass="math inline">\(P(x): x\neq x\)</span>生成的集合, 叫做<strong>空集</strong>, 符号为<spanclass="math inline">\(\empty\)</span>. <span class="math display">\[\empty:=\set{x\in A|x\neq x}\]</span></p>
+          </div>
+<p>子集的定义并不依赖于分离公理(当然分离公理产生的一定是子集),
+只需要集合和逻辑符号即可.</p>
+<div class="note note-success">
+            <h5 id="def-子集和真子集"><em>Def</em> 子集和真子集</h5><p>称一个集合<span class="math inline">\(X\)</span>是集合<spanclass="math inline">\(Y\)</span>的 <strong>子集</strong>, 若<spanclass="math inline">\(X\)</span>中的任何元素一定在<spanclass="math inline">\(Y\)</span>中, 记作<spanclass="math inline">\(X\subset Y\)</span> <span class="math display">\[X\subset Y\Leftrightarrow \forall x (x\in X\Rightarrow x\in Y)\]</span> 如果<span class="math inline">\(Y\)</span>的子集<spanclass="math inline">\(X\)</span>与<spanclass="math inline">\(Y\)</span>不等, 称<spanclass="math inline">\(X\)</span>是<spanclass="math inline">\(Y\)</span>的 <strong>真子集</strong>, 记作<spanclass="math inline">\(X\subsetneq Y\)</span> <spanclass="math display">\[X\subsetneq Y \Leftrightarrow X\subset Y\and X\neq Y\]</span></p>
+          </div>
+<p>如果把<span class="math inline">\(x\in A\)</span>和<span
+class="math inline">\(x\in B\)</span>看成两条开语句,
+则并集和交集有点像转化为命题后的或运算和与运算.
+我们可能还需要一种"非"运算, 但对于集合而言, <span
+class="math inline">\(x\notin A\)</span>只是一条性质, 不足以构成新集合,
+也就是无法找到"万物之集合", 在上面定义绝对的补集运算; 取而代之的是,
+对于<span class="math inline">\(A\)</span>, 如果它具有超集<span
+class="math inline">\(U\)</span>, 就可以定义(相对的)补运算</p>
+<div class="note note-success">
+            <h5 id="def-补集运算"><em>Def</em> 补集运算</h5><p>设<span class="math inline">\(A\)</span>是<spanclass="math inline">\(U\)</span>的子集, 称一个集合<spanclass="math inline">\(\complement_U A\)</span>是<spanclass="math inline">\(A\)</span>在<spanclass="math inline">\(U\)</span>中的 <strong>补集</strong>, 若 <spanclass="math display">\[\complement_U A=\set{x\in U|x\notin A}\]</span></p>
+          </div>
+<p>更普遍地, 如果把子集关系推广为任意情形, 可以定义差集运算</p>
+<div class="note note-success">
+            <h5 id="def-差集运算"><em>Def</em> 差集运算</h5><p>设<span class="math inline">\(A\)</span>, <spanclass="math inline">\(B\)</span>是两个集合, 称一个集合<spanclass="math inline">\(A\backslash B\)</span>是<spanclass="math inline">\(A\)</span>与<spanclass="math inline">\(B\)</span>的 <strong>差集</strong>, 若 <spanclass="math display">\[A\backslash B=\set{x\in A|x\notin B}\]</span></p>
+          </div>
+<h2 id="集合运算的性质">集合运算的性质</h2>
+<p>现在我们有了三种运算: 并集, 交集和差集. 理解了前述的公理化定义后,
+给定三个合法的集合<span class="math inline">\(A,B,C\)</span>,
+则三种运算的二元情形可以被逻辑语句简单地表示:</p>
+<ul>
+<li><span class="math inline">\(\forall x(x\in (A\cup B)\Leftrightarrow
+x\in A \or x\in B)\)</span></li>
+<li><span class="math inline">\(\forall x(x\in (A\cap B)\Leftrightarrow
+x\in A \and x\in B)\)</span></li>
+<li><span class="math inline">\(\forall x(x\in A\backslash
+B\Leftrightarrow x\in A\and x\notin B)\)</span></li>
+</ul>
+<p>它们具有下列运算性质</p>
+<div class="note note-primary">
+            <h5 id="三种集合运算的性质">三种集合运算的性质</h5><ol type="1"><li><p>并集运算具有交换律和结合律</p><ol type="1"><li>交换律: <span class="math inline">\(A\cup B=B\cup A\)</span></li><li>结合律: <span class="math inline">\((A\cup B)\cup C=A\cup (B\cupC)\)</span></li></ol></li><li><p>交集运算具有交换律和结合律</p></li><li><p>并集、交集的混合运算具有分配律 <span class="math display">\[\begin{aligned}(A\cap B)\cup C&amp;=(A\cup C)\cap (B\cup C)\\(A\cup B)\cap C&amp;=(A\cap C)\cup (B\cap C)\end{aligned}\]</span></p></li><li><p>并集或交集与第三集的差集具有 De Morgan 律</p></li></ol><p><span class="math display">\[\begin{aligned}C\backslash (A\cap B)&amp;=(C\backslash A)\cup (C\backslash B)\\C\backslash (A\cup B)&amp;=(C\backslash A)\cap (C\backslash B)\end{aligned}\]</span></p>
+          </div>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%AB%98%E7%AD%89%E5%BE%AE%E7%A7%AF%E5%88%86/" class="category-chain-item">高等微积分</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%AB%98%E7%AD%89%E5%BE%AE%E7%A7%AF%E5%88%86/%E9%80%BB%E8%BE%91%E4%B8%8E%E5%85%AC%E7%90%86%E5%8C%96%E9%9B%86%E5%90%88%E8%AE%BA/" class="category-chain-item">逻辑与公理化集合论</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%9B%86%E5%90%88%E8%AE%BA/" class="print-no-link">#集合论</a>
+      
+        <a href="/tags/Russell-%E6%82%96%E8%AE%BA/" class="print-no-link">#Russell 悖论</a>
+      
+        <a href="/tags/ZF-%E5%85%AC%E7%90%86%E7%B3%BB%E7%BB%9F/" class="print-no-link">#ZF 公理系统</a>
+      
+        <a href="/tags/%E9%9B%86%E5%90%88%E8%BF%90%E7%AE%97/" class="print-no-link">#集合运算</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>逻辑与公理化集合论(02)：从朴素集合论到 ZF 公理系统下的集合论</div>
+      <div>https://notes.rainchan.me/posts/逻辑与公理化集合论(02)：从朴素集合论到 ZF 公理系统下的集合论/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rain Chan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年3月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/%E9%80%BB%E8%BE%91%E4%B8%8E%E5%85%AC%E7%90%86%E5%8C%96%E9%9B%86%E5%90%88%E8%AE%BA(03)%EF%BC%9A%E5%BA%8F%E5%81%B6%E3%80%81%E7%9B%B4%E7%A7%AF%E3%80%81%E5%85%B3%E7%B3%BB%E5%92%8C%E5%87%BD%E6%95%B0/" title="逻辑与公理化集合论(03)：序偶、直积、关系和函数">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">逻辑与公理化集合论(03)：序偶、直积、关系和函数</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/%E9%80%BB%E8%BE%91%E4%B8%8E%E5%85%AC%E7%90%86%E5%8C%96%E9%9B%86%E5%90%88%E8%AE%BA(01)%EF%BC%9A%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" title="逻辑与公理化集合论(01)：数理逻辑的基本语法">
+                        <span class="hidden-mobile">逻辑与公理化集合论(01)：数理逻辑的基本语法</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"karnmarth/blog-comments","repo-id":"R_kgDOMerUGQ","category":"Announcements","category-id":"DIC_kwDOMerUGc4ChX3n","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","theme":"preferred_color_scheme"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

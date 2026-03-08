@@ -1,0 +1,960 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rain Chan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="从孤立整体的微正则系综出发推导子系统的正则与巨正则系综, 定义量子配分函数与 von Neumann 熵, 并系统建立内能、自由能、巨热力学势等热力学函数及其微分关系.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="量子态的系综理论(03)：正则系综、巨正则系综与热力学函数">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E9%87%8F%E5%AD%90%E6%80%81%E7%9A%84%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA(03)%EF%BC%9A%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/">
+<meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="从孤立整体的微正则系综出发推导子系统的正则与巨正则系综, 定义量子配分函数与 von Neumann 熵, 并系统建立内能、自由能、巨热力学势等热力学函数及其微分关系.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-06T10:56:52.000Z">
+<meta property="article:modified_time" content="2026-03-08T13:27:56.532Z">
+<meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="巨正则系综">
+<meta property="article:tag" content="正则系综">
+<meta property="article:tag" content="量子统计">
+<meta property="article:tag" content="统计物理">
+<meta property="article:tag" content="von Neumann 熵">
+<meta property="article:tag" content="热力学函数">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  
+  <title>量子态的系综理论(03)：正则系综、巨正则系综与热力学函数 - Rain Chan&#39;s Notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rain Chan&#39;s Notes</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/ref" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>参考</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="量子态的系综理论(03)：正则系综、巨正则系综与热力学函数"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-06 18:56" pubdate>
+          2026年3月6日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">量子态的系综理论(03)：正则系综、巨正则系综与热力学函数</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2
+id="正则系综newcommandkmathbbknewcommandrmathbbrnewcommandcmathbbcnewcommandbmathbfnewcommandbiboldsymbolnewcommandrank1textrankleft1-rightnewcommanddim1textdimleft1-rightnewcommanddiag1textdiagleft1-rightnewcommanddet1textdetleft1-rightnewcommanddet1leftbeginmatrix-1-endmatrixrightnewcommandset1left-1-rightnewcommandabs1left-1-rightnewcommandnorm1leftleft1rightrightnewcommandtr1texttrleft-1-rightnewcommandptr2texttr_-1-left-2-right">正则系综<span
+class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1
+\right)}\newcommand{\dim}[1]{\text{dim}\left(#1
+\right)}\newcommand{\diag}[1]{\text{diag}\left(#1
+\right)}\newcommand{\det}[1]{\text{det}\left(#1
+\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1
+\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1
+\right\}}\newcommand{\abs}[1]{\left| #1
+\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\newcommand{\tr}[1]{\text{tr}\left(
+#1 \right)}\newcommand{\ptr}[2]{\text{Tr}_{ #1 }\left( #2
+\right)}\)</span></h2>
+<p>实际问题研究的对象往往并不是严格孤立的, 其中比较常见的一类是,
+一个子系统 A 与大热源 B (常见地,
+是外界环境)相互发生能量交换所构成的整体, 而整体是孤立的. 如果假定 A 与 B
+之间的相互作用非常微弱, 那么量子态可以写成直积,
+而能量本征值也可以分为两个子系统单独的能量之和 <span
+class="math display">\[
+\ket{n,m}=\ket{A,n}\otimes\ket{B,m}\qquad E_{n,m}=E_{A,n}+E_{B,m}
+\]</span> 由于整体是孤立的, 可以使用微正则系综处理, 密度算符为 <span
+class="math display">\[
+\hat{\rho}(E)=\frac{1}{\Omega(E)}\sum_{n,m}&#39;\ket{n,m}\bra{n,m}
+\]</span> 其中, <span
+class="math inline">\(\sum&#39;\)</span>表示求和受到约束, 总能量<span
+class="math inline">\(E_{n,m}\)</span>应当在<span
+class="math inline">\(E\sim E+\Delta E\)</span>的能壳中. 对于 B,
+其尺度和本征态的复杂程度远远超出了 A, 我们对它的具体细节也不感兴趣,
+于是可以定义一个 <strong>约化密度算符</strong>, 对 B 的自由度求迹: <span
+class="math display">\[
+\hat{\rho}_A = \frac{1}{\Omega(E)}\sum_n\ket{A,
+n}\bra{A,n}\otimes\ptr{B}{\sum_m&#39;\ket{B,m}\bra{B,m}}
+\]</span> 对 B 态求和的约束是<span
+class="math inline">\(E-E_{A,n}&lt;E_{B,m}&lt;E-E_{A,n}+\Delta
+E\)</span>, 因此"偏迹"运算的结果为<span
+class="math inline">\(\Omega_B(E-E_{A,n})\)</span>. A 的能量远远小于 B
+的能量, 作展开 <span class="math display">\[
+\log(\Omega_B(E-E_{A,n}))\approx\log(\Omega_B(E))-\frac{\partial\log(\Omega_B(E))}{\partial
+E} E_{A,n}
+\]</span> 这里的偏导数正是<span
+class="math inline">\(\beta\)</span>因子, 代回约化密度算符 <span
+class="math display">\[
+\hat{\rho}_A=\frac{\Omega_B(E)}{\Omega(E)}\sum_{n}\ket{A,n}\bra{A,n}e^{-\beta
+E_{A,n}}=\frac{\Omega_B(E)}{\Omega(E)}e^{-\beta\hat{H}_A}
+\]</span> 显然, 约化密度算符对于 A 取偏迹为<span
+class="math inline">\(1\)</span>,
+因此可以仿照经典统计定义出正则配分函数.</p>
+<div class="note note-success">
+            <h5 id="def-量子系统的正则配分函数"><em>Def</em>量子系统的正则配分函数</h5><p><span class="math display">\[Z:=\ptr{A}{e^{-\beta\hat{H}_A}}\]</span></p><p>约化密度算符为 <span class="math display">\[\hat{\rho}_A=\frac{1}{Z}e^{-\beta\hat{H}_A}\]</span></p>
+          </div>
+<h3 id="巨正则系综">巨正则系综</h3>
+<p>巨配分函数只需要加上粒子数算符的部分即可, 与上述推导区别不大.</p>
+<div class="note note-success">
+            <h5 id="def-量子系统的巨配分函数"><em>Def</em> 量子系统的巨配分函数</h5><p><span class="math display">\[\Xi:=\ptr{A}{\exp{(-\beta\hat{H}_A-\alpha\hat{N})}}\]</span></p><p>约化密度算符为 <span class="math display">\[\hat{\rho}_A=\frac{1}{\Xi}e^{-\beta\hat{H}_A-\alpha\hat{N}}\]</span></p>
+          </div>
+<h2 id="热力学函数">热力学函数</h2>
+<h3 id="热力学熵">热力学熵</h3>
+<div class="note note-success">
+            <h5 id="def-von-neumann-熵"><em>Def</em> von Neumann 熵</h5><p><span class="math display">\[S:=\tr{-\hat{\rho}\log\hat{\rho}}\]</span></p>
+          </div>
+<p>在对角表象下, von Neumann 熵可以写为 <span class="math display">\[
+S=-\sum_np_n\log p_n
+\]</span> 与信息熵的定义非常相似. 与 Boltzmann 定义不同的是, von Neumann
+熵的定义不依赖于系综, 如果代入等概率原理<span
+class="math inline">\(p_n=1/\Omega\)</span>, 得到<span
+class="math inline">\(S=\log\Omega\)</span>, 回归到依赖于微正则系综的
+Boltzmann 定义. 或者说, 如果我们迫使熵函数达到极大,
+那么可以导出等概率原理, 因此最大熵原理和等概率原理是等价的.</p>
+<p>熵的最小值为<span class="math inline">\(0\)</span>,
+当且仅当纯态下取得. 在纯态中, <span
+class="math inline">\(p_n=1\)</span>或<span
+class="math inline">\(0\)</span>, 熵为<span
+class="math inline">\(0\)</span>, 从信息论的角度而言,
+表明我们对量子系统的了解程度达到上限, 剩下的不确定性都是纯量子的,
+由态叠加和对易关系等导致.</p>
+<p>利用对角表象可以较易地证明 von Neumann 熵的广延性.</p>
+
+    <div class="fold">
+      <div class="fold-title fold-light collapsed" data-toggle="collapse" href="#collapse-b1bf73c0" role="button" aria-expanded="false" aria-controls="collapse-b1bf73c0">
+        <div class="fold-arrow">▶</div>Proof
+      </div>
+      <div class="fold-collapse collapse" id="collapse-b1bf73c0">
+        <div class="fold-content">
+          <p>考虑两个无关联的子系统 A 和 B, A 处于本征态<spanclass="math inline">\(n\)</span>的概率为<spanclass="math inline">\(p_{A,n}\)</span>, B 处于本征态<spanclass="math inline">\(m\)</span>的概率为<spanclass="math inline">\(p_{B,m}\)</span>, 则从整体来看, 本征态为<spanclass="math inline">\(\ket{n}\otimes\ket{m}\)</span>,整体处于该本征态的概率为<span class="math inline">\(p_{A,n}\cdotp_{B,m}\)</span>, 熵为 <span class="math display">\[\begin{aligned}S&amp;=-\sum_n\sum_m p_{A,n}p_{B,m}\log(p_{A,n}p_{B,m})\\&amp;=-\sum_n\sum_m p_{A,n}p_{B,m}[\log(p_{A,n})+\log(p_{B,m})]\\&amp;=-\sum_n p_{A,n}\log p_{A,n}\sum_m p_{B,m} -\sum_n p_{A,n} \sum_mp_{B,m}\log p_{B,m}\\&amp;=-\sum_n p_{A,n}\log p_{A,n}-\sum_m p_{B,m}\log p_{B,m}\end{aligned}\]</span> 正是两个子系统各自的熵之和, von Neumann 熵的广延性得证.</p>
+        </div>
+      </div>
+    </div>
+<h3 id="微正则系综的热力学函数">微正则系综的热力学函数</h3>
+<p>微正则系综是确定了总能量的系综,
+那么温度就需要用能量和状态数(能壳的相体积)导出 <span
+class="math display">\[
+\frac{1}{T}:=\frac{\partial\log(\Omega(E))}{\partial E}
+\]</span></p>
+<h3 id="正则系综的热力学函数">正则系综的热力学函数</h3>
+<p>正则系综把温度当作已知参量<span class="math inline">\(\beta\)</span>,
+内能需要导出. <span class="math display">\[
+U=\tr{\hat{H}\hat{\rho}}=\frac{1}{Z}\tr{\hat{H}e^{-\beta\hat{H}}}
+\]</span> 多出来的<span
+class="math inline">\(\hat{H}\)</span>可以由<span
+class="math inline">\(\tr{e^{-\beta\hat{H}}}\)</span>对<span
+class="math inline">\(\beta\)</span>求偏导得到, 因此内能公式为 <span
+class="math display">\[
+U=-\frac{1}{Z}\frac{\partial Z}{\partial\beta}
+\]</span> 熵可以从 von Neumann 定义推出显含配分函数的表达式,
+具体细节略去 <span class="math display">\[
+S=\log Z - \beta \frac{\partial\log Z}{\partial\beta}
+\]</span> 有了内能和熵, 就可以定义(Helmholtz)自由能 <span
+class="math display">\[
+F:=U-S/\beta=-\frac{1}{\beta}\log Z
+\]</span> 考虑自由能在温度不变、广义坐标变动下的微分 <span
+class="math display">\[
+dF|_\beta=\tr{\hat{\rho}\frac{\partial\hat{H}}{\partial y}}dy
+\]</span> 等温下自由能的变化就是功, 其系数是广义坐标<span
+class="math inline">\(y\)</span>对应的广义力 <span
+class="math display">\[
+Y=\tr{\hat{\rho}\frac{\partial\hat{H}}{\partial y}}
+\]</span> 自由能<span class="math inline">\(F(y,T)\)</span>是对内能<span
+class="math inline">\(U(y,S)\)</span>的 Legendre 变换,
+此时对另一个自变量继续进行 Legendre 变换, 得到自由焓(Gibbs 自由能) <span
+class="math display">\[
+G:=F-Yy
+\]</span> 自由焓的自然自变量为<span class="math inline">\(Y,T\)</span>,
+在等温等压(等广义力)过程, 自由焓不变.</p>
+<p>现在考虑熵的全微分 <span class="math display">\[
+\begin{aligned}
+dS&amp;=\frac{dZ}{Z}+\beta dU+Ud\beta
+\\&amp;=-\frac{1}{Z}\tr{ e^{-\beta\hat{H}} (\beta d\hat{H}
++\hat{H}d\beta)} + \beta dU + Ud\beta
+\\&amp;=-\beta\tr{\hat{\rho}\frac{\partial\hat{H}}{\partial
+y}}dy-Ud\beta+\beta dU + Ud\beta
+\\&amp;= -\beta Ydy + \beta dU
+\end{aligned}
+\]</span> 和经典的全微分关系比较, <span
+class="math inline">\(\beta\)</span>因子正好是温度的倒数<span
+class="math inline">\(1/T\)</span>.</p>
+<h3 id="巨正则系综的热力学函数">巨正则系综的热力学函数</h3>
+<p><span
+class="math inline">\(\hat{\rho}=e^{-\beta\hat{H}-\alpha\hat{N}}/\Xi\)</span>,
+其中<span class="math inline">\(\alpha=-\beta\mu\)</span>.
+内能和平均粒子数为 <span class="math display">\[
+U=-\frac{\partial\log\Xi}{\partial\beta}\qquad
+N=-\frac{\partial\log\Xi}{\partial\alpha}
+\]</span> 熵为 <span class="math display">\[
+S=\log\Xi +\beta U +\alpha N
+\]</span> 其中第一项被定义为巨热力学势 <span class="math display">\[
+J:=U-TS-\mu N=-\frac{1}{\beta}\log\Xi
+\]</span> 广义力的计算公式以及内能微分关系为 <span
+class="math display">\[
+Y:=\tr{\hat{\rho}\frac{\partial(\hat{H}-\mu\hat{N})}{\partial y}}\qquad
+dU=TdS+Ydy+\mu dN
+\]</span></p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%87%8F%E5%AD%90%E7%BB%9F%E8%AE%A1/" class="category-chain-item">量子统计</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%87%8F%E5%AD%90%E7%BB%9F%E8%AE%A1/%E9%87%8F%E5%AD%90%E6%80%81%E7%9A%84%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA/" class="category-chain-item">量子态的系综理论</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%B7%A8%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/" class="print-no-link">#巨正则系综</a>
+      
+        <a href="/tags/%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/" class="print-no-link">#正则系综</a>
+      
+        <a href="/tags/%E9%87%8F%E5%AD%90%E7%BB%9F%E8%AE%A1/" class="print-no-link">#量子统计</a>
+      
+        <a href="/tags/%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/" class="print-no-link">#统计物理</a>
+      
+        <a href="/tags/von-Neumann-%E7%86%B5/" class="print-no-link">#von Neumann 熵</a>
+      
+        <a href="/tags/%E7%83%AD%E5%8A%9B%E5%AD%A6%E5%87%BD%E6%95%B0/" class="print-no-link">#热力学函数</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>量子态的系综理论(03)：正则系综、巨正则系综与热力学函数</div>
+      <div>https://notes.rainchan.me/posts/量子态的系综理论(03)：正则系综/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rain Chan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年3月6日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/%E9%80%BB%E8%BE%91%E4%B8%8E%E5%85%AC%E7%90%86%E5%8C%96%E9%9B%86%E5%90%88%E8%AE%BA(01)%EF%BC%9A%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/" title="逻辑与公理化集合论(01)：数理逻辑的基本语法">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">逻辑与公理化集合论(01)：数理逻辑的基本语法</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/%E9%87%8F%E5%AD%90%E6%80%81%E7%9A%84%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA(02)%EF%BC%9A%E5%BE%AE%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/" title="量子态的系综理论(02)：微正则系综">
+                        <span class="hidden-mobile">量子态的系综理论(02)：微正则系综</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"karnmarth/blog-comments","repo-id":"R_kgDOMerUGQ","category":"Announcements","category-id":"DIC_kwDOMerUGc4ChX3n","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","theme":"preferred_color_scheme"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

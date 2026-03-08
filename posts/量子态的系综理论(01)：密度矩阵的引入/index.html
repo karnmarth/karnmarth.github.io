@@ -1,0 +1,906 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rain Chan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="本文从经典相空间的 Liouville 定理出发, 引入密度算符以便量子统计内容的展开, 并详细证明了密度矩阵的性质及其随时间的动力学演化(von Neumann 方程).">
+<meta property="og:type" content="article">
+<meta property="og:title" content="量子态的系综理论(01)：密度矩阵的引入">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E9%87%8F%E5%AD%90%E6%80%81%E7%9A%84%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA(01)%EF%BC%9A%E5%AF%86%E5%BA%A6%E7%9F%A9%E9%98%B5%E7%9A%84%E5%BC%95%E5%85%A5/">
+<meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="本文从经典相空间的 Liouville 定理出发, 引入密度算符以便量子统计内容的展开, 并详细证明了密度矩阵的性质及其随时间的动力学演化(von Neumann 方程).">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-05T06:07:37.000Z">
+<meta property="article:modified_time" content="2026-03-05T14:20:14.005Z">
+<meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="量子统计">
+<meta property="article:tag" content="统计物理">
+<meta property="article:tag" content="密度算符">
+<meta property="article:tag" content="von Neumann 方程">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  
+  <title>量子态的系综理论(01)：密度矩阵的引入 - Rain Chan&#39;s Notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rain Chan&#39;s Notes</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/ref" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>参考</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="量子态的系综理论(01)：密度矩阵的引入"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-05 14:07" pubdate>
+          2026年3月5日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          11 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">量子态的系综理论(01)：密度矩阵的引入</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2
+id="经典统计的基本框架newcommandkmathbbknewcommandrmathbbrnewcommandcmathbbcnewcommandbmathbfnewcommandbiboldsymbolnewcommandrank1textrankleft1-rightnewcommanddim1textdimleft1-rightnewcommanddiag1textdiagleft1-rightnewcommanddet1textdetleft1-rightnewcommanddet1leftbeginmatrix-1-endmatrixrightnewcommandset1left-1-rightnewcommandabs1left-1-rightnewcommandnorm1leftleft1rightrightnewcommandtr1texttr-1-newcommandqmean1langle-1-rangle">经典统计的基本框架<span
+class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1
+\right)}\newcommand{\dim}[1]{\text{dim}\left(#1
+\right)}\newcommand{\diag}[1]{\text{diag}\left(#1
+\right)}\newcommand{\det}[1]{\text{det}\left(#1
+\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1
+\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1
+\right\}}\newcommand{\abs}[1]{\left| #1
+\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\newcommand{\tr}[1]{\text{tr}(
+#1 )}\newcommand{\qmean}[1]{\langle #1 \rangle}\)</span></h2>
+<p>在经典统计中, 对于一个宏观系统,
+我们无法对相空间的每个代表点精确地追踪其轨迹, 因此,
+我们引入了概率密度分布函数<span
+class="math inline">\(\rho(p,q,t)\)</span>, 其中<span
+class="math inline">\(p\)</span>和<span
+class="math inline">\(q\)</span>是对全体<span
+class="math inline">\(N\)</span>个粒子的广义动量和广义坐标的缩写.
+精确轨迹相当于特殊情形, 此时密度分布退化为<span
+class="math inline">\(6N\)</span>维空间中的 Dirac 函数.</p>
+<p>经典统计的基础之一是 Hamilton 动力学中的 Liouville 定理. Liouville
+定理认为, 如果把全体代表点看作是相空间中的流体, 那么流体密度<span
+class="math inline">\(\rho\)</span>对时间<span
+class="math inline">\(t\)</span>的全导数为<span
+class="math inline">\(0\)</span>, 即相流体具有不可压缩性,
+随着相流体运动时, 观测到的密度不变: <span class="math display">\[
+\frac{d\rho}{dt}=0
+\]</span> 由此, 借助 Poisson 括号可以给出<span
+class="math inline">\(\rho\)</span>的动力学方程: <span
+class="math display">\[
+\frac{\partial\rho}{\partial t}=\set{H,\rho}
+\]</span> 在<span class="math inline">\(t\)</span>时刻,
+一个动力学量<span class="math inline">\(A(p,q)\)</span>的宏观期望为
+<span class="math display">\[
+\langle A(t)\rangle=\int d^{3N}q d^{3N}p A(p,q)\rho(p,q,t)
+\]</span></p>
+<h2 id="密度矩阵及其基本性质">密度矩阵及其基本性质</h2>
+<p>在量子力学中, 一个动力学量被一个算符<span class="math inline">\(\hat
+A\)</span>代替, 而概率通常至少有两种引入方式. 一种是态叠加,
+即一个纯态展开为一组正交归一完备纯态的线性组合; 另一种是混合态,
+即不同的纯态以经典概率叠加.</p>
+<p>可以先考察纯态情形, 并且不进行任何展开, 就用<span
+class="math inline">\(\ket\Psi\)</span>表示, 则<span
+class="math inline">\(\hat{A}\)</span>的期望为 <span
+class="math display">\[
+\langle\hat A\rangle = \bra\Psi\hat A\ket\Psi
+\]</span> 如果仿照经典期望公式, 那么上述结果需要被表为<span
+class="math inline">\(\rho\)</span>和<span
+class="math inline">\(\hat{A}\)</span>的某种乘积. <span
+class="math inline">\(\rho\)</span>作为动力学量,
+其量子对应应该也是一个算符而非简单的标量, 可以考虑定义为投影算符<span
+class="math inline">\(\ket\Psi\bra\Psi\)</span>,
+用取迹运算代替相体积积分, 从而可观测量的期望为 <span
+class="math display">\[
+\qmean{\hat A} = \tr{\hat A\hat\rho}=\tr{\hat{\rho}\hat{A}}
+\]</span> 另一种情形是混态. 假如存在一组态<span
+class="math inline">\(\set{\ket{\psi_n}}\)</span>, 系统处于态<span
+class="math inline">\(\ket{\psi_n}\)</span>的概率为<span
+class="math inline">\(p_n\)</span>, 则可观测量<span
+class="math inline">\(\hat A\)</span>的期望为 <span
+class="math display">\[
+\qmean{\hat{A}}=\sum_n p_n \bra{\psi_n}\hat{A}\ket{\psi_n}
+\]</span> 这时候也不难保持量子可观测量期望公式的形式, 定义混态的密度算符
+<span class="math display">\[
+\hat\rho:=\sum_n p_n\ket{\psi_n}\bra{\psi_n}
+\]</span> 显然, 纯态密度算符不过是混态密度算符的特殊情形. 如果把<span
+class="math inline">\(\set{\ket{\psi_n}}\)</span>在正交完备基<span
+class="math inline">\(\set{\ket{\phi_m}}\)</span>上展开, 则 <span
+class="math display">\[
+\hat{\rho}=\sum_{m, m&#39;} \rho_{mm&#39;}
+\ket{\phi_m}\bra{\phi_{m&#39;}}
+\]</span> 这表明<span
+class="math inline">\(\hat{\rho}\)</span>在不同的基下未必是对角化的.</p>
+<div class="note note-primary">
+            <h5 id="密度算符的性质">密度算符的性质</h5><ol type="1"><li>厄密性: <spanclass="math inline">\(\hat\rho^\dagger=\hat{\rho}\)</span>.从定义出发即可证明, 并且厄密性说明<spanclass="math inline">\(\hat{\rho}\)</span>一定可以用正交归一完备基精确对角化.</li><li>迹归一性: <span class="math inline">\(\tr{\hat{\rho}}=1\)</span>,只需要考虑恒等算符作为动力学量在<spanclass="math inline">\(\hat{\rho}\)</span>上的期望值.</li><li>半正定性: <spanclass="math inline">\(\hat{\rho}\)</span>的全部本征值非负,且小于等于<span class="math inline">\(1\)</span>.</li><li><span class="math inline">\(\tr{\hat{\rho}^2}\le1\)</span>,当且仅当纯态时取等.</li></ol><p>第3和第4条证明见下.</p>
+          </div>
+
+    <div class="fold">
+      <div class="fold-title fold-light collapsed" data-toggle="collapse" href="#collapse-4b39064d" role="button" aria-expanded="false" aria-controls="collapse-4b39064d">
+        <div class="fold-arrow">▶</div>Proof
+      </div>
+      <div class="fold-collapse collapse" id="collapse-4b39064d">
+        <div class="fold-content">
+          <p>不妨设<span class="math inline">\(\hat{\rho}\)</span>的本征矢为<spanclass="math inline">\(\set{\ket{\phi_m}}\)</span>, 则 <spanclass="math display">\[\bra{\phi_m}\hat{\rho}\ket{\phi_m}=\lambda_m=\sum_np_n|\braket{\phi_m}{\psi_n}|^2\]</span> 由于<spanclass="math inline">\(0\le|\braket{\phi_m}{\psi_n}|^2\le1\)</span>,<span class="math inline">\(p_n\ge 0\)</span>, 所以<spanclass="math inline">\(\lambda_m\)</span>非负, 且<spanclass="math inline">\(\lambda_m\le\sum_n p_n=1\)</span>, 性质3得证.</p><p>本征值的平方和满足 <span class="math display">\[\sum_m \lambda_m^2\le(\sum_m\lambda_m)^2=1\]</span> 取等条件为维数为<span class="math inline">\(1\)</span>,或者<spanclass="math inline">\(2\lambda_m\lambda_{m&#39;}=0\)</span>对任意<spanclass="math inline">\(m\neq m&#39;\)</span>成立. 对于后者,由于本征值求和限制为<span class="math inline">\(1\)</span>(性质2), <spanclass="math inline">\(\lambda\)</span>必然至少存在一个非零值,从而任何其它的本征值取<span class="math inline">\(0\)</span>,唯一的非零本征值取<span class="math inline">\(1\)</span>. 总而言之,<span class="math inline">\(\hat{\rho}^2\)</span>的迹取<spanclass="math inline">\(1\)</span>必然导致系统不发生混合,处于确定的量子态上.</p><p>反之, 如果系统处于纯态<spanclass="math inline">\(\ket{\Psi}\)</span>, 则<spanclass="math inline">\(\ket{\Psi}\)</span>必然是<spanclass="math inline">\(\hat{\rho}\)</span>的本征值为<spanclass="math inline">\(1\)</span>的本征矢, 由于本征值求和为<spanclass="math inline">\(1\)</span>, 如果存在其它本征值,则其它本征值为<span class="math inline">\(0\)</span>,本征值的平方和为<span class="math inline">\(1\)</span>. 性质4得证.</p>
+        </div>
+      </div>
+    </div>
+<p>密度算符满足的动力学方程为 <span class="math display">\[
+\frac{\partial\hat{\rho}}{\partial t}=\sum_n p_n\frac{\partial}{\partial
+t}(\ket{\psi_n}\bra{\psi_n})
+\]</span> 代入 Schrodinger 方程(以及其厄密共轭)可得 <span
+class="math display">\[
+\frac{\partial\hat{\rho}}{\partial t}=i\sum_n
+p_n\hat{H}\ket{\psi_n}\bra{\psi_n}-i\sum_n p_n
+\ket{\psi_n}\bra{\psi_n}\hat{H}
+\]</span> 整理得到所谓的 <strong>von Neumann 方程</strong>.</p>
+<div class="note note-info">
+            <h5 id="von-neumann-方程">von Neumann 方程</h5><p>密度算符在动力学演化中满足 <span class="math display">\[i\frac{\partial\hat{\rho}}{\partial t}=[\hat{H}, \hat{\rho}]\]</span></p>
+          </div>
+<p>物理上, von Neumann 方程正是 Liouville 方程的正则量子化, Poisson
+括号<span class="math inline">\(\set{\cdot,\cdot}\)</span>被替换为<span
+class="math inline">\(-i[\cdot,\cdot]\)</span>.</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%87%8F%E5%AD%90%E7%BB%9F%E8%AE%A1/" class="category-chain-item">量子统计</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%87%8F%E5%AD%90%E7%BB%9F%E8%AE%A1/%E9%87%8F%E5%AD%90%E6%80%81%E7%9A%84%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA/" class="category-chain-item">量子态的系综理论</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%87%8F%E5%AD%90%E7%BB%9F%E8%AE%A1/" class="print-no-link">#量子统计</a>
+      
+        <a href="/tags/%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/" class="print-no-link">#统计物理</a>
+      
+        <a href="/tags/%E5%AF%86%E5%BA%A6%E7%AE%97%E7%AC%A6/" class="print-no-link">#密度算符</a>
+      
+        <a href="/tags/von-Neumann-%E6%96%B9%E7%A8%8B/" class="print-no-link">#von Neumann 方程</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>量子态的系综理论(01)：密度矩阵的引入</div>
+      <div>https://notes.rainchan.me/posts/量子态的系综理论(01)：密度矩阵的引入/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rain Chan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年3月5日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/%E9%87%8F%E5%AD%90%E6%80%81%E7%9A%84%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA(02)%EF%BC%9A%E5%BE%AE%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/" title="量子态的系综理论(02)：微正则系综">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">量子态的系综理论(02)：微正则系综</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/%E5%9C%B0%E7%90%83%E6%B5%81%E4%BD%93%E7%9A%84%E6%95%B0%E5%80%BC%E6%A8%A1%E6%8B%9F%E4%B8%8EAI%E9%A2%84%E6%B5%8B(2)%EF%BC%9AWRF%20%E7%9C%9F%E5%AE%9E%E6%A8%A1%E6%8B%9F/" title="地球流体的数值模拟与AI预测(2)：WRF 真实模拟">
+                        <span class="hidden-mobile">地球流体的数值模拟与AI预测(2)：WRF 真实模拟</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"karnmarth/blog-comments","repo-id":"R_kgDOMerUGQ","category":"Announcements","category-id":"DIC_kwDOMerUGc4ChX3n","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","theme":"preferred_color_scheme"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

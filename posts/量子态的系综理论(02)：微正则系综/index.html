@@ -1,0 +1,925 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rain Chan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="从经典各态遍历假设出发引入微正则系综, 并推广到孤立量子系统, 讨论微正则密度算符的构造及本征态热化假设与量子热化的关系">
+<meta property="og:type" content="article">
+<meta property="og:title" content="量子态的系综理论(02)：微正则系综">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E9%87%8F%E5%AD%90%E6%80%81%E7%9A%84%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA(02)%EF%BC%9A%E5%BE%AE%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/">
+<meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="从经典各态遍历假设出发引入微正则系综, 并推广到孤立量子系统, 讨论微正则密度算符的构造及本征态热化假设与量子热化的关系">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-05T12:19:10.000Z">
+<meta property="article:modified_time" content="2026-03-08T13:16:29.274Z">
+<meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="微正则系综">
+<meta property="article:tag" content="量子统计">
+<meta property="article:tag" content="统计物理">
+<meta property="article:tag" content="密度算符">
+<meta property="article:tag" content="各态遍历假设">
+<meta property="article:tag" content="本征态热化假设">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  
+  <title>量子态的系综理论(02)：微正则系综 - Rain Chan&#39;s Notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rain Chan&#39;s Notes</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/ref" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>参考</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="量子态的系综理论(02)：微正则系综"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-05 20:19" pubdate>
+          2026年3月5日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">量子态的系综理论(02)：微正则系综</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h2
+id="经典统计中的各态遍历newcommandkmathbbknewcommandrmathbbrnewcommandcmathbbcnewcommandbmathbfnewcommandbiboldsymbolnewcommandrank1textrankleft1-rightnewcommanddim1textdimleft1-rightnewcommanddiag1textdiagleft1-rightnewcommanddet1textdetleft1-rightnewcommanddet1leftbeginmatrix-1-endmatrixrightnewcommandset1left-1-rightnewcommandabs1left-1-rightnewcommandnorm1leftleft1rightrightnewcommandtr1texttrleft-1-rightnewcommandqmean1leftlangle-1-rightrangle">经典统计中的各态遍历<span
+class="math inline">\(\newcommand{\K}{\mathbb{K}}\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\b}{\mathbf}\newcommand{\bi}{\boldsymbol}\newcommand{\rank}[1]{\text{rank}\left(#1
+\right)}\newcommand{\dim}[1]{\text{dim}\left(#1
+\right)}\newcommand{\diag}[1]{\text{diag}\left(#1
+\right)}\newcommand{\det}[1]{\text{det}\left(#1
+\right)}\newcommand{\Det}[1]{\left|\begin{matrix} #1
+\end{matrix}\right|}\newcommand{\set}[1]{\left\{ #1
+\right\}}\newcommand{\abs}[1]{\left| #1
+\right|}\newcommand{\norm}[1]{\left|\!\left|#1\right|\!\right|}\newcommand{\tr}[1]{\text{tr}\left(
+#1 \right)}\newcommand{\qmean}[1]{\left\langle #1
+\right\rangle}\)</span></h2>
+<p>仍然需要从经典统计出发. 在典型的经典测量中,
+测量时间远远长于微观散射的时间尺度, 因此, 测量不仅可以看作时间平均,
+而且积分上限可以近似为无穷大: <span class="math display">\[
+\bar{A}(t_0)=\frac{1}{T} \int_{t_0}^{t_0+T} dtdpdq
+A(p,q)\rho(p,q,t)\qquad (T\to+\infty)
+\]</span> 对于统计物理研究的对象, 精确计算时间积分往往是很困难的, 为此,
+往往构造一个 <strong>系综平均(ensemble average)</strong>
+来描述物理量的期望 <span class="math display">\[
+\qmean{A(t_0)}_{ens}=\int dpdq A(p,q)\rho_{ens}(p,q;t_0)
+\]</span> 为了使系综平均等价于时间平均, 一种自然的选取方案是 <span
+class="math display">\[
+\rho_{ens}(p,q;t_0)=\lim_{T\to+\infty} \frac{1}{T}\int_{t_0}^{t_0+T}
+\rho(p,q,t)dt
+\]</span> 应该注意到, 初始条件仍显含在<span
+class="math inline">\(\rho_{ens}\)</span>中. 给定不同的初始条件(e.g.,
+围绕<span class="math inline">\((p_1,q_1)\)</span>点和<span
+class="math inline">\((p_2,q_2)\)</span>点的高斯分布), <span
+class="math inline">\(\rho_{ens}\)</span>完全可能得出两个不同的结果,
+系统因而不存在热平衡态. 为了解决这个问题, 需要<span
+class="math inline">\(\rho_{ens}\)</span>满足平稳条件 <span
+class="math display">\[
+\frac{\partial\rho_{ens}}{\partial t_0}=\set{H,\rho_{ens}}= 0
+\]</span> 平稳的充分条件很容易给出, 如果<span
+class="math inline">\(\rho_{ens}(p,q;t_0)\)</span>可以表为只含<span
+class="math inline">\(H\)</span>的函数<span
+class="math inline">\(f(H)\)</span>, 则系统平稳. 另一方面, 如果系统平稳,
+那么<span class="math inline">\(\rho_{ens}\)</span>是动力学守恒量,
+那么它只能显含<span class="math inline">\(H\)</span>了. 可见,
+平稳的充要条件为<span
+class="math inline">\(\rho_{ens}=f(H)\)</span>.</p>
+<div class="note note-warning">
+            <h5 id="remark"><em>Remark</em></h5><p>应该指出, 总动量、总角动量等即便守恒, 也不属于内能的范畴.动力学守恒量越多, 意味着系统越接近可积系统.因此在统计力学讨论的典型系统中, 通常假设唯一的动力学守恒量是能量.</p>
+          </div>
+<p><span class="math inline">\(\rho_{ens}=f(H)\)</span>正好对应于
+<strong>各态遍历假设(ergodic hypothesis)</strong>.</p>
+<div class="note note-info">
+            <h5 id="hypothesis-各态遍历假设"><em>Hypothesis</em> 各态遍历假设</h5><p>一个处于孤立状态的宏观系统, 从<strong>几乎任意</strong>初态出发,其相空间的动力学轨迹在足够长的时间内,会均匀覆盖<strong>几乎整个</strong>能量曲面,落在一个子区域的时间占比等于该子区域占能量壳层的体积比.</p>
+          </div>
+<p>各态遍历假设或者<span
+class="math inline">\(\rho_{ens}=f(E)\)</span>定义了微正则系综(microcanonical
+ensemble), 即 <span class="math display">\[
+\rho_{ens}(p,q)=\begin{cases}
+\displaystyle\left[\Delta E \int dpdq \delta(E-H(p,q))
+\right]^{-1}  &amp; E&lt;H&lt;E+\Delta E
+\\
+0 &amp; \text{otherwise}
+\end{cases}
+\]</span></p>
+<h2
+id="孤立量子系统的遍历性与本征态热化">孤立量子系统的遍历性与本征态热化</h2>
+<p>可以通过类比给出孤立量子系统的微正则系综形式.
+经典系统不存在额外守恒量等价于量子系统的 Hamiltonian 严格非简并.
+从而密度算符为 <span class="math display">\[
+\hat{\rho}_{ens}(E)=\frac{1}{\Omega(E)}[\theta(\hat{H}-E) -
+\theta(\hat{H}-E-\Delta E)]
+\]</span> 其中<span class="math inline">\(\Omega(E)\)</span>是能壳体积,
+<span class="math inline">\(\theta\)</span>是 Heaviside 阶跃函数.</p>
+<div class="note note-warning">
+            <h5 id="remark"><em>Remark</em></h5><p>对于算符而言, 其阶跃函数的结果可以用谱分解表示 <spanclass="math display">\[\theta(\hat{H}-E)=\sum_{n}\theta(E_n-E)\ket{n}\bra{n}\]</span></p>
+          </div>
+<p>可以验证, 推广而来的系综密度算符仍具有等概率意义,
+系统会等概率地处于能量在能壳中的那些本征态.</p>
+<p>现在的问题在于, 这样的热化混态无法通过幺正演化从纯态得到.
+考虑态和密度算符分别为 <span class="math display">\[
+\ket{\psi(t)}=\sum_n C_n e^{-iE_nt} \ket{n}\quad
+\hat{\rho}(t)=\sum_{m,n}C_n C_m^* e^{i(E_m-E_n)t}\ket{n}\bra{m}
+\]</span> 即便将非对角元通过相位平均消去, 得到的结果为<span
+class="math inline">\(\hat{\rho}(t)=\sum_{n}|C_n|^2
+\ket{n}\bra{n}\)</span>, 它并不满足等概率假设.
+这个态并不是热化后的态.</p>
+<p>如果换成可观测量呢? 对于可观测量<span
+class="math inline">\(\hat{A}\)</span>, 其期望的时间平均为 <span
+class="math display">\[
+\overline{\bra{\psi(t)}\hat{A}\ket{\psi(t)}}=\sum_n |C_n|^2 A_{nn} +
+\sum_{m\neq n}C_n C_m^* A_{mn} \overline{\exp(i(E_m-E_n)t)}
+\]</span> 将复指数项的平均取为<span class="math inline">\(0\)</span>,
+只剩下对角项. 如果希望上述结果回到微正则系综的系综平均, 则 <span
+class="math display">\[
+\sum_n |C_n|^2 A_{nn} = \tr{\hat{\rho}_{ens}(E) \hat{A}}
+\]</span> 所谓的 <strong>本征态热化假设(eigenstate thermalization
+hypothesis, ETH)</strong>
+就是假设每个本征态的矩阵元都能独自体现出热化的性质, 即<span
+class="math inline">\(A_{nn}=\tr{\hat{\rho}_{ens}(E_n)\hat{A}}\)</span>,
+即使能量本征态<span class="math inline">\(\ket{n}\)</span>单独出现,
+不发生态叠加或者态混合, <span
+class="math inline">\(\hat{A}\)</span>的期望仍能给出其在相应能量<span
+class="math inline">\(E_n\)</span>的微正则系综下的系综平均值.
+下面用更严格的语言叙述 ETH:</p>
+<div class="note note-info">
+            <h5 id="hypothesis-本征态热化假设"><em>Hypothesis</em>本征态热化假设</h5><p>考虑一个孤立且量子混沌(不可积)的多体系统, 其 Hamiltonian 为<spanclass="math inline">\(\hat{H}\)</span>且严格非简并, 本征态为<spanclass="math inline">\(\ket{n}\)</span>, 对应能量本征值为<spanclass="math inline">\(E_n\)</span>. 若该系统满足 ETH,则对于任意局域可观测量<span class="math inline">\(\hat{A}\)</span>,在热力学极限下(粒子数趋于无穷大), 其矩阵元<spanclass="math inline">\(A_{mn}\)</span>可以表为如下形式<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><spanclass="hint--top hint--rounded"aria-label="取 Boltzmann 常量和约化 Planck 常量为1的自然单位制.">[1]</span></a></sup>.<span class="math display">\[A_{mn}=\mathcal{O}(\bar{E})\delta_{mn} + e^{-S(\bar{E})/2}f(\bar{E},\omega) R_{mn}\]</span> 其中, <spanclass="math inline">\(\bar{E}=(E_m+E_n)/2\)</span>; <spanclass="math inline">\(\mathcal{O}(\bar{E}) =\tr{\hat{\rho}_{ens}(\bar{E})\hat{A}}\)</span>; <spanclass="math inline">\(S(\bar{E})\)</span>为系综的热力学熵; <spanclass="math inline">\(f\)</span>是关于其参数的光滑函数,代表系统的动力学响应特性; <spanclass="math inline">\(R_{mn}\)</span>是实或复的随机变量, 均值为<spanclass="math inline">\(0\)</span>, 方差为<spanclass="math inline">\(1\)</span>.</p>
+          </div>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1" class="footnote-text"><span>取 Boltzmann 常量和约化
+Planck 常量为1的自然单位制.
+<a href="#fnref:1" rev="footnote" class="footnote-backref">
+↩︎</a></span></span>
+</li>
+</ol>
+</div>
+</section>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%87%8F%E5%AD%90%E7%BB%9F%E8%AE%A1/" class="category-chain-item">量子统计</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%87%8F%E5%AD%90%E7%BB%9F%E8%AE%A1/%E9%87%8F%E5%AD%90%E6%80%81%E7%9A%84%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA/" class="category-chain-item">量子态的系综理论</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E5%BE%AE%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/" class="print-no-link">#微正则系综</a>
+      
+        <a href="/tags/%E9%87%8F%E5%AD%90%E7%BB%9F%E8%AE%A1/" class="print-no-link">#量子统计</a>
+      
+        <a href="/tags/%E7%BB%9F%E8%AE%A1%E7%89%A9%E7%90%86/" class="print-no-link">#统计物理</a>
+      
+        <a href="/tags/%E5%AF%86%E5%BA%A6%E7%AE%97%E7%AC%A6/" class="print-no-link">#密度算符</a>
+      
+        <a href="/tags/%E5%90%84%E6%80%81%E9%81%8D%E5%8E%86%E5%81%87%E8%AE%BE/" class="print-no-link">#各态遍历假设</a>
+      
+        <a href="/tags/%E6%9C%AC%E5%BE%81%E6%80%81%E7%83%AD%E5%8C%96%E5%81%87%E8%AE%BE/" class="print-no-link">#本征态热化假设</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>量子态的系综理论(02)：微正则系综</div>
+      <div>https://notes.rainchan.me/posts/量子态的系综理论(02)：微正则系综/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rain Chan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年3月5日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/%E9%87%8F%E5%AD%90%E6%80%81%E7%9A%84%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA(03)%EF%BC%9A%E6%AD%A3%E5%88%99%E7%B3%BB%E7%BB%BC/" title="量子态的系综理论(03)：正则系综、巨正则系综与热力学函数">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">量子态的系综理论(03)：正则系综、巨正则系综与热力学函数</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/%E9%87%8F%E5%AD%90%E6%80%81%E7%9A%84%E7%B3%BB%E7%BB%BC%E7%90%86%E8%AE%BA(01)%EF%BC%9A%E5%AF%86%E5%BA%A6%E7%9F%A9%E9%98%B5%E7%9A%84%E5%BC%95%E5%85%A5/" title="量子态的系综理论(01)：密度矩阵的引入">
+                        <span class="hidden-mobile">量子态的系综理论(01)：密度矩阵的引入</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"karnmarth/blog-comments","repo-id":"R_kgDOMerUGQ","category":"Announcements","category-id":"DIC_kwDOMerUGc4ChX3n","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","theme":"preferred_color_scheme"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>

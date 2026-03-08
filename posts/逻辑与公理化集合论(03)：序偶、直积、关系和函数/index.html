@@ -1,0 +1,910 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=dark>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Rain Chan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="本文从 ZF 公理系统出发构造序偶与集合直积, 并据此定义关系、函数以及映射.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="逻辑与公理化集合论(03)：序偶、直积、关系和函数">
+<meta property="og:url" content="https://notes.rainchan.me/posts/%E9%80%BB%E8%BE%91%E4%B8%8E%E5%85%AC%E7%90%86%E5%8C%96%E9%9B%86%E5%90%88%E8%AE%BA(03)%EF%BC%9A%E5%BA%8F%E5%81%B6%E3%80%81%E7%9B%B4%E7%A7%AF%E3%80%81%E5%85%B3%E7%B3%BB%E5%92%8C%E5%87%BD%E6%95%B0/">
+<meta property="og:site_name" content="Rain Chan&#39;s Notes">
+<meta property="og:description" content="本文从 ZF 公理系统出发构造序偶与集合直积, 并据此定义关系、函数以及映射.">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-07T12:17:24.000Z">
+<meta property="article:modified_time" content="2026-03-08T13:21:44.241Z">
+<meta property="article:author" content="Rain Chan">
+<meta property="article:tag" content="集合论">
+<meta property="article:tag" content="ZF 公理系统">
+<meta property="article:tag" content="关系">
+<meta property="article:tag" content="函数">
+<meta property="article:tag" content="映射">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+    <meta name="referrer" content="no-referrer-when-downgrade">
+  
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display&family=Noto+Sans+SC&display=swap" rel="stylesheet">
+  
+  <title>逻辑与公理化集合论(03)：序偶、直积、关系和函数 - Rain Chan&#39;s Notes</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"notes.rainchan.me","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Rain Chan&#39;s Notes</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/posts/ref" target="_self">
+                <i class="iconfont icon-books"></i>
+                <span>参考</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="逻辑与公理化集合论(03)：序偶、直积、关系和函数"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-07 20:17" pubdate>
+          2026年3月7日 晚上
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          14 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">逻辑与公理化集合论(03)：序偶、直积、关系和函数</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <p>为了引出关系和函数的概念, 首先要继续介绍 ZF 公理系统,
+在公理系统中构造序偶和两集合的直积, 并证明直积在ZF公理系统中是集合.<span
+class="math inline">\(\newcommand{\R}{\mathbb{R}}\newcommand{\C}{\mathbb{C}}\newcommand{\K}{\mathbb{K}}\newcommand{\exist}{\exists}\newcommand{\and}{\land}\newcommand{\or}{\lor}\newcommand{\set}[1]{\left\{
+#1
+\right\}}\renewcommand{\empty}{\varnothing}\newcommand{\abs}[1]{\left|
+#1
+\right|}\renewcommand{\subset}{\subseteq}\renewcommand{\supset}{\supseteq}\)</span></p>
+<h2 id="无序偶-序偶和直积">无序偶, 序偶和直积</h2>
+<div class="note note-info">
+            <h5 id="axiomatic-system-zf公理系统的45条"><em>Axiomatic System</em>ZF公理系统的4、5条</h5><ol start="4" type="1"><li><strong>配对公理:</strong> 对任意<spanclass="math inline">\(X\)</span>和<spanclass="math inline">\(Y\)</span>, 存在称为"<spanclass="math inline">\(X\)</span>和<spanclass="math inline">\(Y\)</span>的无序偶"的集合<spanclass="math inline">\(Z\)</span>, 其元素恰好只有<spanclass="math inline">\(X\)</span>和<spanclass="math inline">\(Y\)</span></li></ol><p><span class="math display">\[\forall X\forall Y\exist Z \forall z (z\in Z\Leftrightarrow z=X\or z=Y)\]</span></p><ol start="5" type="1"><li><strong>幂集公理:</strong> 对于集合<spanclass="math inline">\(X\)</span>, 存在称为"<spanclass="math inline">\(X\)</span>的幂集"的集合<spanclass="math inline">\(\mathcal{P}(X)\)</span>, 其元素是且仅是<spanclass="math inline">\(X\)</span>的子集</li></ol><p><span class="math display">\[\forall X\exist\mathcal{P}(X)\forall Y(Y\in\mathcal{P}(X)\LeftrightarrowY\subset X)\]</span></p>
+          </div>
+<p>配对公理已经引入了无序偶<span
+class="math inline">\(\set{X,Y}\)</span>, 当<span
+class="math inline">\(X=Y\)</span>时它只含一个元素.
+还可以引入有序偶的概念</p>
+<div class="note note-success">
+            <h5 id="def-序偶"><em>Def</em> 序偶</h5><p>由<span class="math inline">\(X\)</span>和<spanclass="math inline">\(Y\)</span>产生的如下集合是 <strong>序偶</strong>,记作<span class="math inline">\((X,Y)\)</span> <spanclass="math display">\[(X,Y):=\set{\set{X},\set{X,Y}}\]</span></p>
+          </div>
+<p>容易证明, 这种序偶构造具有唯一性, 即如果<span
+class="math inline">\((X,Y)=(Z,W)\)</span>, 则一定有<span
+class="math inline">\(X=Z\and Y=W\)</span>.</p>
+<p>序偶和无序偶的区别是, <span
+class="math inline">\((X,Y)=(Y,X)\)</span>当且仅当<span
+class="math inline">\(X=Y\)</span>成立, 而<span
+class="math inline">\(\set{X,Y}=\set{Y,X}\)</span>恒成立.</p>
+<p>现在可以考虑构造直积了. 从朴素的角度讲, 直积应该这么构造 <span
+class="math display">\[
+X\times Y=\set{(x,y)|x\in X\and y\in Y}
+\]</span> 分离公理要求从母集出发, 添加一些性质来构造合法的集合.
+现在需要找出<span class="math inline">\(X\times
+Y\)</span>的这样一个母集合<span class="math inline">\(Z\)</span>.</p>
+<p>幂集公理告诉我们, 幂集一定存在, 如果<span
+class="math inline">\(x\)</span>和<span
+class="math inline">\(y\)</span>都属于某个集合<span
+class="math inline">\(Z\)</span>, 则<span
+class="math inline">\(\set{x}\)</span>和<span
+class="math inline">\(\set{x,y}\)</span>是其子集, 因而属于<span
+class="math inline">\(Z\)</span>的幂集: <span class="math display">\[
+x\in Z\and y\in Z \Rightarrow
+\set{x}\in\mathcal{P}(Z)\and\set{x,y}\in\mathcal{P}(Z)
+\]</span> 进一步地, <span class="math inline">\(\set{x}\)</span>和<span
+class="math inline">\(\set{x,y}\)</span>又可以看作两个元素同属于新集合<span
+class="math inline">\(\mathcal{P}(Z)\)</span>, 因此 <span
+class="math display">\[
+\set{x}\in \mathcal{P}(Z)\and \set{x,y}\in \mathcal{P}(Z)\Rightarrow
+\set{\set{x},\set{x,y}}\in \mathcal{P}(\mathcal{P}(Z))
+\]</span> 根据并集公理(参照<a
+href="../逻辑与公理化集合论(02)：从朴素集合论到%20ZF%20公理系统下的集合论">上一节</a>),
+<span class="math inline">\(X\cup Y\)</span>一定存在,
+并且满足这里的<span class="math inline">\(Z\)</span>要求. 任何满足<span
+class="math inline">\(x\in X\and y\in Y\)</span>的序偶<span
+class="math inline">\((x,y)\)</span>显然满足<span
+class="math inline">\(x\in X\cup Y\and y\in X\cup Y\)</span>,
+从而序偶<span class="math inline">\((x,y)\)</span>也在<span
+class="math inline">\(\mathcal{P}(\mathcal{P}(X\cup Y))\)</span>中.
+换言之, 可以利用分离公理构造严格定义的直积.</p>
+<div class="note note-success">
+            <h5 id="def-集合的直积"><em>Def</em> 集合的直积</h5><p>两个集合<span class="math inline">\(X\)</span>和<spanclass="math inline">\(Y\)</span>的 <strong>直积</strong>是这样一个集合(记作<span class="math inline">\(X\times Y\)</span>),它的元素是且仅是这样的序偶: 序偶的第一个元素来自<spanclass="math inline">\(X\)</span>, 第二个元素来自<spanclass="math inline">\(Y\)</span>. <span class="math display">\[X\times Y:=\set{(x,y)\in\mathcal{P}(\mathcal{P}(X\cup Y))| x\in X\andy\in Y}\]</span></p>
+          </div>
+<h2 id="关系和函数">关系和函数</h2>
+<p>有了直积就可以定义关系了, 它是其定义域和陪域的直积的子集;
+而函数会作为一种单值关系被着重强调.</p>
+<div class="note note-success">
+            <h5 id="def-关系"><em>Def</em> 关系</h5><p>设<span class="math inline">\(X\)</span>和<spanclass="math inline">\(Y\)</span>为集合, <strong>关系</strong> 是<spanclass="math inline">\(X\times Y\)</span>的子集, 记作<spanclass="math inline">\(\mathcal{R}\)</span>. 且 <spanclass="math display">\[\forall x(x\in X\Rightarrow\exist y(y\in Y\and(x,y)\in \mathcal{R}))\]</span> 其中<span class="math inline">\(X\)</span>叫做关系<spanclass="math inline">\(\mathcal{R}\)</span>的 <strong>定义域</strong>,也记作<span class="math inline">\(\text{dom}(\mathcal{R})\)</span>;<span class="math inline">\(Y\)</span>叫做关系<spanclass="math inline">\(\mathcal{R}\)</span>的 <strong>陪域</strong>,从而称<span class="math inline">\(R\)</span>是"定义域为<spanclass="math inline">\(X\)</span>, 陪域为<spanclass="math inline">\(Y\)</span>的关系". 常常把<spanclass="math inline">\((x,y)\in\mathcal{R}\)</span>记作<spanclass="math inline">\(x\mathcal{R}y\)</span>, 并说"<spanclass="math inline">\(x\)</span>和<spanclass="math inline">\(y\)</span>具有关系<spanclass="math inline">\(\mathcal{R}\)</span>".</p><p>在关系<span class="math inline">\(\mathcal{R}\)</span>之下集合<spanclass="math inline">\(A\)</span>的 <strong>像</strong> 是<spanclass="math inline">\(Y\)</span>的一个子集, 记作<spanclass="math inline">\(\mathcal{R}[A]\)</span>, 其定义为 <spanclass="math display">\[\mathcal{R}[A]:=\set{y\in Y|\exist x(x\in A\and (x,y)\in\mathcal{R})}\]</span> 如果<span class="math inline">\(A\)</span>取定义域<spanclass="math inline">\(X\)</span>, 则像特别地称作 <strong>值域</strong>,记作<span class="math inline">\(\mathcal{R}[X]\)</span>或者<spanclass="math inline">\(\text{range}(\mathcal{R})\)</span>.</p>
+          </div>
+<p>这里为了和后文的函数定义保持一致性, 将<span
+class="math inline">\(X\)</span>直接取为了定义域. 常见的定义是<span
+class="math inline">\(\mathcal{R}\subset X\times Y\)</span>,
+其中定义域是<span class="math inline">\(X\)</span>的子集. 显然,
+无论哪种定义, 值域是陪域<span
+class="math inline">\(Y\)</span>的一个子集.</p>
+<p>如果一个关系<span class="math inline">\(\mathcal{R}\subset X\times
+X\)</span>, 且满足自反、对称和传递性, 则称此关系为<span
+class="math inline">\(X\)</span>上的 <strong>等价关系</strong>.
+等价关系可以用<span class="math inline">\(\sim\)</span>来特别地表示.</p>
+<p>为了引出函数的逆, 需要先定义什么是关系的逆.</p>
+<div class="note note-success">
+            <h5 id="def-关系的逆"><em>Def</em> 关系的逆</h5><p><strong>关系<spanclass="math inline">\(\mathcal{R}\)</span>的逆</strong> 是<spanclass="math inline">\(\mathcal{R}\)</span>的序偶被颠倒顺序后的新序偶的集合,也是另一个关系, 记作<spanclass="math inline">\(\mathcal{R}^{-1}\)</span>. 即 <spanclass="math display">\[\mathcal{R}^{-1}:=\set{(y,x)\in\text{range}(\mathcal{R})\times\text{dom}(\mathcal{R})|(x,y)\in\mathcal{R}}\]</span></p>
+          </div>
+<p>为了定义函数, 需要对关系作出一些限制. 例如单值性.</p>
+<div class="note note-success">
+            <h5 id="def-函数"><em>Def</em> 函数</h5><p><strong>函数</strong> 是一种特殊的关系,其定义域的任意元素在陪域存在唯一对应. 即</p><ul><li><p>存在性: <span class="math inline">\(\forall x(x\inX\Rightarrow\exist y(y\in Y\and(x,y)\in f))\)</span></p></li><li><p>唯一性: <span class="math inline">\(\forall x\forall y_1\forally_2((x,y_1)\in f\and (x,y_2)\in f\Rightarrow y_1=y_2)\)</span></p></li></ul><p><strong>映射</strong> 是函数<spanclass="math inline">\(f\)</span>、定义域<spanclass="math inline">\(X\)</span>和陪域<spanclass="math inline">\(Y\)</span>的三元组<spanclass="math inline">\(((f,X),Y)\)</span>, 记作<spanclass="math inline">\(f:X\to Y\)</span>, 读作"<spanclass="math inline">\(f\)</span>是<spanclass="math inline">\(X\)</span>到<spanclass="math inline">\(Y\)</span>的函数". 在定义域和陪域明确的情况下,也常常称<span class="math inline">\(f\)</span>本身为映射.通常称定义域的元素<span class="math inline">\(x\)</span>为<strong>自变量</strong>, 因为此时<spanclass="math inline">\(y\)</span>由<spanclass="math inline">\(x\)</span>和<spanclass="math inline">\(f\)</span>唯一地决定, 也常将<spanclass="math inline">\(y\)</span>记作<spanclass="math inline">\(f(x)\)</span>, 叫做 <strong>因变量</strong>,也说<span class="math inline">\(y\)</span>是<spanclass="math inline">\(x\)</span>的 <strong>像</strong>, <spanclass="math inline">\(x\)</span>是<spanclass="math inline">\(y\)</span>的一个 <strong>原像</strong>.与此同时集合<span class="math inline">\(A\)</span>的像概念仍然保留,记作<span class="math inline">\(f[A]\)</span>: <spanclass="math display">\[f[A]:=\set{y\in Y|\exist x(x\in A\and y=f(x))}\]</span></p>
+          </div>
+<p>自然, 函数的逆关系也就从关系的逆关系中继承下来. 但应该指出, 函数<span
+class="math inline">\(f\)</span>的逆<span
+class="math inline">\(f^{-1}\)</span>一般地不是函数, 而只是普通的关系.
+如果希望<span class="math inline">\(f^{-1}\)</span>仍是函数,
+必要条件是<span class="math inline">\(f\)</span>具有如下性质: <span
+class="math display">\[
+\forall  x_1\forall x_2(f(x_1)=f(x_2)\Rightarrow x_1=x_2)
+\]</span> 具有这样性质的映射称作 <strong>单射</strong>.
+单射只能保证任意<span class="math inline">\(y\in
+Y\)</span>至多有一个原像, 不保证原像的存在性. 为了确保其存在性,
+需要令<span class="math inline">\(f[X]=Y\)</span>, 即值域等于陪域.
+具有这样性质的映射称为 <strong>满射</strong>. 换言之, 单射确保<span
+class="math inline">\(f^{-1}\)</span>在<span
+class="math inline">\(Y\)</span>上有定义的子集(<span
+class="math inline">\(f\)</span>的值域)上保持单值性, 而满射确保<span
+class="math inline">\(f^{-1}\)</span>的定义扩张到整个陪域<span
+class="math inline">\(Y\)</span>. 如果<span
+class="math inline">\(f\)</span>既是单射又是满射, 称<span
+class="math inline">\(f\)</span>为 <strong>双射</strong>.
+双射才是函数的逆仍为函数的充要条件.</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E9%AB%98%E7%AD%89%E5%BE%AE%E7%A7%AF%E5%88%86/" class="category-chain-item">高等微积分</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/%E9%AB%98%E7%AD%89%E5%BE%AE%E7%A7%AF%E5%88%86/%E9%80%BB%E8%BE%91%E4%B8%8E%E5%85%AC%E7%90%86%E5%8C%96%E9%9B%86%E5%90%88%E8%AE%BA/" class="category-chain-item">逻辑与公理化集合论</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E9%9B%86%E5%90%88%E8%AE%BA/" class="print-no-link">#集合论</a>
+      
+        <a href="/tags/ZF-%E5%85%AC%E7%90%86%E7%B3%BB%E7%BB%9F/" class="print-no-link">#ZF 公理系统</a>
+      
+        <a href="/tags/%E5%85%B3%E7%B3%BB/" class="print-no-link">#关系</a>
+      
+        <a href="/tags/%E5%87%BD%E6%95%B0/" class="print-no-link">#函数</a>
+      
+        <a href="/tags/%E6%98%A0%E5%B0%84/" class="print-no-link">#映射</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>逻辑与公理化集合论(03)：序偶、直积、关系和函数</div>
+      <div>https://notes.rainchan.me/posts/逻辑与公理化集合论(03)：序偶、直积、关系和函数/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Rain Chan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2026年3月7日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/posts/%E9%80%BB%E8%BE%91%E4%B8%8E%E5%85%AC%E7%90%86%E5%8C%96%E9%9B%86%E5%90%88%E8%AE%BA(04)%EF%BC%9A%E6%97%A0%E7%A9%B7%E5%85%AC%E7%90%86%E4%B8%8E%E8%87%AA%E7%84%B6%E6%95%B0%E7%9A%84%E9%9B%86%E5%90%88%E8%AE%BA%E6%9E%84%E9%80%A0/" title="逻辑与公理化集合论(04)：无穷公理与自然数的构造">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">逻辑与公理化集合论(04)：无穷公理与自然数的构造</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/posts/%E9%80%BB%E8%BE%91%E4%B8%8E%E5%85%AC%E7%90%86%E5%8C%96%E9%9B%86%E5%90%88%E8%AE%BA(02)%EF%BC%9A%E4%BB%8E%E6%9C%B4%E7%B4%A0%E9%9B%86%E5%90%88%E8%AE%BA%E5%88%B0%20ZF%20%E5%85%AC%E7%90%86%E7%B3%BB%E7%BB%9F%E4%B8%8B%E7%9A%84%E9%9B%86%E5%90%88%E8%AE%BA/" title="逻辑与公理化集合论(02)：从朴素集合论到 ZF 公理系统下的集合论">
+                        <span class="hidden-mobile">逻辑与公理化集合论(02)：从朴素集合论到 ZF 公理系统下的集合论</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+    <div id="giscus" class="giscus"></div>
+    <script type="text/javascript">
+      Fluid.utils.loadComments('#giscus', function() {
+        var options = {"repo":"karnmarth/blog-comments","repo-id":"R_kgDOMerUGQ","category":"Announcements","category-id":"DIC_kwDOMerUGc4ChX3n","theme-light":"light","theme-dark":"dark","mapping":"pathname","reactions-enabled":1,"emit-metadata":0,"input-position":"top","lang":"zh-CN","theme":"preferred_color_scheme"};
+        var attributes = {};
+        for (let option in options) {
+          if (!option.startsWith('theme-')) {
+            var key = option.startsWith('data-') ? option : 'data-' + option;
+            attributes[key] = options[option];
+          }
+        }
+        var light = 'light';
+        var dark = 'dark';
+        window.GiscusThemeLight = light;
+        window.GiscusThemeDark = dark;
+        attributes['data-theme'] = document.documentElement.getAttribute('data-user-color-scheme') === 'dark' ? dark : light;
+        for (let attribute in attributes) {
+          var value = attributes[attribute];
+          if (value === undefined || value === null || value === '') {
+            delete attributes[attribute];
+          }
+        }
+        var s = document.createElement('script');
+        s.setAttribute('src', 'https://giscus.app/client.js');
+        s.setAttribute('crossorigin', 'anonymous');
+        for (let attribute in attributes) {
+          s.setAttribute(attribute, attributes[attribute]);
+        }
+        var ss = document.getElementsByTagName('script');
+        var e = ss.length > 0 ? ss[ss.length - 1] : document.head || document.documentElement;
+        e.parentNode.insertBefore(s, e.nextSibling);
+      });
+    </script>
+    <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="busuanzi_container_site_pv" style="display: none">
+        总访问量 
+        <span id="busuanzi_value_site_pv"></span>
+         次
+      </span>
+    
+    
+      <span id="busuanzi_container_site_uv" style="display: none">
+        总访客数 
+        <span id="busuanzi_value_site_uv"></span>
+         人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+  <script defer src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
